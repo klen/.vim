@@ -1,0 +1,107 @@
+# XSLT snippets
+
+# apply templates compact
+snippet apc
+	<xsl:apply-templates />
+# apply templates normal
+snippet ap
+	<xsl:apply-templates select="${1:Expr}" mode="${2:QName}"/>${3}
+# apply templates full
+snippet app
+	<xsl:apply-templates select="${1:Expr}" mode="${2:QName}">
+		<xsl:with-param name="${3:QName}" select="${4:Expr}"/>
+	</xsl:apply-templates>${5}
+# call-templates
+snippet cl
+	<xsl:call-template name="${1:QName}"/>${2}
+# call-templates full
+snippet clp
+	<xsl:call-temp late name="${1:QName}">
+		<xsl:with-param name="${2:QName}" select="${3:Expr}"/>
+	</xsl:call-template>${4}
+# cdata
+snippet cd
+	<![CDATA[${1:Data}]]>${2}
+# choose compact
+snippet chc
+	<xsl:choose>
+		${1:Content}
+	</xsl:choose>${2}
+# choose
+snippet ch
+	<xsl:choose> 
+		<xsl:when test="${1:Expr}">
+			${2:Content}
+		</xsl:when>
+		<xsl:otherwise>
+			${3:Content}
+		</xsl:otherwise>
+	</xsl:choose>${4}
+snippet cm
+	<xsl:comment>  
+		${1:Content}
+	</xsl:comment>${2}
+snippet cp
+	<xsl:copy-of select="${1:Expr}"/>${2}
+snippet fr
+	<xsl:for-each select="${1:Expr}">
+		${2:Content}
+	</xsl:for-each>${3}
+snippet if
+	<xsl:if test="${1:Expr}">
+		${2}
+	</xsl:if>${3} 
+snippet im
+	<xsl:import href="${1:Uri}"/>${2}
+snippet pr
+	<xsl:param name="${1:QName}" select"${2:Expr}"/>${3}
+snippet pre
+	<xsl:param name="${1:QName}"> 
+		${2:Content}
+	</xsl:param>${3}
+snippet tm
+	<xsl:template match="${1:Expr}" mode="${2:QName}">
+		${3}
+	</xsl:template>${4}
+snippet tmc
+	<xsl:template match="${1:Expr}">
+		${3}
+	</xsl:template>${4}
+snippet tmp
+	<xsl:template match="${1:Expr}" mode="${2:QName}">
+		<xsl:param name="${3:QName}" select="${4:Expr}"/>
+		${5:Content} 
+	</xsl:templat e>${6}
+# value
+snippet vl
+	<xsl:value-of select="${1:Expr}"/>${2}
+# when
+snippet wh
+	<xsl:when test="${1:Expr}">
+		${2:Content}
+	</xsl:when>${3}
+snippet wt
+	<xsl:with-param name="${1:QName}" select="${2:Expr}"/>${3}
+# text
+snippet tx
+	<xsl:text>${1:Text}</xsl:text>${2}
+snippet vr
+	<xsl:variable name="${1:QName}" select="${2:Expr}"/>${3}
+snippet vre
+	<xsl:variable name="${1:QName}">
+		${2:Content}
+	</xsl:variable>${3}
+snippet db
+	<h2 style="color:red;font:2em bold">${1:debug}</h2>
+snippet st
+	<?xml version="1.0" encoding="UTF-8"?>
+	<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+
+	</xsl:stylesheet>
+snippet at
+	<xsl:attribute name="${1:QName}">${2:Content}</xsl:attribute>${3}
+snippet k
+	<xsl:key name="${1:QName}" select="${2:Content}" />
+
