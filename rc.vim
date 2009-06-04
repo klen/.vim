@@ -119,7 +119,7 @@
 " Функции
 
     " Подсветка текущей раскладки
-    function MyKeyMapHighlight()
+    function! MyKeyMapHighlight()
         if &iminsert == 0
             hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
         else
@@ -254,3 +254,15 @@
     autocmd CmdwinEnter * highlight StatusLine ctermbg=22
     autocmd CmdwinLeave * highlight StatusLine ctermbg=236
 
+    function! BufNewFile_PY()
+        0put = '#!/usr/bin/env python'
+        1put = '#-*- coding: utf-8 -*-'
+        3put = ''
+        4put = ''
+        normal G
+    endfunction
+
+    autocmd BufNewFile *.py call BufNewFile_PY()
+
+    " Работа с клипбордом для вима собранного без опции clipboard
+    map <C-V> <Esc>:let @c = system('xclip -o')<CR>"cp

@@ -1,13 +1,5 @@
 """ Конфигурационный файл для python files
 
-	function! BufNewFile_PY()
-		0put = '#!/usr/bin/env python'
-		1put = '#-*- coding: utf-8 -*-'
-		3put = ''
-		4put = ''
-		normal G
-	endfunction
-
         setlocal foldlevelstart=1
         setlocal foldlevel=1
 
