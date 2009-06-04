@@ -65,8 +65,9 @@
 
     " Редактирование
     set backspace=indent,eol,start
-    set clipboard+=unnamed
+    set clipboard+=unnamed      " Включаем X clipboard
     set virtualedit=block
+    set go+=a                   " Выделение в виме копирует в буфер системы
 
     " Скролл
     set scrolloff=5
@@ -163,7 +164,7 @@
     map     <Leader>e   :e! ~/.vimrc<CR>
 
     " Автоматическая перезагрузка настроек после редактирования
-    autocmd! bufwritepost .vimrc source ~/.vimrc
+    autocmd! bufwritepost rc.vim source ~/.vimrc
 
     " Клавиши для быстрой смены синтаксиса
     map     <Leader>1   :set syntax=cheetah<CR>
@@ -224,7 +225,7 @@
     call Map_ex_cmd("<F11>", "reg")
 
     " Список меток
-    call Map_ex_cmd("<F11>", "marks")
+    call Map_ex_cmd("<F12>", "marks")
 
     " Твиттер, куда же без него :)
     fu! LoginTwitter()
