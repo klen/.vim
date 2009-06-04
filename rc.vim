@@ -121,9 +121,9 @@
     " Подсветка текущей раскладки
     function! MyKeyMapHighlight()
         if &iminsert == 0
-            hi StatusLine ctermfg=DarkBlue guifg=DarkBlue
+            hi StatusLine ctermfg=Blue guifg=Blue
         else
-            hi StatusLine ctermfg=DarkGreen guifg=DarkGreen
+            hi StatusLine ctermfg=Green guifg=Green
         endif
     endfunction
 
