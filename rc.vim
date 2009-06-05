@@ -196,9 +196,6 @@
     " Запуск/сокрытие плагина NERDTree
     call Map_ex_cmd("<silent><F3>", "NERDTreeToggle")
 
-    " Запуск/сокрытие плагина MiniBufExplorer
-    call Map_ex_cmd("<silent><F4>", "TMiniBufExplorer")
-
     
     call Map_ex_cmd("<F5>", "nohlsearch")   " Выключить подсветку результатов поиска
     call Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
