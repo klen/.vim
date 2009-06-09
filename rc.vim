@@ -55,7 +55,7 @@
     set foldenable
     set foldclose=all
     set foldmethod=syntax
-    set listchars+=tab:>-,trail:-,extends:>,precedes:<,nbsp:%
+    set listchars+=tab:>-,trail:-,extends:>,precedes:<,nbsp:~
     set noequalalways
     set wrap                    " Перенос строк
     set linebreak               " Перенос строк по словам, а не по буквам
