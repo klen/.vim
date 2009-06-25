@@ -17,9 +17,9 @@ snippet end
 	[%- END -%]
 
 snippet for
-	[% FOR ${1:var} IN ${2:set} %]
+	[%- FOR ${1:var} IN ${2:set} -%]
 		$3
-	[% END %]
+	[%- END -%]
 
 snippet if
 	[%- IF ${1:condition} -%]
@@ -29,17 +29,22 @@ snippet if
 	[%- END -%]
 
 snippet include
-	[% INCLUDE ${1:template} %]
+	[%- INCLUDE ${1:template} -%]
+
 snippet process
 	[%- PROCESS ${1:block} -%]
+
 snippet rem
-	[%# ${1:rem} %]
+	[%-# ${1:rem} -%]
+
 snippet tt
-	[% ${1:code} %]
+	[%- ${1:code} -%]
+
 snippet unless
-	[% UNLESS ${1:condition} %]
+	[%- UNLESS ${1:condition} -%]
 		$2
-	[% END %]
+	[%- END -%]
+
 snippet wrapper
 	[%- WRAPPER ${1:template} -%]
 		$2
