@@ -212,16 +212,13 @@
 
     " Меню работы с (VCS plugin
     map <F9> :emenu VCS.<TAB>
-    menu VCS.Add :VCSAdd<CR>
-    menu VCS.Annotate :VCSAnnotate<CR>
-    menu VCS.Commit :VCSCommit<CR>
-    menu VCS.Delete :VCSDelete<CR>
-    menu VCS.Diff :VCSDiff<CR>
-    menu VCS.Log :VCSLog<CR>
-    menu VCS.Revert :VCSRevert<CR>
-    menu VCS.Status :VCSStatus<CR>
-    menu VCS.Update :VCSUpdate<CR>
     menu VCS.VimDiff :VCSVimDiff<CR>
+    menu VCS.Commit :VCSCommit<CR>
+    menu VCS.Revert :VCSRevert<CR>
+    menu VCS.Add :VCSAdd<CR>
+    menu VCS.Delete :VCSDelete<CR>
+    menu VCS.Log :VCSLog<CR>
+    menu VCS.Update :VCSUpdate<CR>
 
     " Закрытие файла
     call Map_ex_cmd("<F10>", "qall")
