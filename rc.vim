@@ -6,20 +6,21 @@
 " Настройки
 
     " Разное
-    set nocompatible            " Отключаем совместимость с vi
-    set hidden                  " Не требовать сохранения буфера
-    set title                   " Показывать имя файла в заголовке окна
-    set autoread                " Отслеживать изменения файлов
-    set visualbell              " Ошибки без писка
-    set magic                   " Добавим магии
+    set nocompatible            " отключаем совместимость с vi
+    set hidden                  " не требовать сохранения буфера
+    set title                   " показывать имя файла в заголовке окна
+    set autoread                " отслеживать изменения файлов
+    set visualbell              " ошибки без писка
+    set modeline                " читать параметры конфигурации из открытого файла
+    set magic                   " добавим магии
 
     " Отступы
-    set autoindent              " Копирует отступ от предыдущей строки
-    set smartindent             " Включаем 'умную' автоматическую расстановку отступов
+    set autoindent              " копирует отступ от предыдущей строки
+    set smartindent             " включаем 'умную' автоматическую расстановку отступов
 
     " Бэкап и своп файлы
     set nobackup                " Отключаем создание бэкапов
-    set noswapfile              " Отключаем создание swap файлов
+    set directory=~/.vim/swap   " Хранить swap в отдельном каталоге
     set history=400             " История командной строки
     set viminfo+=h              " Хранить историю
 
@@ -28,6 +29,7 @@
     set smarttab
     set shiftwidth=4            " Размер сдвига при нажатии на клавиши << и >>
     set softtabstop=4           " Табуляция 4 пробела
+    set shiftround              " удалять лишние пробелы при отступе
 
     " Опции поиска
     set hlsearch                " Подсветка результатов
@@ -45,11 +47,13 @@
     set termencoding=utf-8
 
     " Строка статуса и командная строка
-    set laststatus=2            " Всегда отображать статусную строку для каждого окна
+    set laststatus=2            " всегда отображать статусную строку для каждого окна
+    set showtabline=2           " показывать строку вкладок всегда
     set shortmess=tToOI
-    set showcmd                 " Отображение команд
+    set showcmd                 " отображение команд
     set statusline=%<%f%h%m%r%=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
-    set wildmenu
+    set wildmenu                " использовать wildmenu ...
+    set wildcharm=<TAB>         " ... с авто-дополнением
 
     " Отображение
     set foldenable
@@ -57,17 +61,20 @@
     set foldmethod=syntax
     set listchars+=tab:>-,trail:-,extends:>,precedes:<,nbsp:~
     set noequalalways
-    set wrap                    " Перенос строк
-    set linebreak               " Перенос строк по словам, а не по буквам
-    set showmatch               " Подсвечивать скобки
-    set winminheight=0          " Минимальная высота окна
-    set winminwidth=0           " Минимальная ширина окна
+    set wrap                    " перенос строк
+    set linebreak               " перенос строк по словам, а не по буквам
+    set showmatch               " подсвечивать скобки
+    set winminheight=0          " минимальная высота окна
+    set winminwidth=0           " минимальная ширина окна
+    set lazyredraw              " перерисовывать буфер менее плавно
+    set confirm                 " использовать диалоги вместо сообщений об ошибках
+    set shortmess=fimnrxoOtTI   " использовать сокращённые диалоги
 
     " Редактирование
     set backspace=indent,eol,start
-    set clipboard+=unnamed      " Включаем X clipboard
+    set clipboard+=unnamed      " включаем X clipboard
     set virtualedit=block
-    set go+=a                   " Выделение в виме копирует в буфер системы
+    set go+=a                   " выделение в виме копирует в буфер системы
 
     " Скролл
     set scrolloff=5
@@ -77,12 +84,12 @@
     " Подсветка синтаксиса и прочее
     syntax on
     filetype on
-    filetype plugin on
+    filetype plugin on          " определять подсветку на основе кода файла
     filetype indent on
 
     " Настройка цветовой схемы
     set t_Co=256
-    set background=dark         " Говорим виму, что наш цвет терминала темный
+    set background=dark         " говорим виму, что наш цвет терминала темный
     colorscheme wombat256
 
     " Включаем мышку даже в текстовом режиме
@@ -93,6 +100,8 @@
 
     " Опции автодополнения
     set completeopt=menu
+    set infercase               " предлагать авто-дополнение на основе уже введённого регистра
+
 
     " Перемещать курсор на следующую строку при нажатии на клавиши вправо-влево и пр.
     set whichwrap=b,s,<,>,[,],l,h
