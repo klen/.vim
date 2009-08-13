@@ -159,8 +159,6 @@
     map     <Space>     <PageDown>
     " Выход из режима вставки
     imap    jj          <Esc>
-    " Новая вкладка
-    map     <C-W>t      :tabnew<CR>
     " Новая строка и выход из режима вставки
     map     <S-O>       i<CR><ESC>
     " Вставить новую строку без переключения режима
@@ -183,6 +181,54 @@
     map     <Leader>5   :syntax sync fromstart<CR>
 
     autocmd BufEnter * :syntax sync fromstart
+
+    " Работа с вкладками
+    " новая вкладка
+    call Map_ex_cmd("<C-W>t", ":tabnew")
+    " предыдущая вкладка
+    call Map_ex_cmd("<silent><A-LEFT>", ":call TabJump('left')")
+    " следующая вкладка
+    call Map_ex_cmd("<silent><A-RIGHT>", ":call TabJump('right')")
+    " первая вкладка
+    call Map_ex_cmd("<A-UP>", ":tabfirst")
+    " последняя вкладка
+    call Map_ex_cmd("<A-DOWN>", ":tablast")
+    " переместить вкладку в начало
+    call Map_ex_cmd("<C-UP>", ":tabmove 0")
+    " переместить вкладку в конец
+    call Map_ex_cmd("<C-DOWN>", ":tabmove")
+    " переместить вкладку назад
+    call Map_ex_cmd("<silent><C-LEFT>", ":call TabMove('left')")
+    " переместить вкладку вперёд
+    call Map_ex_cmd("<silent><C-RIGHT>", ":call TabMove('right')")
+    " передвигаемся по вкладкам
+    function! TabJump(direction)
+        let l:tablen=tabpagenr('$')
+        let l:tabcur=tabpagenr()
+        if a:direction=='left'
+            if l:tabcur>1
+                execute 'tabprevious'
+            endif
+        else
+            if l:tabcur!=l:tablen
+                execute 'tabnext'
+            endif
+        endif
+    endfunction
+    " передвигаем вкладки
+    function! TabMove(direction)
+        let l:tablen=tabpagenr('$')
+        let l:tabcur=tabpagenr()
+        if a:direction=='left'
+            if l:tabcur>1
+                execute 'tabmove' l:tabcur-2
+            endif
+        else
+            if l:tabcur!=l:tablen
+                execute 'tabmove' l:tabcur
+            endif
+        endif
+    endfunction
 
     " Переключение раскладок будет производиться по <C-F>
     cmap <silent> <C-F> <C-^>
