@@ -94,7 +94,7 @@
 
     " Включаем мышку даже в текстовом режиме
     if &term =~ "xterm"
-        set mouse=-a
+        set mouse-=a
         set mousemodel=popup
     endif
 
