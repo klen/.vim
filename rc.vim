@@ -248,8 +248,12 @@
     " Сохранение файла
     call Map_ex_cmd("<F2>", "write")
 
+
+    " Рекурсивный поиск строки в файлах
+    call Map_ex_cmd("<F3>", "Rgrep");
+
     " Запуск/сокрытие плагина NERDTree
-    call Map_ex_cmd("<silent><F3>", "NERDTreeToggle")
+    call Map_ex_cmd("<silent><F4>", "NERDTreeToggle")
 
     
     call Map_ex_cmd("<F5>", "nohlsearch")   " Выключить подсветку результатов поиска
