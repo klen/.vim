@@ -250,7 +250,7 @@
 
 
     " Рекурсивный поиск строки в файлах
-    call Map_ex_cmd("<F3>", "Rgrep");
+    call Map_ex_cmd("<F3>", "Rgrep")
 
     " Запуск/сокрытие плагина NERDTree
     call Map_ex_cmd("<silent><F4>", "NERDTreeToggle")
