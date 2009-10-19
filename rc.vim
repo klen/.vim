@@ -77,9 +77,9 @@
     set go+=a                   " выделение в виме копирует в буфер системы
 
     " Скролл
-    set scrolloff=5
+    set scrolloff=4             " 4 символа минимум под курсором
     set sidescroll=4
-    set sidescrolloff=10
+    set sidescrolloff=10        " 10 символов минимум под курсором при скролле
 
     " Подсветка синтаксиса и прочее
     syntax on
@@ -186,9 +186,9 @@
     " новая вкладка
     call Map_ex_cmd("<C-W>t", ":tabnew")
     " предыдущая вкладка
-    call Map_ex_cmd("<silent><A-LEFT>", ":call TabJump('left')")
+    nmap Z :call TabJump('left')<cr>
     " следующая вкладка
-    call Map_ex_cmd("<silent><A-RIGHT>", ":call TabJump('right')")
+    nmap X :call TabJump('right')<cr>
     " первая вкладка
     call Map_ex_cmd("<A-UP>", ":tabfirst")
     " последняя вкладка
