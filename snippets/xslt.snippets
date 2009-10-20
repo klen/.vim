@@ -1,40 +1,40 @@
 # XSLT snippets
-
-# apply templates compact
+#
+# APPLY TEMPLATES COMPACT
 snippet apc
 	<xsl:apply-templates />
 #
-# apply templates normal
+# APPLY TEMPLATES NORMAL
 snippet ap
 	<xsl:apply-templates select="${1:Expr}" mode="${2:QName}"/>${3}
 #
-# apply templates full
+# APPLY TEMPLATES FULL
 snippet apf
 	<xsl:apply-templates select="${1:Expr}" mode="${2:QName}">
 		<xsl:with-param name="${3:QName}" select="${4:Expr}"/>
 	</xsl:apply-templates>${5}
 #
-# call-templates
+# CALL-TEMPLATES
 snippet cl
 	<xsl:call-template name="${1:QName}"/>${2}
 #
-# call-templates full
+# CALL-TEMPLATES FULL
 snippet clf
 	<xsl:call-template name="${1:QName}">
 		<xsl:with-param name="${2:QName}" select="${3:Expr}"/>
 	</xsl:call-template>${4}
 #
-# cdata
+# CDATA
 snippet cd
 	<![CDATA[${1:Data}]]>${2}
 #
-# choose compact
+# CHOOSE COMPACT
 snippet chc
 	<xsl:choose>
 		${1:Content}
 	</xsl:choose>${2}
 #
-# choose
+# CHOOSE
 snippet ch
 	<xsl:choose> 
 		<xsl:when test="${1:Expr}">
@@ -45,106 +45,116 @@ snippet ch
 		</xsl:otherwise>
 	</xsl:choose>${4}
 #
-# comment
+# WHEN
+snippet wh
+	<xsl:when test="${1:Expr}">
+		${2:Content}
+	</xsl:when>${3}
+#
+# OTHERWISE
+snippet ot
+    <xsl:otherwise>
+	    ${1:Content}
+    </xsl:otherwise>${2}
+#
+# COMMENT
 snippet cm
 	<xsl:comment>  
 		${1:Content}
 	</xsl:comment>${2}
 #
-# copy of select
+# COPY OF SELECT
 snippet cp
 	<xsl:copy-of select="${1:Expr}"/>${2}
 #
-# for each
+# FOR EACH
 snippet fr
 	<xsl:for-each select="${1:Expr}">
 		${2:Content}
 	</xsl:for-each>${3}
 #
-# if
+# IF
 snippet if
 	<xsl:if test="${1:Expr}">
 		${2}
 	</xsl:if>${3} 
 #
-# import
+# IMPORT
 snippet im
 	<xsl:import href="${1:Uri}"/>${2}
 #
-# param
+# PARAM
 snippet pr
 	<xsl:param name="${1:QName}" select"${2:Expr}"/>${3}
 #
-# param full
+# PARAM FULL
 snippet prf
 	<xsl:param name="${1:QName}"> 
 		${2:Content}
 	</xsl:param>${3}
 #
-# template match
+# TEMPLATE MATCH
 snippet tm
 	<xsl:template match="${1:Expr}" mode="${2:QName}">
 		${3}
 	</xsl:template>${4}
 #
-# template match compact
+# TEMPLATE MATCH COMPACT
 snippet tmc
 	<xsl:template match="${1:Expr}">
 		${3}
 	</xsl:template>${4}
-# template match full
+#
+# TEMPLATE MATCH FULL
 snippet tmf
 	<xsl:template match="${1:Expr}" mode="${2:QName}">
 		<xsl:param name="${3:QName}" select="${4:Expr}"/>
 		${5:Content} 
 	</xsl:templat e>${6}
 #
-# template name compact
+# TEMPLATE NAME COMPACT
 snippet tn
 	<xsl:template name="${1:Expr}">
 		${3}
 	</xsl:template>${4}
 #
-# template name full
+# TEMPLATE NAME FULL
 snippet tnf
 	<xsl:template name="${1:Expr}">
 		<xsl:param name="${3:QName}" select="${4:Expr}"/>
 		${5:Content} 
 	</xsl:templat e>${6}
 #
-# value
+# VALUE
 snippet vl
 	<xsl:value-of select="${1:Expr}"/>${2}
+# VALUE FULL
+snippet vlf
+	<xsl:value-of select="${1:Expr}" disable-output-escaping="yes" />${2}
 #
-# when
-snippet wh
-	<xsl:when test="${1:Expr}">
-		${2:Content}
-	</xsl:when>${3}
-#
-# with-param
+# WITH-PARAM
 snippet wt
 	<xsl:with-param name="${1:QName}" select="${2:Expr}"/>${3}
 #
-# text
+# TEXT
 snippet tx
 	<xsl:text>${1:Text}</xsl:text>${2}
 #
-# variable
+# VARIABLE
 snippet vr
 	<xsl:variable name="${1:QName}" select="${2:Expr}"/>${3}
 #
-# variable full
+# VARIABLE FULL
 snippet vrf
 	<xsl:variable name="${1:QName}">
 		${2:Content}
 	</xsl:variable>${3}
 #
-# debug
+# DEBUG
 snippet db
 	<h2 style="color:red;font:2em bold">${1:debug}</h2>
 #
-# style
+# STYLESHEET
 snippet st
 	<?xml version="1.0" encoding="UTF-8"?>
 	<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -153,11 +163,11 @@ snippet st
 
 	</xsl:stylesheet>
 #
-# attribute
+# ATTRIBUTE
 snippet at
 	<xsl:attribute name="${1:QName}">${2:Content}</xsl:attribute>${3}
 #
-# key
-snippet k
+# KEY
+snippet ky
 	<xsl:key name="${1:QName}" select="${2:Content}" />
 
