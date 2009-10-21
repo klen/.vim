@@ -152,7 +152,9 @@ snippet vrf
 #
 # DEBUG
 snippet db
-	<h2 style="color:red;font:2em bold">${1:debug}</h2>
+	<h2 style="color:red;font:2em bold"><xsl:value-of select="${1:'debug'}"/></h2>
+snippet fx
+	<b style="font:bold 12px verdana;color:#fff;background:red;padding:2px;">[= FIXME =]</b>
 #
 # STYLESHEET
 snippet st
