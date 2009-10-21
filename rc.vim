@@ -194,7 +194,7 @@
     " последняя вкладка
     call Map_ex_cmd("<A-DOWN>", ":tablast")
     " переместить вкладку в начало
-    nmap A :tabmove 0<cr>
+    nmap Q :tabmove 0<cr>
     " переместить вкладку в конец
     call Map_ex_cmd("<C-DOWN>", ":tabmove")
     " переместить вкладку назад
