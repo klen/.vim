@@ -59,6 +59,8 @@
     set foldenable
     set foldclose=all
     set foldmethod=syntax
+    set foldnestmax=3           "deepest fold is 3 levels
+    set nofoldenable            "dont fold by default
     set listchars+=tab:>-,trail:-,extends:>,precedes:<,nbsp:~
     set noequalalways
     set wrap                    " перенос строк
@@ -165,7 +167,7 @@
     " Вставить новую строку без переключения режима
     nmap    <CR>        o<ESC>k
     " Дерево файлов
-    map     <Leader>f   :find<CR>
+    map     <Leader>f   :vimgrep /.*\<<c-r>=expand("<cword>")<CR>\> ../**/*<CR>
     " Перегрузка настроек
     map     <Leader>s   :source ~/.vimrc<CR>
     " Быстрое редактирование настроек
@@ -257,7 +259,7 @@
     call Map_ex_cmd("<silent><F4>", "NERDTreeToggle")
 
     
-    call Map_ex_cmd("<F5>", "nohlsearch")   " Выключить подсветку результатов поиска
+    call Map_ex_cmd("<F5>", "nohls")   " Выключить подсветку результатов поиска
     call Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
     call Toggle_option("<F7>", "wrap")      " Переключение переноса слов
 
