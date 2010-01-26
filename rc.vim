@@ -283,19 +283,6 @@
     " Список меток
     call Map_ex_cmd("<F12>", "marks")
 
-    " Твиттер, куда же без него :)
-    fu! LoginTwitter()
-        let a:user=input("Your twitter login: ")
-        let a:pswd=inputsecret(a:user."'s password: ")
-        let g:twitvim_login=a:user.':'.a:pswd
-        echo "Credentials are saved"
-    endf
-    command! Twil :call LoginTwitter()
-    " Twitter mappings
-    nmap <C-T>p :PosttoTwitter<cr>
-    nmap <C-T>f :FriendsTwitter<cr>
-    nmap <C-T>l :Twil<cr>
-
     " Автоматическое сохранение последней сессии
     autocmd VimLeavePre * silent mksession! ~/.lastVimSession
 

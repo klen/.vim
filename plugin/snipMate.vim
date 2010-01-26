@@ -1,6 +1,7 @@
 " File:          snipMate.vim
 " Author:        Michael Sanders
-" Version:       0.79
+" Last Updated:  July 13, 2009
+" Version:       0.83
 " Description:   snipMate.vim implements some of TextMate's snippets features in
 "                Vim. A snippet is a piece of often-typed text that you can
 "                insert into your document using a trigger word followed by a "<tab>".
@@ -69,7 +70,7 @@ fun! ExtractSnipsFile(file, ft)
 	let text = readfile(a:file)
 	let inSnip = 0
 	for line in text + ["\n"]
-		if inSnip && (line == '' || strpart(line, 0, 1) == "\t")
+		if inSnip && (line[0] == "\t" || line == '')
 			let content .= strpart(line, 1)."\n"
 			continue
 		elseif inSnip
@@ -77,7 +78,7 @@ fun! ExtractSnipsFile(file, ft)
 			let inSnip = 0
 		endif
 
-		if stridx(line, 'snippet') == 0
+		if line[:6] == 'snippet'
 			let inSnip = 1
 			let trigger = strpart(line, 8)
 			let name = ''
@@ -138,16 +139,16 @@ fun! TriggerSnippet()
 		call feedkeys("\<tab>") | return ''
 	endif
 
-	if exists('g:snipPos') | return snipMate#jumpTabStop() | endif
+	if exists('g:snipPos') | return snipMate#jumpTabStop(0) | endif
 
 	let word = matchstr(getline('.'), '\S\+\%'.col('.').'c')
 	for scope in [bufnr('%')] + split(&ft, '\.') + ['_']
 		let [trigger, snippet] = s:GetSnippet(word, scope)
-		" If word is a trigger for a snippet, delete the trigger & expand 
+		" If word is a trigger for a snippet, delete the trigger & expand
 		" the snippet.
 		if snippet != ''
 			let col = col('.') - len(trigger)
-			sil exe 's/\V'.escape(trigger, '/').'\%#//'
+			sil exe 's/\V'.escape(trigger, '/.').'\%#//'
 			return snipMate#expandSnip(snippet, col)
 		endif
 	endfor
@@ -159,6 +160,23 @@ fun! TriggerSnippet()
 	return "\<tab>"
 endf
 
+fun! BackwardsSnippet()
+	if exists('g:snipPos') | return snipMate#jumpTabStop(1) | endif
+
+	if exists('g:SuperTabMappingForward')
+		if g:SuperTabMappingBackward == "<s-tab>"
+			let SuperTabKey = "\<c-p>"
+		elseif g:SuperTabMappingForward == "<s-tab>"
+			let SuperTabKey = "\<c-n>"
+		endif
+	endif
+	if exists('SuperTabKey')
+		call feedkeys(SuperTabKey)
+		return ''
+	endif
+	return "\<s-tab>"
+endf
+
 " Check if word under cursor is snippet trigger; if it isn't, try checking if
 " the text after non-word characters is (e.g. check for "foo" in "bar.foo")
 fun s:GetSnippet(word, scope)
@@ -168,11 +186,15 @@ fun s:GetSnippet(word, scope)
 			let snippet = s:snippets[a:scope][word]
 		elseif exists('s:multi_snips["'.a:scope.'"]["'.escape(word, '\"').'"]')
 			let snippet = s:ChooseSnippet(a:scope, word)
+			if snippet == '' | break | endif
 		else
 			if match(word, '\W') == -1 | break | endif
 			let word = substitute(word, '.\{-}\W', '', '')
 		endif
 	endw
+	if word == '' && a:word != '.' && stridx(a:word, '.') != -1
+		let [word, snippet] = s:GetSnippet('.', a:scope)
+	endif
 	return [word, snippet]
 endf
 
@@ -186,5 +208,40 @@ fun s:ChooseSnippet(scope, trigger)
 	if i == 2 | return s:multi_snips[a:scope][a:trigger][0][1] | endif
 	let num = inputlist(snippet) - 1
 	return num == -1 ? '' : s:multi_snips[a:scope][a:trigger][num][1]
+endf
+
+fun! ShowAvailableSnips()
+	let line  = getline('.')
+	let col   = col('.')
+	let word  = matchstr(getline('.'), '\S\+\%'.col.'c')
+	let words = [word]
+	if stridx(word, '.')
+		let words += split(word, '\.', 1)
+	endif
+	let matchlen = 0
+	let matches = []
+	for scope in [bufnr('%')] + split(&ft, '\.') + ['_']
+		let triggers = has_key(s:snippets, scope) ? keys(s:snippets[scope]) : []
+		if has_key(s:multi_snips, scope)
+			let triggers += keys(s:multi_snips[scope])
+		endif
+		for trigger in triggers
+			for word in words
+				if word == ''
+					let matches += [trigger] " Show all matches if word is empty
+				elseif trigger =~ '^'.word
+					let matches += [trigger]
+					let len = len(word)
+					if len > matchlen | let matchlen = len | endif
+				endif
+			endfor
+		endfor
+	endfor
+
+	" This is to avoid a bug with Vim when using complete(col - matchlen, matches)
+	" (Issue#46 on the Google Code snipMate issue tracker).
+	call setline(line('.'), substitute(line, repeat('.', matchlen).'\%'.col.'c', '', ''))
+	call complete(col, matches)
+	return ''
 endf
 " vim:noet:sw=4:ts=4:ft=vim

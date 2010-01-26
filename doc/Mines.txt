@@ -1,0 +1,195 @@
+*Mines.txt*	The Mines Game 				Jul 30, 2009
+
+Author:  Charles E. Campbell, Jr.  <NdrOchip@ScampbellPfamily.AbizM>
+	  (remove NOSPAM from the email address first)
+Copyright: (c) 2004-2009 by Charles E. Campbell, Jr.	*mines-copyright*
+           The VIM LICENSE applies to Mines.vim and Mines.txt
+           (see |copyright|) except use "Mines" instead of "Vim"
+	   No warranty, express or implied.  Use At-Your-Own-Risk.
+
+=============================================================================
+1. Mines:						*mines*
+
+Mines is a Vim plugin, but you may source it in on demand if you wish.
+You'll need <Mines.vim> and <Rndm.vim> - the latter file is available
+as "Rndm" at the following website:
+
+    http://mysite.verizon.net/astronaut/vim/index.html#VimFuncs
+
+
+STARTING
+
+    Games:						*mines-start*
+        \mfc : clear statistics (when a game is not showing)
+        \mfe : play an easy mines game
+        \mfm : play a  medium-difficulty mines game
+        \mfh : play a  high-difficulty mines game
+        \mfr : restore a game
+
+Note that using the \mf_ maps will save the files showing in all windows and
+save your session.  Although I've used the backslash in the maps as shown here,
+actually they use <Leader> so you may customize your maps as usual (see
+|mapleader| for more about <Leader>).
+
+
+USE AT YOUR OWN RISK
+
+Mines.vim is a use-at-your-own-risk game.  However, an effort has been made
+to preserve your files.  The game does a "windo w" and uses mksession to both
+save your working files that are showing in your windows and to preserve your
+window layout for subsequent restoration.
+
+
+OBJECTIVE
+
+The objective of the game is to flag all mines and to reveal all safe
+squares.  As soon as you click a <leftmouse> or x, the square under the cursor
+is revealed with either a count of the number of bombs around it or as a BOOM!
+Of course, to use a mouse means your vim must support using the mouse.  Gvim
+usually does; console vim may or may not depending on your supporting
+terminal (see |'mouse'|).
+
+Statistics are stored in <$HOME/.vimMines>.  You need to have a $HOME
+environment variable set up properly for statistics to be kept.
+
+If you win, Minnie will do a cartwheel for you!
+
+
+GAME INTERFACE
+
+On many terminals, all you need to do is to click with the left mouse (to see
+what's there, or maybe to go BOOM!) or to click with the rightmouse to flag
+what you think is a mine.
+
+     -Play-						*mines-play*
+        x  move the cursor around the field;
+           pressing x is just like pressing a
+           <leftmouse> -- find out what's
+           hidden!
+        f  just like the <rightmouse>, flag what's under the cursor as a mine
+        0  goes to leftmost  position inside minefield
+        $  goes to rightmost position inside minefield
+        gg goes to uppermost position inside minefield
+        G  goes to bttommost position inside minefield
+
+
+
+     -Control-						*mines-control*
+        C   clear statistics (only while a game is showing)
+        s   suspend the game, restore the display
+            and session  (\mfr will subsequently
+            restore the game)
+
+        q   quit the game, restore the display
+
+     -New Games-					*mines-newgame*
+        E   starts up a new easy game
+            (only while an old game is showing)
+
+        M   starts up a new medium game
+            (only while an old game is showing)
+
+        H   starts up a new hard game
+            (only while an old game is showing)
+
+
+=============================================================================
+3. Hints:						*mines-hints*
+
+My own win rate with Mines is about 30%, so don't expect a sure fire
+way-to-win!  However, here are some hints.  If you don't want to see them,
+close your eyes!
+
+	1-9 qty of bombs in vicinity
+	#   any number
+	o   any number or blank (no bomb) space
+	?   unknown
+	f   flag the space
+	x   find out what's in the space
+
+	 Pattern         Can Safely Do         Pattern         Can Safely Do
+         ooooo             ooooo
+         oo3oo             oo3oo             	oooo              oooo
+	                    fff              	111o              111o
+                                             	                    x
+
+	+-----             +-----
+	|ooo               |ooo              	oooo              oooo
+	|22o..             |22o..            	122o              122o
+	|??                |ffx              	                    f
+
+
+	 ooooo            ooooo
+	 #121#            #121#
+                           fxf
+
+
+=============================================================================
+2. History:						*mines-history* {{{1
+
+   17 : 04/08/08   * pressing "x" when atop an "f" now is a no-op; one must
+		     use an "f" to clear an "f".
+	11/29/08   * attempting to modify a completed minefield no longer
+		     produces not-modifiable error messages.
+	05/20/09   * cecutil bug fix
+	07/30/09   * fixed a bug where part of the minefield would disappear
+		     when virtualedit was off (I usually use :set ve=all).
+   16 : 01/24/07   * on wins, percentage won now shown to 3 decimal places
+                   * works with Rndm.vim to save seeds in $HOME/.seed to
+		     improve pseudo-random nature of games
+   15 : 06/28/06   * now includes cecutil.vim as part of its distribution
+                   * when game is over, if -Mines- exists, it will be deleted
+		   * "Flags Used" field was misplaced for Medium and Hard
+		     games; fixed.
+		   * a "redr!" for debugging was inadvertently left in,
+		     causing flickering floods.  Fixed.
+	08/10/06   * included "Time Used" field during play
+	12/28/06   * at end-of-game, when one hits a mine, mistakenly flagged
+	             squares are shown with truth with blue background
+   14 : 06/26/06   * added "Flags Used" field while playing
+	06/16/06   * pressing "c" changes corner
+		   * pressing 0  goes to leftmost  position inside minefield
+		   * pressing $  goes to rightmost position inside minefield
+		   * pressing gg goes to uppermost position inside minefield
+		   * pressing G  goes to bttommost position inside minefield
+	05/16/06   * medium is now 15% mines, hard is 18% mines
+		   * medium now uses an 18x18 grid
+   13 : 01/06/06 : * the percentage wins is now shown to tenths
+	12/28/05   * now uses cecutil to save/restore user maps
+   12 : 05/23/05   * Mines will issue a message that Rndm is missing
+		     (and where to get it) when Rndm is missing
+	01/05/06   * Mines' win message now includes percentage of wins
+   11 : 08/02/04 : * an X will now mark the bomb that went off
+		   * bugfix: an "f" on a previously determined site
+		     (whether numbered or blank) will now have no effect
+		   * flipped the cterm=NONE and fg/bg specs about; some
+		     machines were showing all bold which equated to one
+		     color.
+   10 : 07/28/04 : * updatetime now 200ms, affects time-left display when
+		     g:mines_timer is true.  Restored after game finished.
+		   * longest winning/losing streaks now computed&displayed
+		   * statistics now kept separately for each field size
+		   * now includes a title
+		   * CursorHold used to fix highlighting after a
+		     colorscheme change
+    9 : 06/28/04 : * Mines now handles light as well as dark backgrounds
+    8 : 06/15/04 : * improved look of Minnie at the end
+		   * total/streak win/loss statistics
+    7 : 12/08/03 : changed a norm to norm! to avoid <c-y> mapping
+    6 : 10/16/03 : includes help
+    5 : 05/08/03 : adjusted Med/Hard to be 20% mines
+    4 : 02/03/03 : \mft toggles g:mines_timer
+		   colons lined up for Happy()
+		   multiple x hits after a Minnie repeated Minnie - fixed
+		   saves/restores gdefault (turns it to nogd during game)
+    3 : 02/03/03 : map restoration was done too early, now fixed
+		   \mfr didn't always set ts to 1; fixed
+		   included E M H maps for easily starting new games
+		   escape() now used on s:restoremap prior to execution
+		   g:mines_timer  (by default enabled) if true applies
+		   time-limit
+    2 : 01/31/03 : now intercepts attempts to restore a quit game
+		   quit games' s:minebufnum is now unlet
+
+=============================================================================
+vim:tw=78:ts=8:ft=help:fdm=marker
