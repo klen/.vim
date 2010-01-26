@@ -126,22 +126,19 @@
     let Grep_Cygwin_Find              = 1
 
 
-
 " ------------------------------
 " Функции
 
     " Подсветка текущей раскладки
     function! MyKeyMapHighlight()
         if &iminsert == 0
-            hi StatusLine ctermfg=Blue guifg=Blue
+            hi StatusLine ctermfg=White
+            hi StatusLine ctermbg=Blue
         else
-            hi StatusLine ctermfg=Green guifg=Green
+            hi StatusLine ctermbg=Red
         endif
     endfunction
-
     call MyKeyMapHighlight()
-
-    au WinEnter * :call MyKeyMapHighlight()
 
     " Биндинг клавиш"
     function! Map_ex_cmd(key, cmd)
@@ -151,39 +148,63 @@
       execute "vmap ".a:key." " . "<Esc>:".a:cmd."<CR>gv"
     endfunction
 
+    " Биндинг переключалки опций
     function! Toggle_option(key, opt)
       call Map_ex_cmd(a:key, "set ".a:opt."! ".a:opt."?")
     endfunction
 
+    " передвигаемся по вкладкам
+    function! TabJump(direction)
+        let l:tablen=tabpagenr('$')
+        let l:tabcur=tabpagenr()
+        if a:direction=='left'
+            if l:tabcur>1
+                execute 'tabprevious'
+            endif
+        else
+            if l:tabcur!=l:tablen
+                execute 'tabnext'
+            endif
+        endif
+    endfunction
+
+    " передвигаем вкладки
+    function! TabMove(direction)
+        let l:tablen=tabpagenr('$')
+        let l:tabcur=tabpagenr()
+        if a:direction=='left'
+            if l:tabcur>1
+                execute 'tabmove' l:tabcur-2
+            endif
+        else
+            if l:tabcur!=l:tablen
+                execute 'tabmove' l:tabcur
+            endif
+        endif
+    endfunction
+
+
+" ------------------------------
+" Автокоманды
+
+    " Подсветка раскладки
+    au WinEnter * :call MyKeyMapHighlight()
+
+    " Автоматическая перезагрузка настроек после редактирования
+    au! bufwritepost rc.vim source ~/.vimrc
+
+
 " ------------------------------
 " Горячие клавиши 
 "
-    " Пробел пролистывает страницы
-    map     <Space>     <PageDown>
     " Выход из режима вставки
     imap    jj          <Esc>
     " Новая строка и выход из режима вставки
     map     <S-O>       i<CR><ESC>
     " Вставить новую строку без переключения режима
     nmap    <CR>        o<ESC>k
-    " Дерево файлов
+    " Поиск по файлам
     map     <Leader>f   :vimgrep /.*\<<c-r>=expand("<cword>")<CR>\> ../**/*<CR>
-    " Перегрузка настроек
-    map     <Leader>s   :source ~/.vimrc<CR>
-    " Быстрое редактирование настроек
-    map     <Leader>e   :e! ~/.vimrc<CR>
-
-    " Автоматическая перезагрузка настроек после редактирования
-    autocmd! bufwritepost rc.vim source ~/.vimrc
-
-    " Клавиши для быстрой смены синтаксиса
-    map     <Leader>1   :set syntax=cheetah<CR>
-    map     <Leader>2   :set syntax=xhtml<CR>
-    map     <Leader>3   :set syntax=python<CR>
-    map     <Leader>4   :set ft=javascript<CR>
-    map     <Leader>5   :syntax sync fromstart<CR>
-
-    autocmd BufEnter * :syntax sync fromstart
 
     " Работа с вкладками
     " новая вкладка
@@ -204,34 +225,6 @@
     call Map_ex_cmd("<silent><C-LEFT>", ":call TabMove('left')")
     " переместить вкладку вперёд
     call Map_ex_cmd("<silent><C-RIGHT>", ":call TabMove('right')")
-    " передвигаемся по вкладкам
-    function! TabJump(direction)
-        let l:tablen=tabpagenr('$')
-        let l:tabcur=tabpagenr()
-        if a:direction=='left'
-            if l:tabcur>1
-                execute 'tabprevious'
-            endif
-        else
-            if l:tabcur!=l:tablen
-                execute 'tabnext'
-            endif
-        endif
-    endfunction
-    " передвигаем вкладки
-    function! TabMove(direction)
-        let l:tablen=tabpagenr('$')
-        let l:tabcur=tabpagenr()
-        if a:direction=='left'
-            if l:tabcur>1
-                execute 'tabmove' l:tabcur-2
-            endif
-        else
-            if l:tabcur!=l:tablen
-                execute 'tabmove' l:tabcur
-            endif
-        endif
-    endfunction
 
     " Переключение раскладок будет производиться по <C-F>
     cmap <silent> <C-F> <C-^>
@@ -251,13 +244,11 @@
     " Сохранение файла
     call Map_ex_cmd("<F2>", "write")
 
-
     " Рекурсивный поиск строки в файлах
     call Map_ex_cmd("<F3>", "Rgrep")
 
     " Запуск/сокрытие плагина NERDTree
     call Map_ex_cmd("<silent><F4>", "NERDTreeToggle")
-
     
     call Map_ex_cmd("<F5>", "nohls")   " Выключить подсветку результатов поиска
     call Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
@@ -292,10 +283,10 @@
     " Подсветка режима вставки
     autocmd InsertEnter * set cursorline
     autocmd InsertLeave * set nocursorline
-    autocmd InsertEnter * highlight StatusLine ctermbg=52
-    autocmd InsertLeave * highlight StatusLine ctermbg=236
-    autocmd CmdwinEnter * highlight StatusLine ctermbg=22
-    autocmd CmdwinLeave * highlight StatusLine ctermbg=236
+    autocmd InsertEnter * highlight CursorLine ctermbg=52
+    autocmd InsertLeave * highlight CursorLine ctermbg=236
+    "autocmd CmdwinEnter * highlight StatusLine ctermbg=52
+    "autocmd CmdwinLeave * highlight StatusLine ctermbg=236
 
     function! BufNewFile_PY()
         0put = '#!/usr/bin/env python'
@@ -306,6 +297,3 @@
     endfunction
 
     autocmd BufNewFile *.py call BufNewFile_PY()
-
-    " Работа с клипбордом для вима собранного без опции clipboard
-    map <C-V> <Esc>:let @c = system('xclip -o')<CR>"cp

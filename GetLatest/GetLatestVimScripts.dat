@@ -10,3 +10,5 @@ ScriptID SourceID Filename
 551 11139 :AutoInstall: Mines.vim
 1066 7618 :AutoInstall: cecutil.vim
 1643 11853 :AutoInstall: SuperTab
+2098 11739 :AutoInstall: FakeClip
+1643 11853 :AutoInstall: supertab.vim
