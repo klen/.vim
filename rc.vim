@@ -129,6 +129,19 @@
 " ------------------------------
 " Функции
 
+    let DisableI = 1
+    function! DisableIndent()
+        if g:DisableI == 1
+            execute "set noautoindent nosmartindent"
+            echo "Disable auto indent"
+            let g:DisableI = 0
+        else
+            execute "set autoindent smartindent"
+            let g:DisableI = 1
+            echo "Enable auto indent"
+        endif
+    endfunction
+
     " Подсветка текущей раскладки
     function! MyKeyMapHighlight()
         if &iminsert == 0
@@ -193,6 +206,20 @@
     " Автоматическая перезагрузка настроек после редактирования
     au! bufwritepost rc.vim source ~/.vimrc
 
+    " Автоматическое сохранение последней сессии
+    autocmd VimLeavePre * silent mksession! ~/.lastVimSession
+
+    " Автоматическая загрузка последней сессии
+    "autocmd VimEnter * silent source! ~/.lastVimSession
+
+    " Подсветка режима вставки
+    autocmd InsertEnter * set cursorline
+    autocmd InsertLeave * set nocursorline
+    autocmd InsertEnter * highlight CursorLine ctermbg=52
+    autocmd InsertLeave * highlight CursorLine ctermbg=236
+    "autocmd CmdwinEnter * highlight StatusLine ctermbg=52
+    "autocmd CmdwinLeave * highlight StatusLine ctermbg=236
+
 
 " ------------------------------
 " Горячие клавиши 
@@ -232,12 +259,6 @@
     nmap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
     vmap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
  
-    " Автозакрытие скобок
-    imap ( ()<ESC>:let leavechar=")"<CR>i
-    imap [ []<ESC>:let leavechar="]"<CR>i
-    imap { {}<ESC>:let leavechar="}"<CR>i
-    imap ,, <ESC>:exec "normal f" . leavechar<CR>a
-
     " Запуск/сокрытие плагина Tlist
     call Map_ex_cmd("<silent><F1>", "TlistToggle")
 
@@ -253,6 +274,7 @@
     call Map_ex_cmd("<F5>", "nohls")   " Выключить подсветку результатов поиска
     call Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
     call Toggle_option("<F7>", "wrap")      " Переключение переноса слов
+    map <F8> :call DisableIndent()<CR>
 
     " Меню работы с (VCS plugin
     map <F9> :emenu VCS.<TAB>
@@ -273,20 +295,6 @@
 
     " Список меток
     call Map_ex_cmd("<F12>", "marks")
-
-    " Автоматическое сохранение последней сессии
-    autocmd VimLeavePre * silent mksession! ~/.lastVimSession
-
-    " Автоматическая загрузка последней сессии
-    "autocmd VimEnter * silent source! ~/.lastVimSession
-
-    " Подсветка режима вставки
-    autocmd InsertEnter * set cursorline
-    autocmd InsertLeave * set nocursorline
-    autocmd InsertEnter * highlight CursorLine ctermbg=52
-    autocmd InsertLeave * highlight CursorLine ctermbg=236
-    "autocmd CmdwinEnter * highlight StatusLine ctermbg=52
-    "autocmd CmdwinLeave * highlight StatusLine ctermbg=236
 
     function! BufNewFile_PY()
         0put = '#!/usr/bin/env python'
