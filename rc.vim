@@ -215,7 +215,7 @@
     " Подсветка режима вставки
     autocmd InsertEnter * set cursorline
     autocmd InsertLeave * set nocursorline
-    autocmd InsertEnter * highlight CursorLine ctermbg=52
+    autocmd InsertEnter * highlight CursorLine ctermbg=DarkBlue
     autocmd InsertLeave * highlight CursorLine ctermbg=236
     "autocmd CmdwinEnter * highlight StatusLine ctermbg=52
     "autocmd CmdwinLeave * highlight StatusLine ctermbg=236
