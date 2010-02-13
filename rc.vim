@@ -51,7 +51,7 @@
     set showtabline=2           " показывать строку вкладок всегда
     set shortmess=tToOI
     set showcmd                 " отображение команд
-    set statusline=%<%f%h%m%r%=format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
+    set statusline=%<%f%h%m%r%=%#warningmsg#%{SyntasticStatuslineFlag()}%*\ format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
     set wildmenu                " использовать wildmenu ...
     set wildcharm=<TAB>         " ... с авто-дополнением
 
@@ -125,6 +125,8 @@
     let Grep_Skip_Dirs                = 'RCS CVS SCCS .svn'
     let Grep_Cygwin_Find              = 1
 
+    let g:syntastic_enable_signs=1
+    let g:syntastic_auto_loc_list=1
 
 " ------------------------------
 " Функции
