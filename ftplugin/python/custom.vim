@@ -26,4 +26,6 @@
 
         setlocal omnifunc=pythoncomplete#Complete
         setlocal complete+=t
+    
+        "let g:syntastic_quiet_warnings=1
 
