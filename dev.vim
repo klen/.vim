@@ -24,12 +24,3 @@
 	set completeopt-=preview
 	set completeopt+=longest
 
-    function! BufNewFile_PY()
-        0put = '#!/usr/bin/env python'
-        1put = '#-*- coding: utf-8 -*-'
-        3put = ''
-        4put = ''
-        normal G
-    endfunction
-
-    autocmd BufNewFile *.py call BufNewFile_PY()

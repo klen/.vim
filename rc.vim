@@ -222,6 +222,7 @@
     "autocmd CmdwinEnter * highlight StatusLine ctermbg=52
     "autocmd CmdwinLeave * highlight StatusLine ctermbg=236
 
+    autocmd BufNewFile * silent! 0r $HOME/.vim/templates/%:e.tpl
 
 " ------------------------------
 " Горячие клавиши 
@@ -298,12 +299,3 @@
     " Список меток
     call Map_ex_cmd("<F12>", "marks")
 
-    function! BufNewFile_PY()
-        0put = '#!/usr/bin/env python'
-        1put = '#-*- coding: utf-8 -*-'
-        3put = ''
-        4put = ''
-        normal G
-    endfunction
-
-    autocmd BufNewFile *.py call BufNewFile_PY()

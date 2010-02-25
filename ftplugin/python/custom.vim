@@ -23,6 +23,7 @@
 
         " Запуск скрипта
         map <buffer> <leader>r :!python %<cr>
+        map <buffer> <leader>i :!ipython<cr>
 
         setlocal omnifunc=pythoncomplete#Complete
         setlocal complete+=t
