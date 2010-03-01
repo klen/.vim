@@ -138,7 +138,6 @@
 ExtractSnips()	snipMate.txt	/*ExtractSnips()*
 ExtractSnipsFile()	snipMate.txt	/*ExtractSnipsFile()*
 Filename()	snipMate.txt	/*Filename()*
-Mines.txt	Mines.txt	/*Mines.txt*
 NERDComAbout	NERD_commenter.txt	/*NERDComAbout*
 NERDComAlignedComment	NERD_commenter.txt	/*NERDComAlignedComment*
 NERDComAltDelim	NERD_commenter.txt	/*NERDComAltDelim*
@@ -323,14 +322,6 @@ i_<Plug>(fakeclip-screen-insert-p)	fakeclip.txt	/*i_<Plug>(fakeclip-screen-inser
 i_<Plug>(fakeclip-screen-insert-r)	fakeclip.txt	/*i_<Plug>(fakeclip-screen-insert-r)*
 i_CTRL-R_<Tab>	snipMate.txt	/*i_CTRL-R_<Tab>*
 list-snippets	snipMate.txt	/*list-snippets*
-mines	Mines.txt	/*mines*
-mines-control	Mines.txt	/*mines-control*
-mines-copyright	Mines.txt	/*mines-copyright*
-mines-hints	Mines.txt	/*mines-hints*
-mines-history	Mines.txt	/*mines-history*
-mines-newgame	Mines.txt	/*mines-newgame*
-mines-play	Mines.txt	/*mines-play*
-mines-start	Mines.txt	/*mines-start*
 multi_snip	snipMate.txt	/*multi_snip*
 snipMate	snipMate.txt	/*snipMate*
 snipMate-$#	snipMate.txt	/*snipMate-$#*

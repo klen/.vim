@@ -7,7 +7,6 @@
 	setlocal foldlevelstart=0
 	
 	" Метод фолдинга - по синтаксису
-	"setlocal foldmethod=syntax
 	setlocal foldmethod=indent
 	
 	" Включаем отображение номеров строк

@@ -3,10 +3,13 @@
 
 
 " ------------------------------
-" Настройки
+" Setup
 
-    " Разное
-    set nocompatible            " отключаем совместимость с vi
+    if !exists('s:loaded_my_vimrc')
+    " Don't reset twice on reloading - 'compatible' has SO many side effects.
+        set nocompatible  " to use many extensions of Vim.
+    endif
+
     set hidden                  " не требовать сохранения буфера
     set title                   " показывать имя файла в заголовке окна
     set autoread                " отслеживать изменения файлов
@@ -14,34 +17,49 @@
     set modeline                " читать параметры конфигурации из открытого файла
     set magic                   " добавим магии
 
-    " Отступы
+    " Indent and tabulation
     set autoindent              " копирует отступ от предыдущей строки
     set smartindent             " включаем 'умную' автоматическую расстановку отступов
-
-    " Бэкап и своп файлы
-    set nobackup                " Отключаем создание бэкапов
-    set directory=~/.vim/swap   " Хранить swap в отдельном каталоге
-    set history=400             " История командной строки
-    set viminfo+=h              " Хранить историю
-
-    " Табуляция
     set expandtab
     set smarttab
     set shiftwidth=4            " Размер сдвига при нажатии на клавиши << и >>
     set softtabstop=4           " Табуляция 4 пробела
     set shiftround              " удалять лишние пробелы при отступе
 
-    " Опции поиска
+    " Backup and swap files
+    set backup                  " make backup file and leave it around 
+    if finddir($HOME.'/.data/') == ''
+        silent call mkdir($HOME.'/.data/')
+    endif
+    if finddir($HOME.'/.data/backup') == ''
+        silent call mkdir($HOME.'/.data/backup')
+    endif
+    if finddir($HOME.'/.data/swap') == ''
+        silent call mkdir($HOME.'/.data/swap')
+    endif
+    set backupdir=$HOME/.data/backup    " where to put backup file 
+    set backupskip&
+    set backupskip+=svn-commit.tmp,svn-commit.[0-9]*.tmp
+    set directory=$HOME/.data/swap      " where to put swap file 
+    set history=400                     " history length
+    set viminfo+=h                      " save history
+
+    " Auto save last session
+    autocmd VimLeavePre * silent mksession! $HOME/.data/lastVimSession
+    set sessionoptions=blank,curdir,buffers,tabpages
+
+    " Search options
     set hlsearch                " Подсветка результатов
     set ignorecase              " Игнорировать регистр букв при поиске
     set incsearch               " При поиске перескакивать на найденный текст в процессе набора строки
     set smartcase               " Игнорировать предыдущую опцию если в строке поиска есть буквы разного регистра
 
-    " Локализация
+    " Localization
+    set langmenu=none            " Always use english menu
     set keymap=russian-jcukenwin " Переключение раскладок клавиатуры по <C-^>
-    set iminsert=0              " Раскладка по умолчанию - английская
-    set imsearch=0              " Раскладка по умолчанию при поиске - английская
-    set spelllang=en,ru         " Языки для проверки правописания
+    set iminsert=0               " Раскладка по умолчанию - английская
+    set imsearch=0               " Раскладка по умолчанию при поиске - английская
+    set spelllang=en,ru          " Языки для проверки правописания
     set encoding=utf-8
     set fileencodings=utf-8,cp1251,koi8-r,cp866
     set termencoding=utf-8
@@ -50,10 +68,12 @@
     set laststatus=2            " всегда отображать статусную строку для каждого окна
     set showtabline=2           " показывать строку вкладок всегда
     set shortmess=tToOI
-    set showcmd                 " отображение команд
+    set showcmd                 " show command
+    set showmode                " show mode
     set statusline=%<%f%h%m%r%=%#warningmsg#%{SyntasticStatuslineFlag()}%*\ format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
     set wildmenu                " использовать wildmenu ...
     set wildcharm=<TAB>         " ... с авто-дополнением
+    set wildignore=*.pyc        " Игнорировать pyc файлы
 
     " Отображение
     set foldenable
@@ -86,15 +106,15 @@
     " Подсветка синтаксиса и прочее
     syntax on
     filetype on
-    filetype plugin on          " определять подсветку на основе кода файла
+    filetype plugin on
     filetype indent on
 
-    " Настройка цветовой схемы
-    set t_Co=256
-    set background=dark         " говорим виму, что наш цвет терминала темный
-    colorscheme wombat256
+    " Customization
+    set t_Co=256                " set 256 colors
+    set background=dark         " set background color to dark
+    colorscheme wombat256       " set default theme
 
-    " Включаем мышку даже в текстовом режиме
+    " enable mouse
     if &term =~ "xterm"
         set mouse=a
         set mousemodel=popup
@@ -104,45 +124,38 @@
     set completeopt=menu
     set infercase               " предлагать авто-дополнение на основе уже введённого регистра
 
-
     " Перемещать курсор на следующую строку при нажатии на клавиши вправо-влево и пр.
     set whichwrap=b,s,<,>,[,],l,h
-
-    " Опции сессии
-    set sessionoptions=curdir,buffers,tabpages
 
     " Подключение тег файла
     set tags=tags
 
-    " Настройки для плагинов
-    let Tlist_GainFocus_On_ToggleOpen = 1
-    let Tlist_Close_On_Select         = 1
-    let Tlist_Exit_OnlyWindow         = 1
-    let Tlist_Show_One_File           = 1
-    let Tlist_Use_Right_Window        = 1
-    let Tlist_Compact_Format          = 1
-    let Tlist_Enable_Fold_Column      = 0
+    " Plugins setup
+    " Taglist
+    let Tlist_GainFocus_On_ToggleOpen = 1   " Jump to taglist window to open
+    let Tlist_Close_On_Select         = 0   " Close taglist when a file or tag selected
+    let Tlist_Exit_OnlyWindow         = 1   " If you are last kill your self
+    let Tlist_Show_One_File           = 1   " Displaying tags for only one file
+    let Tlist_Use_Right_Window        = 1   " split to rigt side of the screen
+    let Tlist_Compart_Format          = 1   " Remove extra information and blank lines from taglist window
+    let Tlist_Compact_Format          = 1   " Do not show help
+    let Tlist_Enable_Fold_Column      = 0   " Don't Show the fold indicator column
+    let Tlist_WinWidth                = 30  " Taglist win width
+    let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name
+    let Tlist_BackToEditBuffer        = 0   " If no close on select, let the user choose back to edit buffer or not
+
+    " Supertab
+    let g:SuperTabDefaultCompletionType    = 'context'
+
     let Grep_Skip_Dirs                = 'RCS CVS SCCS .svn'
     let Grep_Cygwin_Find              = 1
 
+    " Syntastic
     let g:syntastic_enable_signs=1
     let g:syntastic_auto_loc_list=1
 
 " ------------------------------
 " Функции
-
-    let DisableI = 1
-    function! DisableIndent()
-        if g:DisableI == 1
-            execute "set noautoindent nosmartindent"
-            echo "Disable auto indent"
-            let g:DisableI = 0
-        else
-            execute "set autoindent smartindent"
-            let g:DisableI = 1
-            echo "Enable auto indent"
-        endif
-    endfunction
 
     " Подсветка текущей раскладки
     function! MyKeyMapHighlight()
@@ -205,30 +218,49 @@
     " Подсветка раскладки
     au WinEnter * :call MyKeyMapHighlight()
 
-    " Автоматическая перезагрузка настроек после редактирования
+    " Auto reload vim settins
     au! bufwritepost rc.vim source ~/.vimrc
 
-    " Автоматическое сохранение последней сессии
-    autocmd VimLeavePre * silent mksession! ~/.lastVimSession
+    " Auto load last session
+    "au VimEnter * silent source! ~/.lastVimSession
 
-    " Автоматическая загрузка последней сессии
-    "autocmd VimEnter * silent source! ~/.lastVimSession
+    " Highlight insert mode
+    au InsertEnter * set cursorline
+    au InsertLeave * set nocursorline
+    au InsertEnter * highlight CursorLine ctermbg=DarkBlue
+    au InsertLeave * highlight CursorLine ctermbg=236
 
-    " Подсветка режима вставки
-    autocmd InsertEnter * set cursorline
-    autocmd InsertLeave * set nocursorline
-    autocmd InsertEnter * highlight CursorLine ctermbg=DarkBlue
-    autocmd InsertLeave * highlight CursorLine ctermbg=236
-    "autocmd CmdwinEnter * highlight StatusLine ctermbg=52
-    "autocmd CmdwinLeave * highlight StatusLine ctermbg=236
+    " New file templates
+    au BufNewFile * silent! 0r $HOME/.vim/templates/%:e.tpl
 
-    autocmd BufNewFile * silent! 0r $HOME/.vim/templates/%:e.tpl
+    "Omni complete settings
+    au FileType python set omnifunc=pythoncomplete#Complete
+    au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+    au FileType html set omnifunc=htmlcomplete#CompleteTags
+    au FileType css set omnifunc=csscomplete#CompleteCSS
 
 " ------------------------------
 " Горячие клавиши 
 "
     " Выход из режима вставки
     imap    jj          <Esc>
+    "uses space to toggle folding
+    nnoremap <space> za
+    vnoremap <space> zf
+    "   ]t      -- Jump to beginning of block
+    map  ]t   :PBoB<CR>
+    vmap ]t   :<C-U>PBOB<CR>m'gv``
+    "   ]e      -- Jump to end of block
+    map  ]e   :PEoB<CR>
+    vmap ]e   :<C-U>PEoB<CR>m'gv``
+    "   ]v      -- Select (Visual Line Mode) block
+    map  ]v   ]tV]e
+    "   ]<      -- Shift block to left
+    map  ]<   ]tV]e<
+    vmap ]<   <
+    "   ]>      -- Shift block to right
+    map  ]>   ]tV]e>
+    vmap ]>   >
     " Новая строка и выход из режима вставки
     map     <S-O>       i<CR><ESC>
     " Вставить новую строку без переключения режима
@@ -277,7 +309,6 @@
     call Map_ex_cmd("<F5>", "nohls")   " Выключить подсветку результатов поиска
     call Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
     call Toggle_option("<F7>", "wrap")      " Переключение переноса слов
-    map <F8> :call DisableIndent()<CR>
 
     " Меню работы с (VCS plugin
     map <F9> :emenu VCS.<TAB>
@@ -298,4 +329,50 @@
 
     " Список меток
     call Map_ex_cmd("<F12>", "marks")
+    function! s:SID_PREFIX()
+        return matchstr(expand('<sfile>'), '<SNR>\d\+_')
+    endfunction
 
+    function! s:gettabvar(tabpagenr, varname)  "{{{2
+    " Wrapper for non standard (my own) built-in function gettabvar().
+        return exists('*gettabvar') ? gettabvar(a:tabpagenr, a:varname) : ''
+    endfunction
+
+    function! s:my_tabline() 
+    let s = ''
+    
+    for i in range(1, tabpagenr('$'))
+        let bufnrs = tabpagebuflist(i)
+        let curbufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
+    
+        let no = (i <= 10 ? i-1 : '#')  " display 0-origin tabpagenr.
+        let mod = len(filter(bufnrs, 'getbufvar(v:val, "&modified")')) ? '+' : ' '
+        let title = s:gettabvar(i, 'title')
+        let title = len(title) ? title : fnamemodify(s:gettabvar(i, 'cwd'), ':t')
+        let title = len(title) ? title : fnamemodify(bufname(curbufnr),':t')
+        let title = len(title) ? title : '[No Name]'
+    
+        let s .= '%'.i.'T'
+        let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
+        let s .= no
+        let s .= mod
+        let s .= title
+        let s .= '%#TabLineFill#'
+        let s .= '  '
+    endfor
+    
+    let s .= '%#TabLineFill#%T'
+    let s .= '%=%#TabLine#'
+    let s .= '| '
+    let s .= '%999X'
+    return s
+    endfunction "}}}
+    let &tabline = '%!' . s:SID_PREFIX() . 'my_tabline()'
+
+    " Fin.  "
+    if !exists('s:loaded_my_vimrc')
+        let s:loaded_my_vimrc = 1
+    endif
+ 
+
+    set secure  " must be written at the last.  see :help 'secure'.
