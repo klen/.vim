@@ -44,10 +44,6 @@
     set history=400                     " history length
     set viminfo+=h                      " save history
 
-    " Auto save last session
-    autocmd VimLeavePre * silent mksession! $HOME/.data/lastVimSession
-    set sessionoptions=blank,curdir,buffers,tabpages
-
     " Search options
     set hlsearch                " Подсветка результатов
     set ignorecase              " Игнорировать регистр букв при поиске

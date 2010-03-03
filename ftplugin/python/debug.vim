@@ -43,5 +43,6 @@ def RemoveBreakpoints():
 
     vim.command( 'normal %dG' % nCurrentLine)
 
-vim.command( 'map <s-f8> :py RemoveBreakpoints()<cr>')
 EOF
+
+command! RemoveBreakpoints :py RemoveBreakpoints()
