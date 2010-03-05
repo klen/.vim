@@ -29,6 +29,7 @@
         if finddir($HOME.'/.data/sessions') == ''
             silent call mkdir($HOME.'/.data/sessions')
         endif
+        let g:session_dir = $HOME.'/.data/sessions'
 
     endif
 
@@ -325,7 +326,7 @@
 
     " Sessions
     fun! SessionRead(name)
-        let s:name = $HOME.'/.data/sessions/'.a:name.'.session'
+        let s:name = g:session_dir.'/'.a:name.'.session'
         if getfsize(s:name) >= 0
             echo "Reading " s:name
             exe 'source '.s:name
@@ -333,7 +334,7 @@
     endfun
 
     fun! SessionSave(name)
-        exe "mks! " $HOME.'/.data/sessions/'.a:name.'.session'
+        exe "mks! " g:session_dir.'/'.a:name.'.session'
         echo "Session" a:name "saved"
     endfun
 
@@ -342,7 +343,7 @@
 
     " Загрузка настроек VIM (.vimrc) из рабочей директории
     fun! s:LoadDirVimSettings(path)
-        let s:filename = a:path.'/.vimrc'
+        let s:filename = a:path.'/.vim/.vimrc'
         if filereadable(s:filename) != 0
             exe 'source '.s:filename
         endif
