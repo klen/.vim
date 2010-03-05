@@ -23,9 +23,6 @@
     " Улучшенная подсветка синтаксиса для питона
     let python_highlight_all = 1	
 
-    " Set Python dic
-    set dictionary+=~/.vim/dic/pydiction
-
     " Запуск скрипта
     map <buffer> <leader>r :!python %<cr>
     map <buffer> <leader>i :!ipython<cr>
