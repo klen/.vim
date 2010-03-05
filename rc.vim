@@ -8,6 +8,28 @@
     if !exists('s:loaded_my_vimrc')
     " Don't reset twice on reloading - 'compatible' has SO many side effects.
         set nocompatible  " to use many extensions of Vim.
+        " Create special directory for backup and swap
+        if finddir($HOME.'/.data/') == ''
+            silent call mkdir($HOME.'/.data/')
+        endif
+
+        if finddir($HOME.'/.data/backup') == ''
+            silent call mkdir($HOME.'/.data/backup')
+        endif
+        set backup                  " make backup file and leave it around 
+        set backupdir=$HOME/.data/backup    " where to put backup file 
+        set backupskip&
+        set backupskip+=svn-commit.tmp,svn-commit.[0-9]*.tmp
+
+        if finddir($HOME.'/.data/swap') == ''
+            silent call mkdir($HOME.'/.data/swap')
+        endif
+        set directory=$HOME/.data/swap      " where to put swap file 
+
+        if finddir($HOME.'/.data/sessions') == ''
+            silent call mkdir($HOME.'/.data/sessions')
+        endif
+
     endif
 
     set hidden                  " не требовать сохранения буфера
@@ -27,20 +49,6 @@
     set shiftround              " удалять лишние пробелы при отступе
 
     " Backup and swap files
-    set backup                  " make backup file and leave it around 
-    if finddir($HOME.'/.data/') == ''
-        silent call mkdir($HOME.'/.data/')
-    endif
-    if finddir($HOME.'/.data/backup') == ''
-        silent call mkdir($HOME.'/.data/backup')
-    endif
-    if finddir($HOME.'/.data/swap') == ''
-        silent call mkdir($HOME.'/.data/swap')
-    endif
-    set backupdir=$HOME/.data/backup    " where to put backup file 
-    set backupskip&
-    set backupskip+=svn-commit.tmp,svn-commit.[0-9]*.tmp
-    set directory=$HOME/.data/swap      " where to put swap file 
     set history=400                     " history length
     set viminfo+=h                      " save history
 
@@ -66,7 +74,9 @@
     set shortmess=tToOI
     set showcmd                 " show command
     set showmode                " show mode
-    set statusline=%<%f%h%m%r%=%#warningmsg#%{SyntasticStatuslineFlag()}%*\ format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
+    set statusline=%<%f%h%m
+    set statusline+=%#Error#%r%*%=
+    set statusline+=%#warningmsg#%{SyntasticStatuslineFlag()}%*\ type=%Y\ format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
     set wildmenu                " использовать wildmenu ...
     set wildcharm=<TAB>         " ... с авто-дополнением
     set wildignore=*.pyc        " Игнорировать pyc файлы
@@ -76,9 +86,8 @@
     set foldclose=all
     set foldmethod=syntax
     set foldnestmax=3           "deepest fold is 3 levels
-    set nofoldenable            "dont fold by default
+    set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo    " This commands open folds
     set listchars+=tab:>-,trail:-,extends:>,precedes:<,nbsp:~
-    set noequalalways
     set wrap                    " перенос строк
     set linebreak               " перенос строк по словам, а не по буквам
     set showmatch               " подсвечивать скобки
@@ -95,15 +104,12 @@
     set go+=a                   " выделение в виме копирует в буфер системы
 
     " Скролл
-    set scrolloff=4             " 4 символа минимум под курсором
-    set sidescroll=4
+    set scrolloff=8             " 4 символа минимум под курсором
+    set sidescroll=8
     set sidescrolloff=10        " 10 символов минимум под курсором при скролле
 
     " Подсветка синтаксиса и прочее
     syntax on
-    filetype on
-    filetype plugin on
-    filetype indent on
 
     " Customization
     set t_Co=256                " set 256 colors
@@ -115,6 +121,7 @@
         set mouse=a
         set mousemodel=popup
     endif
+    set mousehide		" Hide the mouse when typing text
 
     " Опции автодополнения
     set completeopt=menu
@@ -125,6 +132,7 @@
 
     " Подключение тег файла
     set tags=tags
+
 
     " Plugins setup
     " Taglist
@@ -147,35 +155,38 @@
     let g:syntastic_enable_signs=1
     let g:syntastic_auto_loc_list=1
 
+    " Comment with space
+    let NERDSpaceDelims = 1
+
 " ------------------------------
 " Функции
 
     " Подсветка текущей раскладки
-    function! MyKeyMapHighlight()
+    fun! MyKeyMapHighlight()
         if &iminsert == 0
             hi StatusLine ctermfg=White
             hi StatusLine ctermbg=Blue
         else
             hi StatusLine ctermbg=Red
         endif
-    endfunction
+    endfun
     call MyKeyMapHighlight()
 
     " Биндинг клавиш"
-    function! Map_ex_cmd(key, cmd)
+    fun! Map_ex_cmd(key, cmd)
       execute "nmap ".a:key." " . ":".a:cmd."<CR>"
       execute "cmap ".a:key." " . "<C-C>:".a:cmd."<CR>"
       execute "imap ".a:key." " . "<C-O>:".a:cmd."<CR>"
       execute "vmap ".a:key." " . "<Esc>:".a:cmd."<CR>gv"
-    endfunction
+    endfun
 
     " Биндинг переключалки опций
-    function! Toggle_option(key, opt)
+    fun! Toggle_option(key, opt)
       call Map_ex_cmd(a:key, "set ".a:opt."! ".a:opt."?")
-    endfunction
+    endfun
 
     " передвигаемся по вкладкам
-    function! TabJump(direction)
+    fun! TabJump(direction)
         let l:tablen=tabpagenr('$')
         let l:tabcur=tabpagenr()
         if a:direction=='left'
@@ -187,50 +198,56 @@
                 execute 'tabnext'
             endif
         endif
-    endfunction
-
-    " передвигаем вкладки
-    function! TabMove(direction)
-        let l:tablen=tabpagenr('$')
-        let l:tabcur=tabpagenr()
-        if a:direction=='left'
-            if l:tabcur>1
-                execute 'tabmove' l:tabcur-2
-            endif
-        else
-            if l:tabcur!=l:tablen
-                execute 'tabmove' l:tabcur
-            endif
-        endif
-    endfunction
-
+    endfun
 
 " ------------------------------
 " Автокоманды
 
-    " Подсветка раскладки
-    au WinEnter * :call MyKeyMapHighlight()
+    if has("autocmd")
 
-    " Auto reload vim settins
-    au! bufwritepost rc.vim source ~/.vimrc
+        filetype plugin indent on
+  
+        augroup vimrcEx
+        au!
 
-    " Auto load last session
-    "au VimEnter * silent source! ~/.lastVimSession
+        " Подсветка раскладки
+        au WinEnter * :call MyKeyMapHighlight()
 
-    " Highlight insert mode
-    au InsertEnter * set cursorline
-    au InsertLeave * set nocursorline
-    au InsertEnter * highlight CursorLine ctermbg=DarkBlue
-    au InsertLeave * highlight CursorLine ctermbg=236
+        " Auto reload vim settins
+        au! bufwritepost rc.vim source ~/.vimrc
 
-    " New file templates
-    au BufNewFile * silent! 0r $HOME/.vim/templates/%:e.tpl
+        " Highlight insert mode
+        au InsertEnter * set cursorline
+        au InsertLeave * set nocursorline
+        au InsertEnter * highlight CursorLine ctermbg=DarkBlue
+        au InsertLeave * highlight CursorLine ctermbg=236
 
-    "Omni complete settings
-    au FileType python set omnifunc=pythoncomplete#Complete
-    au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-    au FileType html set omnifunc=htmlcomplete#CompleteTags
-    au FileType css set omnifunc=csscomplete#CompleteCSS
+        " New file templates
+        au BufNewFile * silent! 0r $HOME/.vim/templates/%:e.tpl
+
+        "Omni complete settings
+        au FileType python set omnifunc=pythoncomplete#Complete
+        au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+        au FileType html set omnifunc=htmlcomplete#CompleteTags
+        au FileType css set omnifunc=csscomplete#CompleteCSS
+
+        if has('mksession') 
+            au VimLeavePre * :call SessionSave('last')
+        endif
+
+        " When editing a file, always jump to the last known cursor position.
+        " Don't do it when the position is invalid or when inside an event handler
+        " (happens when dropping a file on gvim).
+        " Also don't do it when the mark is in the first line, that is the default
+        " position when opening a file.
+        autocmd BufReadPost *
+            \ if line("'\"") > 1 && line("'\"") <= line("$") |
+            \   exe "normal! g`\"" |
+            \ endif
+
+        augroup END
+
+    endif
 
 " ------------------------------
 " Горячие клавиши 
@@ -240,26 +257,13 @@
     "uses space to toggle folding
     nnoremap <space> za
     vnoremap <space> zf
-    "   ]t      -- Jump to beginning of block
-    map  ]t   :PBoB<CR>
-    vmap ]t   :<C-U>PBOB<CR>m'gv``
-    "   ]e      -- Jump to end of block
-    map  ]e   :PEoB<CR>
-    vmap ]e   :<C-U>PEoB<CR>m'gv``
-    "   ]v      -- Select (Visual Line Mode) block
-    map  ]v   ]tV]e
-    "   ]<      -- Shift block to left
-    map  ]<   ]tV]e<
-    vmap ]<   <
-    "   ]>      -- Shift block to right
-    map  ]>   ]tV]e>
-    vmap ]>   >
     " Новая строка и выход из режима вставки
     map     <S-O>       i<CR><ESC>
     " Вставить новую строку без переключения режима
     nmap    <CR>        o<ESC>k
     " Поиск по файлам
     map     <Leader>f   :vimgrep /.*\<<c-r>=expand("<cword>")<CR>\> ../**/*<CR>
+    inoremap <Nul> <C-x><C-o>
 
     " Работа с вкладками
     " новая вкладка
@@ -276,10 +280,6 @@
     nmap Q :tabmove 0<cr>
     " переместить вкладку в конец
     call Map_ex_cmd("<C-DOWN>", ":tabmove")
-    " переместить вкладку назад
-    call Map_ex_cmd("<silent><C-LEFT>", ":call TabMove('left')")
-    " переместить вкладку вперёд
-    call Map_ex_cmd("<silent><C-RIGHT>", ":call TabMove('right')")
 
     " Переключение раскладок будет производиться по <C-F>
     cmap <silent> <C-F> <C-^>
@@ -322,50 +322,36 @@
 
     " Список меток
     call Map_ex_cmd("<F12>", "marks")
-    function! s:SID_PREFIX()
-        return matchstr(expand('<sfile>'), '<SNR>\d\+_')
-    endfunction
 
-    function! s:gettabvar(tabpagenr, varname)  "{{{2
-    " Wrapper for non standard (my own) built-in function gettabvar().
-        return exists('*gettabvar') ? gettabvar(a:tabpagenr, a:varname) : ''
-    endfunction
+    " Sessions
+    fun! SessionRead(name)
+        let s:name = $HOME.'/.data/sessions/'.a:name.'.session'
+        if getfsize(s:name) >= 0
+            echo "Reading " s:name
+            exe 'source '.s:name
+        endif
+    endfun
 
-    function! s:my_tabline() 
-    let s = ''
-    
-    for i in range(1, tabpagenr('$'))
-        let bufnrs = tabpagebuflist(i)
-        let curbufnr = bufnrs[tabpagewinnr(i) - 1]  " first window, first appears
-    
-        let no = (i <= 10 ? i-1 : '#')  " display 0-origin tabpagenr.
-        let mod = len(filter(bufnrs, 'getbufvar(v:val, "&modified")')) ? '+' : ' '
-        let title = s:gettabvar(i, 'title')
-        let title = len(title) ? title : fnamemodify(s:gettabvar(i, 'cwd'), ':t')
-        let title = len(title) ? title : fnamemodify(bufname(curbufnr),':t')
-        let title = len(title) ? title : '[No Name]'
-    
-        let s .= '%'.i.'T'
-        let s .= '%#' . (i == tabpagenr() ? 'TabLineSel' : 'TabLine') . '#'
-        let s .= no
-        let s .= mod
-        let s .= title
-        let s .= '%#TabLineFill#'
-        let s .= '  '
-    endfor
-    
-    let s .= '%#TabLineFill#%T'
-    let s .= '%=%#TabLine#'
-    let s .= '| '
-    let s .= '%999X'
-    return s
-    endfunction "}}}
-    let &tabline = '%!' . s:SID_PREFIX() . 'my_tabline()'
+    fun! SessionSave(name)
+        exe "mks! " $HOME.'/.data/sessions/'.a:name.'.session'
+        echo "Session" a:name "saved"
+    endfun
 
-    " Fin.  "
+    com! Ssave :call SessionSave(<args>)
+    com! Sread :call SessionRead(<args>)
+
+    " Загрузка настроек VIM (.vimrc) из рабочей директории
+    fun! s:LoadDirVimSettings(path)
+        let s:filename = a:path.'/.vimrc'
+        if filereadable(s:filename) != 0
+            exe 'source '.s:filename
+        endif
+    endfun
+
     if !exists('s:loaded_my_vimrc')
-        let s:loaded_my_vimrc = 1
+        call s:LoadDirVimSettings(getcwd())
     endif
- 
 
+    let s:loaded_my_vimrc = 1       " Fin
     set secure  " must be written at the last.  see :help 'secure'.
+
