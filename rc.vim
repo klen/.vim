@@ -140,9 +140,6 @@
     let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name
     let Tlist_BackToEditBuffer        = 0   " If no close on select, let the user choose back to edit buffer or not
 
-    " Supertab
-    let g:SuperTabDefaultCompletionType    = 'context'
-
     let Grep_Skip_Dirs                = 'RCS CVS SCCS .svn'
     let Grep_Cygwin_Find              = 1
 

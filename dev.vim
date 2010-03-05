@@ -4,9 +4,9 @@
 	setlocal nowrap
 	
 	" Уровень сокрытия по умолчанию для вновь открытых файлов
-	setlocal foldlevelstart=0
+	setlocal foldlevelstart=1
 	
-	" Метод фолдинга - по синтаксису
+	" Метод фолдинга - по отступам
 	setlocal foldmethod=indent
 	
 	" Включаем отображение номеров строк
