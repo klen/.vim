@@ -361,6 +361,10 @@ i_<tab>	xptemplate.txt	/*i_<tab>*
 i_CTRL-G_S	surround.txt	/*i_CTRL-G_S*
 i_CTRL-G_s	surround.txt	/*i_CTRL-G_s*
 n_<C-g>	xptemplate.txt	/*n_<C-g>*
+rope	rope.txt	/*rope*
+rope_finding_files	rope.txt	/*rope_finding_files*
+rope_keybinding_section	rope.txt	/*rope_keybinding_section*
+rope_shortcuts	rope.txt	/*rope_shortcuts*
 s_<C-\>	xptemplate.txt	/*s_<C-\\>*
 s_<C-l>	xptemplate.txt	/*s_<C-l>*
 s_<CR>	xptemplate.txt	/*s_<CR>*

@@ -8,10 +8,10 @@
     setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
     set cindent
 
-    set tags+=$HOME/.vim/tags/python.ctags
+    set tags+=$HOME/.vim/tags/django.tags
 
     " Поиск по документаци
-    setlocal keywordprg=pydoc
+    " setlocal keywordprg=pydoc
 
     setlocal textwidth=79
     setlocal formatoptions-=t
@@ -29,16 +29,16 @@
 
     setlocal complete+=t
 
-    " Для поиска по библиотекам питона
+    " RopeVim
+    let ropevim_codeassist_maxfixes=10
+    let ropevim_guess_project=1
+    let ropevim_vim_completion=1
+    let ropevim_enable_autoimport=1
+    let ropevim_enable_shortcuts=1
+    let ropevim_extended_complete=0 
+    let ropevim_global_prefix="<C-c>p"
 
-python << EOF
-import os
-import sys
-import vim
-for p in sys.path:
-    if os.path.isdir(p):
-        vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
-EOF
-
-    "let g:syntastic_quiet_warnings=1
-
+    imap <buffer><Nul> <M-/>
+    map <buffer><C-c>r :call RopeRename()<CR>
+    map <buffer><C-c>u :call RopeUndo()<CR>
+    map <buffer><C-c>c :call RopeProjectConfig()<CR>

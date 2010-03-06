@@ -52,6 +52,7 @@
     " Backup and swap files
     set history=400                     " history length
     set viminfo+=h                      " save history
+    set sessionoptions-=blank           " dont save blank vindow
 
     " Search options
     set hlsearch                " Подсветка результатов
@@ -227,7 +228,7 @@
         au BufNewFile * silent! 0r $HOME/.vim/templates/%:e.tpl
 
         "Omni complete settings
-        au FileType python set omnifunc=pythoncomplete#Complete
+        " au FileType python set omnifunc=pythoncomplete#Complete
         au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
         au FileType html set omnifunc=htmlcomplete#CompleteTags
         au FileType css set omnifunc=csscomplete#CompleteCSS
@@ -264,6 +265,7 @@
     nmap    <CR>        o<ESC>k
     " Поиск по файлам
     map     <Leader>f   :vimgrep /.*\<<c-r>=expand("<cword>")<CR>\> ../**/*<CR>
+    " Omnicompletition
     inoremap <Nul> <C-x><C-o>
 
     " Работа с вкладками
