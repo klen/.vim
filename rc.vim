@@ -1,13 +1,13 @@
 " ------------------------------
 " .vimrc klen <horneds@gmail.com>
 
-
 " ------------------------------
 " Setup
 
     if !exists('s:loaded_my_vimrc')
     " Don't reset twice on reloading - 'compatible' has SO many side effects.
         set nocompatible  " to use many extensions of Vim.
+
         " Create special directory for backup and swap
         if finddir($HOME.'/.data/') == ''
             silent call mkdir($HOME.'/.data/')
@@ -43,7 +43,7 @@
     " Indent and tabulation
     set autoindent              " копирует отступ от предыдущей строки
     set smartindent             " включаем 'умную' автоматическую расстановку отступов
-    set expandtab
+    set expandtab               " tab with spaces
     set smarttab
     set shiftwidth=4            " Размер сдвига при нажатии на клавиши << и >>
     set softtabstop=4           " Табуляция 4 пробела
@@ -72,16 +72,21 @@
 
     " Строка статуса и командная строка
     set laststatus=2            " всегда отображать статусную строку для каждого окна
-    set showtabline=2           " показывать строку вкладок всегда
-    set shortmess=tToOI
+    set shortmess=atToOI
     set showcmd                 " show command
     set showmode                " show mode
-    set statusline=%<%f%h%m
-    set statusline+=%#Error#%r%*%=
-    set statusline+=%#warningmsg#%{SyntasticStatuslineFlag()}%*\ type=%Y\ format=%{&fileformat}\ file=%{&fileencoding}\ enc=%{&encoding}\ %b\ 0x%B\ %l,%c%V\ %P
+    set statusline=%<%f%h%m     " filename and modify flag
+    set statusline+=%#Error#%r%*%= " read only and separator
+    set statusline+=%#warningmsg#%{SyntasticStatuslineFlag()}%*
+    set statusline+=\ type=%Y
+    set statusline+=\ format=%{&fileformat}
+    set statusline+=\ file=%{&fileencoding}
+    set statusline+=\ enc=%{&encoding}
+    set statusline+=\ %b\ 0x%B\ %l,%c%V\ %P
     set wildmenu                " использовать wildmenu ...
     set wildcharm=<TAB>         " ... с авто-дополнением
     set wildignore=*.pyc        " Игнорировать pyc файлы
+    set cmdheight=2             " Command line height 2
 
     " Отображение
     set foldenable
@@ -89,7 +94,7 @@
     set foldmethod=syntax
     set foldnestmax=3           "deepest fold is 3 levels
     set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo    " This commands open folds
-    set listchars+=tab:>-,trail:-,extends:>,precedes:<,nbsp:~
+    set listchars=eol:$,tab:>-,trail:·,nbsp:~,extends:>,precedes:<
     set wrap                    " перенос строк
     set linebreak               " перенос строк по словам, а не по буквам
     set showmatch               " подсвечивать скобки
@@ -102,21 +107,22 @@
     " Редактирование
     set backspace=indent,eol,start
     set clipboard+=unnamed      " включаем X clipboard
-    set virtualedit=block
+    set virtualedit=all         " On virtualedit for all mode
     set go+=a                   " выделение в виме копирует в буфер системы
 
     " Скролл
-    set scrolloff=8             " 4 символа минимум под курсором
-    set sidescroll=8
+    set scrolloff=4             " 4 символа минимум под курсором
+    set sidescroll=4
     set sidescrolloff=10        " 10 символов минимум под курсором при скролле
 
-    " Подсветка синтаксиса и прочее
-    syntax on
-
     " Customization
+    syntax on
     set t_Co=256                " set 256 colors
     set background=dark         " set background color to dark
-    colorscheme wombat256       " set default theme
+    " colorscheme wombat256       " set default theme
+    " colorscheme xoria256       " set default theme
+    colorscheme mustang
+    set ttyfast
 
     " enable mouse
     if &term =~ "xterm"
@@ -135,6 +141,8 @@
     " Подключение тег файла
     set tags=tags
 
+    " set custom map leader to ','
+    let mapleader = ","
 
     " Plugins setup
     " Taglist
@@ -150,7 +158,7 @@
     let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name
     let Tlist_BackToEditBuffer        = 0   " If no close on select, let the user choose back to edit buffer or not
 
-    let Grep_Skip_Dirs                = 'RCS CVS SCCS .svn'
+    let Grep_Skip_Dirs                = 'RCS CVS SCCS .svn .git'
     let Grep_Cygwin_Find              = 1
 
     " Syntastic
@@ -160,19 +168,20 @@
     " Comment with space
     let NERDSpaceDelims = 1
 
+    " Enable extended matchit
+    runtime macros/matchit.vim
 " ------------------------------
 " Функции
 
     " Подсветка текущей раскладки
-    fun! MyKeyMapHighlight()
+    fun! KeyMapHighlight()
         if &iminsert == 0
-            hi StatusLine ctermfg=White
-            hi StatusLine ctermbg=Blue
+            hi StatusLine ctermfg=White ctermbg=Blue
         else
             hi StatusLine ctermbg=Red
         endif
     endfun
-    call MyKeyMapHighlight()
+    call KeyMapHighlight()
 
     " Биндинг клавиш"
     fun! Map_ex_cmd(key, cmd)
@@ -213,7 +222,7 @@
         au!
 
         " Подсветка раскладки
-        au WinEnter * :call MyKeyMapHighlight()
+        au WinEnter * :call KeyMapHighlight()
 
         " Auto reload vim settins
         au! bufwritepost rc.vim source ~/.vimrc
@@ -221,9 +230,18 @@
         " Highlight insert mode
         au InsertEnter * set cursorline
         au InsertLeave * set nocursorline
-        au InsertEnter * highlight CursorLine ctermbg=DarkBlue
-        au InsertLeave * highlight CursorLine ctermbg=236
-
+        " au InsertEnter * highlight CursorLine ctermbg=DarkBlue
+        " au InsertLeave * highlight CursorLine ctermbg=236
+        
+        " Set up the gui cursor to look nice
+        set guicursor=n-v-c:block-Cursor-blinkon0
+        set guicursor+=ve:ver35-Cursor
+        set guicursor+=o:hor50-Cursor
+        set guicursor+=i-ci:ver25-Cursor
+        set guicursor+=r-cr:hor20-Cursor
+        set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
+        set guioptions=ac
+        
         " New file templates
         au BufNewFile * silent! 0r $HOME/.vim/templates/%:e.tpl
 
@@ -254,19 +272,59 @@
 " ------------------------------
 " Горячие клавиши 
 "
-    " Выход из режима вставки
-    imap    jj          <Esc>
-    "uses space to toggle folding
-    nnoremap <space> za
-    vnoremap <space> zf
+"
+    " Insert mode helpers
+    imap <M-l> <Right>
+    imap <M-h> <Left>
+    imap <M-j> <Down>
+    imap <M-k> <Up>
+
+    " Set paste mode for paste from terminal
+    nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
     " Новая строка и выход из режима вставки
     map     <S-O>       i<CR><ESC>
-    " Вставить новую строку без переключения режима
-    nmap    <CR>        o<ESC>k
-    " Поиск по файлам
-    map     <Leader>f   :vimgrep /.*\<<c-r>=expand("<cword>")<CR>\> ../**/*<CR>
-    " Omnicompletition
+    " Drop hightlight search result
+    map    <silent> <leader>n  :silent :nohls<CR> 
+    " Omnicompletition on space
     inoremap <Nul> <C-x><C-o>
+    " Fast scrool
+    nnoremap <C-e> 3<C-e>
+    nnoremap <C-y> 3<C-y>
+
+    " allow command line editing like emacs
+    cnoremap <C-A>      <Home>
+    cnoremap <C-B>      <Left>
+    cnoremap <C-E>      <End>
+    cnoremap <C-F>      <Right>
+    cnoremap <C-N>      <Down>
+    cnoremap <C-P>      <Up>
+
+    " Window commands
+    noremap <silent> ,h :wincmd h<CR>
+    noremap <silent> ,j :wincmd j<CR>
+    noremap <silent> ,k :wincmd k<CR>
+    noremap <silent> ,l :wincmd l<CR>
+    noremap <silent> ,sb :wincmd p<CR>
+    noremap <silent> ,cj :wincmd j<CR>:close<CR>
+    noremap <silent> ,ck :wincmd k<CR>:close<CR>
+    noremap <silent> ,ch :wincmd h<CR>:close<CR>
+    noremap <silent> ,cl :wincmd l<CR>:close<CR>
+    noremap <silent> ,cw :close<CR>
+
+    " Buffer commands
+    noremap <silent> ,bp :bp<CR>
+    noremap <silent> ,bn :bn<CR>
+    noremap <silent> ,bw :w<CR>
+    noremap <silent> ,bd :bd<CR>
+    noremap <silent> ,ls :ls<CR>
+    nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
+
+    " Search the current file for the word under the cursor and display matches
+    nmap <silent> ,gw :Rgrep()<CR>
+
+    " Search the current file for the WORD under the cursor and display matches
+    " nmap <silent> ,gW
+        " \ :vimgrep /<C-r><C-a>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:set nohls<CR>
 
     " Работа с вкладками
     " новая вкладка
@@ -286,23 +344,16 @@
 
     " Переключение раскладок будет производиться по <C-F>
     cmap <silent> <C-F> <C-^>
-    imap <silent> <C-F> <C-^>X<Esc>:call MyKeyMapHighlight()<CR>a<C-H>
-    nmap <silent> <C-F> a<C-^><Esc>:call MyKeyMapHighlight()<CR>
-    vmap <silent> <C-F> <Esc>a<C-^><Esc>:call MyKeyMapHighlight()<CR>gv
+    imap <silent> <C-F> <C-^>X<Esc>:call KeyMapHighlight()<CR>a<C-H>
+    nmap <silent> <C-F> a<C-^><Esc>:call KeyMapHighlight()<CR>
+    vmap <silent> <C-F> <Esc>a<C-^><Esc>:call KeyMapHighlight()<CR>gv
  
     " Запуск/сокрытие плагина Tlist
-    call Map_ex_cmd("<silent><F1>", "TlistToggle")
-
-    " Сохранение файла
-    call Map_ex_cmd("<F2>", "write")
-
-    " Рекурсивный поиск строки в файлах
-    call Map_ex_cmd("<F3>", "Rgrep")
+    call Map_ex_cmd("<F1>", "TlistToggle")
 
     " Запуск/сокрытие плагина NERDTree
-    call Map_ex_cmd("<silent><F4>", "NERDTreeToggle")
+    call Map_ex_cmd("<F4>", "NERDTreeToggle")
     
-    call Map_ex_cmd("<F5>", "nohls")   " Выключить подсветку результатов поиска
     call Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
     call Toggle_option("<F7>", "wrap")      " Переключение переноса слов
 
