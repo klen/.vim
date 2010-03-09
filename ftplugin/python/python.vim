@@ -15,7 +15,6 @@
 
     setlocal textwidth=79
     setlocal formatoptions-=t
-    match Error /\%>79v.\+/
 
     "Trim trailing whitespace
     au FileType python autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))

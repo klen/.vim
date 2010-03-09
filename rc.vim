@@ -77,7 +77,6 @@
     set showmode                " show mode
     set statusline=%<%f%h%m     " filename and modify flag
     set statusline+=%#Error#%r%*%= " read only and separator
-    set statusline+=%#warningmsg#%{SyntasticStatuslineFlag()}%*
     set statusline+=\ type=%Y
     set statusline+=\ format=%{&fileformat}
     set statusline+=\ file=%{&fileencoding}
@@ -298,6 +297,8 @@
     cnoremap <C-F>      <Right>
     cnoremap <C-N>      <Down>
     cnoremap <C-P>      <Up>
+
+    noremap <silent> ,ll :ll<CR>
 
     " Window commands
     noremap <silent> ,h :wincmd h<CR>
