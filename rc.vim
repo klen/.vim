@@ -395,6 +395,21 @@
     com! Ssave :call SessionSave(<args>)
     com! Sread :call SessionRead(<args>)
 
+    " Some gui settings
+    if has("gui_running")
+        set guifont=DejaVu\ Sans\ Mono\ 11
+        colorscheme xoria256
+        if !exists("g:vimrcloaded")
+            winpos 0 0
+            if ! &diff
+                winsize 130 90
+            else
+                winsize 227 90
+            endif
+            let g:vimrcloaded = 1
+        endif
+    endif
+
     " Загрузка настроек VIM (.vimrc) из рабочей директории
     fun! s:LoadDirVimSettings(path)
         let s:filename = a:path.'/.vim/.vimrc'
