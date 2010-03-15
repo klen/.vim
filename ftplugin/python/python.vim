@@ -38,6 +38,7 @@
     let ropevim_global_prefix="<C-c>p"
 
     imap <buffer><Nul> <M-/>
+    imap <buffer><C-Space> <M-/>
     map <buffer><C-c>r :call RopeRename()<CR>
     map <buffer><C-c>u :call RopeUndo()<CR>
     map <buffer><C-c>c :call RopeProjectConfig()<CR>
