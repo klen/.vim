@@ -285,7 +285,7 @@
     cnoremap <C-N>      <Down>
     cnoremap <C-P>      <Up>
 
-    noremap <silent> ,ll :ll<CR>
+    noremap <silent> ,ll :ccl<CR>
 
     " Window commands
     noremap <silent> ,h :wincmd h<CR>
