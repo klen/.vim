@@ -160,10 +160,6 @@
     let Grep_Skip_Dirs                = 'RCS CVS SCCS .svn .git'
     let Grep_Cygwin_Find              = 1
 
-    " Syntastic
-    let g:syntastic_enable_signs=1
-    let g:syntastic_auto_loc_list=1
-
     " Comment with space
     let NERDSpaceDelims = 1
 

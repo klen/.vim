@@ -28,6 +28,10 @@
 
     setlocal complete+=t
 
+    " PyLint
+    compiler pylint
+
+
     " RopeVim
     let ropevim_codeassist_maxfixes=10
     let ropevim_guess_project=1
