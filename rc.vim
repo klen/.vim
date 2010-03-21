@@ -165,6 +165,7 @@
 
     " Enable extended matchit
     runtime macros/matchit.vim
+
 " ------------------------------
 " Функции
 
@@ -237,6 +238,7 @@
         au FileType html set omnifunc=htmlcomplete#CompleteTags
         au FileType css set omnifunc=csscomplete#CompleteCSS
 
+        " Autosave last session
         if has('mksession') 
             au VimLeavePre * :call SessionSave('last')
         endif
@@ -273,6 +275,7 @@
     map    <silent> <leader>n  :silent :nohls<CR> 
     " Omnicompletition on space
     inoremap <Nul> <C-x><C-o>
+    inoremap <C-Space> <C-x><C-o>
     " Fast scrool
     nnoremap <C-e> 3<C-e>
     nnoremap <C-y> 3<C-y>
@@ -285,6 +288,7 @@
     cnoremap <C-N>      <Down>
     cnoremap <C-P>      <Up>
 
+    " Close cwindow
     noremap <silent> ,ll :ccl<CR>
 
     " Window commands
@@ -305,6 +309,8 @@
     noremap <silent> ,bw :w<CR>
     noremap <silent> ,bd :bd<CR>
     noremap <silent> ,ls :ls<CR>
+
+    " Delete all buffers
     nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
 
     " Search the current file for the word under the cursor and display matches
@@ -336,12 +342,15 @@
     nmap <silent> <C-F> a<C-^><Esc>:call KeyMapHighlight()<CR>
     vmap <silent> <C-F> <Esc>a<C-^><Esc>:call KeyMapHighlight()<CR>gv
  
-    " Запуск/сокрытие плагина Tlist
-    call Map_ex_cmd("<F1>", "TlistToggle")
-
     " Запуск/сокрытие плагина NERDTree
-    call Map_ex_cmd("<F4>", "NERDTreeToggle")
+    call Map_ex_cmd("<F1>", "NERDTreeToggle")
+
+    " Toggle cwindow
+    call Map_ex_cmd("<F2>", "cw")
     
+    " Запуск/сокрытие плагина Tlist
+    call Map_ex_cmd("<F3>", "TlistToggle")
+
     call Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
     call Toggle_option("<F7>", "wrap")      " Переключение переноса слов
 
@@ -393,7 +402,7 @@
         set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
         set guioptions=ac
         set guifont=Monaco\ 11
-        colorscheme xoria256
+        colorscheme wombat256
         if !exists("g:vimrcloaded")
             winpos 0 0
             if ! &diff
