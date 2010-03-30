@@ -53,6 +53,7 @@
     set history=400                     " history length
     set viminfo+=h                      " save history
     set sessionoptions-=blank           " dont save blank vindow
+    set sessionoptions-=options           " dont save options
 
     " Search options
     set hlsearch                " Подсветка результатов
@@ -116,15 +117,15 @@
 
     " Customization
     syntax on
-    set t_Co=256                " set 256 colors
-    set background=dark         " set background color to dark
-    " colorscheme wombat256       " set default theme
-    " colorscheme xoria256       " set default theme
-    colorscheme mustang
-    set ttyfast
-
     " enable mouse
     if &term =~ "xterm"
+        set t_Co=256                " set 256 colors
+        set background=dark         " set background color to dark
+        " colorscheme wombat256       " set default theme
+        " colorscheme xoria256       " set default theme
+        colorscheme mustang
+        set ttyfast
+
         set mouse=a
         set mousemodel=popup
     endif
@@ -261,11 +262,11 @@
 " Горячие клавиши 
 "
 "
-    " Insert mode helpers
     imap <M-l> <Right>
     imap <M-h> <Left>
     imap <M-j> <Down>
     imap <M-k> <Up>
+    nnoremap <Space> <C-d>
 
     " Set paste mode for paste from terminal
     nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
@@ -314,7 +315,7 @@
     nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
 
     " Search the current file for the word under the cursor and display matches
-    nmap <silent> ,gw :Rgrep()<CR>
+    nmap <silent> ,gw :Rgrep<CR>
 
     " Search the current file for the WORD under the cursor and display matches
     " nmap <silent> ,gW
@@ -343,7 +344,7 @@
     vmap <silent> <C-F> <Esc>a<C-^><Esc>:call KeyMapHighlight()<CR>gv
  
     " Запуск/сокрытие плагина NERDTree
-    call Map_ex_cmd("<F1>", "NERDTreeToggle")
+    call Map_ex_cmd("<F1>", "NERDTree")
 
     " Toggle cwindow
     call Map_ex_cmd("<F2>", "cw")
@@ -380,6 +381,17 @@
         if getfsize(s:name) >= 0
             echo "Reading " s:name
             exe 'source '.s:name
+        else
+            echo 'Not find session: '.a:name
+        endif
+    endfun
+
+    fun! SessionInput(type)
+        let s:name = input(a:type.' session name? ')
+        if a:type == 'Save'
+            call SessionSave(s:name)
+        else
+            call SessionRead(s:name)
         endif
     endfun
 
@@ -388,6 +400,8 @@
         echo "Session" a:name "saved"
     endfun
 
+    nmap <Leader>ss :call SessionInput('Save')<CR>
+    nmap <Leader>sr :call SessionInput('Read')<CR>
     com! Ssave :call SessionSave(<args>)
     com! Sread :call SessionRead(<args>)
 

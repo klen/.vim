@@ -8,8 +8,6 @@
     setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
     set cindent
 
-    set tags+=$HOME/.vim/tags/django.tags
-
     " Поиск по документаци
     " setlocal keywordprg=pydoc
 

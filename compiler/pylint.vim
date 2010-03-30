@@ -54,7 +54,7 @@ if !exists('g:pylint_onwrite')
 endif
  
 if !exists('g:pylint_show_rate')
-    let g:pylint_show_rate = 1
+    let g:pylint_show_rate = 0
 endif
  
 if !exists('g:pylint_cwindow')
@@ -89,7 +89,8 @@ CompilerSet makeprg=(echo\ '[%]';pylint\ -i\ y\ %\\\|grep\ -e\ \'^[WECY]\'\\\|se
 "CompilerSet efm=%+P[%f],%t:\ %#%l:%m,%Z,%+IYour\ code%m,%Z,%-G%.%#
 "modified by Jose Blanca
 "version for the sorted and filtered pylint
-CompilerSet efm=%-GI%n:\ %#%l:%m,%*\\d\ %t\ %n:\ %#%l:%m,%Z,%+IYour\ code%m,%Z,%-G%.%#
+" CompilerSet efm=%-GI%n:\ %#%l:%m,%*\\d\ %t\ %n:\ %#%l:%m,%Z,%+IYour\ code%m,%Z,%-G%.%#
+CompilerSet efm=%-GI%n:\ %#%l:%m,%*\\d\ %t\ %n:\ %#%l:%m,%Z,%Z,%-G%.%#
  
 ""sings
 "signs definition
@@ -127,7 +128,7 @@ function! Pylint(writing)
         cwindow
     endif
  
-    call PylintEvaluation()
+    " call PylintEvaluation()
  
     if g:pylint_show_rate
         echon 'code rate: ' b:pylint_rate ', prev: ' b:pylint_prev_rate
