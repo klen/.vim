@@ -121,9 +121,7 @@
     if &term =~ "xterm"
         set t_Co=256                " set 256 colors
         set background=dark         " set background color to dark
-        " colorscheme wombat256       " set default theme
-        " colorscheme xoria256       " set default theme
-        colorscheme mustang
+        colorscheme wombat256
         set ttyfast
 
         set mouse=a
@@ -168,7 +166,7 @@
     runtime macros/matchit.vim
 
 " ------------------------------
-" Функции
+" Functions
 
     " Подсветка текущей раскладки
     fun! KeyMapHighlight()
@@ -208,8 +206,42 @@
         endif
     endfun
 
+    " Sessions
+    fun! SessionRead(name)
+        let s:name = g:session_dir.'/'.a:name.'.session'
+        if getfsize(s:name) >= 0
+            echo "Reading " s:name
+            exe 'source '.s:name
+            exe 'silent! source '.getcwd().'/.vim/.vimrc'
+        else
+            echo 'Not find session: '.a:name
+        endif
+    endfun
+
+    fun! SessionInput(type)
+        let s:name = input(a:type.' session name? ')
+        if a:type == 'Save'
+            call SessionSave(s:name)
+        else
+            call SessionRead(s:name)
+        endif
+    endfun
+
+    fun! SessionSave(name)
+        exe "mks! " g:session_dir.'/'.a:name.'.session'
+        echo "Session" a:name "saved"
+    endfun
+
+    " Omni and dict completition
+    fun! AddWrapper()
+        if exists('&omnifunc') && &omnifunc != ''
+            return "\<C-X>\<C-o>\<C-p>"
+        else
+            return "\<C-N>"
+        endif
+    endfun
 " ------------------------------
-" Автокоманды
+" Autocommands
 
     if has("autocmd")
 
@@ -259,9 +291,10 @@
     endif
 
 " ------------------------------
-" Горячие клавиши 
+" Hot keys 
 "
-"
+    
+    " Text navigation
     imap <M-l> <Right>
     imap <M-h> <Left>
     imap <M-j> <Down>
@@ -274,12 +307,13 @@
     map     <S-O>       i<CR><ESC>
     " Drop hightlight search result
     map    <silent> <leader>n  :silent :nohls<CR> 
-    " Omnicompletition on space
-    inoremap <Nul> <C-x><C-o>
-    inoremap <C-Space> <C-x><C-o>
+    " Omni and dict completition on space
+    inoremap <Nul> <C-R>=AddWrapper()<CR>
+    inoremap <C-Space> <C-R>=AddWrapper()<CR>
     " Fast scrool
     nnoremap <C-e> 3<C-e>
     nnoremap <C-y> 3<C-y>
+
 
     " allow command line editing like emacs
     cnoremap <C-A>      <Home>
@@ -375,33 +409,9 @@
     " Список меток
     call Map_ex_cmd("<F12>", "marks")
 
-    " Sessions
-    fun! SessionRead(name)
-        let s:name = g:session_dir.'/'.a:name.'.session'
-        if getfsize(s:name) >= 0
-            echo "Reading " s:name
-            exe 'source '.s:name
-        else
-            echo 'Not find session: '.a:name
-        endif
-    endfun
-
-    fun! SessionInput(type)
-        let s:name = input(a:type.' session name? ')
-        if a:type == 'Save'
-            call SessionSave(s:name)
-        else
-            call SessionRead(s:name)
-        endif
-    endfun
-
-    fun! SessionSave(name)
-        exe "mks! " g:session_dir.'/'.a:name.'.session'
-        echo "Session" a:name "saved"
-    endfun
-
     nmap <Leader>ss :call SessionInput('Save')<CR>
     nmap <Leader>sr :call SessionInput('Read')<CR>
+    nmap <Leader>sl :call SessionRead('last')<CR>
     com! Ssave :call SessionSave(<args>)
     com! Sread :call SessionRead(<args>)
 
@@ -428,16 +438,9 @@
         endif
     endif
 
-    " Загрузка настроек VIM (.vimrc) из рабочей директории
-    fun! s:LoadDirVimSettings(path)
-        let s:filename = a:path.'/.vim/.vimrc'
-        if filereadable(s:filename) != 0
-            exe 'source '.s:filename
-        endif
-    endfun
-
     if !exists('s:loaded_my_vimrc')
-        call s:LoadDirVimSettings(getcwd())
+        " Автозагрузка настроек из текущей директории
+        exe 'silent! source '.getcwd().'/.vim/.vimrc'
     endif
 
     let s:loaded_my_vimrc = 1       " Fin
