@@ -548,7 +548,7 @@ function! s:SetupScratchBuffer(command, vcsType, originalBuffer, statusText)
 
 	setlocal buftype=nofile
 	setlocal noswapfile
-	let &filetype = a:vcsType . a:command
+	let &filetype = tolower(a:vcsType . a:command)
 
 	if VCSCommandGetOption('VCSCommandDeleteOnHide', 0)
 		setlocal bufhidden=delete
@@ -701,6 +701,10 @@ endfunction
 " Function: s:VCSAnnotate(...) {{{2
 function! s:VCSAnnotate(bang, ...)
 	try
+		let line = line('.')
+		let currentBuffer = bufnr('%')
+		let originalBuffer = VCSCommandGetOriginalBuffer(currentBuffer)
+
 		let annotateBuffer = s:ExecuteVCSCommand('Annotate', a:000)
 		if annotateBuffer == -1
 			return -1
@@ -716,7 +720,6 @@ function! s:VCSAnnotate(bang, ...)
 			if splitRegex == ''
 				return annotateBuffer
 			endif
-			let originalBuffer = VCSCommandGetOriginalBuffer(annotateBuffer)
 			let originalFileType = getbufvar(originalBuffer, '&ft')
 			let annotateFileType = getbufvar(annotateBuffer, '&ft')
 			execute "normal 0zR\<c-v>G/" . splitRegex . "/e\<cr>d"
@@ -728,6 +731,24 @@ function! s:VCSAnnotate(bang, ...)
 			call s:SetupScratchBuffer('annotate', vcsType, originalBuffer, 'header')
 			wincmd l
 		endif
+
+		if currentBuffer == originalBuffer
+			" Starting from the original source buffer, so the
+			" current line is relevant.
+			if a:0 == 0
+				" No argument list means that we're annotating
+				" the current version, so jumping to the same
+				" line is the expected action.
+				execute "normal" line . 'G'
+				if has('folding')
+					" The execution of the buffer created autocommand
+					" re-folds the buffer.  Display the current line
+					" unfolded.
+					normal zv
+				endif
+			endif
+		endif
+
 		return annotateBuffer
 	catch
 		call s:ReportError(v:exception)
@@ -773,6 +794,7 @@ function! s:VCSCommit(bang, message)
 		silent put ='VCS: ----------------------------------------------------------------------'
 		$
 		setlocal nomodified
+		silent do VCSCommand User VCSBufferCreated
 	catch
 		call s:ReportError(v:exception)
 		return -1
@@ -797,22 +819,16 @@ endfunction
 
 " Function: s:VCSFinishCommit(logMessageList, originalBuffer) {{{2
 function! s:VCSFinishCommit(logMessageList, originalBuffer)
-	let shellSlashBak = &shellslash
+	let messageFileName = tempname()
+	call writefile(a:logMessageList, messageFileName)
 	try
-		set shellslash
-		let messageFileName = tempname()
-		call writefile(a:logMessageList, messageFileName)
-		try
-			let resultBuffer = s:ExecuteVCSCommand('Commit', [messageFileName])
-			if resultBuffer < 0
-				return resultBuffer
-			endif
-			return s:MarkOrigBufferForSetup(resultBuffer)
-		finally
-			call delete(messageFileName)
-		endtry
+		let resultBuffer = s:ExecuteVCSCommand('Commit', [messageFileName])
+		if resultBuffer < 0
+			return resultBuffer
+		endif
+		return s:MarkOrigBufferForSetup(resultBuffer)
 	finally
-		let &shellslash = shellSlashBak
+		call delete(messageFileName)
 	endtry
 endfunction
 
@@ -837,6 +853,24 @@ function! s:VCSGotoOriginal(bang)
 			endwhile
 		endif
 	endif
+endfunction
+
+function! s:VCSDiff(...)  "{{{2
+	let resultBuffer = s:ExecuteVCSCommand('Diff', a:000)
+	if resultBuffer > 0
+		let &filetype = 'diff'
+	elseif resultBuffer == 0
+		echomsg 'No differences found'
+	endif
+	return resultBuffer
+endfunction
+
+function! s:VCSReview(...)  "{{{2
+	let resultBuffer = s:ExecuteVCSCommand('Review', a:000)
+	if resultBuffer > 0
+		let &filetype = getbufvar(b:VCSCommandOriginalBuffer, '&filetype')
+	endif
+	return resultBuffer
 endfunction
 
 " Function: s:VCSVimDiff(...) {{{2
@@ -867,7 +901,7 @@ function! s:VCSVimDiff(...)
 				if exists('s:vimDiffSourceBuffer')
 					call s:WipeoutCommandBuffers(s:vimDiffSourceBuffer, 'vimdiff')
 				endif
-				let resultBuffer = s:plugins[vcsType][1].Review([a:1])
+				let resultBuffer = s:VCSReview(a:1)
 				if resultBuffer < 0
 					echomsg 'Can''t open revision ' . a:1
 					return resultBuffer
@@ -878,7 +912,7 @@ function! s:VCSVimDiff(...)
 				" If no split method is defined, cheat, and set it to vertical.
 				try
 					call s:OverrideOption('VCSCommandSplit', orientation)
-					let resultBuffer = s:plugins[vcsType][1].Review([a:2])
+					let resultBuffer = s:VCSReview(a:2)
 				finally
 					call s:OverrideOption('VCSCommandSplit')
 				endtry
@@ -897,9 +931,9 @@ function! s:VCSVimDiff(...)
 					call s:OverrideOption('VCSCommandSplit', orientation)
 					try
 						if(a:0 == 0)
-							let resultBuffer = s:plugins[vcsType][1].Review([])
+							let resultBuffer = s:VCSReview()
 						else
-							let resultBuffer = s:plugins[vcsType][1].Review([a:1])
+							let resultBuffer = s:VCSReview(a:1)
 						endif
 					finally
 						call s:OverrideOption('VCSCommandSplit')
@@ -1236,14 +1270,14 @@ com! -nargs=* -bang VCSAnnotate call s:VCSAnnotate(<q-bang>, <f-args>)
 com! -nargs=* -bang VCSBlame call s:VCSAnnotate(<q-bang>, <f-args>)
 com! -nargs=? -bang VCSCommit call s:VCSCommit(<q-bang>, <q-args>)
 com! -nargs=* VCSDelete call s:ExecuteVCSCommand('Delete', [<f-args>])
-com! -nargs=* VCSDiff call s:ExecuteVCSCommand('Diff', [<f-args>])
+com! -nargs=* VCSDiff call s:VCSDiff(<f-args>)
 com! -nargs=0 -bang VCSGotoOriginal call s:VCSGotoOriginal(<q-bang>)
 com! -nargs=* VCSInfo call s:ExecuteVCSCommand('Info', [<f-args>])
 com! -nargs=* VCSLock call s:MarkOrigBufferForSetup(s:ExecuteVCSCommand('Lock', [<f-args>]))
 com! -nargs=* VCSLog call s:ExecuteVCSCommand('Log', [<f-args>])
 com! -nargs=* VCSRemove call s:ExecuteVCSCommand('Delete', [<f-args>])
 com! -nargs=0 VCSRevert call s:MarkOrigBufferForSetup(s:ExecuteVCSCommand('Revert', []))
-com! -nargs=? VCSReview call s:ExecuteVCSCommand('Review', [<f-args>])
+com! -nargs=? VCSReview call s:VCSReview(<f-args>)
 com! -nargs=* VCSStatus call s:ExecuteVCSCommand('Status', [<f-args>])
 com! -nargs=* VCSUnlock call s:MarkOrigBufferForSetup(s:ExecuteVCSCommand('Unlock', [<f-args>]))
 com! -nargs=0 VCSUpdate call s:MarkOrigBufferForSetup(s:ExecuteVCSCommand('Update', []))
