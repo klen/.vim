@@ -294,16 +294,16 @@
 " Hot keys 
 "
     
-    " Text navigation
+    " Text navigation in insert mode
     imap <M-l> <Right>
     imap <M-h> <Left>
     imap <M-j> <Down>
     imap <M-k> <Up>
+    " Page listing
     nnoremap <Space> <C-d>
-
     " Set paste mode for paste from terminal
     nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
-    " Новая строка и выход из режима вставки
+    " New line and exit from insert mode
     map     <S-O>       i<CR><ESC>
     " Drop hightlight search result
     map    <silent> <leader>n  :silent :nohls<CR> 
@@ -313,19 +313,18 @@
     " Fast scrool
     nnoremap <C-e> 3<C-e>
     nnoremap <C-y> 3<C-y>
-
-
-    " allow command line editing like emacs
+    " Select all
+    map vA ggVG
+    " Allow command line editing like emacs
     cnoremap <C-A>      <Home>
     cnoremap <C-B>      <Left>
     cnoremap <C-E>      <End>
     cnoremap <C-F>      <Right>
     cnoremap <C-N>      <Down>
     cnoremap <C-P>      <Up>
-
     " Close cwindow
     noremap <silent> ,ll :ccl<CR>
-
+    noremap <silent> ,nn :cn<CR>
     " Window commands
     noremap <silent> ,h :wincmd h<CR>
     noremap <silent> ,j :wincmd j<CR>
@@ -337,17 +336,14 @@
     noremap <silent> ,ch :wincmd h<CR>:close<CR>
     noremap <silent> ,cl :wincmd l<CR>:close<CR>
     noremap <silent> ,cw :close<CR>
-
     " Buffer commands
     noremap <silent> ,bp :bp<CR>
     noremap <silent> ,bn :bn<CR>
     noremap <silent> ,bw :w<CR>
     noremap <silent> ,bd :bd<CR>
     noremap <silent> ,ls :ls<CR>
-
     " Delete all buffers
     nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
-
     " Search the current file for the word under the cursor and display matches
     nmap <silent> ,gw :Rgrep<CR>
 
@@ -362,6 +358,16 @@
     nmap Z :call TabJump('left')<cr>
     " следующая вкладка
     nmap X :call TabJump('right')<cr>
+    " Tab navigation
+    map <A-1> 1gt
+    map <A-2> 2gt
+    map <A-3> 3gt
+    map <A-4> 4gt
+    map <A-5> 5gt
+    map <A-6> 6gt
+    map <A-7> 7gt
+    map <A-8> 8gt
+    map <A-9> 9gt
     " первая вкладка
     call Map_ex_cmd("<A-UP>", ":tabfirst")
     " последняя вкладка
