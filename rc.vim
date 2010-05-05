@@ -159,8 +159,11 @@
     let Grep_Skip_Dirs                = 'RCS CVS SCCS .svn .git'
     let Grep_Cygwin_Find              = 1
 
-    " Comment with space
+    " NERDCommenter
     let NERDSpaceDelims = 1
+
+    " Pylint compiler
+    let g:pylint_show_rate = 0
 
     " Enable extended matchit
     runtime macros/matchit.vim

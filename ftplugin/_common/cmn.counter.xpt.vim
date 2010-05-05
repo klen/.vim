@@ -7,7 +7,7 @@ let s:f = g:XPTfuncs()
 
 " draft increment implementation
 fun! s:f.CntD() "{{{
-  let ctx = self._ctx
+  let ctx = self.renderContext
   if !has_key(ctx, '__counter')
     let ctx.__counter = {}
   endif
@@ -35,7 +35,6 @@ fun! s:f.CntIncr(name, ...)"{{{
 endfunction"}}}
 
 " ================================= Snippets ===================================
-XPTemplateDef
 
 
 

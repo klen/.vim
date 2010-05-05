@@ -5,21 +5,20 @@ endif
 
 XPTemplate priority=lang-
 
-XPTemplateDef
 
-XPT ruby hint=<%\ ...
+XPT ruby " <% ...
 <%
     `cursor^
 %>
 
 
-XPT r hint=<%\ ...\ %>
+XPT r " <% ... %>
 <% `cursor^ %>
 
 
-XPT re hint=<%=\ ...
+XPT re " <%= ...
 <%= `expr^ %>
 
 
-XPT rc hint=<%#\ ...
+XPT rc " <%# ...
 <%# `cursor^ %>

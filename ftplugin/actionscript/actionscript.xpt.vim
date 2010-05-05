@@ -22,20 +22,10 @@ XPTinclude
 " ========================= Function and Variables =============================
 
 " ================================= Snippets ===================================
-XPTemplateDef
 
-XPT fun hint=function\ ..(\ ..\ )\ {..}
+XPT fun wrap=cursor " function ..( .. ) {..}
 XSET arg*|post=ExpandIfNotEmpty(', ', 'arg*')
 function` `name^ (`arg*^) {
     `cursor^
 }
 
-
-
-" ================================= Wrapper ===================================
-
-XPT fun_ hint=function\ ..(\ ..\ )\ {..}
-function` `name^ (`param^) {
-    `wrapped^
-    return;
-}

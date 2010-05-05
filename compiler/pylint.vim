@@ -54,7 +54,7 @@ if !exists('g:pylint_onwrite')
 endif
  
 if !exists('g:pylint_show_rate')
-    let g:pylint_show_rate = 0
+    let g:pylint_show_rate = 1
 endif
  
 if !exists('g:pylint_cwindow')
@@ -101,7 +101,7 @@ sign define E text=EE texthl=pylint_error
 if g:pylint_onwrite
     augroup python
         au!
-        au BufWritePost * call Pylint(1)
+        au BufWritePost *.py call Pylint(1)
     augroup end
 endif
  
