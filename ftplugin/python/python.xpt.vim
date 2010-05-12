@@ -47,7 +47,7 @@ XPTvar $SPcmd      ' '
 
 " a ** = ** a ** + ** 1
 " (a, ** b, ** )
-XPTvar $SPop       ' '
+XPTvar $SPop       ''
 
 
 

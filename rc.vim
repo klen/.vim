@@ -142,7 +142,9 @@
     " set custom map leader to ','
     let mapleader = ","
 
-    " Plugins setup
+" ------------------------------
+" Plugins setup
+"
     " Taglist
     let Tlist_GainFocus_On_ToggleOpen = 1   " Jump to taglist window to open
     let Tlist_Close_On_Select         = 0   " Close taglist when a file or tag selected
@@ -158,6 +160,10 @@
 
     let Grep_Skip_Dirs                = 'RCS CVS SCCS .svn .git'
     let Grep_Cygwin_Find              = 1
+
+    " XPTemplates
+    let g:xptemplate_key = '<Tab>'
+    let g:xptemplate_highlight = 'following'
 
     " NERDCommenter
     let NERDSpaceDelims = 1

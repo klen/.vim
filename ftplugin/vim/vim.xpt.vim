@@ -14,16 +14,16 @@ XPTvar $SPfun      ''
 " for ( ** statement ** )
 " [ ** a, b ** ]
 " { ** 'k' : 'v' ** }
-XPTvar $SParg      ' '
+XPTvar $SParg      ''
 
 " if ** (
 " while ** (
 " for ** (
-XPTvar $SPcmd      ' '
+XPTvar $SPcmd      ''
 
 " a ** = ** a ** + ** 1
 " (a, ** b, ** )
-XPTvar $SPop       ' '
+XPTvar $SPop       ''
 
 XPTinclude
       \ _common/common
