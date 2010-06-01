@@ -271,6 +271,7 @@ XPT a " <a href...
 
 
 XPT div alias=_tag
+XPT span alias=_tag
 XPT p   alias=_tag
 XPT ul  alias=_tag
 XPT ol  alias=_tag

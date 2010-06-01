@@ -339,6 +339,8 @@
     noremap <silent> ,j :wincmd j<CR>
     noremap <silent> ,k :wincmd k<CR>
     noremap <silent> ,l :wincmd l<CR>
+    noremap <silent> ,+ :wincmd +<CR>
+    noremap <silent> ,- :wincmd -<CR>
     noremap <silent> ,sb :wincmd p<CR>
     noremap <silent> ,cj :wincmd j<CR>:close<CR>
     noremap <silent> ,ck :wincmd k<CR>:close<CR>

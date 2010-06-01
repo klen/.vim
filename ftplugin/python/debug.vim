@@ -16,7 +16,7 @@ def SetBreakpoint():
         if strLine == "import ipdb as pdb":
             break
     else:
-        vim.current.buffer.append( 'import ipdb as pdb', 3)
+        vim.current.buffer.append( 'import ipdb as pdb', 1)
         vim.command( 'normal j1')
 
 vim.command( 'map <f8> :py SetBreakpoint()<cr>')
