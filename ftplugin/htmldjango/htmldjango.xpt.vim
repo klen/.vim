@@ -61,9 +61,12 @@ XPT for " for ... empty
 XPT if
 {% if `condition^ %}
     `so^
-{% else %}
-    `otherwise^
+`else...{{^`:else:^`}}^
 {% endif %}
+
+XPT else " else
+{% else %}
+    `cursor^
 
 XPT ifchanged alias=_tag " Check if a value has changed from the last iteration of a loop
 
