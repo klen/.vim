@@ -12,9 +12,6 @@
 	" Включаем отображение номеров строк
 	setlocal number
 
-	" Поддержка xslt тегов
-	let tlist_xslt_settings = 'xslt;m:match;n:name;a:apply;c:call'
-
 	" Complete option
 	set complete=""
 	set complete+=.

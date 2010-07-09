@@ -158,6 +158,10 @@
     let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name
     let Tlist_BackToEditBuffer        = 0   " If no close on select, let the user choose back to edit buffer or not
 
+    " Поддержка тегов
+    let tlist_xslt_settings = 'xslt;m:match;n:name;a:apply;c:call'
+    let tlist_css_settings = 'css;r:rules'
+
     let Grep_Skip_Dirs                = 'RCS CVS SCCS .svn .git'
     let Grep_Cygwin_Find              = 1
 
