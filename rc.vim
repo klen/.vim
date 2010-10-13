@@ -4,32 +4,35 @@
 " ------------------------------
 " Setup
 
-    if !exists('s:loaded_my_vimrc')
-    " Don't reset twice on reloading - 'compatible' has SO many side effects.
+    if !exists('s:loaded_my_vimrc') " Don't reset twice on reloading
+
         set nocompatible  " to use many extensions of Vim.
 
-        " Create special directory for backup and swap
-        if finddir($HOME.'/.data/') == ''
-            silent call mkdir($HOME.'/.data/')
+        set backupdir=$HOME/.cache/vim/backup      " where to put backup file 
+        set directory=$HOME/.cache/vim/swap        " where to put swap file 
+        let g:SESSION_DIR   = $HOME.'/.cache/vim/sessions'
+
+        if finddir(&backupdir) == ''
+            silent call mkdir(&backupdir, "p")
         endif
 
-        if finddir($HOME.'/.data/backup') == ''
-            silent call mkdir($HOME.'/.data/backup')
+        if finddir(&directory) == ''
+            silent call mkdir(&directory, "p")
         endif
-        set backup                  " make backup file and leave it around 
-        set backupdir=$HOME/.data/backup    " where to put backup file 
-        set backupskip&
+
+        if finddir(g:SESSION_DIR) == ''
+            silent call mkdir(g:SESSION_DIR, "p")
+        endif
+
+        set backup                             " make backup file and leave it around 
         set backupskip+=svn-commit.tmp,svn-commit.[0-9]*.tmp
 
-        if finddir($HOME.'/.data/swap') == ''
-            silent call mkdir($HOME.'/.data/swap')
-        endif
-        set directory=$HOME/.data/swap      " where to put swap file 
+        " Pathogen load
+        filetype off
+        call pathogen#helptags()
+        call pathogen#runtime_append_all_bundles()
 
-        if finddir($HOME.'/.data/sessions') == ''
-            silent call mkdir($HOME.'/.data/sessions')
-        endif
-        let g:session_dir = $HOME.'/.data/sessions'
+        syntax on
 
     endif
 
@@ -37,10 +40,7 @@
     set title                   " показывать имя файла в заголовке окна
     set autoread                " отслеживать изменения файлов
     set visualbell              " ошибки без писка
-    set modeline                " читать параметры конфигурации из открытого файла
-    set magic                   " добавим магии
 
-    " Indent and tabulation
     set autoindent              " копирует отступ от предыдущей строки
     set smartindent             " включаем 'умную' автоматическую расстановку отступов
     set expandtab               " tab with spaces
@@ -53,7 +53,7 @@
     set history=400                     " history length
     set viminfo+=h                      " save history
     set sessionoptions-=blank           " dont save blank vindow
-    set sessionoptions-=options           " dont save options
+    set sessionoptions-=options         " dont save options
 
     " Search options
     set hlsearch                " Подсветка результатов
@@ -71,11 +71,9 @@
     set fileencodings=utf-8,cp1251,koi8-r,cp866
     set termencoding=utf-8
 
-    " Строка статуса и командная строка
+    " Status and command lines
     set laststatus=2            " всегда отображать статусную строку для каждого окна
     set shortmess=atToOI
-    set showcmd                 " show command
-    set showmode                " show mode
     set statusline=%<%f%h%m     " filename and modify flag
     set statusline+=%#Error#%r%*%= " read only and separator
     set statusline+=\ type=%Y
@@ -83,13 +81,13 @@
     set statusline+=\ file=%{&fileencoding}
     set statusline+=\ enc=%{&encoding}
     set statusline+=\ %b\ 0x%B\ %l,%c%V\ %P
+
     set wildmenu                " использовать wildmenu ...
     set wildcharm=<TAB>         " ... с авто-дополнением
     set wildignore=*.pyc        " Игнорировать pyc файлы
     set cmdheight=2             " Command line height 2
 
     " Отображение
-    set foldenable
     set foldclose=all
     set foldmethod=syntax
     set foldnestmax=3           "deepest fold is 3 levels
@@ -110,14 +108,11 @@
     set virtualedit=all         " On virtualedit for all mode
     set go+=a                   " выделение в виме копирует в буфер системы
 
-    " Скролл
     set scrolloff=4             " 4 символа минимум под курсором
     set sidescroll=4
     set sidescrolloff=10        " 10 символов минимум под курсором при скролле
 
-    " Customization
-    syntax on
-    " enable mouse
+    " Enable mouse
     if &term =~ "xterm"
         set t_Co=256                " set 256 colors
         set background=dark         " set background color to dark
@@ -136,9 +131,6 @@
     " Перемещать курсор на следующую строку при нажатии на клавиши вправо-влево и пр.
     set whichwrap=b,s,<,>,[,],l,h
 
-    " Подключение тег файла
-    set tags=tags
-
     " set custom map leader to ','
     let mapleader = ","
 
@@ -146,24 +138,17 @@
 " Plugins setup
 "
     " Taglist
-    let Tlist_GainFocus_On_ToggleOpen = 1   " Jump to taglist window to open
-    let Tlist_Close_On_Select         = 0   " Close taglist when a file or tag selected
-    let Tlist_Exit_OnlyWindow         = 1   " If you are last kill your self
-    let Tlist_Show_One_File           = 1   " Displaying tags for only one file
-    let Tlist_Use_Right_Window        = 1   " split to rigt side of the screen
-    let Tlist_Compart_Format          = 1   " Remove extra information and blank lines from taglist window
     let Tlist_Compact_Format          = 1   " Do not show help
     let Tlist_Enable_Fold_Column      = 0   " Don't Show the fold indicator column
+    let Tlist_Exit_OnlyWindow         = 1   " If you are last kill your self
+    let Tlist_GainFocus_On_ToggleOpen = 1   " Jump to taglist window to open
+    let Tlist_Show_One_File           = 1   " Displaying tags for only one file
+    let Tlist_Use_Right_Window        = 1   " Split to rigt side of the screen
+    let Tlist_Use_SingleClick         = 1   " Single mouse click open tag
     let Tlist_WinWidth                = 30  " Taglist win width
     let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name
-    let Tlist_BackToEditBuffer        = 0   " If no close on select, let the user choose back to edit buffer or not
-
-    " Поддержка тегов
-    let tlist_xslt_settings = 'xslt;m:match;n:name;a:apply;c:call'
-    let tlist_css_settings = 'css;r:rules'
-
-    let Grep_Skip_Dirs                = 'RCS CVS SCCS .svn .git'
-    let Grep_Cygwin_Find              = 1
+    let tlist_xslt_settings           = 'xslt;m:match;n:name;a:apply;c:call'
+    let tlist_css_settings            = 'css;r:rules'
 
     " XPTemplates
     let g:xptemplate_key = '<Tab>'
@@ -221,7 +206,7 @@
 
     " Sessions
     fun! SessionRead(name)
-        let s:name = g:session_dir.'/'.a:name.'.session'
+        let s:name = g:SESSION_DIR.'/'.a:name.'.session'
         if getfsize(s:name) >= 0
             echo "Reading " s:name
             exe 'source '.s:name
@@ -241,7 +226,7 @@
     endfun
 
     fun! SessionSave(name)
-        exe "mks! " g:session_dir.'/'.a:name.'.session'
+        exe "mks! " g:SESSION_DIR.'/'.a:name.'.session'
         echo "Session" a:name "saved"
     endfun
 
@@ -253,6 +238,28 @@
             return "\<C-N>"
         endif
     endfun
+
+    " Recursive vimgrep
+    fun! RGrep()
+        let pattern = input("Search for pattern: ", expand("<cword>"))
+        if pattern == ""
+            return
+        endif
+
+        let cwd = getcwd()
+        let startdir = input("Start searching from directory: ", cwd, "dir")
+        if startdir == ""
+            return
+        endif
+
+        let filepattern = input("Search in files matching pattern: ", "*.*") 
+        if filepattern == ""
+            return
+        endif
+
+        execute 'noautocmd vimgrep /'.pattern.'/gj '.startdir.'/**/'.filepattern | copen
+    endfun
+
 " ------------------------------
 " Autocommands
 
@@ -307,27 +314,39 @@
 " Hot keys 
 "
     
+    " Nice scrolling if line wrap
+    noremap j gj
+    noremap k gk
+
     " Text navigation in insert mode
     imap <M-l> <Right>
     imap <M-h> <Left>
     imap <M-j> <Down>
     imap <M-k> <Up>
+
     " Page listing
     nnoremap <Space> <C-d>
+
     " Set paste mode for paste from terminal
     nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
+
     " New line and exit from insert mode
     map     <S-O>       i<CR><ESC>
+
     " Drop hightlight search result
     map    <silent> <leader>n  :silent :nohls<CR> 
+
     " Omni and dict completition on space
     inoremap <Nul> <C-R>=AddWrapper()<CR>
     inoremap <C-Space> <C-R>=AddWrapper()<CR>
+
     " Fast scrool
     nnoremap <C-e> 3<C-e>
     nnoremap <C-y> 3<C-y>
+
     " Select all
     map vA ggVG
+
     " Allow command line editing like emacs
     cnoremap <C-A>      <Home>
     cnoremap <C-B>      <Left>
@@ -335,9 +354,11 @@
     cnoremap <C-F>      <Right>
     cnoremap <C-N>      <Down>
     cnoremap <C-P>      <Up>
+
     " Close cwindow
     noremap <silent> ,ll :ccl<CR>
     noremap <silent> ,nn :cn<CR>
+
     " Window commands
     noremap <silent> ,h :wincmd h<CR>
     noremap <silent> ,j :wincmd j<CR>
@@ -351,28 +372,33 @@
     noremap <silent> ,ch :wincmd h<CR>:close<CR>
     noremap <silent> ,cl :wincmd l<CR>:close<CR>
     noremap <silent> ,cw :close<CR>
+
     " Buffer commands
     noremap <silent> ,bp :bp<CR>
     noremap <silent> ,bn :bn<CR>
     noremap <silent> ,bw :w<CR>
     noremap <silent> ,bd :bd<CR>
     noremap <silent> ,ls :ls<CR>
+
     " Delete all buffers
     nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
+
     " Search the current file for the word under the cursor and display matches
-    nmap <silent> ,gw :Rgrep<CR>
+    nmap <silent> ,gw :call RGrep()<CR>
 
     " Search the current file for the WORD under the cursor and display matches
-    " nmap <silent> ,gW
-        " \ :vimgrep /<C-r><C-a>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:set nohls<CR>
+    " nmap <silent> ,gw :vimgrep /<C-r><C-a>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:set nohls<CR>
 
-    " Работа с вкладками
-    " новая вкладка
+    " Work with tabs
+    " Open new tab
     call Map_ex_cmd("<C-W>t", ":tabnew")
-    " предыдущая вкладка
+
+    " previos tab
     nmap Z :call TabJump('left')<cr>
-    " следующая вкладка
+
+    " next tab
     nmap X :call TabJump('right')<cr>
+
     " Tab navigation
     map <A-1> 1gt
     map <A-2> 2gt
@@ -383,6 +409,7 @@
     map <A-7> 7gt
     map <A-8> 8gt
     map <A-9> 9gt
+
     " первая вкладка
     call Map_ex_cmd("<A-UP>", ":tabfirst")
     " последняя вкладка
@@ -430,6 +457,7 @@
     " Список меток
     call Map_ex_cmd("<F12>", "marks")
 
+    " Session UI
     nmap <Leader>ss :call SessionInput('Save')<CR>
     nmap <Leader>sr :call SessionInput('Read')<CR>
     nmap <Leader>sl :call SessionRead('last')<CR>
@@ -460,10 +488,10 @@
     endif
 
     if !exists('s:loaded_my_vimrc')
-        " Автозагрузка настроек из текущей директории
+        " auto load .vim/.vimrc from current directory
         exe 'silent! source '.getcwd().'/.vim/.vimrc'
+        let s:loaded_my_vimrc = 1
     endif
 
-    let s:loaded_my_vimrc = 1       " Fin
     set secure  " must be written at the last.  see :help 'secure'.
 
