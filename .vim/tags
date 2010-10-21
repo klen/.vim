@@ -1,0 +1,923 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+g:loaded_pathogen	../autoload/pathogen.vim	/^let g:loaded_pathogen = 1$/;"	v
+pathogen#split	../autoload/pathogen.vim	/^function! pathogen#split(path) abort " {{{1$/;"	f
+pathogen#join	../autoload/pathogen.vim	/^function! pathogen#join(...) abort " {{{1$/;"	f
+pathogen#legacyjoin	../autoload/pathogen.vim	/^function! pathogen#legacyjoin(...) abort " {{{1$/;"	f
+pathogen#uniq	../autoload/pathogen.vim	/^function! pathogen#uniq(list) abort " {{{1$/;"	f
+pathogen#separator	../autoload/pathogen.vim	/^function! pathogen#separator() abort " {{{1$/;"	f
+pathogen#glob	../autoload/pathogen.vim	/^function! pathogen#glob(pattern) abort " {{{1$/;"	f
+pathogen#glob_directories	../autoload/pathogen.vim	/^function! pathogen#glob_directories(pattern) abort " {{{1$/;"	f
+pathogen#runtime_prepend_subdirectories	../autoload/pathogen.vim	/^function! pathogen#runtime_prepend_subdirectories(path) " {{{1$/;"	f
+pathogen#runtime_append_all_bundles	../autoload/pathogen.vim	/^function! pathogen#runtime_append_all_bundles(...) " {{{1$/;"	f
+s:done_bundles	../autoload/pathogen.vim	/^let s:done_bundles = ''$/;"	v
+pathogen#helptags	../autoload/pathogen.vim	/^function! pathogen#helptags() " {{{1$/;"	f
+current_compiler	../compiler/pylint.vim	/^let current_compiler = 'pylint'$/;"	v
+g:pylint_onwrite	../compiler/pylint.vim	/^    let g:pylint_onwrite = 1$/;"	v
+g:pylint_show_rate	../compiler/pylint.vim	/^    let g:pylint_show_rate = 1$/;"	v
+g:pylint_cwindow	../compiler/pylint.vim	/^    let g:pylint_cwindow = 1$/;"	v
+g:pylint_signs	../compiler/pylint.vim	/^    let g:pylint_signs = 1$/;"	v
+Pylint	../compiler/pylint.vim	/^    command Pylint :call Pylint(0)$/;"	c
+CompilerSet	../compiler/pylint.vim	/^  command -nargs=* CompilerSet setlocal <args>$/;"	c
+python	../compiler/pylint.vim	/^    augroup python$/;"	a
+Pylint	../compiler/pylint.vim	/^function! Pylint(writing)$/;"	f
+PylintEvaluation	../compiler/pylint.vim	/^function! PylintEvaluation()$/;"	f
+PlacePylintSigns	../compiler/pylint.vim	/^function! PlacePylintSigns()$/;"	f
+g:SESSION_DIR	../rc.vim	/^        let g:SESSION_DIR   = $HOME.'\/.cache\/vim\/sessions'$/;"	v
+mapleader	../rc.vim	/^    let mapleader = ","$/;"	v
+Tlist_Compact_Format	../rc.vim	/^    let Tlist_Compact_Format          = 1   " Do not show help$/;"	v
+Tlist_Enable_Fold_Column	../rc.vim	/^    let Tlist_Enable_Fold_Column      = 0   " Don't Show the fold indicator column$/;"	v
+Tlist_Exit_OnlyWindow	../rc.vim	/^    let Tlist_Exit_OnlyWindow         = 1   " If you are last kill your self$/;"	v
+Tlist_GainFocus_On_ToggleOpen	../rc.vim	/^    let Tlist_GainFocus_On_ToggleOpen = 1   " Jump to taglist window to open$/;"	v
+Tlist_Show_One_File	../rc.vim	/^    let Tlist_Show_One_File           = 1   " Displaying tags for only one file$/;"	v
+Tlist_Use_Right_Window	../rc.vim	/^    let Tlist_Use_Right_Window        = 1   " Split to rigt side of the screen$/;"	v
+Tlist_Use_SingleClick	../rc.vim	/^    let Tlist_Use_SingleClick         = 1   " Single mouse click open tag$/;"	v
+Tlist_WinWidth	../rc.vim	/^    let Tlist_WinWidth                = 30  " Taglist win width$/;"	v
+Tlist_Display_Tag_Scope	../rc.vim	/^    let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name$/;"	v
+tlist_xslt_settings	../rc.vim	/^    let tlist_xslt_settings           = 'xslt;m:match;n:name;a:apply;c:call'$/;"	v
+tlist_css_settings	../rc.vim	/^    let tlist_css_settings            = 'css;r:rules'$/;"	v
+g:xptemplate_key	../rc.vim	/^    let g:xptemplate_key = '<Tab>'$/;"	v
+g:xptemplate_highlight	../rc.vim	/^    let g:xptemplate_highlight = 'following'$/;"	v
+NERDSpaceDelims	../rc.vim	/^    let NERDSpaceDelims = 1$/;"	v
+g:pylint_show_rate	../rc.vim	/^    let g:pylint_show_rate = 0$/;"	v
+KeyMapHighlight	../rc.vim	/^    fun! KeyMapHighlight()$/;"	f
+Map_ex_cmd	../rc.vim	/^    fun! Map_ex_cmd(key, cmd)$/;"	f
+Toggle_option	../rc.vim	/^    fun! Toggle_option(key, opt)$/;"	f
+TabJump	../rc.vim	/^    fun! TabJump(direction)$/;"	f
+SessionRead	../rc.vim	/^    fun! SessionRead(name)$/;"	f
+SessionInput	../rc.vim	/^    fun! SessionInput(type)$/;"	f
+SessionSave	../rc.vim	/^    fun! SessionSave(name)$/;"	f
+AddWrapper	../rc.vim	/^    fun! AddWrapper()$/;"	f
+RGrep	../rc.vim	/^    fun! RGrep()$/;"	f
+vimrcEx	../rc.vim	/^        augroup vimrcEx$/;"	a
+j	../rc.vim	/^    noremap j gj$/;"	m
+k	../rc.vim	/^    noremap k gk$/;"	m
+<M-l>	../rc.vim	/^    imap <M-l> <Right>$/;"	m
+<M-h>	../rc.vim	/^    imap <M-h> <Left>$/;"	m
+<M-j>	../rc.vim	/^    imap <M-j> <Down>$/;"	m
+<M-k>	../rc.vim	/^    imap <M-k> <Up>$/;"	m
+<Space>	../rc.vim	/^    nnoremap <Space> <C-d>$/;"	m
+,p	../rc.vim	/^    nmap <silent> ,p :set invpaste<CR>:set paste?<CR>$/;"	m
+<S-O>	../rc.vim	/^    map     <S-O>       i<CR><ESC>$/;"	m
+<leader>n	../rc.vim	/^    map    <silent> <leader>n  :silent :nohls<CR> $/;"	m
+<Nul>	../rc.vim	/^    inoremap <Nul> <C-R>=AddWrapper()<CR>$/;"	m
+<C-Space>	../rc.vim	/^    inoremap <C-Space> <C-R>=AddWrapper()<CR>$/;"	m
+<C-e>	../rc.vim	/^    nnoremap <C-e> 3<C-e>$/;"	m
+<C-y>	../rc.vim	/^    nnoremap <C-y> 3<C-y>$/;"	m
+vA	../rc.vim	/^    map vA ggVG$/;"	m
+<C-A>	../rc.vim	/^    cnoremap <C-A>      <Home>$/;"	m
+<C-B>	../rc.vim	/^    cnoremap <C-B>      <Left>$/;"	m
+<C-E>	../rc.vim	/^    cnoremap <C-E>      <End>$/;"	m
+<C-F>	../rc.vim	/^    cnoremap <C-F>      <Right>$/;"	m
+<C-N>	../rc.vim	/^    cnoremap <C-N>      <Down>$/;"	m
+<C-P>	../rc.vim	/^    cnoremap <C-P>      <Up>$/;"	m
+,ll	../rc.vim	/^    noremap <silent> ,ll :ccl<CR>$/;"	m
+,nn	../rc.vim	/^    noremap <silent> ,nn :cn<CR>$/;"	m
+,h	../rc.vim	/^    noremap <silent> ,h :wincmd h<CR>$/;"	m
+,j	../rc.vim	/^    noremap <silent> ,j :wincmd j<CR>$/;"	m
+,k	../rc.vim	/^    noremap <silent> ,k :wincmd k<CR>$/;"	m
+,l	../rc.vim	/^    noremap <silent> ,l :wincmd l<CR>$/;"	m
+,+	../rc.vim	/^    noremap <silent> ,+ :wincmd +<CR>$/;"	m
+,-	../rc.vim	/^    noremap <silent> ,- :wincmd -<CR>$/;"	m
+,sb	../rc.vim	/^    noremap <silent> ,sb :wincmd p<CR>$/;"	m
+,cj	../rc.vim	/^    noremap <silent> ,cj :wincmd j<CR>:close<CR>$/;"	m
+,ck	../rc.vim	/^    noremap <silent> ,ck :wincmd k<CR>:close<CR>$/;"	m
+,ch	../rc.vim	/^    noremap <silent> ,ch :wincmd h<CR>:close<CR>$/;"	m
+,cl	../rc.vim	/^    noremap <silent> ,cl :wincmd l<CR>:close<CR>$/;"	m
+,cw	../rc.vim	/^    noremap <silent> ,cw :close<CR>$/;"	m
+,bp	../rc.vim	/^    noremap <silent> ,bp :bp<CR>$/;"	m
+,bn	../rc.vim	/^    noremap <silent> ,bn :bn<CR>$/;"	m
+,bw	../rc.vim	/^    noremap <silent> ,bw :w<CR>$/;"	m
+,bd	../rc.vim	/^    noremap <silent> ,bd :bd<CR>$/;"	m
+,ls	../rc.vim	/^    noremap <silent> ,ls :ls<CR>$/;"	m
+,da	../rc.vim	/^    nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>$/;"	m
+,gw	../rc.vim	/^    nmap <silent> ,gw :call RGrep()<CR>$/;"	m
+Z	../rc.vim	/^    nmap Z :call TabJump('left')<cr>$/;"	m
+X	../rc.vim	/^    nmap X :call TabJump('right')<cr>$/;"	m
+<A-1>	../rc.vim	/^    map <A-1> 1gt$/;"	m
+<A-2>	../rc.vim	/^    map <A-2> 2gt$/;"	m
+<A-3>	../rc.vim	/^    map <A-3> 3gt$/;"	m
+<A-4>	../rc.vim	/^    map <A-4> 4gt$/;"	m
+<A-5>	../rc.vim	/^    map <A-5> 5gt$/;"	m
+<A-6>	../rc.vim	/^    map <A-6> 6gt$/;"	m
+<A-7>	../rc.vim	/^    map <A-7> 7gt$/;"	m
+<A-8>	../rc.vim	/^    map <A-8> 8gt$/;"	m
+<A-9>	../rc.vim	/^    map <A-9> 9gt$/;"	m
+Q	../rc.vim	/^    nmap Q :tabmove 0<cr>$/;"	m
+<C-F>	../rc.vim	/^    cmap <silent> <C-F> <C-^>$/;"	m
+<C-F>	../rc.vim	/^    imap <silent> <C-F> <C-^>X<Esc>:call KeyMapHighlight()<CR>a<C-H>$/;"	m
+<C-F>	../rc.vim	/^    nmap <silent> <C-F> a<C-^><Esc>:call KeyMapHighlight()<CR>$/;"	m
+<C-F>	../rc.vim	/^    vmap <silent> <C-F> <Esc>a<C-^><Esc>:call KeyMapHighlight()<CR>gv$/;"	m
+<F9>	../rc.vim	/^    map <F9> :emenu VCS.<TAB>$/;"	m
+<Leader>ss	../rc.vim	/^    nmap <Leader>ss :call SessionInput('Save')<CR>$/;"	m
+<Leader>sr	../rc.vim	/^    nmap <Leader>sr :call SessionInput('Read')<CR>$/;"	m
+<Leader>sl	../rc.vim	/^    nmap <Leader>sl :call SessionRead('last')<CR>$/;"	m
+Ssave	../rc.vim	/^    com! Ssave :call SessionSave(<args>)$/;"	c
+Sread	../rc.vim	/^    com! Sread :call SessionRead(<args>)$/;"	c
+g:vimrcloaded	../rc.vim	/^            let g:vimrcloaded = 1$/;"	v
+s:loaded_my_vimrc	../rc.vim	/^        let s:loaded_my_vimrc = 1$/;"	v
+colors_name	../colors/autumn.vim	/^let colors_name = "autumn"$/;"	v
+g:colors_name	../colors/synic.vim	/^let g:colors_name = "synic"$/;"	v
+colors_name	../colors/coldgreen.vim	/^let colors_name = "coldgreen"$/;"	v
+g:colors_name	../colors/peaksea.vim	/^let g:colors_name = expand("<sfile>:t:r")$/;"	v
+colors_name	../colors/kellys.vim	/^let colors_name = "kellys"$/;"	v
+g:colors_name	../colors/bluegreen.vim	/^let g:colors_name="mine"$/;"	v
+g:colors_name	../colors/molokai.vim	/^let g:colors_name="molokai"$/;"	v
+s:molokai_original	../colors/molokai.vim	/^    let s:molokai_original = g:molokai_original$/;"	v
+s:molokai_original	../colors/molokai.vim	/^    let s:molokai_original = 0$/;"	v
+g:colors_name	../colors/ekvoli.vim	/^let g:colors_name = "ekvoli"$/;"	v
+g:colors_name	../colors/gardener.vim	/^let g:colors_name = "gardener"$/;"	v
+colors_name	../colors/gardener.vim	/^let colors_name   = "gardener"$/;"	v
+g:colors_name	../colors/midnight.vim	/^let g:colors_name="midnight2"$/;"	v
+<leader>;	../colors/midnight.vim	/^nmap <silent> <leader>; :call ToggleSemicolonHighlighting()<cr>$/;"	m
+ToggleSemicolonHighlighting	../colors/midnight.vim	/^function! ToggleSemicolonHighlighting()$/;"	f
+colors_name	../colors/inkpot.vim	/^let colors_name = "inkpot"$/;"	v
+M	../colors/inkpot.vim	/^fun! <SID>M(a)$/;"	f
+X	../colors/inkpot.vim	/^fun! <SID>X(a)$/;"	f
+g:inkpot_black_background	../colors/inkpot.vim	/^    let g:inkpot_black_background = 0$/;"	v
+colors_name	../colors/xoria256.vim	/^let colors_name = "xoria256"$/;"	v
+colors_name	../colors/mustang.vim	/^let colors_name = "mustang"$/;"	v
+g:colors_name	../colors/desert256.vim	/^let g:colors_name="desert256"$/;"	v
+grey_number	../colors/desert256.vim	/^    fun <SID>grey_number(x)$/;"	f
+grey_level	../colors/desert256.vim	/^    fun <SID>grey_level(n)$/;"	f
+grey_color	../colors/desert256.vim	/^    fun <SID>grey_color(n)$/;"	f
+rgb_number	../colors/desert256.vim	/^    fun <SID>rgb_number(x)$/;"	f
+rgb_level	../colors/desert256.vim	/^    fun <SID>rgb_level(n)$/;"	f
+rgb_color	../colors/desert256.vim	/^    fun <SID>rgb_color(x, y, z)$/;"	f
+color	../colors/desert256.vim	/^    fun <SID>color(r, g, b)$/;"	f
+rgb	../colors/desert256.vim	/^    fun <SID>rgb(rgb)$/;"	f
+X	../colors/desert256.vim	/^    fun <SID>X(group, fg, bg, attr)$/;"	f
+g:colors_name	../colors/wombat256.vim	/^let g:colors_name = "wombat256"$/;"	v
+grey_number	../colors/wombat256.vim	/^fun <SID>grey_number(x)$/;"	f
+grey_level	../colors/wombat256.vim	/^fun <SID>grey_level(n)$/;"	f
+grey_color	../colors/wombat256.vim	/^fun <SID>grey_color(n)$/;"	f
+rgb_number	../colors/wombat256.vim	/^fun <SID>rgb_number(x)$/;"	f
+rgb_level	../colors/wombat256.vim	/^fun <SID>rgb_level(n)$/;"	f
+rgb_color	../colors/wombat256.vim	/^fun <SID>rgb_color(x, y, z)$/;"	f
+color	../colors/wombat256.vim	/^fun <SID>color(r, g, b)$/;"	f
+rgb	../colors/wombat256.vim	/^fun <SID>rgb(rgb)$/;"	f
+X	../colors/wombat256.vim	/^fun <SID>X(group, fg, bg, attr)$/;"	f
+g:colors_name	../colors/nightwish.vim	/^let g:colors_name = "nightwish"$/;"	v
+g:colors_name	../colors/calmar256-dark.vim	/^let g:colors_name = "calmar256"$/;"	v
+s:save_cpo	../colors/calmar256-dark.vim	/^let s:save_cpo = &cpo$/;"	v
+s:colors256	../colors/calmar256-dark.vim	/^let s:colors256 = [ $/;"	v
+s:colorvim7	../colors/calmar256-dark.vim	/^let s:colorvim7 = [$/;"	v
+checkargs	../colors/calmar256-dark.vim	/^function! s:checkargs(arg)$/;"	f
+s:cmap	../colors/calmar256-dark.vim	/^    let s:cmap =   [ $/;"	v
+fg	../colors/calmar256-dark.vim	/^        let fg = s:checkargs(s:col[2])$/;"	v
+bg	../colors/calmar256-dark.vim	/^        let bg = s:checkargs(s:col[3])$/;"	v
+fg	../colors/calmar256-dark.vim	/^            let fg = s:checkargs(s:col[2])$/;"	v
+bg	../colors/calmar256-dark.vim	/^            let bg = s:checkargs(s:col[3])$/;"	v
+g:colors_name	../colors/tabula.vim	/^let g:colors_name = "tabula"$/;"	v
+s:BoldStatement	../colors/tabula.vim	/^let s:BoldStatement = 0$/;"	v
+s:BoldStatement	../colors/tabula.vim	/^  let s:BoldStatement = g:Tabula_BoldStatement$/;"	v
+s:CurColor	../colors/tabula.vim	/^let s:CurColor = "blue"$/;"	v
+s:CurColor	../colors/tabula.vim	/^  let s:CurColor = g:Tabula_CurColor$/;"	v
+s:ColorPre	../colors/tabula.vim	/^let s:ColorPre = "blue"$/;"	v
+s:ColorPre	../colors/tabula.vim	/^    let s:ColorPre = g:Tabula_ColorPre$/;"	v
+s:DarkError	../colors/tabula.vim	/^let s:DarkError = 0$/;"	v
+s:DarkError	../colors/tabula.vim	/^  let s:DarkError = g:Tabula_DarkError$/;"	v
+s:FlatConstants	../colors/tabula.vim	/^let s:FlatConstants = 1$/;"	v
+s:FlatConstants	../colors/tabula.vim	/^  let s:FlatConstants = g:Tabula_FlatConstants$/;"	v
+s:InvisibleIgnore	../colors/tabula.vim	/^let s:InvisibleIgnore = 1$/;"	v
+s:InvisibleIgnore	../colors/tabula.vim	/^  let s:InvisibleIgnore = g:Tabula_InvisibleIgnore$/;"	v
+s:LNumUnderline	../colors/tabula.vim	/^let s:LNumUnderline = 0$/;"	v
+s:LNumUnderline	../colors/tabula.vim	/^  let s:LNumUnderline = g:Tabula_LNumUnderline$/;"	v
+s:SearchStandOut	../colors/tabula.vim	/^let s:SearchStandOut=0$/;"	v
+s:SearchStandOut	../colors/tabula.vim	/^  let s:SearchStandOut = g:Tabula_SearchStandOut$/;"	v
+s:TodoUnderline	../colors/tabula.vim	/^let s:TodoUnderline=1$/;"	v
+s:TodoUnderline	../colors/tabula.vim	/^  let s:TodoUnderline = g:Tabula_TodoUnderline$/;"	v
+html_my_rendering	../colors/tabula.vim	/^let html_my_rendering=1$/;"	v
+Tabula	../colors/tabula.vim	/^function! Tabula()$/;"	f
+Tabula_1	../colors/tabula.vim	/^function! Tabula_1()$/;"	f
+Tabula_2	../colors/tabula.vim	/^function! Tabula_2()$/;"	f
+Tabula_3	../colors/tabula.vim	/^function! Tabula_3()$/;"	f
+Tabula_4	../colors/tabula.vim	/^function! Tabula_4()$/;"	f
+Tabula_5	../colors/tabula.vim	/^function! Tabula_5()$/;"	f
+Tabula_6	../colors/tabula.vim	/^function! Tabula_6()$/;"	f
+Tabula_7	../colors/tabula.vim	/^function! Tabula_7()$/;"	f
+Tabula_8	../colors/tabula.vim	/^function! Tabula_8()$/;"	f
+Tabula_9	../colors/tabula.vim	/^function! Tabula_9()$/;"	f
+g:colors_name	../colors/marklar.vim	/^let g:colors_name = "marklar"$/;"	v
+s:bold_opt	../colors/marklar.vim	/^    let s:bold_opt = 0$/;"	v
+s:ignore_opt	../colors/marklar.vim	/^    let s:ignore_opt = 1$/;"	v
+main	../colors/marklar.vim	/^    function! s:main()$/;"	f
+s:opts	../colors/marklar.vim	/^        let s:opts = {'bold': 0, 'ignore': 1}$/;"	v
+apply_opts	../colors/marklar.vim	/^        function! s:apply_opts()$/;"	f
+print_opts	../colors/marklar.vim	/^        function! s:print_opts(...)$/;"	f
+Marklar	../colors/marklar.vim	/^        function! s:Marklar(...)$/;"	f
+Marklar	../colors/marklar.vim	/^        command! -nargs=*  Marklar  :call s:Marklar(<f-args>)$/;"	c
+g:colors_name	../colors/chela_light.vim	/^let g:colors_name="chela_light"$/;"	v
+s:moria_style	../colors/moria.vim	/^    let s:moria_style = g:moria_style$/;"	v
+s:moria_style	../colors/moria.vim	/^    let s:moria_style = &background$/;"	v
+s:moria_monochrome	../colors/moria.vim	/^    let s:moria_monochrome = g:moria_monochrome$/;"	v
+s:moria_monochrome	../colors/moria.vim	/^    let s:moria_monochrome = 0$/;"	v
+s:moria_fontface	../colors/moria.vim	/^    let s:moria_fontface = g:moria_fontface$/;"	v
+s:moria_fontface	../colors/moria.vim	/^    let s:moria_fontface = "plain"$/;"	v
+s:moria_style	../colors/moria.vim	/^    let s:moria_style = &background $/;"	v
+colors_name	../colors/moria.vim	/^let colors_name = "moria"$/;"	v
+g:colors_name	../colors/lettuce.vim	/^let g:colors_name="lettuce"$/;"	v
+Syntax_extensions	../colors/lettuce.vim	/^augroup Syntax_extensions$/;"	a
+colors_name	../colors/earendel.vim	/^let colors_name = "earendel"$/;"	v
+python_highlight_all	../ftplugin/python/python.vim	/^    let python_highlight_all = 1	$/;"	v
+<leader>r	../ftplugin/python/python.vim	/^    map <buffer> <leader>r :!python %<cr>$/;"	m
+ropevim_codeassist_maxfixes	../ftplugin/python/python.vim	/^    let ropevim_codeassist_maxfixes=10$/;"	v
+ropevim_guess_project	../ftplugin/python/python.vim	/^    let ropevim_guess_project=1$/;"	v
+ropevim_vim_completion	../ftplugin/python/python.vim	/^    let ropevim_vim_completion=1$/;"	v
+ropevim_enable_autoimport	../ftplugin/python/python.vim	/^    let ropevim_enable_autoimport=1$/;"	v
+ropevim_enable_shortcuts	../ftplugin/python/python.vim	/^    let ropevim_enable_shortcuts=1$/;"	v
+ropevim_extended_complete	../ftplugin/python/python.vim	/^    let ropevim_extended_complete=0 $/;"	v
+ropevim_global_prefix	../ftplugin/python/python.vim	/^    let ropevim_global_prefix="<C-c>p"$/;"	v
+<Nul>	../ftplugin/python/python.vim	/^    imap <buffer><Nul> <M-\/>$/;"	m
+<C-Space>	../ftplugin/python/python.vim	/^    imap <buffer><C-Space> <M-\/>$/;"	m
+<C-c>r	../ftplugin/python/python.vim	/^    map <buffer><C-c>r :call RopeRename()<CR>$/;"	m
+<C-c>u	../ftplugin/python/python.vim	/^    map <buffer><C-c>u :call RopeUndo()<CR>$/;"	m
+<C-c>c	../ftplugin/python/python.vim	/^    map <buffer><C-c>c :call RopeProjectConfig()<CR>$/;"	m
+vim	../ftplugin/python/debug.vim	/^import vim$/;"	m
+re	../ftplugin/python/debug.vim	/^    import re$/;"	m
+re	../ftplugin/python/debug.vim	/^    import re$/;"	m
+RemoveBreakpoints	../ftplugin/python/debug.vim	/^command! RemoveBreakpoints :py RemoveBreakpoints()$/;"	c
+LoadRope	../ftplugin/python/ropevim.vim	/^function! LoadRope()$/;"	f
+python_highlight_builtin_objs	../syntax/python.vim	/^      let python_highlight_builtin_objs = 1$/;"	v
+python_highlight_builtin_funcs	../syntax/python.vim	/^      let python_highlight_builtin_funcs = 1$/;"	v
+python_highlight_exceptions	../syntax/python.vim	/^    let python_highlight_exceptions = 1$/;"	v
+python_highlight_string_formatting	../syntax/python.vim	/^    let python_highlight_string_formatting = 1$/;"	v
+python_highlight_string_format	../syntax/python.vim	/^    let python_highlight_string_format = 1$/;"	v
+python_highlight_string_templates	../syntax/python.vim	/^    let python_highlight_string_templates = 1$/;"	v
+python_highlight_indent_errors	../syntax/python.vim	/^    let python_highlight_indent_errors = 1$/;"	v
+python_highlight_space_errors	../syntax/python.vim	/^    let python_highlight_space_errors = 1$/;"	v
+python_highlight_doctests	../syntax/python.vim	/^    let python_highlight_doctests = 1$/;"	v
+did_python_syn_inits	../syntax/python.vim	/^    let did_python_syn_inits = 1$/;"	v
+HiLink	../syntax/python.vim	/^    command -nargs=+ HiLink hi link <args>$/;"	c
+HiLink	../syntax/python.vim	/^    command -nargs=+ HiLink hi def link <args>$/;"	c
+b:current_syntax	../syntax/python.vim	/^let b:current_syntax = "python"$/;"	v
+g:__XPT_VIM__	../bundle/xptemplates/autoload/XPT.vim	/^let g:__XPT_VIM__ = 1$/;"	v
+s:oldcpo	../bundle/xptemplates/autoload/XPT.vim	/^let s:oldcpo = &cpo$/;"	v
+XPT#ver	../bundle/xptemplates/autoload/XPT.vim	/^let XPT#ver = 2$/;"	v
+XPT#let_sid	../bundle/xptemplates/autoload/XPT.vim	/^let XPT#let_sid = 'map <Plug>xsid <SID>|let s:sid=matchstr(maparg("<Plug>xsid"), "\\\\d\\\\+_")|unmap <Plug>xsid'$/;"	v
+XPT#nullDict	../bundle/xptemplates/autoload/XPT.vim	/^let XPT#nullDict = {}$/;"	v
+XPT#nullList	../bundle/xptemplates/autoload/XPT.vim	/^let XPT#nullList = []$/;"	v
+XPT#nonEscaped	../bundle/xptemplates/autoload/XPT.vim	/^let XPT#nonEscaped =$/;"	v
+XPT#setIfNotExist	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#setIfNotExist(k, v) "{{{$/;"	f
+XPT#warn	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#warn( msg ) "{{{$/;"	f
+XPT#info	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#info( msg ) "{{{$/;"	f
+XPT#error	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#error( msg ) "{{{$/;"	f
+XPT#fallback	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#fallback( fbs ) "{{{$/;"	f
+XPT#softTabStop	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#softTabStop() "{{{$/;"	f
+XPT#getIndentNr	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#getIndentNr( ln, col ) "{{{$/;"	f
+XPT#getCmdOutput	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#getCmdOutput( cmd ) "{{{$/;"	f
+XPT#LeadingTabToSpace	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#LeadingTabToSpace( str ) "{{{$/;"	f
+XPT#convertSpaceToTab	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#convertSpaceToTab( text ) "{{{$/;"	f
+XPT#SpaceToTab	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#SpaceToTab( lines ) "{{{$/;"	f
+XPT#SpaceToTabExceptFirstLine	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#SpaceToTabExceptFirstLine( lines ) "{{{$/;"	f
+XPT#TextBetween	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#TextBetween( posList ) "{{{$/;"	f
+XPT#TextInLine	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#TextInLine( ln, s, e ) "{{{$/;"	f
+XPT#LinesBetween	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#LinesBetween( posList ) "{{{$/;"	f
+XPT#class	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#class( sid, proto ) "{{{$/;"	f
+XPT#classNew	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#classNew( ... ) dict "{{{$/;"	f
+XPT#classVoidInit	../bundle/xptemplates/autoload/XPT.vim	/^fun! XPT#classVoidInit( ... ) dict "{{{$/;"	f
+g:__XPPUM_VIM__	../bundle/xptemplates/autoload/XPpum.vim	/^let g:__XPPUM_VIM__ = 1$/;"	v
+s:oldcpo	../bundle/xptemplates/autoload/XPpum.vim	/^let s:oldcpo = &cpo$/;"	v
+XPpum#completeFunc	../bundle/xptemplates/autoload/XPpum.vim	/^fun! XPpum#completeFunc( first, base )$/;"	f
+XPpum#complete	../bundle/xptemplates/autoload/XPpum.vim	/^fun! XPpum#complete( col, list, onShow ) "{{{$/;"	f
+RestoreCommpletefunc	../bundle/xptemplates/autoload/XPpum.vim	/^fun! s:RestoreCommpletefunc() "{{{$/;"	f
+g:__XPTEMPLATE_UTIL_VIM__	../bundle/xptemplates/plugin/xptemplate.util.vim	/^let g:__XPTEMPLATE_UTIL_VIM__ = XPT#ver$/;"	v
+s:oldcpo	../bundle/xptemplates/plugin/xptemplate.util.vim	/^let s:oldcpo = &cpo$/;"	v
+s:log	../bundle/xptemplates/plugin/xptemplate.util.vim	/^let s:log = CreateLogger( 'warn' )$/;"	v
+s:unescapeHead	../bundle/xptemplates/plugin/xptemplate.util.vim	/^let s:unescapeHead          = '\\v(\\\\*)\\1\\\\?\\V'$/;"	v
+XPclassPrototype	../bundle/xptemplates/plugin/xptemplate.util.vim	/^fun! g:XPclassPrototype( sid, ...) $/;"	f
+UnescapeChar	../bundle/xptemplates/plugin/xptemplate.util.vim	/^fun! s:UnescapeChar( str, chars ) $/;"	f
+DeepExtend	../bundle/xptemplates/plugin/xptemplate.util.vim	/^fun! s:DeepExtend( to, from ) $/;"	f
+XPTgetCurrentOrPreviousSynName	../bundle/xptemplates/plugin/xptemplate.util.vim	/^fun! s:XPTgetCurrentOrPreviousSynName() $/;"	f
+RemoveDuplicate	../bundle/xptemplates/plugin/xptemplate.util.vim	/^fun! s:RemoveDuplicate( list ) $/;"	f
+g:xptutil	../bundle/xptemplates/plugin/xptemplate.util.vim	/^let g:xptutil = XPT#class( s:sid, {} )$/;"	v
+g:__XPTEMPLATE_VIM__	../bundle/xptemplates/plugin/xptemplate.vim	/^let g:__XPTEMPLATE_VIM__ = XPT#ver$/;"	v
+s:oldcpo	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:oldcpo = &cpo$/;"	v
+s:log	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:log = CreateLogger( 'warn' )$/;"	v
+s:log	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:log = CreateLogger( 'debug' )$/;"	v
+XPTmarkCompare	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTmarkCompare( o, markToAdd, existedMark ) $/;"	f
+s:repetitionPattern	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:repetitionPattern     = '\\w\\*...\\w\\*'$/;"	v
+s:nullDict	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:nullDict = {}$/;"	v
+s:nullList	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:nullList = []$/;"	v
+s:nonEscaped	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:nonEscaped =$/;"	v
+g:XPTemplateSettingPrototype	../bundle/xptemplates/plugin/xptemplate.vim	/^let g:XPTemplateSettingPrototype  = {$/;"	v
+XPTapplyTemplateSettingDefaultValue	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! g:XPTapplyTemplateSettingDefaultValue( setting ) $/;"	f
+SetDefaultFilters	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:SetDefaultFilters( ph ) $/;"	f
+s:priorities	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:priorities = {'all' : 64, 'spec' : 48, 'like' : 32, 'lang' : 16, 'sub' : 8, 'personal' : 0}$/;"	v
+g:XPT_RC	../bundle/xptemplates/plugin/xptemplate.vim	/^let g:XPT_RC = {$/;"	v
+s:buildingSeqNr	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:buildingSeqNr = 0$/;"	v
+s:anonymouseIndex	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:anonymouseIndex = 0$/;"	v
+s:pumCB	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:pumCB = {}$/;"	v
+pumCB.onEmpty	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:pumCB.onEmpty(sess) $/;"	f
+pumCB.onOneMatch	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:pumCB.onOneMatch(sess) $/;"	f
+s:ItemPumCB	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:ItemPumCB = {}$/;"	v
+ItemPumCB.onOneMatch	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ItemPumCB.onOneMatch( sess ) $/;"	f
+FallbackKey	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:FallbackKey() $/;"	f
+XPTemplateKeyword	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTemplateKeyword(val) $/;"	f
+XPTemplatePriority	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTemplatePriority(...) $/;"	f
+XPTemplateMark	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTemplateMark(sl, sr) $/;"	f
+XPTmark	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTmark() $/;"	f
+XPTfuncs	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! g:XPTfuncs() $/;"	f
+XPTemplateAlias	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTemplateAlias( name, toWhich, setting ) $/;"	f
+GetSnipFileFT	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! g:GetSnipFileFT() $/;"	f
+GetSnipFileFtScope	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! g:GetSnipFileFtScope() $/;"	f
+GetTempSnipScope	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:GetTempSnipScope( x, ft ) $/;"	f
+XPTemplate	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTemplate(name, str_or_ctx, ...) $/;"	f
+XPTdefineSnippet	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTdefineSnippet( name, setting, snip ) $/;"	f
+Abbr	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:Abbr( name ) $/;"	f
+InitTemplateObject	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:InitTemplateObject( xptObj, tmplObj ) $/;"	f
+ParseInclusion	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ParseInclusion( tmplDict, tmplObject ) $/;"	f
+DoInclude	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:DoInclude( tmplDict, tmplObject, pattern, keepCursor ) $/;"	f
+ReplacePHInSubSnip	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ReplacePHInSubSnip( snipObject, subSnipObject, params ) $/;"	f
+ParseInclusionStatement	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ParseInclusionStatement( snipObject, st ) $/;"	f
+MergeSetting	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:MergeSetting( toSettings, fromSettings ) $/;"	f
+ParseTemplateSetting	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ParseTemplateSetting( tmpl ) $/;"	f
+ParsePostQuoter	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ParsePostQuoter( setting ) $/;"	f
+AddCursorToComeLast	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:AddCursorToComeLast(setting) $/;"	f
+InitItemOrderList	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:InitItemOrderList( setting ) $/;"	f
+XPTreload	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTreload() $/;"	f
+XPTgetAllTemplates	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTgetAllTemplates() $/;"	f
+XPTemplatePreWrap	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTemplatePreWrap( wrap ) $/;"	f
+ConcreteSpace	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ConcreteSpace() $/;"	f
+XPTemplateDoWrap	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTemplateDoWrap() $/;"	f
+XPTabbr	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTabbr( name ) $/;"	f
+XPTtgr	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTtgr( snippetName, ... ) $/;"	f
+XPTemplateTrigger	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTemplateTrigger( snippetName, ... ) $/;"	f
+XPTparseSnippets	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTparseSnippets() $/;"	f
+XPTemplateStart	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTemplateStart(pos_unused_any_more, ...) $/;"	f
+s:priPtn	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:priPtn = 'all\\|spec\\|like\\|lang\\|sub\\|personal\\|\\d\\+'$/;"	v
+ParsePriorityString	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ParsePriorityString(s) $/;"	f
+ParsePriority	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ParsePriority( pstr ) $/;"	f
+NewRenderContext	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:NewRenderContext( ftScope, tmplName ) $/;"	f
+DoStart	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:DoStart( sess ) $/;"	f
+RenderSnippet	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:RenderSnippet() $/;"	f
+SaveNavKey	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:SaveNavKey() $/;"	f
+FinishRendering	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:FinishRendering(...) $/;"	f
+Popup	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:Popup(pref, coln, opt) $/;"	f
+IfSnippetShow	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:IfSnippetShow( snipObj, synNames ) $/;"	f
+AddIndent	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:AddIndent( text, startPos ) $/;"	f
+ParseSpaces	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ParseSpaces( snipObject ) $/;"	f
+ParseRepetition	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ParseRepetition( snipObject ) $/;"	f
+GetIndentBeforeEdge	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:GetIndentBeforeEdge( tmplObj, textBeforeLeftMark ) $/;"	f
+ParseQuotedPostFilter	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ParseQuotedPostFilter( tmplObj ) $/;"	f
+BuildSnippet	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:BuildSnippet(nameStartPosition, nameEndPosition) $/;"	f
+GetNameInfo	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:GetNameInfo(end) $/;"	f
+GetValueInfo	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:GetValueInfo( end ) $/;"	f
+CreatePlaceHolder	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:CreatePlaceHolder( ctx, nameInfo, valueInfo ) $/;"	f
+BuildMarksOfPlaceHolder	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:BuildMarksOfPlaceHolder( item, placeHolder, nameInfo, valueInfo ) $/;"	f
+AddItemToRenderContext	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:AddItemToRenderContext( ctx, item ) $/;"	f
+AddToOrderList	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:AddToOrderList( list, item ) $/;"	f
+BuildPlaceHolders	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:BuildPlaceHolders( markRange ) $/;"	f
+NextLeftMark	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:NextLeftMark( markRange ) $/;"	f
+EvaluateEdge	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:EvaluateEdge( xp, item, ph ) $/;"	f
+ApplyBuildTimeInclusion	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ApplyBuildTimeInclusion( placeHolder, nameInfo, valueInfo ) $/;"	f
+ApplyInstantValue	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ApplyInstantValue( placeHolder, nameInfo, valueInfo ) $/;"	f
+ApplyPreValues	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ApplyPreValues( placeHolder ) $/;"	f
+SetPreValue	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:SetPreValue( placeHolder, filter ) $/;"	f
+BuildItemForPlaceHolder	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:BuildItemForPlaceHolder( placeHolder ) $/;"	f
+XPTvisual	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:XPTvisual() $/;"	f
+CleanupCurrentItem	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:CleanupCurrentItem() $/;"	f
+ShiftBackward	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ShiftBackward() $/;"	f
+PushBackItem	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:PushBackItem() $/;"	f
+ShiftForward	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ShiftForward( action ) $/;"	f
+XPTforceForward	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTforceForward( action ) $/;"	f
+FinishCurrent	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:FinishCurrent( action ) $/;"	f
+RemoveCurrentMarks	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:RemoveCurrentMarks() $/;"	f
+ApplyPostFilter	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ApplyPostFilter() $/;"	f
+RemoveEditMark	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:RemoveEditMark( ph ) $/;"	f
+EvalPostFilter	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:EvalPostFilter( filter, typed, leader ) $/;"	f
+GotoNextItem	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:GotoNextItem() $/;"	f
+DoGotoNextItem	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:DoGotoNextItem() $/;"	f
+ExtractOneItem	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ExtractOneItem() $/;"	f
+HandleDefaultValueAction	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:HandleDefaultValueAction( ctx, filter ) $/;"	f
+ActionFinish	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ActionFinish( renderContext, filter ) $/;"	f
+EmbedSnippetInLeadingPlaceHolder	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:EmbedSnippetInLeadingPlaceHolder( ctx, snippet ) $/;"	f
+FillinLeadingPlaceHolderAndSelect	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:FillinLeadingPlaceHolderAndSelect( ctx, str ) $/;"	f
+ApplyDefaultValueToPH	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ApplyDefaultValueToPH( renderContext, filter ) $/;"	f
+DefaultValuePumHandler	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:DefaultValuePumHandler( renderContext, filter ) $/;"	f
+DefaultValueShowPum	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:DefaultValueShowPum( renderContext, filter ) $/;"	f
+InitItem	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:InitItem() $/;"	f
+ApplyDefaultValue	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ApplyDefaultValue() $/;"	f
+XPTmappingEval	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTmappingEval( str ) $/;"	f
+InitItemMapping	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:InitItemMapping() $/;"	f
+InitItemTempMapping	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:InitItemTempMapping() $/;"	f
+XPTmapKey	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTmapKey( left, right ) $/;"	f
+ClearItemMapping	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ClearItemMapping( rctx ) $/;"	f
+SelectCurrent	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:SelectCurrent() $/;"	f
+CreateStringMask	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:CreateStringMask( str ) $/;"	f
+EvalFilter	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:EvalFilter( filter, container, context ) $/;"	f
+Eval	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:Eval(str, container, ...) $/;"	f
+CachedCompileExpr	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:CachedCompileExpr( s, xfunc ) $/;"	f
+CompileExpr	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:CompileExpr(s, xfunc) $/;"	f
+TextBetween	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:TextBetween( posList ) $/;"	f
+Goback	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:Goback() $/;"	f
+XPTinitMapping	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:XPTinitMapping() $/;"	f
+XPTCR	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:XPTCR() $/;"	f
+ApplyMap	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ApplyMap() $/;"	f
+ClearMap	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:ClearMap() $/;"	f
+XPTbufData	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTbufData() $/;"	f
+s:snipScopePrototype	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:snipScopePrototype = {$/;"	v
+XPTnewSnipScope	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTnewSnipScope( filename )$/;"	f
+XPTsnipScope	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTsnipScope()$/;"	f
+XPTsnipScopePush	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTsnipScopePush()$/;"	f
+XPTsnipScopePop	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTsnipScopePop()$/;"	f
+XPTemplateInit	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! XPTemplateInit() $/;"	f
+RedefinePattern	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:RedefinePattern() $/;"	f
+PushRenderContext	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:PushRenderContext() $/;"	f
+PopRenderContext	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:PopRenderContext() $/;"	f
+SynNameStack	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:SynNameStack(l, c) $/;"	f
+UpdateFollowingPlaceHoldersWith	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:UpdateFollowingPlaceHoldersWith( contentTyped, option ) $/;"	f
+Crash	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:Crash(...) $/;"	f
+XPTupdateTyping	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:XPTupdateTyping() $/;"	f
+HandleOntypeFilter	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:HandleOntypeFilter( filter ) $/;"	f
+HandleOntypeAction	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:HandleOntypeAction( renderContext, filter ) $/;"	f
+HandleAction	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:HandleAction( renderContext, filter ) $/;"	f
+IsUpdateCondition	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:IsUpdateCondition( renderContext ) $/;"	f
+UpdateMarksAccordingToLeaderChanges	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:UpdateMarksAccordingToLeaderChanges( renderContext ) $/;"	f
+XPTupdate	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:XPTupdate() $/;"	f
+DoUpdate	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:DoUpdate( renderContext, changeType ) $/;"	f
+DoBreakUndo	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:DoBreakUndo() $/;"	f
+<Plug>XPTdoBreakUndo	../bundle/xptemplates/plugin/xptemplate.vim	/^inoremap <silent> <Plug>XPTdoBreakUndo <C-r>=<SID>DoBreakUndo()<CR>$/;"	m
+BreakUndo	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:BreakUndo() $/;"	f
+RecordRelativePosToMark	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:RecordRelativePosToMark( pos, mark ) $/;"	f
+GotoRelativePosToMark	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:GotoRelativePosToMark( rPos, mark ) $/;"	f
+XPTcheck	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:XPTcheck() $/;"	f
+GetContextFT	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:GetContextFT() $/;"	f
+GetContextFTObj	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:GetContextFTObj() $/;"	f
+LoadSnippetFile	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:LoadSnippetFile(snip) $/;"	f
+XPTbufferInit	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:XPTbufferInit() $/;"	f
+XPT	../bundle/xptemplates/plugin/xptemplate.vim	/^augroup XPT $/;"	a
+XPTaddPlugin	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! g:XPTaddPlugin(event, when, func) $/;"	f
+s:plugins	../bundle/xptemplates/plugin/xptemplate.vim	/^let s:plugins = {}$/;"	v
+CreatePluginContainer	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:CreatePluginContainer( ... ) $/;"	f
+CallPlugin	../bundle/xptemplates/plugin/xptemplate.vim	/^fun! s:CallPlugin(ev, when) $/;"	f
+XPTreload	../bundle/xptemplates/plugin/xptemplate.vim	/^com! XPTreload call XPTreload()$/;"	c
+XPTcrash	../bundle/xptemplates/plugin/xptemplate.vim	/^com! XPTcrash call <SID>Crash()$/;"	c
+g:__FILETYPESCOPE_VIM__	../bundle/xptemplates/plugin/classes/FiletypeScope.vim	/^let g:__FILETYPESCOPE_VIM__ = XPT#ver$/;"	v
+s:oldcpo	../bundle/xptemplates/plugin/classes/FiletypeScope.vim	/^let s:oldcpo = &cpo$/;"	v
+s:proto	../bundle/xptemplates/plugin/classes/FiletypeScope.vim	/^let s:proto = {$/;"	v
+New	../bundle/xptemplates/plugin/classes/FiletypeScope.vim	/^fun! s:New() dict $/;"	f
+IsSnippetLoaded	../bundle/xptemplates/plugin/classes/FiletypeScope.vim	/^fun! s:IsSnippetLoaded( filename ) dict $/;"	f
+SetSnippetLoaded	../bundle/xptemplates/plugin/classes/FiletypeScope.vim	/^fun! s:SetSnippetLoaded( filename ) dict $/;"	f
+CheckAndSetSnippetLoaded	../bundle/xptemplates/plugin/classes/FiletypeScope.vim	/^fun! s:CheckAndSetSnippetLoaded( filename ) dict $/;"	f
+g:FiletypeScope	../bundle/xptemplates/plugin/classes/FiletypeScope.vim	/^let g:FiletypeScope = XPT#class( s:sid, s:proto )$/;"	v
+g:__FILTERVALUE_VIM__	../bundle/xptemplates/plugin/classes/FilterValue.vim	/^let g:__FILTERVALUE_VIM__ = XPT#ver$/;"	v
+s:oldcpo	../bundle/xptemplates/plugin/classes/FilterValue.vim	/^let s:oldcpo = &cpo$/;"	v
+g:EmptyFilter	../bundle/xptemplates/plugin/classes/FilterValue.vim	/^let g:EmptyFilter = {}$/;"	v
+s:proto	../bundle/xptemplates/plugin/classes/FilterValue.vim	/^let s:proto = {}$/;"	v
+New	../bundle/xptemplates/plugin/classes/FilterValue.vim	/^fun! s:New( nIndent, text, ... ) dict $/;"	f
+AdjustIndent	../bundle/xptemplates/plugin/classes/FilterValue.vim	/^fun! s:AdjustIndent( startPos ) dict $/;"	f
+AdjustTextAction	../bundle/xptemplates/plugin/classes/FilterValue.vim	/^fun! s:AdjustTextAction( context ) dict $/;"	f
+g:FilterValue	../bundle/xptemplates/plugin/classes/FilterValue.vim	/^let g:FilterValue = XPT#class( s:sid, s:proto )$/;"	v
+g:__SETTINGSWITCH_VIM__	../bundle/xptemplates/plugin/classes/SettingSwitch.vim	/^let g:__SETTINGSWITCH_VIM__ = XPT#ver$/;"	v
+s:oldcpo	../bundle/xptemplates/plugin/classes/SettingSwitch.vim	/^let s:oldcpo = &cpo$/;"	v
+s:log	../bundle/xptemplates/plugin/classes/SettingSwitch.vim	/^let s:log = CreateLogger( 'warn' )$/;"	v
+s:log	../bundle/xptemplates/plugin/classes/SettingSwitch.vim	/^let s:log = CreateLogger( 'debug' )$/;"	v
+New	../bundle/xptemplates/plugin/classes/SettingSwitch.vim	/^fun! s:New() dict $/;"	f
+Add	../bundle/xptemplates/plugin/classes/SettingSwitch.vim	/^fun! s:Add( key, value ) dict $/;"	f
+AddList	../bundle/xptemplates/plugin/classes/SettingSwitch.vim	/^fun! s:AddList( ... ) dict $/;"	f
+Switch	../bundle/xptemplates/plugin/classes/SettingSwitch.vim	/^fun! s:Switch() dict $/;"	f
+Restore	../bundle/xptemplates/plugin/classes/SettingSwitch.vim	/^fun! s:Restore() dict $/;"	f
+g:SettingSwitch	../bundle/xptemplates/plugin/classes/SettingSwitch.vim	/^let g:SettingSwitch = XPT#class( s:sid, {} )$/;"	v
+g:__MAPSAVER_VIM__	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^let g:__MAPSAVER_VIM__ = XPT#ver$/;"	v
+s:oldcpo	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^let s:oldcpo = &cpo$/;"	v
+s:log	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^let s:log = CreateLogger( 'warn' )$/;"	v
+s:log	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^let s:log = CreateLogger( 'debug' )$/;"	v
+_GetAlighWidth	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^fun! s:_GetAlighWidth() $/;"	f
+s:alignWidth	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^let s:alignWidth = s:_GetAlighWidth()$/;"	v
+s:stack	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^let s:stack = []$/;"	v
+_GetMapLine	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^fun! s:_GetMapLine(key, mode, isbuffer) $/;"	f
+MapSaver_GetMapInfo	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^fun! MapSaver_GetMapInfo( key, mode, isbuffer ) $/;"	f
+_MapPop	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^fun! s:_MapPop( info ) $/;"	f
+MapSaverGetMapCommand	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^fun! MapSaverGetMapCommand( info ) $/;"	f
+String	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^fun! s:String( stack ) $/;"	f
+New	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^fun! s:New( isLocal ) dict $/;"	f
+Add	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^fun! s:Add( mode, key ) dict $/;"	f
+AddList	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^fun! s:AddList( ... ) dict $/;"	f
+UnmapAll	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^fun! s:UnmapAll() dict $/;"	f
+Save	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^fun! s:Save() dict $/;"	f
+Literalize	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^fun! s:Literalize( ... ) dict $/;"	f
+Restore	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^fun! s:Restore() dict $/;"	f
+GetStack	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^fun! s:GetStack() dict $/;"	f
+g:MapSaver	../bundle/xptemplates/plugin/classes/MapSaver.vim	/^let g:MapSaver = XPT#class( s:sid, {} )$/;"	v
+g:__RENDERCONTEXT_VIM__	../bundle/xptemplates/plugin/classes/RenderContext.vim	/^let g:__RENDERCONTEXT_VIM__ = XPT#ver$/;"	v
+s:oldcpo	../bundle/xptemplates/plugin/classes/RenderContext.vim	/^let s:oldcpo = &cpo$/;"	v
+s:proto	../bundle/xptemplates/plugin/classes/RenderContext.vim	/^let s:proto = {}$/;"	v
+g:xptRenderPhase	../bundle/xptemplates/plugin/classes/RenderContext.vim	/^let g:xptRenderPhase = {$/;"	v
+p	../bundle/xptemplates/plugin/classes/RenderContext.vim	/^let p = g:xptRenderPhase$/;"	v
+s:phaseGraph	../bundle/xptemplates/plugin/classes/RenderContext.vim	/^let s:phaseGraph = {$/;"	v
+New	../bundle/xptemplates/plugin/classes/RenderContext.vim	/^fun! s:New( x ) dict $/;"	f
+SwitchPhase	../bundle/xptemplates/plugin/classes/RenderContext.vim	/^fun! s:SwitchPhase( nextPhase ) dict $/;"	f
+g:RenderContext	../bundle/xptemplates/plugin/classes/RenderContext.vim	/^let g:RenderContext = XPT#class( s:sid, s:proto )$/;"	v
+g:__XPT_PLUGIN_HIGHLIGHT_VIM__	../bundle/xptemplates/plugin/xpt.plugin.highlight.vim	/^let g:__XPT_PLUGIN_HIGHLIGHT_VIM__ = XPT#ver$/;"	v
+UpdateHL	../bundle/xptemplates/plugin/xpt.plugin.highlight.vim	/^fun! s:UpdateHL(x, ctx) $/;"	f
+PatternOfNext	../bundle/xptemplates/plugin/xpt.plugin.highlight.vim	/^fun! s:PatternOfNext( ctx ) $/;"	f
+MarkRange	../bundle/xptemplates/plugin/xpt.plugin.highlight.vim	/^fun! s:MarkRange( marks ) $/;"	f
+XPTgetStaticRange	../bundle/xptemplates/plugin/xpt.plugin.highlight.vim	/^fun! XPTgetStaticRange(p, q) $/;"	f
+HLinit	../bundle/xptemplates/plugin/xpt.plugin.highlight.vim	/^    fun! s:HLinit() $/;"	f
+ClearHL	../bundle/xptemplates/plugin/xpt.plugin.highlight.vim	/^    fun! s:ClearHL(x, ctx) $/;"	f
+HL	../bundle/xptemplates/plugin/xpt.plugin.highlight.vim	/^    fun! s:HL(grp, ptn) $/;"	f
+s:matchingCmd	../bundle/xptemplates/plugin/xpt.plugin.highlight.vim	/^    let s:matchingCmd = {$/;"	v
+ClearHL	../bundle/xptemplates/plugin/xpt.plugin.highlight.vim	/^    fun! s:ClearHL(x, ctx) $/;"	f
+HL	../bundle/xptemplates/plugin/xpt.plugin.highlight.vim	/^    fun! s:HL(grp, ptn) $/;"	f
+s:FuncUpdate	../bundle/xptemplates/plugin/xpt.plugin.highlight.vim	/^let s:FuncUpdate = function( '<SNR>' . s:sid . "UpdateHL" )$/;"	v
+s:FuncClear	../bundle/xptemplates/plugin/xpt.plugin.highlight.vim	/^let s:FuncClear  = function( '<SNR>' . s:sid . "ClearHL" )$/;"	v
+g:__XPOPUP_VIM__	../bundle/xptemplates/plugin/xpopup.vim	/^let g:__XPOPUP_VIM__ = XPT#ver$/;"	v
+s:oldcpo	../bundle/xptemplates/plugin/xpopup.vim	/^let s:oldcpo = &cpo$/;"	v
+s:log	../bundle/xptemplates/plugin/xpopup.vim	/^let s:log = CreateLogger( 'warn' )$/;"	v
+s:log	../bundle/xptemplates/plugin/xpopup.vim	/^let s:log = CreateLogger( 'debug' )$/;"	v
+SetIfNotExist	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:SetIfNotExist(k, v) $/;"	f
+s:opt	../bundle/xptemplates/plugin/xpopup.vim	/^let s:opt = {$/;"	v
+s:CHECK_PUM	../bundle/xptemplates/plugin/xpopup.vim	/^let s:CHECK_PUM = 1$/;"	v
+s:errorTolerance	../bundle/xptemplates/plugin/xpopup.vim	/^let s:errorTolerance = 3$/;"	v
+s:sessionPrototype	../bundle/xptemplates/plugin/xpopup.vim	/^let s:sessionPrototype = {$/;"	v
+XPPopupNew	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPopupNew( callback, data, ... ) $/;"	f
+popup	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:popup( start_col, opt ) dict $/;"	f
+PUMclear	../bundle/xptemplates/plugin/xpopup.vim	/^fun PUMclear() $/;"	f
+CreateSession	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:CreateSession( sess ) $/;"	f
+SetAcceptEmpty	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:SetAcceptEmpty( acc ) dict $/;"	f
+SetMatchWholeName	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:SetMatchWholeName( mwn ) dict $/;"	f
+SetOption	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:SetOption( opt ) dict $/;"	f
+KeyPopup	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:KeyPopup( doCallback, ifEnlarge ) dict $/;"	f
+ListPopup	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:ListPopup( doCallback, ifEnlarge ) dict $/;"	f
+SetTriggerKey	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:SetTriggerKey( key ) dict $/;"	f
+sessionPrototype.addList	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:sessionPrototype.addList( list ) $/;"	f
+sessionPrototype.createPrefixIndex	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:sessionPrototype.createPrefixIndex(list) $/;"	f
+sessionPrototype.updatePrefixIndex	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:sessionPrototype.updatePrefixIndex(list) $/;"	f
+_InitBuffer	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:_InitBuffer() $/;"	f
+XPPprocess	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPprocess( list ) $/;"	f
+GetTextBeforeCursor	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:GetTextBeforeCursor( sess ) $/;"	f
+XPPcomplete	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPcomplete(col, list) $/;"	f
+XPPcr	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPcr() $/;"	f
+XPPup	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPup( key ) $/;"	f
+XPPdown	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPdown( key ) $/;"	f
+XPPcallback	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPcallback() $/;"	f
+XPPshorten	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPshorten() $/;"	f
+XPPenlarge	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPenlarge( key ) $/;"	f
+XPPcancel	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPcancel( key ) $/;"	f
+XPPaccept	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPaccept() $/;"	f
+XPPrepopup	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPrepopup( doCallback, ifEnlarge ) $/;"	f
+XPPcorrectPos	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPcorrectPos() $/;"	f
+ApplyMapAndSetting	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:ApplyMapAndSetting() $/;"	f
+ClearMapAndSetting	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:ClearMapAndSetting() $/;"	f
+CheckAndFinish	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:CheckAndFinish() $/;"	f
+MistakeTypeEnd	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:MistakeTypeEnd() $/;"	f
+XPPhasSession	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPhasSession() $/;"	f
+XPPend	../bundle/xptemplates/plugin/xpopup.vim	/^fun! XPPend() $/;"	f
+End	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:End() $/;"	f
+PopupCheck	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:PopupCheck(...) $/;"	f
+UpdateIndex	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:UpdateIndex(map, key) $/;"	f
+LongestPrefix	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:LongestPrefix(sess) $/;"	f
+filterCompleteList	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:filterCompleteList( sess ) $/;"	f
+FindShorter	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:FindShorter(map, key) $/;"	f
+ClassPrototype	../bundle/xptemplates/plugin/xpopup.vim	/^fun! s:ClassPrototype(...) $/;"	f
+s:sessionPrototype2	../bundle/xptemplates/plugin/xpopup.vim	/^let s:sessionPrototype2 =  s:ClassPrototype($/;"	v
+g:__XPTEMPLATE_PARSER_VIM__	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^let g:__XPTEMPLATE_PARSER_VIM__ = XPT#ver$/;"	v
+s:oldcpo	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^let s:oldcpo = &cpo$/;"	v
+s:log	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^let s:log = CreateLogger( 'warn' )$/;"	v
+XPTemplate	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^com! -nargs=* XPTemplate$/;"	c
+XPTemplateDef	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^com! -nargs=* XPTemplateDef call s:XPTstartSnippetPart(expand("<sfile>")) | finish$/;"	c
+XPT	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^com! -nargs=* XPT           call s:XPTstartSnippetPart(expand("<sfile>")) | finish$/;"	c
+XPTvar	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^com! -nargs=* XPTvar        call XPTsetVar( <q-args> )$/;"	c
+XPTsnipSet	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^com! -nargs=* XPTsnipSet    call XPTsnipSet( <q-args> )$/;"	c
+XPTinclude	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^com! -nargs=+ XPTinclude    call XPTinclude(<f-args>)$/;"	c
+XPTembed	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^com! -nargs=+ XPTembed      call XPTembed(<f-args>)$/;"	c
+s:nonEscaped	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^let s:nonEscaped = '\\%(' . '\\%(\\[^\\\\]\\|\\^\\)' . '\\%(\\\\\\\\\\)\\*' . '\\)' . '\\@<='$/;"	v
+AssignSnipFT	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! s:AssignSnipFT( filename ) $/;"	f
+LoadOtherFTPlugins	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! s:LoadOtherFTPlugins( ft ) $/;"	f
+XPTsnippetFileInit	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! XPTsnippetFileInit( filename, ... ) $/;"	f
+XPTsnipSet	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! XPTsnipSet( dictNameValue ) $/;"	f
+XPTsetVar	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! XPTsetVar( nameSpaceValue ) $/;"	f
+XPTinclude	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! XPTinclude(...) $/;"	f
+XPTembed	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! XPTembed(...) $/;"	f
+XPTstartSnippetPart	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! s:XPTstartSnippetPart(fn) $/;"	f
+DoParseSnippet	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! DoParseSnippet( p ) $/;"	f
+XPTemplateParseSnippet	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! s:XPTemplateParseSnippet(lines) $/;"	f
+GetSnipCommentHint	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! s:GetSnipCommentHint(str) $/;"	f
+ConvertIndent	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! s:ConvertIndent( snipLines ) $/;"	f
+getXSETkeyAndValue	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! s:getXSETkeyAndValue(lines, start) $/;"	f
+ParseMultiLineValues	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! s:ParseMultiLineValues(lines, start) $/;"	f
+GetKeyType	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! s:GetKeyType(rawKey) $/;"	f
+HandleXSETcommand	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! s:HandleXSETcommand(setting, command, keyname, keytype, value) $/;"	f
+SplitWith	../bundle/xptemplates/plugin/xptemplate.parser.vim	/^fun! s:SplitWith( str, char ) $/;"	f
+g:__XPMARK_VIM__	../bundle/xptemplates/plugin/xpmark.vim	/^let g:__XPMARK_VIM__ = XPT#ver$/;"	v
+s:oldcpo	../bundle/xptemplates/plugin/xpmark.vim	/^let s:oldcpo = &cpo$/;"	v
+XPMgetSID	../bundle/xptemplates/plugin/xpmark.vim	/^com! XPMgetSID let s:sid =  matchstr("<SID>", '\\zs\\d\\+_\\ze')$/;"	c
+s:log	../bundle/xptemplates/plugin/xpmark.vim	/^let s:log = CreateLogger( 'warn' )$/;"	v
+g:xpm_mark	../bundle/xptemplates/plugin/xpmark.vim	/^let g:xpm_mark = 'p'$/;"	v
+g:xpm_mark_nextline	../bundle/xptemplates/plugin/xpmark.vim	/^let g:xpm_mark_nextline = 'l'$/;"	v
+g:xpm_changenr_level	../bundle/xptemplates/plugin/xpmark.vim	/^let g:xpm_changenr_level = 1000$/;"	v
+s:insertPattern	../bundle/xptemplates/plugin/xpmark.vim	/^let s:insertPattern = '[i]'$/;"	v
+g:XPM_RET	../bundle/xptemplates/plugin/xpmark.vim	/^let g:XPM_RET = {$/;"	v
+s:emptyHistoryElt	../bundle/xptemplates/plugin/xpmark.vim	/^let s:emptyHistoryElt = {'list':[], 'dict' :{}, 'likely' : { 'start' : '', 'end' : '' }}$/;"	v
+g:XPMpreferLeft	../bundle/xptemplates/plugin/xpmark.vim	/^let g:XPMpreferLeft = 'l'$/;"	v
+g:XPMpreferRight	../bundle/xptemplates/plugin/xpmark.vim	/^let g:XPMpreferRight = 'r'$/;"	v
+XPM	../bundle/xptemplates/plugin/xpmark.vim	/^augroup XPM$/;"	a
+XPMcheckStatusline	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMcheckStatusline() $/;"	f
+SetupStatusline	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:SetupStatusline() $/;"	f
+XPMadd	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMadd( name, pos, prefer, ... ) $/;"	f
+XPMhere	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMhere( name, prefer ) $/;"	f
+XPMremove	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMremove( name ) $/;"	f
+XPMremoveStartEnd	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMremoveStartEnd( dict ) $/;"	f
+XPMremoveMarkStartWith	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMremoveMarkStartWith(prefix) $/;"	f
+XPMflush	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMflush() $/;"	f
+XPMflushWithHistory	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMflushWithHistory() $/;"	f
+XPMgoto	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMgoto( name ) $/;"	f
+XPMpos	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMpos( name ) $/;"	f
+XPMhas	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMhas( ... ) $/;"	f
+XPMposStartEnd	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMposStartEnd( dict ) $/;"	f
+XPMposList	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMposList( ... ) $/;"	f
+XPMmarkAfter	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMmarkAfter( pos ) $/;"	f
+XPMsetLikelyBetween	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMsetLikelyBetween( start, end ) $/;"	f
+XPMsetUpdateStrategy	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMsetUpdateStrategy( mode ) $/;"	f
+XPMupdateSpecificChangedRange	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMupdateSpecificChangedRange(start, end) $/;"	f
+XPMautoUpdate	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMautoUpdate(msg) $/;"	f
+XPMupdate	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMupdate(...) $/;"	f
+XPMupdateStat	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMupdateStat() $/;"	f
+XPMupdateCursorStat	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMupdateCursorStat(...) $/;"	f
+XPMsetBufSortFunction	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMsetBufSortFunction( funcRef ) $/;"	f
+XPMallMark	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMallMark() $/;"	f
+isUpdateNeeded	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:isUpdateNeeded() dict $/;"	f
+initCurrentStat	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:initCurrentStat() dict $/;"	f
+snapshot	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:snapshot() dict $/;"	f
+handleUndoRedo	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:handleUndoRedo() dict $/;"	f
+ToChangeNr	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:ToChangeNr( nr ) dict $/;"	f
+insertModeUpdate	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:insertModeUpdate() dict $/;"	f
+normalModeUpdate	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:normalModeUpdate() dict $/;"	f
+updateMarksAfterLine	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:updateMarksAfterLine(line) dict $/;"	f
+updateForLinewiseDeletion	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:updateForLinewiseDeletion( fromLine, toLine ) dict $/;"	f
+updateWithNewChangeRange	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:updateWithNewChangeRange( changeStart, changeEnd ) dict $/;"	f
+updateMarksBefore	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:updateMarksBefore( indexRange, changeStart, changeEnd ) dict $/;"	f
+updateMarksAfter	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:updateMarksAfter( indexRange, changeStart, changeEnd ) dict $/;"	f
+updateMarks	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:updateMarks( indexRange, changeStart, changeEnd ) dict $/;"	f
+XPMupdateWithMarkRangeChanging	../bundle/xptemplates/plugin/xpmark.vim	/^fun! XPMupdateWithMarkRangeChanging( startMark, endMark, changeStart, changeEnd ) $/;"	f
+findLikelyRange2	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:findLikelyRange2(changeStart, bChangeEnd) dict $/;"	f
+findLikelyRange	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:findLikelyRange(changeStart, bChangeEnd) dict $/;"	f
+saveCurrentCursorStat	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:saveCurrentCursorStat() dict $/;"	f
+saveCurrentStat	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:saveCurrentStat() dict $/;"	f
+removeMark	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:removeMark(name) dict $/;"	f
+addMarkOrder	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:addMarkOrder( name, beforeWhich ) dict $/;"	f
+compare	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:compare( a, b ) dict $/;"	f
+ClassPrototype	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:ClassPrototype(...) $/;"	f
+s:prototype	../bundle/xptemplates/plugin/xpmark.vim	/^let s:prototype =  s:ClassPrototype($/;"	v
+initBufData	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:initBufData() $/;"	f
+BufData	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:BufData() $/;"	f
+InitBuf	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:InitBuf() $/;"	f
+defaultCompare	../bundle/xptemplates/plugin/xpmark.vim	/^fun! s:defaultCompare(d, markA, markB) $/;"	f
+PrintDebug	../bundle/xptemplates/plugin/xpmark.vim	/^fun! PrintDebug()$/;"	f
+g:__DEBUG_VIM__	../bundle/xptemplates/plugin/debug.vim	/^let g:__DEBUG_VIM__ = XPT#ver$/;"	v
+s:oldcpo	../bundle/xptemplates/plugin/debug.vim	/^let s:oldcpo = &cpo$/;"	v
+s:globalLogLevel	../bundle/xptemplates/plugin/debug.vim	/^let s:globalLogLevel = 'warn'$/;"	v
+DebugGetSID	../bundle/xptemplates/plugin/debug.vim	/^com! DebugGetSID let s:sid =  matchstr("<SID>", '\\zs\\d\\+_\\ze')$/;"	c
+CreateLogger	../bundle/xptemplates/plugin/debug.vim	/^fun! CreateLogger( level ) $/;"	f
+Assert	../bundle/xptemplates/plugin/debug.vim	/^fun! Assert( shouldBeTrue, msg ) $/;"	f
+Assert	../bundle/xptemplates/plugin/debug.vim	/^com! -nargs=+ Assert call Assert( <args>, <q-args> )$/;"	c
+s:logLevels	../bundle/xptemplates/plugin/debug.vim	/^let s:logLevels = {$/;"	v
+s:loggerPrototype	../bundle/xptemplates/plugin/debug.vim	/^let s:loggerPrototype = {}$/;"	v
+Fatal	../bundle/xptemplates/plugin/debug.vim	/^fun! s:Fatal(...) dict $/;"	f
+Error	../bundle/xptemplates/plugin/debug.vim	/^fun! s:Error(...) dict $/;"	f
+Warn	../bundle/xptemplates/plugin/debug.vim	/^fun! s:Warn(...) dict $/;"	f
+Info	../bundle/xptemplates/plugin/debug.vim	/^fun! s:Info(...) dict $/;"	f
+Log	../bundle/xptemplates/plugin/debug.vim	/^fun! s:Log(...) dict $/;"	f
+Debug	../bundle/xptemplates/plugin/debug.vim	/^fun! s:Debug(...) dict $/;"	f
+LogNothing	../bundle/xptemplates/plugin/debug.vim	/^fun! s:LogNothing(...) $/;"	f
+s:loggerPrototype	../bundle/xptemplates/plugin/debug.vim	/^let s:loggerPrototype.Fatal       = function( "<SNR>" . s:sid . "Fatal"      )$/;"	v
+s:loggerPrototype	../bundle/xptemplates/plugin/debug.vim	/^let s:loggerPrototype.Error       = function( "<SNR>" . s:sid . "Error"      )$/;"	v
+s:loggerPrototype	../bundle/xptemplates/plugin/debug.vim	/^let s:loggerPrototype.Warn        = function( "<SNR>" . s:sid . "Warn"       )$/;"	v
+s:loggerPrototype	../bundle/xptemplates/plugin/debug.vim	/^let s:loggerPrototype.Info        = function( "<SNR>" . s:sid . "Info"       )$/;"	v
+s:loggerPrototype	../bundle/xptemplates/plugin/debug.vim	/^let s:loggerPrototype.Log         = function( "<SNR>" . s:sid . "Log"        )$/;"	v
+s:loggerPrototype	../bundle/xptemplates/plugin/debug.vim	/^let s:loggerPrototype.Debug       = function( "<SNR>" . s:sid . "Debug"      )$/;"	v
+s:loggerPrototype	../bundle/xptemplates/plugin/debug.vim	/^let s:loggerPrototype.LogNothing  = function( "<SNR>" . s:sid . "LogNothing" )$/;"	v
+s:logLocation	../bundle/xptemplates/plugin/debug.vim	/^    let s:logLocation = finddir( $HOME . '\/tmp' )$/;"	v
+s:logLocation	../bundle/xptemplates/plugin/debug.vim	/^    let s:logLocation = $HOME $/;"	v
+s:logLocation	../bundle/xptemplates/plugin/debug.vim	/^let s:logLocation .= '\/vim.log'$/;"	v
+Log_core	../bundle/xptemplates/plugin/debug.vim	/^fun! Log_core(level, ...) $/;"	f
+g:__XPTEMPLATE_CONF_VIM__	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^let g:__XPTEMPLATE_CONF_VIM__ = XPT#ver$/;"	v
+s:oldcpo	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^let s:oldcpo = &cpo$/;"	v
+s:escapeHead	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^let s:escapeHead   = '\\v(\\\\*)\\V'$/;"	v
+s:unescapeHead	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^let s:unescapeHead = '\\v(\\\\*)\\1\\\\?\\V'$/;"	v
+s:ep	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^let s:ep           = '\\%(' . '\\%(\\[^\\\\]\\|\\^\\)' . '\\%(\\\\\\\\\\)\\*' . '\\)' . '\\@<='$/;"	v
+g:xptemplate_minimal_prefix	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^            let g:xptemplate_minimal_prefix = outer + 0$/;"	v
+g:xptemplate_minimal_prefix	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^            let g:xptemplate_minimal_prefix = outer$/;"	v
+g:xptemplate_minimal_prefix_nested	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^            let g:xptemplate_minimal_prefix_nested = inner + 0$/;"	v
+g:xptemplate_minimal_prefix_nested	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^            let g:xptemplate_minimal_prefix_nested = inner$/;"	v
+g:xptemplate_fallback	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^    let g:xptemplate_fallback = '<NOP>'$/;"	v
+g:xptemplate_fallback	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^    let g:xptemplate_fallback = 'nore:' . g:xptemplate_fallback$/;"	v
+g:xptemplate_brace_complete	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^    let g:xptemplate_brace_complete = '([{"'''$/;"	v
+s:path	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^let s:path = expand( "<sfile>" )$/;"	v
+s:filename	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^let s:filename = 'xptemplate.conf.vim'$/;"	v
+s:path	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^let s:path = substitute( s:path, '\\', '\/', 'g' )$/;"	v
+s:path	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^let s:path = matchstr( s:path, '\\V\\.\\*\\ze\/plugin\/' . s:filename )$/;"	v
+g:XPTpvs	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^let g:XPTpvs = {}$/;"	v
+g:XPTmappings	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^let g:XPTmappings = {$/;"	v
+g:xptemplate_fallback	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^    let g:xptemplate_fallback = g:xptemplate_fallback[ 5: ]$/;"	v
+EscapeMap	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^fun! s:EscapeMap( s ) $/;"	f
+s:pvs	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^let s:pvs = split(g:xptemplate_vars, '\\V'.s:ep.'&')$/;"	v
+s:key	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^  let s:key = matchstr(s:v, '\\V\\^\\[^=]\\*\\ze=')$/;"	v
+s:key	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^    let s:key = '$'.s:key$/;"	v
+s:val	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^  let s:val = matchstr(s:v, '\\V\\^\\[^=]\\*=\\zs\\.\\*')$/;"	v
+g:XPTpvs	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^  let g:XPTpvs[s:key] = substitute(s:val, s:unescapeHead.'&', '\\1\\&', 'g')$/;"	v
+s:bundle	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^    let s:bundle = split( g:xptemplate_bundle, ',' )$/;"	v
+s:bundle	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^    let s:bundle = g:xptemplate_bundle$/;"	v
+g:xptBundle	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^let g:xptBundle = {}$/;"	v
+g:xptBundle	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^        let g:xptBundle[ ft ] = {}$/;"	v
+g:xptBundle	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^    let g:xptBundle[ ft ][ bundle ] = 1$/;"	v
+XPTaddBundle	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^fun! g:XPTaddBundle(ft, bundle) $/;"	f
+XPTloadBundle	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^fun! g:XPTloadBundle(ft, bundle) $/;"	f
+XPTfiletypeInit	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^fun! XPTfiletypeInit() $/;"	f
+XPTftInit	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^augroup XPTftInit$/;"	a
+(	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^    inoremap <silent> ( <C-v><C-v><BS><C-r>=XPTtgr('(',{'noliteral':1,'k':'('})<cr>$/;"	m
+[	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^    inoremap <silent> [ <C-v><C-v><BS><C-r>=XPTtgr('[',{'noliteral':1,'k':'['})<cr>$/;"	m
+{	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^    inoremap <silent> { <C-v><C-v><BS><C-r>=XPTtgr('{',{'noliteral':1,'k':'{'})<cr>$/;"	m
+'	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^    inoremap <silent> ' <C-v><C-v><BS><C-r>=XPTtgr('''',{'noliteral':1,'k':''''})<cr>$/;"	m
+"	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^    inoremap <silent> " <C-v><C-v><BS><C-r>=XPTtgr('"',{'noliteral':1,'k':'"'})<cr>$/;"	m
+bs	../bundle/xptemplates/plugin/xptemplate.conf.vim	/^let bs=&bs$/;"	v
+g:__XPREPLACE_VIM__	../bundle/xptemplates/plugin/xpreplace.vim	/^let g:__XPREPLACE_VIM__ = XPT#ver$/;"	v
+s:oldcpo	../bundle/xptemplates/plugin/xpreplace.vim	/^let s:oldcpo = &cpo$/;"	v
+s:log	../bundle/xptemplates/plugin/xpreplace.vim	/^let s:log = CreateLogger( 'warn' )$/;"	v
+s:log	../bundle/xptemplates/plugin/xpreplace.vim	/^let s:log = CreateLogger( 'debug' )$/;"	v
+InitBuffer	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! s:InitBuffer() $/;"	f
+XPRstartSession	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! XPRstartSession() $/;"	f
+XPRendSession	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! XPRendSession() $/;"	f
+XPreplaceByMarkInternal	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! XPreplaceByMarkInternal( startMark, endMark, replacement ) $/;"	f
+ConvertSpaceToTab	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! s:ConvertSpaceToTab( text ) $/;"	f
+XPreplaceInternal	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! XPreplaceInternal(start, end, replacement, ...) $/;"	f
+Replace_standard	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! s:Replace_standard( start, end, replacement ) $/;"	f
+Replace_gp	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! s:Replace_gp( start, end, replacement ) $/;"	f
+XPreplace	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! XPreplace(start, end, replacement, ...) $/;"	f
+s:_xpreplace	../bundle/xptemplates/plugin/xpreplace.vim	/^let s:_xpreplace = { 'post' : {}, 'pre' : {} }$/;"	v
+XPRaddPreJob	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! XPRaddPreJob( functionName ) $/;"	f
+XPRaddPostJob	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! XPRaddPostJob( functionName ) $/;"	f
+XPRremovePreJob	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! XPRremovePreJob( functionName ) $/;"	f
+XPRremovePostJob	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! XPRremovePostJob( functionName ) $/;"	f
+doPreJob	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! s:doPreJob( start, end, replacement ) $/;"	f
+doPostJob	../bundle/xptemplates/plugin/xpreplace.vim	/^fun! s:doPostJob( start, end, replacement ) $/;"	f
+s:f	../bundle/xptemplates/ftplugin/vim/vim.xpt.vim	/^let s:f = g:XPTfuncs()$/;"	v
+f.vim_call	../bundle/xptemplates/ftplugin/vim/vim.xpt.vim	/^fun! s:f.vim_call()$/;"	f
+g	../bundle/xptemplates/ftplugin/vim/vim.xpt.vim	/^let `g^:`i^`$SPop^=`$SPop^1$/;"	v
+g	../bundle/xptemplates/ftplugin/vim/vim.xpt.vim	/^let ``g^:``i^`$SPop^=`$SPop^``ver^$/;"	v
+g	../bundle/xptemplates/ftplugin/vim/vim.xpt.vim	/^    let `g^:`varname^`$SPop^=`$SPop^`val^$/;"	v
+s:f	../bundle/xptemplates/ftplugin/xpt/xpt.xpt.vim	/^let s:f = g:XPTfuncs()$/;"	v
+f.xpt_vim_hint_escape	../bundle/xptemplates/ftplugin/xpt/xpt.xpt.vim	/^fun! s:f.xpt_vim_hint_escape()$/;"	f
+s:xpt_snip	../bundle/xptemplates/ftplugin/xpt/xpt.xpt.vim	/^let s:xpt_snip = split( globpath( &rtp, "ftplugin\/**\/*.xpt.vim" ), "\\n" )$/;"	v
+f.xpt_ftp_pum	../bundle/xptemplates/ftplugin/xpt/xpt.xpt.vim	/^fun! s:f.xpt_ftp_pum()$/;"	f
+s:xpts	../bundle/xptemplates/ftplugin/xpt/xpt.xpt.vim	/^let s:xpts = {}$/;"	v
+s:xpts	../bundle/xptemplates/ftplugin/xpt/xpt.xpt.vim	/^        let s:xpts[ ft ] = []$/;"	v
+s:xpts	../bundle/xptemplates/ftplugin/xpt/xpt.xpt.vim	/^    let s:xpts[ ft ] += [ snip ]$/;"	v
+f.xpt_vim_path	../bundle/xptemplates/ftplugin/xpt/xpt.xpt.vim	/^fun! s:f.xpt_vim_path()$/;"	f
+f.xpt_vim_name	../bundle/xptemplates/ftplugin/xpt/xpt.xpt.vim	/^fun! s:f.xpt_vim_name(path)$/;"	f
+s:f	../bundle/xptemplates/ftplugin/xpt/xpt.xpt.vim	/^let s:f = g:XPTfuncs()$/;"	v
+s:f	../bundle/xptemplates/ftplugin/xpt/xpt.xpt.vim	/^let s:f = g:XPTfuncs()$/;"	v
+s:f	../bundle/xptemplates/ftplugin/_preprocessor/c.like.xpt.vim	/^let s:f = g:XPTfuncs()$/;"	v
+s:f	../bundle/xptemplates/ftplugin/cg/cg.xpt.vim	/^let s:f = g:XPTfuncs()$/;"	v
+s:f	../bundle/xptemplates/ftplugin/factor/factor.xpt.vim	/^let s:f = g:XPTfuncs()$/;"	v
+b:__HTML_FTDETECT_VIM__	../bundle/xptemplates/ftplugin/html/html.ftdetect.vim	/^let b:__HTML_FTDETECT_VIM__ = 1$/;"	v
+s:skipPattern	../bundle/xptemplates/ftplugin/html/html.ftdetect.vim	/^let s:skipPattern = 'synIDattr(synID(line("."), col("."), 0), "name") =~? "\\\\vstring|comment"'$/;"	v
+s:pattern	../bundle/xptemplates/ftplugin/html/html.ftdetect.vim	/^let s:pattern = {$/;"	v
+XPT_htmlFiletypeDetect	../bundle/xptemplates/ftplugin/html/html.ftdetect.vim	/^fun! XPT_htmlFiletypeDetect() "{{{$/;"	f
+b:XPTfiletypeDetect	../bundle/xptemplates/ftplugin/html/html.ftdetect.vim	/^let b:XPTfiletypeDetect = function( 'XPT_htmlFiletypeDetect' )$/;"	v
+b:did_ftplugin	../bundle/xptemplates/ftplugin/html/xml.vim	/^let b:did_ftplugin = 1$/;"	v
+b:match_ignorecase	../bundle/xptemplates/ftplugin/html/xml.vim	/^    let b:match_ignorecase=0$/;"	v
+b:match_words	../bundle/xptemplates/ftplugin/html/xml.vim	/^    let b:match_words =$/;"	v
+s:NoSlashBeforeGt	../bundle/xptemplates/ftplugin/html/xml.vim	/^let s:NoSlashBeforeGt = '\\(\\\/\\)\\@\\<!>'$/;"	v
+s:Attrib	../bundle/xptemplates/ftplugin/html/xml.vim	/^let s:Attrib =  '\\(\\(\\s\\|\\n\\)\\+\\([^>= \\t]\\+=[^>&]\\+\\)\\(\\s\\|\\n\\)*\\)'$/;"	v
+s:OptAttrib	../bundle/xptemplates/ftplugin/html/xml.vim	/^let s:OptAttrib = s:Attrib . '*'. s:NoSlashBeforeGt$/;"	v
+s:ReqAttrib	../bundle/xptemplates/ftplugin/html/xml.vim	/^let s:ReqAttrib = s:Attrib . '\\+'. s:NoSlashBeforeGt$/;"	v
+s:OpenTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^let s:OpenTag = '<[^!\/?][^>]*' . s:OptAttrib$/;"	v
+s:OpenOrCloseTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^let s:OpenOrCloseTag = '<[^!?][^>]*'. s:OptAttrib$/;"	v
+s:CloseTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^let s:CloseTag = '<\\\/[^>]*'. s:NoSlashBeforeGt$/;"	v
+s:SpaceInfront	../bundle/xptemplates/ftplugin/html/xml.vim	/^let s:SpaceInfront = '^\\s*<'$/;"	v
+s:EndofName	../bundle/xptemplates/ftplugin/html/xml.vim	/^let s:EndofName = '\\($\\|\\s\\|>\\)'$/;"	v
+b:emptyTags	../bundle/xptemplates/ftplugin/html/xml.vim	/^let b:emptyTags='^\\(img\\|input\\|param\\|frame\\|br\\|hr\\|meta\\|link\\|base\\|area\\)$'$/;"	v
+b:firstWasEndTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^let b:firstWasEndTag = 0$/;"	v
+b:html_mode	../bundle/xptemplates/ftplugin/html/xml.vim	/^let b:html_mode =((&filetype =~ 'x\\?html') && !exists("g:xml_no_html"))$/;"	v
+b:haveAtt	../bundle/xptemplates/ftplugin/html/xml.vim	/^let b:haveAtt = 0$/;"	v
+b:lastTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^let b:lastTag = ""$/;"	v
+b:lastAtt	../bundle/xptemplates/ftplugin/html/xml.vim	/^let b:lastAtt = ""$/;"	v
+b:suffix	../bundle/xptemplates/ftplugin/html/xml.vim	/^let b:suffix = (exists('g:makeElementSuf') ? g:makeElementSuf : ';;')$/;"	v
+b:xml_use_xhtml	../bundle/xptemplates/ftplugin/html/xml.vim	/^let b:xml_use_xhtml = 0$/;"	v
+b:xml_use_xhtml	../bundle/xptemplates/ftplugin/html/xml.vim	/^	let b:xml_use_xhtml = g:xml_use_xhtml$/;"	v
+b:xml_use_xhtml	../bundle/xptemplates/ftplugin/html/xml.vim	/^	let b:xml_use_xhtml = 1$/;"	v
+NewFileXML	../bundle/xptemplates/ftplugin/html/xml.vim	/^function! NewFileXML( )$/;"	f
+Callback	../bundle/xptemplates/ftplugin/html/xml.vim	/^function! s:Callback( xml_tag, isHtml )$/;"	f
+SavePos	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:SavePos()	$/;"	f
+findOpenTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:findOpenTag(flag)	$/;"	f
+findCloseTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:findCloseTag(flag)	$/;"	f
+GetTagName	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:GetTagName(from)$/;"	f
+hasAtt	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:hasAtt()$/;"	f
+TagUnderCursor	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:TagUnderCursor()$/;"	f
+Match	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:Match(name)$/;"	f
+InComment	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:InComment()$/;"	f
+DelComment	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:DelComment()$/;"	f
+DelCommentSection	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:DelCommentSection()$/;"	f
+DelCData	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:DelCData()$/;"	f
+InCData	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:InCData()$/;"	f
+DelCDataSection	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:DelCDataSection()$/;"	f
+Matches	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:Matches()	$/;"	f
+MatchesVisual	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:MatchesVisual()	$/;"	f
+makeElement	../bundle/xptemplates/ftplugin/html/xml.vim	/^function! s:makeElement()$/;"	f
+CloseTagFun	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:CloseTagFun()	$/;"	f
+BlockTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:BlockTag(multi)$/;"	f
+BlockWith	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:BlockWith(open,close)$/;"	f
+vlistitem	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:vlistitem()$/;"	f
+Change	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:Change()$/;"	f
+Join	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:Join()$/;"	f
+ChangeWholeTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:ChangeWholeTag()$/;"	f
+Delete	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:Delete()$/;"	f
+DeleteSection	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:DeleteSection()$/;"	f
+FoldTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:FoldTag()$/;"	f
+FoldTagAll	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:FoldTagAll()$/;"	f
+StartTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:StartTag()$/;"	f
+EndTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:EndTag()$/;"	f
+BeforeTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:BeforeTag()$/;"	f
+CommentTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:CommentTag()$/;"	f
+AfterTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:AfterTag()$/;"	f
+ShiftRight	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:ShiftRight()$/;"	f
+ShiftLeft	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:ShiftLeft()$/;"	f
+FormatTag	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:FormatTag()$/;"	f
+FormatTagAll	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:FormatTagAll()$/;"	f
+IndentAll	../bundle/xptemplates/ftplugin/html/xml.vim	/^fun! s:IndentAll()$/;"	f
+XML_menu_autos	../bundle/xptemplates/ftplugin/html/xml.vim	/^augroup XML_menu_autos$/;"	a
+g:did_xml_menu	../bundle/xptemplates/ftplugin/html/xml.vim	/^	let g:did_xml_menu = 1$/;"	v
+Xml.BlockTag\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	vmenu <script> Xml.BlockTag\\ inline<Tab>v  <Esc>:call <SID>BlockTag(0)<CR>$/;"	m
+Xml.Insert\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	vmenu <script> Xml.Insert\\ listitem<Tab>l <Esc>:call <SID>vlistitem()<CR>$/;"	m
+Xml.Comment<Tab><	../bundle/xptemplates/ftplugin/html/xml.vim	/^	vmenu <script> Xml.Comment<Tab>< <Esc>:call <SID>BlockWith('<!--','-->')<Cr>$/;"	m
+Xml.Comment\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	vmenu <script> Xml.Comment\\ With\\ CData<Tab>c <Esc>:call <SID>BlockWith('<![CDATA[',']]>')<Cr>$/;"	m
+Xml.Comment\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Comment\\ Tag<Tab>= <Esc>:call <SID>CommentTag()<Cr>$/;"	m
+Xml.Comment\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Comment\\ Tag<Tab>= <Esc>:call <SID>CommentTag()<Cr>$/;"	m
+Xml.Change<Tab>c	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Change<Tab>c  :call <SID>Change()<CR>$/;"	m
+Xml.Change<Tab>c	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Change<Tab>c  <C-C>:call <SID>Change()<CR>$/;"	m
+Xml.Change\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Change\\ Whole\\ Tag<Tab>C  :call <SID>ChangeWholeTag()<CR>$/;"	m
+Xml.Change\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Change\\ Whole\\ Tag<Tab>C  <C-C>:call <SID>ChangeWholeTag()<CR>$/;"	m
+Xml.Delete\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Delete\\ Comment<Tab>]  :call <SID>DelComment()<CR>$/;"	m
+Xml.Delete\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Delete\\ Comment<Tab>]  <C-C>:call <SID>DelComment()<CR>$/;"	m
+Xml.Delete\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Delete\\ Comment\\ Section<Tab>}  :call <SID>DelCommentSection()<CR>$/;"	m
+Xml.Delete\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Delete\\ Comment\\ Section<Tab>}  <C-C>:call <SID>DelCommentSection()<CR>$/;"	m
+Xml.Delete\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Delete\\ CData<Tab>[  :call <SID>DelCData()<CR>$/;"	m
+Xml.Delete\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Delete\\ CData<Tab>[  <C-C>:call <SID>DelCData()<CR>$/;"	m
+Xml.Delete\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Delete\\ CData\\ Section<Tab>[  :call <SID>DelCDataSection()<CR>$/;"	m
+Xml.Delete\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Delete\\ CData\\ Section<Tab>[  <C-C>:call <SID>DelCDataSection()<CR>$/;"	m
+Xml.Delete\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Delete\\ Tag<Tab>d  :call <SID>Delete()<CR>$/;"	m
+Xml.Delete\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Delete\\ Tag<Tab>d  <C-C>:call <SID>Delete()<CR>$/;"	m
+Xml.Delete\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Delete\\ Section<Tab>D  :call <SID>DeleteSection()<CR>$/;"	m
+Xml.Delete\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Delete\\ Section<Tab>D  <C-C>:call <SID>DeleteSection()<CR>$/;"	m
+Xml.End\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.End\\ Tag<Tab>e  :call <SID>EndTag()<CR>$/;"	m
+Xml.End\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.End\\ Tag<Tab>e  <C-C>:call <SID>EndTag()<CR>$/;"	m
+Xml.Fold\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Fold\\ Comment  :?<!--?,\/-->\/fo<CR>$/;"	m
+Xml.Fold\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Fold\\ CData  :?<!\\[CDATA\\[?,\/\\]\\]>\/fo<CR>$/;"	m
+Xml.Fold\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Fold\\ Processing\\ instruc  :?<\\?[a-zA-Z]*?,\/?>\/fo<CR>$/;"	m
+Xml.Fold\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Fold\\ Tag<Tab>f  :call <SID>FoldTag()<CR>$/;"	m
+Xml.Fold\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Fold\\ All\\ Tags<Tab>F  :call <SID>FoldTagAll()<CR>$/;"	m
+Xml.Format\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Format\\ Tags<Tab>g  :call <SID>FormatTag()<CR>$/;"	m
+Xml.Format\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Format\\ All\\ Tags<Tab>G  :call <SID>FormatTagAll()<CR>$/;"	m
+Xml.Join<Tab>j	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Join<Tab>j  :call <SID>Join()<CR>$/;"	m
+Xml.Join<Tab>j	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Join<Tab>j  <C-C>:call <SID>Join()<CR>$/;"	m
+Xml.Open\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Open\\ After\\ Tag<Tab>O  :call <SID>AfterTag()<CR>$/;"	m
+Xml.Open\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Open\\ After\\ Tag<Tab>O  <C-C>:call <SID>AfterTag()<CR>$/;"	m
+Xml.open\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.open\\ Before\\ Tag<Tab>o  :call <SID>BeforeTag()<CR>$/;"	m
+Xml.open\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.open\\ Before\\ Tag<Tab>o  <C-C>:call <SID>BeforeTag()<CR>$/;"	m
+Xml.Match<Tab>5	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Match<Tab>5  :call <SID>Matches()<CR>$/;"	m
+Xml.Match<Tab>5	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Match<Tab>5  <C-C>:call <SID>Matches()<CR><C-\\><C-G>$/;"	m
+Xml.Shift\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Shift\\ Left<Tab><  :call <SID>ShiftLeft()<CR>$/;"	m
+Xml.Shift\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Shift\\ Left<Tab><  <C-C>:call <SID>ShiftLeft()<CR><C-\\><C-G>$/;"	m
+Xml.Shift\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Shift\\ Right<Tab>>  :call <SID>ShiftRight()<CR>$/;"	m
+Xml.Shift\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Shift\\ Right<Tab>>  <C-C>:call <SID>ShiftRight()<CR><C-\\><C-G>$/;"	m
+Xml.Start\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	nmenu <script> Xml.Start\\ Tag<Tab>s  :call <SID>StartTag()<CR>$/;"	m
+Xml.Start\	../bundle/xptemplates/ftplugin/html/xml.vim	/^	imenu <script> Xml.Start\\ Tag<Tab>s  <C-C>:call <SID>StartTag()<CR><C-\\><C-G>$/;"	m
+XmlInstallDocumentation	../bundle/xptemplates/ftplugin/html/xml.vim	/^function! s:XmlInstallDocumentation(full_name, revision)$/;"	f
+s:revision	../bundle/xptemplates/ftplugin/html/xml.vim	/^let s:revision=$/;"	v
+<LocalLeader>5	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>5 :call <SID>Matches()<Cr>$/;"	m
+<LocalLeader>5	../bundle/xptemplates/ftplugin/html/xml.vim	/^vnoremap <silent> <buffer> <LocalLeader>5 <Esc>:call <SID>MatchesVisual()<Cr>$/;"	m
+<LocalLeader>%	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>% :call <SID>Matches()<Cr>$/;"	m
+<LocalLeader>%	../bundle/xptemplates/ftplugin/html/xml.vim	/^vnoremap <silent> <buffer> <LocalLeader>% <Esc>:call <SID>MatchesVisual()<Cr>$/;"	m
+<LocalLeader>c	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>c :call <SID>Change()<Cr>$/;"	m
+<LocalLeader>C	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>C :call <SID>ChangeWholeTag()<Cr>$/;"	m
+<LocalLeader>d	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>d :call <SID>Delete()<Cr>$/;"	m
+<LocalLeader>D	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>D :call <SID>DeleteSection()<Cr>$/;"	m
+<LocalLeader>e	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>e :call <SID>EndTag()<Cr>$/;"	m
+<LocalLeader>]	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>] :call <SID>DelComment()<Cr>$/;"	m
+<LocalLeader>}	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>} :call <SID>DelCommentSection()<Cr>$/;"	m
+<LocalLeader>f	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>f :call <SID>FoldTag()<Cr>$/;"	m
+<LocalLeader>F	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>F :call <SID>FoldTagAll()<Cr>$/;"	m
+<LocalLeader>g	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>g :call <SID>FormatTag()<Cr>$/;"	m
+<LocalLeader>G	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>G :call <SID>FormatTagAll()<Cr>$/;"	m
+<LocalLeader>I	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>I :call <SID>IndentAll()<Cr>$/;"	m
+<LocalLeader>j	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>j :call <SID>Join()<Cr>$/;"	m
+<LocalLeader>O	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>O :call <SID>BeforeTag()<Cr>$/;"	m
+<LocalLeader>=	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>= :call <SID>CommentTag()<Cr>$/;"	m
+<LocalLeader>o	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>o :call <SID>AfterTag()<Cr>$/;"	m
+<LocalLeader>s	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>s :call <SID>StartTag()<Cr>$/;"	m
+<LocalLeader>[	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>[ :call <SID>DelCData()<Cr>$/;"	m
+<LocalLeader>{	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>{ :call <SID>DelCDataSection()<Cr>$/;"	m
+<LocalLeader>>	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>> :call <SID>ShiftRight()<Cr>$/;"	m
+<LocalLeader><	../bundle/xptemplates/ftplugin/html/xml.vim	/^nnoremap <silent> <buffer> <LocalLeader>< :call <SID>ShiftLeft()<Cr>$/;"	m
+<LocalLeader>l	../bundle/xptemplates/ftplugin/html/xml.vim	/^vnoremap <silent> <buffer> <LocalLeader>l <Esc>:call <SID>vlistitem()<Cr>$/;"	m
+<LocalLeader>v	../bundle/xptemplates/ftplugin/html/xml.vim	/^vnoremap <silent> <buffer> <LocalLeader>v <Esc>:call <SID>BlockTag(0)<Cr>$/;"	m
+<LocalLeader>V	../bundle/xptemplates/ftplugin/html/xml.vim	/^vnoremap <silent> <buffer> <LocalLeader>V <Esc>:call <SID>BlockTag(1)<Cr>$/;"	m
+<LocalLeader>c	../bundle/xptemplates/ftplugin/html/xml.vim	/^vnoremap <silent> <buffer> <LocalLeader>c <Esc>:call <SID>BlockWith('<![CDATA[',']]>')<Cr>$/;"	m
+<LocalLeader><	../bundle/xptemplates/ftplugin/html/xml.vim	/^vnoremap <silent> <buffer> <LocalLeader>< <Esc>:call <SID>BlockWith('<!--','-->')<Cr>$/;"	m
+[[	../bundle/x

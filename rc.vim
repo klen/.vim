@@ -45,21 +45,21 @@
     set smartindent             " включаем 'умную' автоматическую расстановку отступов
     set expandtab               " tab with spaces
     set smarttab
-    set shiftwidth=4            " Размер сдвига при нажатии на клавиши << и >>
-    set softtabstop=4           " Табуляция 4 пробела
+    set shiftwidth=4            " Number of spaces to use for each step of indent
+    set softtabstop=4           " Tab like 4 spaces
     set shiftround              " удалять лишние пробелы при отступе
 
     " Backup and swap files
-    set history=400                     " history length
-    set viminfo+=h                      " save history
-    set sessionoptions-=blank           " dont save blank vindow
-    set sessionoptions-=options         " dont save options
+    set history=400             " history length
+    set viminfo+=h              " save history
+    set ssop-=blank             " dont save blank vindow
+    set ssop-=options           " dont save options
 
     " Search options
-    set hlsearch                " Подсветка результатов
-    set ignorecase              " Игнорировать регистр букв при поиске
-    set incsearch               " При поиске перескакивать на найденный текст в процессе набора строки
-    set smartcase               " Игнорировать предыдущую опцию если в строке поиска есть буквы разного регистра
+    set hlsearch                " Highlight search results
+    set ignorecase              " Ignore case in search patterns
+    set smartcase               " Override the 'ignorecase' option if the search pattern contains upper case characters
+    set incsearch               " While typing a search command, show where the pattern
 
     " Localization
     set langmenu=none            " Always use english menu
@@ -148,7 +148,6 @@
     let Tlist_WinWidth                = 30  " Taglist win width
     let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name
     let tlist_xslt_settings           = 'xslt;m:match;n:name;a:apply;c:call'
-    let tlist_css_settings            = 'css;r:rules'
 
     " XPTemplates
     let g:xptemplate_key = '<Tab>'
