@@ -14,8 +14,11 @@
     setlocal textwidth=79
     setlocal formatoptions-=t
 
-    "Trim trailing whitespace
-    au FileType python autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+    " Trim trailing whitespace
+    au BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+    " Match long line
+    " au BufWinEnter *.py let w:m1=matchadd('Search', '\%<111v.\%>107v', -1)
+    " au BufWinEnter *.py let w:m2=matchadd('ErrorMsg', '\%>110v.\+', -1)
 
     " Улучшенная подсветка синтаксиса для питона
     let python_highlight_all = 1	

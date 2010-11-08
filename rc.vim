@@ -9,9 +9,13 @@
         set nocompatible  " to use many extensions of Vim.
 
         set backupdir=$HOME/.cache/vim/backup      " where to put backup file 
+        set backup                                 " make backup file and leave it around 
+        set backupskip+=svn-commit.tmp,svn-commit.[0-9]*.tmp
+
         set directory=$HOME/.cache/vim/swap        " where to put swap file 
         let g:SESSION_DIR   = $HOME.'/.cache/vim/sessions'
 
+        " Create system vim dirs
         if finddir(&backupdir) == ''
             silent call mkdir(&backupdir, "p")
         endif
@@ -23,9 +27,6 @@
         if finddir(g:SESSION_DIR) == ''
             silent call mkdir(g:SESSION_DIR, "p")
         endif
-
-        set backup                             " make backup file and leave it around 
-        set backupskip+=svn-commit.tmp,svn-commit.[0-9]*.tmp
 
         " Pathogen load
         filetype off
@@ -93,7 +94,6 @@
     set foldnestmax=3           "deepest fold is 3 levels
     set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo    " This commands open folds
     set listchars=eol:$,tab:>-,trail:·,nbsp:~,extends:>,precedes:<
-    set wrap                    " перенос строк
     set linebreak               " перенос строк по словам, а не по буквам
     set showmatch               " подсвечивать скобки
     set winminheight=0          " минимальная высота окна
@@ -131,6 +131,8 @@
     " Перемещать курсор на следующую строку при нажатии на клавиши вправо-влево и пр.
     set whichwrap=b,s,<,>,[,],l,h
 
+    set modelines=0
+
     " set custom map leader to ','
     let mapleader = ","
 
@@ -145,7 +147,7 @@
     let Tlist_Show_One_File           = 1   " Displaying tags for only one file
     let Tlist_Use_Right_Window        = 1   " Split to rigt side of the screen
     let Tlist_Use_SingleClick         = 1   " Single mouse click open tag
-    let Tlist_WinWidth                = 30  " Taglist win width
+    let Tlist_WinWidth                = 20  " Taglist win width
     let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name
     let tlist_xslt_settings           = 'xslt;m:match;n:name;a:apply;c:call'
 
@@ -155,6 +157,9 @@
 
     " NERDCommenter
     let NERDSpaceDelims = 1
+
+    " NERDTree
+    let NERDTreeWinSize = 20
 
     " Pylint compiler
     let g:pylint_show_rate = 0
@@ -307,6 +312,8 @@
 
         augroup END
 
+        au FocusLost * :w   " save current open file when wimdow focus is lost
+
     endif
 
 " ------------------------------
@@ -323,9 +330,6 @@
     imap <M-j> <Down>
     imap <M-k> <Up>
 
-    " Page listing
-    nnoremap <Space> <C-d>
-
     " Set paste mode for paste from terminal
     nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
 
@@ -333,7 +337,7 @@
     map     <S-O>       i<CR><ESC>
 
     " Drop hightlight search result
-    map    <silent> <leader>n  :silent :nohls<CR> 
+    nnoremap <leader><space> :nohls<CR>
 
     " Omni and dict completition on space
     inoremap <Nul> <C-R>=AddWrapper()<CR>
