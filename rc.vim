@@ -114,8 +114,8 @@
 
     " Enable mouse
     if &term =~ "xterm"
-        set t_Co=256                " set 256 colors
-        set background=dark         " set background color to dark
+        set t_Co=256            " set 256 colors
+        set background=dark     " set background color to dark
         colorscheme wombat256
         set ttyfast
 
@@ -147,7 +147,7 @@
     let Tlist_Show_One_File           = 1   " Displaying tags for only one file
     let Tlist_Use_Right_Window        = 1   " Split to rigt side of the screen
     let Tlist_Use_SingleClick         = 1   " Single mouse click open tag
-    let Tlist_WinWidth                = 20  " Taglist win width
+    let Tlist_WinWidth                = 30  " Taglist win width
     let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name
     let tlist_xslt_settings           = 'xslt;m:match;n:name;a:apply;c:call'
 
@@ -159,7 +159,7 @@
     let NERDSpaceDelims = 1
 
     " NERDTree
-    let NERDTreeWinSize = 20
+    let NERDTreeWinSize = 30
 
     " Pylint compiler
     let g:pylint_show_rate = 0
@@ -171,17 +171,17 @@
 " Functions
 
     " Подсветка текущей раскладки
-    fun! KeyMapHighlight()
+    fun! rc#KeyMapHighlight()
         if &iminsert == 0
             hi StatusLine ctermfg=White ctermbg=Blue
         else
             hi StatusLine ctermbg=Red
         endif
     endfun
-    call KeyMapHighlight()
+    call rc#KeyMapHighlight()
 
     " Биндинг клавиш"
-    fun! Map_ex_cmd(key, cmd)
+    fun! rc#Map_ex_cmd(key, cmd)
       execute "nmap ".a:key." " . ":".a:cmd."<CR>"
       execute "cmap ".a:key." " . "<C-C>:".a:cmd."<CR>"
       execute "imap ".a:key." " . "<C-O>:".a:cmd."<CR>"
@@ -189,12 +189,12 @@
     endfun
 
     " Биндинг переключалки опций
-    fun! Toggle_option(key, opt)
-      call Map_ex_cmd(a:key, "set ".a:opt."! ".a:opt."?")
+    fun! rc#Toggle_option(key, opt)
+      call rc#Map_ex_cmd(a:key, "set ".a:opt."! ".a:opt."?")
     endfun
 
     " передвигаемся по вкладкам
-    fun! TabJump(direction)
+    fun! rc#TabJump(direction)
         let l:tablen=tabpagenr('$')
         let l:tabcur=tabpagenr()
         if a:direction=='left'
@@ -209,7 +209,7 @@
     endfun
 
     " Sessions
-    fun! SessionRead(name)
+    fun! rc#SessionRead(name)
         let s:name = g:SESSION_DIR.'/'.a:name.'.session'
         if getfsize(s:name) >= 0
             echo "Reading " s:name
@@ -220,22 +220,22 @@
         endif
     endfun
 
-    fun! SessionInput(type)
+    fun! rc#SessionInput(type)
         let s:name = input(a:type.' session name? ')
         if a:type == 'Save'
-            call SessionSave(s:name)
+            call rc#SessionSave(s:name)
         else
-            call SessionRead(s:name)
+            call rc#SessionRead(s:name)
         endif
     endfun
 
-    fun! SessionSave(name)
+    fun! rc#SessionSave(name)
         exe "mks! " g:SESSION_DIR.'/'.a:name.'.session'
         echo "Session" a:name "saved"
     endfun
 
     " Omni and dict completition
-    fun! AddWrapper()
+    fun! rc#AddWrapper()
         if exists('&omnifunc') && &omnifunc != ''
             return "\<C-X>\<C-o>\<C-p>"
         else
@@ -244,7 +244,7 @@
     endfun
 
     " Recursive vimgrep
-    fun! RGrep()
+    fun! rc#RGrep()
         let pattern = input("Search for pattern: ", expand("<cword>"))
         if pattern == ""
             return
@@ -275,7 +275,7 @@
         au!
 
         " Подсветка раскладки
-        au WinEnter * :call KeyMapHighlight()
+        au WinEnter * :call rc#KeyMapHighlight()
 
         " Auto reload vim settins
         au! bufwritepost rc.vim source ~/.vimrc
@@ -297,7 +297,7 @@
 
         " Autosave last session
         if has('mksession') 
-            au VimLeavePre * :call SessionSave('last')
+            au VimLeavePre * :call rc#SessionSave('last')
         endif
 
         " When editing a file, always jump to the last known cursor position.
@@ -312,7 +312,12 @@
 
         augroup END
 
-        au FocusLost * :w   " save current open file when wimdow focus is lost
+        au FocusLost * call rc#SaveBuffer()   " save current open file when wimdow focus is lost
+        fun! rc#SaveBuffer() "{{{
+            if filewritable(expand( '%' ))
+                exe "w"
+            endif
+        endfunction "}}}
 
     endif
 
@@ -340,8 +345,8 @@
     nnoremap <leader><space> :nohls<CR>
 
     " Omni and dict completition on space
-    inoremap <Nul> <C-R>=AddWrapper()<CR>
-    inoremap <C-Space> <C-R>=AddWrapper()<CR>
+    inoremap <Nul> <C-R>=rc#AddWrapper()<CR>
+    inoremap <C-Space> <C-R>=rc#AddWrapper()<CR>
 
     " Fast scrool
     nnoremap <C-e> 3<C-e>
@@ -387,20 +392,20 @@
     nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
 
     " Search the current file for the word under the cursor and display matches
-    nmap <silent> ,gw :call RGrep()<CR>
+    nmap <silent> ,gw :call rc#RGrep()<CR>
 
     " Search the current file for the WORD under the cursor and display matches
     " nmap <silent> ,gw :vimgrep /<C-r><C-a>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:set nohls<CR>
 
     " Work with tabs
     " Open new tab
-    call Map_ex_cmd("<C-W>t", ":tabnew")
+    call rc#Map_ex_cmd("<C-W>t", ":tabnew")
 
     " previos tab
-    nmap Z :call TabJump('left')<cr>
+    nmap Z :call rc#TabJump('left')<cr>
 
     " next tab
-    nmap X :call TabJump('right')<cr>
+    nmap X :call rc#TabJump('right')<cr>
 
     " Tab navigation
     map <A-1> 1gt
@@ -414,31 +419,31 @@
     map <A-9> 9gt
 
     " первая вкладка
-    call Map_ex_cmd("<A-UP>", ":tabfirst")
+    call rc#Map_ex_cmd("<A-UP>", ":tabfirst")
     " последняя вкладка
-    call Map_ex_cmd("<A-DOWN>", ":tablast")
+    call rc#Map_ex_cmd("<A-DOWN>", ":tablast")
     " переместить вкладку в начало
     nmap Q :tabmove 0<cr>
     " переместить вкладку в конец
-    call Map_ex_cmd("<C-DOWN>", ":tabmove")
+    call rc#Map_ex_cmd("<C-DOWN>", ":tabmove")
 
     " Переключение раскладок будет производиться по <C-F>
     cmap <silent> <C-F> <C-^>
-    imap <silent> <C-F> <C-^>X<Esc>:call KeyMapHighlight()<CR>a<C-H>
-    nmap <silent> <C-F> a<C-^><Esc>:call KeyMapHighlight()<CR>
-    vmap <silent> <C-F> <Esc>a<C-^><Esc>:call KeyMapHighlight()<CR>gv
+    imap <silent> <C-F> <C-^>X<Esc>:call rc#KeyMapHighlight()<CR>a<C-H>
+    nmap <silent> <C-F> a<C-^><Esc>:call rc#KeyMapHighlight()<CR>
+    vmap <silent> <C-F> <Esc>a<C-^><Esc>:call rc#KeyMapHighlight()<CR>gv
  
     " Запуск/сокрытие плагина NERDTree
-    call Map_ex_cmd("<F1>", "NERDTree")
+    call rc#Map_ex_cmd("<F1>", "NERDTree")
 
     " Toggle cwindow
-    call Map_ex_cmd("<F2>", "cw")
+    call rc#Map_ex_cmd("<F2>", "cw")
     
     " Запуск/сокрытие плагина Tlist
-    call Map_ex_cmd("<F3>", "TlistToggle")
+    call rc#Map_ex_cmd("<F3>", "TlistToggle")
 
-    call Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
-    call Toggle_option("<F7>", "wrap")      " Переключение переноса слов
+    call rc#Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
+    call rc#Toggle_option("<F7>", "wrap")      " Переключение переноса слов
 
     " Меню работы с (VCS plugin
     map <F9> :emenu VCS.<TAB>
@@ -451,21 +456,21 @@
     menu VCS.Update :VCSUpdate<CR>
 
     " Закрытие файла
-    call Map_ex_cmd("<F10>", "qall")
-    call Map_ex_cmd("<S-F10>", "qall!")
+    call rc#Map_ex_cmd("<F10>", "qall")
+    call rc#Map_ex_cmd("<S-F10>", "qall!")
 
     " Список регистров 
-    call Map_ex_cmd("<F11>", "reg")
+    call rc#Map_ex_cmd("<F11>", "reg")
 
     " Список меток
-    call Map_ex_cmd("<F12>", "marks")
+    call rc#Map_ex_cmd("<F12>", "marks")
 
     " Session UI
-    nmap <Leader>ss :call SessionInput('Save')<CR>
-    nmap <Leader>sr :call SessionInput('Read')<CR>
-    nmap <Leader>sl :call SessionRead('last')<CR>
-    com! Ssave :call SessionSave(<args>)
-    com! Sread :call SessionRead(<args>)
+    nmap <Leader>ss :call rc#SessionInput('Save')<CR>
+    nmap <Leader>sr :call rc#SessionInput('Read')<CR>
+    nmap <Leader>sl :call rc#SessionRead('last')<CR>
+    com! Ssave :call rc#SessionSave(<args>)
+    com! Sread :call rc#SessionRead(<args>)
 
     " Some gui settings
     if has("gui_running")
