@@ -3,8 +3,6 @@ if exists( "g:__HTMLDJANGO_FTDETECT_VIM__" )
 endif
 let g:__HTMLDJANGO_FTDETECT_VIM__ = 1
 
-
-
 if &filetype !~ 'htmldjango'
     finish
 endif
@@ -14,12 +12,6 @@ endif
 
 let s:skipPattern = 'synIDattr(synID(line("."), col("."), 0), "name") =~? "\\vstring|comment"'
 let s:pattern = {
-            \   'ruby'    : {
-            \       'start' : '\V\c<%',
-            \       'mid'   : '',
-            \       'end'   : '\V\c%>',
-            \       'skip'  : s:skipPattern,
-            \   },
             \   'javascript'    : {
             \       'start' : '\V\c<script\_[^>]\*>',
             \       'mid'   : '',
@@ -34,7 +26,7 @@ let s:pattern = {
             \   },
             \}
 
-let s:topFT = 'html'
+let s:topFT = 'htmldjango'
 
 fun! XPT_htmldjangoFiletypeDetect() "{{{
     let pos = [ line( "." ), col( "." ) ]
@@ -42,11 +34,9 @@ fun! XPT_htmldjangoFiletypeDetect() "{{{
     let synName = g:xptutil.XPTgetCurrentOrPreviousSynName()
 
     if synName == ''
-
         return s:topFT
 
     else
-
         for [ name, ftPattern ] in items( s:pattern )
             let pos = searchpairpos( ftPattern.start, ftPattern.mid, ftPattern.end, 'nbW', ftPattern.skip )
             if pos != [0, 0]
@@ -61,7 +51,6 @@ fun! XPT_htmldjangoFiletypeDetect() "{{{
         endif
 
         return s:topFT
-
     endif
 
 endfunction "}}}
