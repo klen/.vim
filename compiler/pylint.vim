@@ -80,7 +80,7 @@ endif
 " it does not list the info messages and it lists errors first
 " pylint -i y hola.py|grep -e '^[WECY]'|sed -e 's/^W/2 W /' -e 's/^E/1 E /' -e
 " 's/^C/3 C /' |sort -k1,3
-CompilerSet makeprg=(echo\ '[%]';pylint\ -i\ y\ %\\\|grep\ -e\ \'^[WECY]\'\\\|sed\ -e\ \'s/^E/1\ E\ /\'\ -e\ \'s/^W/2\ W\ /\'\ -e\ \'s/^C/3\ C\ /\'\ \\\|sort\ -k1,3)
+CompilerSet makeprg=(echo\ '[%]';python\ /usr/bin/pylint\ -i\ y\ %\\\|grep\ -e\ \'^[WECY]\'\\\|sed\ -e\ \'s/^E/1\ E\ /\'\ -e\ \'s/^W/2\ W\ /\'\ -e\ \'s/^C/3\ C\ /\'\ \\\|sort\ -k1,3)
  
 " We could omit end of file-entry, there is only one file
 " %+I... - include code rating information

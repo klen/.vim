@@ -10,11 +10,11 @@ XPTinclude
 
 XPT _simpletag hidden " {% $_xSnipName %}
 {% `$_xSnipName^ %}
-..XP}
+..XPT
 
 XPT _tag hidden " {% $_xSnipName params %}
 {% `$_xSnipName^ `params^ %}
-..XP}
+..XPT
 
 XPT _simpleblock hidden " {% $_xSnipName %}..{% end$_xSnipName %}
 {% `$_xSnipName^ %}`content^{% end`$_xSnipName^ %}
@@ -34,8 +34,22 @@ XPT _if " $_xSnipName .. else .. end$_xSnipName
 {% end`$_xSnipName^ %}
 ..XPT
 
+XPT block " block
+{% block `params^ %}
+    `content^
+{% endblock `params^ %}
+..XPT
+
+XPT var " {{ var }}
+{{ `var^ }}
+..XPT
+
+XPT tag " {% tagname params %} .. {% endtagname %}
+{% `tagname^ `params^ %}
+    `content^
+{% end`tagname^ %}
+
 XPT autoescape alias=_block
-XPT block alias=_block
 XPT comment alias=_simpleblock
 XPT csrf_token alias=_simpletag
 XPT cycle alias=_tag
@@ -53,3 +67,8 @@ XPT ifnotequal alias=_if
 XPT include alias=_tag
 XPT load alias=_tag
 XPT now alias=_tag
+XPT regroup alias=_tag
+XPT url alias=_tag
+XPT spaceless alias=_simpleblock
+XPT ssi alias=_tag
+XPT with alias=_block
