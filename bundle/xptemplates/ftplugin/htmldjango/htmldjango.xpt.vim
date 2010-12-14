@@ -48,6 +48,11 @@ XPT tag " {% tagname params %} .. {% endtagname %}
 {% `tagname^ `params^ %}
     `content^
 {% end`tagname^ %}
+..XPT
+
+XPT stag " {% tagname params %}
+{% `tagname^ `params^ %}
+..XPT
 
 XPT autoescape alias=_block
 XPT comment alias=_simpleblock
