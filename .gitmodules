@@ -13,3 +13,6 @@
 [submodule "bundle/vcscommand.git"]
 	path = bundle/vcscommand.git
 	url = https://github.com/vim-scripts/vcscommand.vim.git
+[submodule "bundle/scss-syntax.vim.git"]
+	path = bundle/scss-syntax.vim.git
+	url = git://github.com/cakebaker/scss-syntax.vim.git
