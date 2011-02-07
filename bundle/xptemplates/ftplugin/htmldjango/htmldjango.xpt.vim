@@ -16,12 +16,22 @@ XPT _tag hidden " {% $_xSnipName params %}
 {% `$_xSnipName^ `params^ %}
 ..XPT
 
+XPT _qtag hidden " {% $_xSnipName "params" %}
+{% `$_xSnipName^ "`params^" %}
+..XPT
+
 XPT _simpleblock hidden " {% $_xSnipName %}..{% end$_xSnipName %}
 {% `$_xSnipName^ %}`content^{% end`$_xSnipName^ %}
 ..XPT
 
 XPT _block hidden " {% $_xSnipName  params %}..{% end$_xSnipName %} 
 {% `$_xSnipName^ `params^ %}
+    `content^
+{% end`$_xSnipName^ %}
+..XPT
+
+XPT _qblock hidden " {% $_xSnipName "params" %}..{% end$_xSnipName %} 
+{% `$_xSnipName^ "`params^" %}
     `content^
 {% end`$_xSnipName^ %}
 ..XPT
@@ -50,6 +60,12 @@ XPT tag " {% tagname params %} .. {% endtagname %}
 {% end`tagname^ %}
 ..XPT
 
+XPT qtag " {% tagname "params" %} .. {% endtagname %}
+{% `tagname^ "`params^" %}
+    `content^
+{% end`tagname^ %}
+..XPT
+
 XPT stag " {% tagname params %}
 {% `tagname^ `params^ %}
 ..XPT
@@ -59,7 +75,7 @@ XPT comment alias=_simpleblock
 XPT csrf_token alias=_simpletag
 XPT cycle alias=_tag
 XPT debug alias=_simpletag
-XPT extends alias=_tag
+XPT extends alias=_qtag
 XPT filter alias=_block
 XPT firstof alias=_tag
 XPT for alias=_block
@@ -69,7 +85,7 @@ XPT if alias=_if
 XPT ifchanged alias=_if
 XPT ifequal alias=_if
 XPT ifnotequal alias=_if
-XPT include alias=_tag
+XPT include alias=_qtag
 XPT load alias=_tag
 XPT now alias=_tag
 XPT regroup alias=_tag

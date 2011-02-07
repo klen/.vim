@@ -9,8 +9,7 @@
     set cindent
 
     " Поиск по документаци
-    " setlocal keywordprg=pydoc
-
+    setlocal keywordprg=pydoc
     setlocal textwidth=79
     setlocal formatoptions-=t
 
@@ -30,4 +29,27 @@
 
     " PyLint
     compiler pylint
+
+python << EOF
+import vim
+
+def breakpoint():
+    n_line = cur_n_line = int( vim.eval( 'line(".")'))
+    indent = ""
+
+    while cur_n_line and indent == "":
+        line = vim.current.buffer[cur_n_line-1]
+        rest = line.lstrip()
+        if rest:
+            indent = line[:-len(rest)]
+        cur_n_line -= 1
+
+    if vim.current.line.lstrip().startswith( 'import ipdb' ):
+        vim.command( 'normal dd')
+    else:
+        vim.current.buffer.append(
+            "%simport ipdb; ipdb.set_trace() ### XXX Breakpoint ###" % indent, n_line - 1)
+            
+vim.command( 'map <f8> :py breakpoint()<cr>')
+EOF
 

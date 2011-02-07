@@ -10,9 +10,15 @@
 [submodule "bundle/surround.git"]
 	path = bundle/surround.git
 	url = https://github.com/tpope/vim-surround.git
-[submodule "bundle/vcscommand.git"]
-	path = bundle/vcscommand.git
-	url = https://github.com/vim-scripts/vcscommand.vim.git
 [submodule "bundle/scss-syntax.vim.git"]
 	path = bundle/scss-syntax.vim.git
 	url = git://github.com/cakebaker/scss-syntax.vim.git
+[submodule "bundle/CSApprox.git"]
+	path = bundle/CSApprox.git
+	url = https://github.com/vim-scripts/CSApprox.git
+[submodule "bundle/vim-pathogen.git"]
+	path = bundle/vim-pathogen.git
+	url = https://github.com/tpope/vim-pathogen.git
+[submodule "bundle/vim-fugitive.git"]
+	path = bundle/vim-fugitive.git
+	url = https://github.com/tpope/vim-fugitive.git

@@ -170,7 +170,7 @@
 " ------------------------------
 " Functions
 
-    " Подсветка текущей раскладки
+    " Keymap highlighter
     fun! rc#KeyMapHighlight()
         if &iminsert == 0
             hi StatusLine ctermfg=White ctermbg=Blue
@@ -180,7 +180,7 @@
     endfun
     call rc#KeyMapHighlight()
 
-    " Биндинг клавиш"
+    " Key bind helper
     fun! rc#Map_ex_cmd(key, cmd)
       execute "nmap ".a:key." " . ":".a:cmd."<CR>"
       execute "cmap ".a:key." " . "<C-C>:".a:cmd."<CR>"
@@ -188,24 +188,9 @@
       execute "vmap ".a:key." " . "<Esc>:".a:cmd."<CR>gv"
     endfun
 
-    " Биндинг переключалки опций
+    " Option switcher helper
     fun! rc#Toggle_option(key, opt)
       call rc#Map_ex_cmd(a:key, "set ".a:opt."! ".a:opt."?")
-    endfun
-
-    " передвигаемся по вкладкам
-    fun! rc#TabJump(direction)
-        let l:tablen=tabpagenr('$')
-        let l:tabcur=tabpagenr()
-        if a:direction=='left'
-            if l:tabcur>1
-                execute 'tabprevious'
-            endif
-        else
-            if l:tabcur!=l:tablen
-                execute 'tabnext'
-            endif
-        endif
     endfun
 
     " Sessions
@@ -290,6 +275,7 @@
         1
     endfunction
 
+
 " ------------------------------
 " Autocommands
 
@@ -300,7 +286,7 @@
         augroup vimrcEx
         au!
 
-        " Подсветка раскладки
+        " Keymap highlight
         au WinEnter * :call rc#KeyMapHighlight()
 
         " Auto reload vim settins
@@ -314,12 +300,6 @@
         
         " New file templates
         au BufNewFile * silent! 0r $HOME/.vim/templates/%:e.tpl
-
-        "Omni complete settings
-        " au FileType python set omnifunc=pythoncomplete#Complete
-        au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-        au FileType html set omnifunc=htmlcomplete#CompleteTags
-        au FileType css set omnifunc=csscomplete#CompleteCSS
 
         " Autosave last session
         if has('mksession') 
@@ -336,14 +316,14 @@
             \   exe "normal! g`\"" |
             \ endif
 
-        augroup END
-
         au FocusLost * call rc#SaveBuffer()   " save current open file when wimdow focus is lost
         fun! rc#SaveBuffer() "{{{
             if filewritable(expand( '%' ))
                 exe "w"
             endif
         endfunction "}}}
+
+        augroup END
 
     endif
 
@@ -354,12 +334,6 @@
     " Nice scrolling if line wrap
     noremap j gj
     noremap k gk
-
-    " Text navigation in insert mode
-    imap <M-l> <Right>
-    imap <M-h> <Left>
-    imap <M-j> <Down>
-    imap <M-k> <Up>
 
     " Set paste mode for paste from terminal
     nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
@@ -391,6 +365,8 @@
 
     " Close cwindow
     noremap <silent> ,ll :ccl<CR>
+
+    " Display next error"
     noremap <silent> ,nn :cn<CR>
 
     " Window commands
@@ -426,12 +402,6 @@
     " Work with tabs
     " Open new tab
     call rc#Map_ex_cmd("<C-W>t", ":tabnew")
-
-    " previos tab
-    nmap Z :call rc#TabJump('left')<cr>
-
-    " next tab
-    nmap X :call rc#TabJump('right')<cr>
 
     " Tab navigation
     map <A-1> 1gt
@@ -471,15 +441,17 @@
     call rc#Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
     call rc#Toggle_option("<F7>", "wrap")      " Переключение переноса слов
 
-    " Меню работы с (VCS plugin
-    map <F9> :emenu VCS.<TAB>
-    menu VCS.VimDiff :VCSVimDiff<CR>
-    menu VCS.Commit :VCSCommit<CR>
-    menu VCS.Revert :VCSRevert<CR>
-    menu VCS.Add :VCSAdd<CR>
-    menu VCS.Delete :VCSDelete<CR>
-    menu VCS.Log :VCSLog<CR>
-    menu VCS.Update :VCSUpdate<CR>
+    " Git fugitive menu
+    map <F9> :emenu G.<TAB>
+    menu G.Diff :Gdiff<CR>
+    menu G.Status :Gstatus<CR>
+    menu G.Log :Glog<CR>
+    menu G.Write :Gwrite<CR>
+    menu G.Blame :Gblame<CR>
+    menu G.Move :Gmove<CR>
+    menu G.Remove :Gremove<CR>
+    menu G.Grep :Ggrep<CR>
+    menu G.Split :Gsplit<CR>
 
     " Закрытие файла
     call rc#Map_ex_cmd("<F10>", "qall")
@@ -528,4 +500,3 @@
     endif
 
     set secure  " must be written at the last.  see :help 'secure'.
-
