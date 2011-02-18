@@ -72,16 +72,7 @@
     set fileencodings=utf-8,cp1251,koi8-r,cp866
     set termencoding=utf-8
 
-    " Status and command lines
-    set laststatus=2            " всегда отображать статусную строку для каждого окна
     set shortmess=atToOI
-    set statusline=%<%f%h%m     " filename and modify flag
-    set statusline+=%#Error#%r%*%= " read only and separator
-    set statusline+=\ type=%Y
-    set statusline+=\ format=%{&fileformat}
-    set statusline+=\ file=%{&fileencoding}
-    set statusline+=\ enc=%{&encoding}
-    set statusline+=\ %b\ 0x%B\ %l,%c%V\ %P
 
     set wildmenu                " использовать wildmenu ...
     set wildcharm=<TAB>         " ... с авто-дополнением
@@ -173,9 +164,9 @@
     " Keymap highlighter
     fun! rc#KeyMapHighlight()
         if &iminsert == 0
-            hi StatusLine ctermfg=White ctermbg=Blue
+            hi StatusLine ctermbg=DarkBlue guibg=DarkBlue
         else
-            hi StatusLine ctermbg=Red
+            hi StatusLine ctermbg=DarkRed guibg=DarkRed
         endif
     endfun
     call rc#KeyMapHighlight()
@@ -285,9 +276,6 @@
   
         augroup vimrcEx
         au!
-
-        " Keymap highlight
-        au WinEnter * :call rc#KeyMapHighlight()
 
         " Auto reload vim settins
         au! bufwritepost rc.vim source ~/.vimrc
