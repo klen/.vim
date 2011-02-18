@@ -1,17 +1,18 @@
-""" Конфигурационный файл для python files
+""" Python config file
 
+    if exists("b:did_ftfile") | finish | endif
+    let b:did_ftfile = 1
+
+    setlocal nowrap
+    setlocal number
     setlocal foldlevelstart=1
     setlocal foldlevel=1
     setlocal foldmethod=syntax
-
-    " Набор слов для переносов
     setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
-    set cindent
-
-    " Поиск по документаци
-    setlocal keywordprg=pydoc
+    setlocal cindent
     setlocal textwidth=79
     setlocal formatoptions-=t
+    setlocal complete+=t
 
     " Trim trailing whitespace
     au BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
@@ -19,17 +20,16 @@
     " au BufWinEnter *.py let w:m1=matchadd('Search', '\%<111v.\%>107v', -1)
     " au BufWinEnter *.py let w:m2=matchadd('ErrorMsg', '\%>110v.\+', -1)
 
-    " Улучшенная подсветка синтаксиса для питона
+    " Best syntax highlight
     let python_highlight_all = 1	
 
-    " Запуск скрипта
+    " Run python script
     map <buffer> <leader>r :!python %<cr>
-
-    setlocal complete+=t
 
     " PyLint
     compiler pylint
 
+    " Debug shortcut
 python << EOF
 import vim
 
@@ -52,4 +52,3 @@ def breakpoint():
             
 vim.command( 'map <f8> :py breakpoint()<cr>')
 EOF
-

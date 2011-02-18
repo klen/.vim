@@ -19,4 +19,3 @@
 	set complete+=b
 	set completeopt-=preview
 	set completeopt+=longest
-
