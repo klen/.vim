@@ -3,9 +3,6 @@
     if exists("b:did_ftfile") | finish | endif
     let b:did_ftfile = 1
 
-    setlocal nowrap
-    setlocal number
-    setlocal foldlevelstart=1
     setlocal foldlevel=1
     setlocal foldmethod=syntax
     setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class

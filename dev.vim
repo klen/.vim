@@ -1,21 +1,16 @@
 """ Общий конфигурационный файл для всех файлов, которые имеют какое-либо отношение к программированию.
 
-	" Отключаем перенос строк
 	setlocal nowrap
-	
-	" Уровень сокрытия по умолчанию для вновь открытых файлов
-	setlocal foldlevelstart=1
-	
-	" Метод фолдинга - по отступам
-	setlocal foldmethod=indent
-	
-	" Включаем отображение номеров строк
 	setlocal number
+	setlocal foldlevelstart=1
+	setlocal foldmethod=indent
 
 	" Complete option
-	set complete=""
-	set complete+=.
-	set complete+=k
-	set complete+=b
-	set completeopt-=preview
-	set completeopt+=longest
+	setlocal complete=""
+	setlocal complete+=.
+	setlocal complete+=k
+	setlocal complete+=b
+	setlocal completeopt-=preview
+	setlocal completeopt+=longest
+        setlocal tabstop=4
+        setlocal softtabstop=4
