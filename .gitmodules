@@ -13,9 +13,6 @@
 [submodule "bundle/scss-syntax.vim.git"]
 	path = bundle/scss-syntax.vim.git
 	url = git://github.com/cakebaker/scss-syntax.vim.git
-[submodule "bundle/CSApprox.git"]
-	path = bundle/CSApprox.git
-	url = https://github.com/vim-scripts/CSApprox.git
 [submodule "bundle/vim-pathogen.git"]
 	path = bundle/vim-pathogen.git
 	url = https://github.com/tpope/vim-pathogen.git
