@@ -1,8 +1,9 @@
-" ------------------------------
+" ================================
 " .vimrc klen <horneds@gmail.com>
+" ================================
 
-" ------------------------------
 " Setup
+" ======
 
     if !exists('s:loaded_my_vimrc') " Don't reset twice on reloading
 
@@ -79,7 +80,7 @@
     set wildignore=*.pyc        " Игнорировать pyc файлы
     set cmdheight=2             " Command line height 2
 
-    " Отображение
+    " Display
     set foldclose=all
     set foldmethod=syntax
     set foldnestmax=3           "deepest fold is 3 levels
@@ -90,10 +91,17 @@
     set winminheight=0          " минимальная высота окна
     set winminwidth=0           " минимальная ширина окна
     set lazyredraw              " перерисовывать буфер менее плавно
-    set confirm                 " использовать диалоги вместо сообщений об ошибках
     set shortmess=fimnrxoOtTI   " использовать сокращённые диалоги
+    set confirm
 
-    " Редактирование
+    " if exists('+colorcolumn')
+        " hi ColorColumn ctermbg=8 guibg=gray
+        " set colorcolumn=+1
+    " else
+        " au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
+    " endif
+
+    " Edit
     set backspace=indent,eol,start
     set clipboard+=unnamed      " включаем X clipboard
     set virtualedit=all         " On virtualedit for all mode
@@ -115,7 +123,7 @@
     endif
     set mousehide		" Hide the mouse when typing text
 
-    " Опции автодополнения
+    " Autocomplete
     set completeopt=menu
     set infercase               " предлагать авто-дополнение на основе уже введённого регистра
 
@@ -127,9 +135,10 @@
     " set custom map leader to ','
     let mapleader = ","
 
-" ------------------------------
+
 " Plugins setup
-"
+" ==============
+
     " Taglist
     let Tlist_Compact_Format          = 1   " Do not show help
     let Tlist_Enable_Fold_Column      = 0   " Don't Show the fold indicator column
@@ -141,6 +150,7 @@
     let Tlist_WinWidth                = 30  " Taglist win width
     let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name
     let tlist_xslt_settings           = 'xslt;m:match;n:name;a:apply;c:call'
+    let tlist_javascript_settings     = 'javascript;s:string;a:array;o:object;f:function'
 
     " XPTemplates
     let g:xptemplate_key = '<Tab>'
@@ -158,8 +168,9 @@
     " Enable extended matchit
     runtime macros/matchit.vim
 
-" ------------------------------
+
 " Functions
+" ==========
 
     " Keymap highlighter
     fun! rc#KeyMapHighlight()
@@ -267,8 +278,8 @@
     endfunction
 
 
-" ------------------------------
 " Autocommands
+" =============
 
     if has("autocmd")
 
@@ -277,186 +288,196 @@
         augroup vimrcEx
         au!
 
-        " Auto reload vim settins
-        au! bufwritepost rc.vim source ~/.vimrc
+            " Auto reload vim settins
+            au! bufwritepost rc.vim source ~/.vimrc
 
-        " Highlight insert mode
-        au InsertEnter * set cursorline
-        au InsertLeave * set nocursorline
-        " au InsertEnter * highlight CursorLine ctermbg=DarkBlue
-        " au InsertLeave * highlight CursorLine ctermbg=236
-        
-        " New file templates
-        au BufNewFile * silent! 0r $HOME/.vim/templates/%:e.tpl
+            " Highlight insert mode
+            au InsertEnter * set cursorline
+            au InsertLeave * set nocursorline
+            
+            " New file templates
+            au BufNewFile * silent! 0r $HOME/.vim/templates/%:e.tpl
 
-        " Autosave last session
-        if has('mksession') 
-            au VimLeavePre * :call rc#SessionSave('last')
-        endif
-
-        " When editing a file, always jump to the last known cursor position.
-        " Don't do it when the position is invalid or when inside an event handler
-        " (happens when dropping a file on gvim).
-        " Also don't do it when the mark is in the first line, that is the default
-        " position when opening a file.
-        autocmd BufReadPost *
-            \ if line("'\"") > 1 && line("'\"") <= line("$") |
-            \   exe "normal! g`\"" |
-            \ endif
-
-        au FocusLost * call rc#SaveBuffer()   " save current open file when wimdow focus is lost
-        fun! rc#SaveBuffer() "{{{
-            if filewritable(expand( '%' ))
-                exe "w"
+            " Autosave last session
+            if has('mksession') 
+                au VimLeavePre * :call rc#SessionSave('last')
             endif
-        endfunction "}}}
+
+            " When editing a file, always jump to the last known cursor position.
+            " Don't do it when the position is invalid or when inside an event handler
+            " (happens when dropping a file on gvim).
+            " Also don't do it when the mark is in the first line, that is the default
+            " position when opening a file.
+            autocmd BufReadPost *
+                \ if line("'\"") > 1 && line("'\"") <= line("$") |
+                \   exe "normal! g`\"" |
+                \ endif
+
+            au FocusLost * call rc#SaveBuffer()   " save current open file when wimdow focus is lost
+            fun! rc#SaveBuffer() "{{{
+                if filewritable(expand( '%' ))
+                    exe "w"
+                endif
+            endfunction "}}}
 
         augroup END
 
     endif
 
-" ------------------------------
+
 " Hot keys 
-"
+" ==========
+
+    " Insert mode
+    " ------------
+
+        " Omni and dict completition on space
+        inoremap <Nul> <C-R>=rc#AddWrapper()<CR>
+        inoremap <C-Space> <C-R>=rc#AddWrapper()<CR>
+
+        " emacs style jump to end of line
+        inoremap <C-E> <C-o>A
+        inoremap <C-A> <C-o>I
     
-    " Nice scrolling if line wrap
-    noremap j gj
-    noremap k gk
+    " Normal mode
+    " ------------
 
-    " Set paste mode for paste from terminal
-    nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
+        " Nice scrolling if line wrap
+        noremap j gj
+        noremap k gk
 
-    " New line and exit from insert mode
-    map     <S-O>       i<CR><ESC>
+        " Set paste mode for paste from terminal
+        nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
 
-    " Drop hightlight search result
-    nnoremap <leader><space> :nohls<CR>
+        " Split line in current cursor position
+        map     <S-O>       i<CR><ESC>
 
-    " Omni and dict completition on space
-    inoremap <Nul> <C-R>=rc#AddWrapper()<CR>
-    inoremap <C-Space> <C-R>=rc#AddWrapper()<CR>
+        " Drop hightlight search result
+        noremap <leader><space> :nohls<CR>
+        noremap <space> za
 
-    " Fast scrool
-    nnoremap <C-e> 3<C-e>
-    nnoremap <C-y> 3<C-y>
+        " Fast scrool
+        nnoremap <C-e> 3<C-e>
+        nnoremap <C-y> 3<C-y>
 
-    " Select all
-    map vA ggVG
+        " Select all
+        map vA ggVG
 
-    " Allow command line editing like emacs
-    cnoremap <C-A>      <Home>
-    cnoremap <C-B>      <Left>
-    cnoremap <C-E>      <End>
-    cnoremap <C-F>      <Right>
-    cnoremap <C-N>      <Down>
-    cnoremap <C-P>      <Up>
+        " Close cwindow
+        noremap <silent> ,ll :ccl<CR>
 
-    " Close cwindow
-    noremap <silent> ,ll :ccl<CR>
+        " Display next error"
+        noremap <silent> ,nn :cn<CR>
 
-    " Display next error"
-    noremap <silent> ,nn :cn<CR>
+        " Window commands
+        noremap <silent> ,h :wincmd h<CR>
+        noremap <silent> ,j :wincmd j<CR>
+        noremap <silent> ,k :wincmd k<CR>
+        noremap <silent> ,l :wincmd l<CR>
+        noremap <silent> ,+ :wincmd +<CR>
+        noremap <silent> ,- :wincmd -<CR>
+        noremap <silent> ,sb :wincmd p<CR>
+        noremap <silent> ,cj :wincmd j<CR>:close<CR>
+        noremap <silent> ,ck :wincmd k<CR>:close<CR>
+        noremap <silent> ,ch :wincmd h<CR>:close<CR>
+        noremap <silent> ,cl :wincmd l<CR>:close<CR>
+        noremap <silent> ,cw :close<CR>
 
-    " Window commands
-    noremap <silent> ,h :wincmd h<CR>
-    noremap <silent> ,j :wincmd j<CR>
-    noremap <silent> ,k :wincmd k<CR>
-    noremap <silent> ,l :wincmd l<CR>
-    noremap <silent> ,+ :wincmd +<CR>
-    noremap <silent> ,- :wincmd -<CR>
-    noremap <silent> ,sb :wincmd p<CR>
-    noremap <silent> ,cj :wincmd j<CR>:close<CR>
-    noremap <silent> ,ck :wincmd k<CR>:close<CR>
-    noremap <silent> ,ch :wincmd h<CR>:close<CR>
-    noremap <silent> ,cl :wincmd l<CR>:close<CR>
-    noremap <silent> ,cw :close<CR>
+        " Buffer commands
+        noremap <silent> ,bp :bp<CR>
+        noremap <silent> ,bn :bn<CR>
+        noremap <silent> ,bw :w<CR>
+        noremap <silent> ,bd :bd<CR>
+        noremap <silent> ,ls :ls<CR>
 
-    " Buffer commands
-    noremap <silent> ,bp :bp<CR>
-    noremap <silent> ,bn :bn<CR>
-    noremap <silent> ,bw :w<CR>
-    noremap <silent> ,bd :bd<CR>
-    noremap <silent> ,ls :ls<CR>
+        " Delete all buffers
+        nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
 
-    " Delete all buffers
-    nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
+        " Search the current file for the word under the cursor and display matches
+        nmap <silent> ,gw :call rc#RGrep()<CR>
 
-    " Search the current file for the word under the cursor and display matches
-    nmap <silent> ,gw :call rc#RGrep()<CR>
+        " Open new tab
+        call rc#Map_ex_cmd("<C-W>t", ":tabnew")
 
-    " Search the current file for the WORD under the cursor and display matches
-    " nmap <silent> ,gw :vimgrep /<C-r><C-a>/ %<CR>:ccl<CR>:cwin<CR><C-W>J:set nohls<CR>
+        " Tab navigation
+        map <A-1> 1gt
+        map <A-2> 2gt
+        map <A-3> 3gt
+        map <A-4> 4gt
+        map <A-5> 5gt
+        map <A-6> 6gt
+        map <A-7> 7gt
+        map <A-8> 8gt
+        map <A-9> 9gt
 
-    " Work with tabs
-    " Open new tab
-    call rc#Map_ex_cmd("<C-W>t", ":tabnew")
+        " первая вкладка
+        call rc#Map_ex_cmd("<A-UP>", ":tabfirst")
+        " последняя вкладка
+        call rc#Map_ex_cmd("<A-DOWN>", ":tablast")
+        " переместить вкладку в начало
+        nmap Q :tabmove 0<cr>
+        " переместить вкладку в конец
+        call rc#Map_ex_cmd("<C-DOWN>", ":tabmove")
 
-    " Tab navigation
-    map <A-1> 1gt
-    map <A-2> 2gt
-    map <A-3> 3gt
-    map <A-4> 4gt
-    map <A-5> 5gt
-    map <A-6> 6gt
-    map <A-7> 7gt
-    map <A-8> 8gt
-    map <A-9> 9gt
-
-    " первая вкладка
-    call rc#Map_ex_cmd("<A-UP>", ":tabfirst")
-    " последняя вкладка
-    call rc#Map_ex_cmd("<A-DOWN>", ":tablast")
-    " переместить вкладку в начало
-    nmap Q :tabmove 0<cr>
-    " переместить вкладку в конец
-    call rc#Map_ex_cmd("<C-DOWN>", ":tabmove")
-
-    " Переключение раскладок будет производиться по <C-F>
-    cmap <silent> <C-F> <C-^>
-    imap <silent> <C-F> <C-^>X<Esc>:call rc#KeyMapHighlight()<CR>a<C-H>
-    nmap <silent> <C-F> a<C-^><Esc>:call rc#KeyMapHighlight()<CR>
-    vmap <silent> <C-F> <Esc>a<C-^><Esc>:call rc#KeyMapHighlight()<CR>gv
- 
-    " Запуск/сокрытие плагина NERDTree
-    call rc#Map_ex_cmd("<F1>", "NERDTree")
-
-    " Toggle cwindow
-    call rc#Map_ex_cmd("<F2>", "cw")
+        " Переключение раскладок будет производиться по <C-F>
+        cmap <silent> <C-F> <C-^>
+        imap <silent> <C-F> <C-^>X<Esc>:call rc#KeyMapHighlight()<CR>a<C-H>
+        nmap <silent> <C-F> a<C-^><Esc>:call rc#KeyMapHighlight()<CR>
+        vmap <silent> <C-F> <Esc>a<C-^><Esc>:call rc#KeyMapHighlight()<CR>gv
     
-    " Запуск/сокрытие плагина Tlist
-    call rc#Map_ex_cmd("<F3>", "TlistToggle")
+        " Запуск/сокрытие плагина NERDTree
+        call rc#Map_ex_cmd("<F1>", "NERDTree")
 
-    call rc#Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
-    call rc#Toggle_option("<F7>", "wrap")      " Переключение переноса слов
+        " Toggle cwindow
+        call rc#Map_ex_cmd("<F2>", "cw")
+        
+        " Запуск/сокрытие плагина Tlist
+        call rc#Map_ex_cmd("<F3>", "TlistToggle")
 
-    " Git fugitive menu
-    map <F9> :emenu G.<TAB>
-    menu G.Diff :Gdiff<CR>
-    menu G.Status :Gstatus<CR>
-    menu G.Log :Glog<CR>
-    menu G.Write :Gwrite<CR>
-    menu G.Blame :Gblame<CR>
-    menu G.Move :Gmove<CR>
-    menu G.Remove :Gremove<CR>
-    menu G.Grep :Ggrep<CR>
-    menu G.Split :Gsplit<CR>
+        call rc#Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
+        call rc#Toggle_option("<F7>", "wrap")      " Переключение переноса слов
 
-    " Закрытие файла
-    call rc#Map_ex_cmd("<F10>", "qall")
-    call rc#Map_ex_cmd("<S-F10>", "qall!")
+        " Git fugitive menu
+        map <F9> :emenu G.<TAB>
+        menu G.Diff :Gdiff<CR>
+        menu G.Status :Gstatus<CR>
+        menu G.Log :Glog<CR>
+        menu G.Write :Gwrite<CR>
+        menu G.Blame :Gblame<CR>
+        menu G.Move :Gmove<CR>
+        menu G.Remove :Gremove<CR>
+        menu G.Grep :Ggrep<CR>
+        menu G.Split :Gsplit<CR>
 
-    " Список регистров 
-    call rc#Map_ex_cmd("<F11>", "reg")
+        " Закрытие файла
+        call rc#Map_ex_cmd("<F10>", "qall")
+        call rc#Map_ex_cmd("<S-F10>", "qall!")
 
-    " Список меток
-    call rc#Map_ex_cmd("<F12>", "marks")
+        " Список регистров 
+        call rc#Map_ex_cmd("<F11>", "reg")
 
-    " Session UI
-    nmap <Leader>ss :call rc#SessionInput('Save')<CR>
-    nmap <Leader>sr :call rc#SessionInput('Read')<CR>
-    nmap <Leader>sl :call rc#SessionRead('last')<CR>
-    com! Ssave :call rc#SessionSave(<args>)
-    com! Sread :call rc#SessionRead(<args>)
+        " Список меток
+        call rc#Map_ex_cmd("<F12>", "marks")
+
+        " Session UI
+        nmap <Leader>ss :call rc#SessionInput('Save')<CR>
+        nmap <Leader>sr :call rc#SessionInput('Read')<CR>
+        nmap <Leader>sl :call rc#SessionRead('last')<CR>
+
+    " Command mode
+    " ------------
+
+        " Allow command line editing like emacs
+        cnoremap <C-A>      <Home>
+        cnoremap <C-B>      <Left>
+        cnoremap <C-E>      <End>
+        cnoremap <C-F>      <Right>
+        cnoremap <C-N>      <Down>
+        cnoremap <C-P>      <Up>
+
+
+" GUI settings
+" ============
 
     " Some gui settings
     if has("gui_running")
@@ -481,10 +502,15 @@
         endif
     endif
 
+
+" Project settings
+" ================
+
     if !exists('s:loaded_my_vimrc')
         " auto load .vim/.vimrc from current directory
         exe 'silent! source '.getcwd().'/.vim/.vimrc'
         let s:loaded_my_vimrc = 1
     endif
 
-    set secure  " must be written at the last.  see :help 'secure'.
+
+set secure  " must be written at the last.  see :help 'secure'.
