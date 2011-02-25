@@ -168,6 +168,9 @@
     " Enable extended matchit
     runtime macros/matchit.vim
 
+    " Chapa
+    let g:chapa_default_mappings = 1
+
 
 " Functions
 " ==========
