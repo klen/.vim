@@ -48,7 +48,7 @@ fun! s:SetFullStatusline() "{{{
   setlocal statusline+=%=
 
   setlocal statusline+=\ %-10.(%l,%c-%v%)                                   "position
-  setlocal statusline+=%P                                                   "position percentage
+  setlocal statusline+=\ %P                                                   "position percentage
   setlocal statusline+=\ %#StatuslineTime#%{strftime(\"%m-%d\ %H:%M\")}     " current time
 endfunction "}}}
 

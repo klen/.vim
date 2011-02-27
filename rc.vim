@@ -323,6 +323,9 @@
                 endif
             endfunction "}}}
 
+            " Filetypes
+            au BufRead,BufNewFile /etc/nginx/* set ft=nginx
+
         augroup END
 
     endif
