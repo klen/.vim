@@ -138,12 +138,12 @@
         set numberwidth=1       " Keep line numbers small if it's shown
     endif
 
-    if exists('+colorcolumn')
-        hi ColorColumn ctermbg=8 guibg=gray
-        set colorcolumn=+1
-    else
-        au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
-    endif
+    " if exists('+colorcolumn')
+        " hi ColorColumn ctermbg=8 guibg=gray
+        " set colorcolumn=+1
+    " else
+        " au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
+    " endif
 
     " Enable mouse
     if &term =~ "xterm"

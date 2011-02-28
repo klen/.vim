@@ -11,12 +11,11 @@
 
     " Trim trailing whitespace
     au BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
-    " Match long line
-    " au BufWinEnter *.py let w:m1=matchadd('Search', '\%<111v.\%>107v', -1)
-    " au BufWinEnter *.py let w:m2=matchadd('ErrorMsg', '\%>110v.\+', -1)
 
     " Best syntax highlight
-    let python_highlight_all = 1	
+    let python_highlight_all=1
+    let python_highlight_exceptions=1
+    let python_highlight_builtins=1
 
     " Run python script
     map <buffer> <leader>r :!python %<cr>
@@ -44,6 +43,6 @@ def breakpoint():
     else:
         vim.current.buffer.append(
             "%simport ipdb; ipdb.set_trace() ### XXX Breakpoint ###" % indent, n_line - 1)
-            
+
 vim.command( 'map <f8> :py breakpoint()<cr>')
 EOF
