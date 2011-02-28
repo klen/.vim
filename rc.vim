@@ -2,18 +2,18 @@
 " .vimrc klen <horneds@gmail.com>
 " ================================
 
-" Setup
+" Setup {{{
 " ======
 
     if !exists('s:loaded_my_vimrc') " Don't reset twice on reloading
 
-        set nocompatible  " to use many extensions of Vim.
+        set nocompatible                           " enable vim features
 
         set backupdir=$HOME/.cache/vim/backup      " where to put backup file 
         set backup                                 " make backup file and leave it around 
         set backupskip+=svn-commit.tmp,svn-commit.[0-9]*.tmp
 
-        set directory=$HOME/.cache/vim/swap        " where to put swap file 
+        set directory=$HOME/.cache/vim/swap        " where to put swap file
         let g:SESSION_DIR   = $HOME.'/.cache/vim/sessions'
 
         " Create system vim dirs
@@ -37,19 +37,36 @@
         syntax on
 
     endif
+    
+    " Buffer options
+    set hidden                  " hide buffers when they are abandoned
+    set autoread                " auto reload changed files
+    set autowrite               " automatically save before commands like :next and :make
 
-    set hidden                  " не требовать сохранения буфера
-    set title                   " показывать имя файла в заголовке окна
-    set autoread                " отслеживать изменения файлов
-    set visualbell              " ошибки без писка
+    " Display options
+    set title                   " show file name in window title
+    set visualbell              " mute error bell
+    set listchars=tab:⇥\ ,trail:·,extends:⋯,precedes:⋯,eol:$,nbsp:~
+    set linebreak               " break lines by words
+    set winminheight=0          " minimal window height
+    set winminwidth=0           " minimal window width
+    set lazyredraw              " lazy buffer redrawing
+    set scrolloff=4             " 4 символа минимум под курсором
+    set sidescroll=4
+    set sidescrolloff=10        " 10 символов минимум под курсором при скролле
 
-    set autoindent              " копирует отступ от предыдущей строки
-    set smartindent             " включаем 'умную' автоматическую расстановку отступов
+    " Split options
+    set splitright              " open new window right side
+    set nosplitbelow            " open new window bellow
+
+    " Tab options
+    set autoindent              " copy indent from previous line
+    set smartindent             " enable nice indent
     set expandtab               " tab with spaces
-    set smarttab
-    set shiftwidth=4            " Number of spaces to use for each step of indent
-    set softtabstop=4           " Tab like 4 spaces
-    set shiftround              " удалять лишние пробелы при отступе
+    set smarttab                " isdent using shiftwidth"
+    set shiftwidth=4            " number of spaces to use for each step of indent
+    set softtabstop=4           " tab like 4 spaces
+    set shiftround              " drop unused spaces
 
     " Backup and swap files
     set history=400             " history length
@@ -63,6 +80,11 @@
     set smartcase               " Override the 'ignorecase' option if the search pattern contains upper case characters
     set incsearch               " While typing a search command, show where the pattern
 
+    " Matching characters
+    set showmatch               " Show matching brackets
+    set matchpairs+=<:>         " Make < and > match as well
+    set matchtime=3             " Show matching brackets for only 0.3 seconds
+
     " Localization
     set langmenu=none            " Always use english menu
     set keymap=russian-jcukenwin " Переключение раскладок клавиатуры по <C-^>
@@ -73,49 +95,59 @@
     set fileencodings=utf-8,cp1251,koi8-r,cp866
     set termencoding=utf-8
 
-    set shortmess=atToOI
+    " Undo
+    if has('persistent_undo')
+        set undofile            " enable persistent undo
+        set undodir=/tmp/       " store undofiles in a tmp dir
+    endif
 
-    set wildmenu                " использовать wildmenu ...
-    set wildcharm=<TAB>         " ... с авто-дополнением
-    set wildignore=*.pyc        " Игнорировать pyc файлы
-    set cmdheight=2             " Command line height 2
+    " Wildmenu
+    set wildmenu                " use wildmenu ...
+    set wildcharm=<TAB>         " autocomplete
+    set wildignore=*.pyc        " ignore file pattern
+    set cmdheight=2             " command line height 2
 
-    " Display
-    set foldclose=all
-    set foldmethod=syntax
-    set foldnestmax=3           "deepest fold is 3 levels
-    set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo    " This commands open folds
-    set listchars=eol:$,tab:>-,trail:·,nbsp:~,extends:>,precedes:<
-    set linebreak               " перенос строк по словам, а не по буквам
-    set showmatch               " подсвечивать скобки
-    set winminheight=0          " минимальная высота окна
-    set winminwidth=0           " минимальная ширина окна
-    set lazyredraw              " перерисовывать буфер менее плавно
-    set shortmess=fimnrxoOtTI   " использовать сокращённые диалоги
-    set confirm
+    " Folding
+    if has('folding')
+        set foldenable          " Enable code folding
+        set foldmethod=marker   " Fold on marker
+        set foldmarker={{{,}}}  " Keep foldmarkers default
+        set foldopen-=search    " Do not open folds when searching
+        set foldopen-=undo      " Do not open folds when undoing changes
+        set foldlevel=999       " High default so folds are shown to start
+        set foldcolumn=0        " Don't show a fold column
+    endif
 
-    " if exists('+colorcolumn')
-        " hi ColorColumn ctermbg=8 guibg=gray
-        " set colorcolumn=+1
-    " else
-        " au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
-    " endif
+    " Open help in a vsplit rather than a split
+    command! -nargs=? -complete=help Help :vertical help <args>
+    cabbrev h h<C-\>esubstitute(getcmdline(), '^h\>', 'Help', '')<CR>
+
+    " Color options
+    set background=dark     " set background color to dark
+    colorscheme wombat256
 
     " Edit
-    set backspace=indent,eol,start
-    set clipboard+=unnamed      " включаем X clipboard
-    set virtualedit=all         " On virtualedit for all mode
-    set go+=a                   " выделение в виме копирует в буфер системы
+    set backspace=indent,eol,start " Allow backspace to remove indents, newlines and old tex"
+    set clipboard+=unnamed      " enable x-clipboard
+    set virtualedit=all         " on virtualedit for all mode
 
-    set scrolloff=4             " 4 символа минимум под курсором
-    set sidescroll=4
-    set sidescrolloff=10        " 10 символов минимум под курсором при скролле
+    set shortmess=atToOI
+    set confirm
+
+    if v:version >= 700
+        set numberwidth=1       " Keep line numbers small if it's shown
+    endif
+
+    if exists('+colorcolumn')
+        hi ColorColumn ctermbg=8 guibg=gray
+        set colorcolumn=+1
+    else
+        au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
+    endif
 
     " Enable mouse
     if &term =~ "xterm"
         set t_Co=256            " set 256 colors
-        set background=dark     " set background color to dark
-        colorscheme wombat256
         set ttyfast
 
         set mouse=a
@@ -135,8 +167,10 @@
     " set custom map leader to ','
     let mapleader = ","
 
+" }}}
 
-" Plugins setup
+
+" Plugins setup {{{
 " ==============
 
     " Taglist
@@ -171,35 +205,36 @@
     " Chapa
     let g:chapa_default_mappings = 1
 
+" }}}
 
-" Functions
+
+" Functions {{{
 " ==========
 
     " Keymap highlighter
-    fun! rc#KeyMapHighlight()
+    fun! rc#KeyMapHighlight() "{{{ 
         if &iminsert == 0
             hi StatusLine ctermbg=DarkBlue guibg=DarkBlue
         else
             hi StatusLine ctermbg=DarkRed guibg=DarkRed
         endif
-    endfun
-    call rc#KeyMapHighlight()
+    endfun "}}} 
 
     " Key bind helper
-    fun! rc#Map_ex_cmd(key, cmd)
+    fun! rc#Map_ex_cmd(key, cmd) "{{{ 
       execute "nmap ".a:key." " . ":".a:cmd."<CR>"
       execute "cmap ".a:key." " . "<C-C>:".a:cmd."<CR>"
       execute "imap ".a:key." " . "<C-O>:".a:cmd."<CR>"
       execute "vmap ".a:key." " . "<Esc>:".a:cmd."<CR>gv"
-    endfun
+    endfun "}}} 
 
     " Option switcher helper
-    fun! rc#Toggle_option(key, opt)
+    fun! rc#Toggle_option(key, opt) "{{{ 
       call rc#Map_ex_cmd(a:key, "set ".a:opt."! ".a:opt."?")
-    endfun
+    endfun "}}} 
 
     " Sessions
-    fun! rc#SessionRead(name)
+    fun! rc#SessionRead(name) "{{{ 
         let s:name = g:SESSION_DIR.'/'.a:name.'.session'
         if getfsize(s:name) >= 0
             echo "Reading " s:name
@@ -208,33 +243,33 @@
         else
             echo 'Not find session: '.a:name
         endif
-    endfun
+    endfun "}}} 
 
-    fun! rc#SessionInput(type)
+    fun! rc#SessionInput(type) "{{{ 
         let s:name = input(a:type.' session name? ')
         if a:type == 'Save'
             call rc#SessionSave(s:name)
         else
             call rc#SessionRead(s:name)
         endif
-    endfun
+    endfun "}}} 
 
-    fun! rc#SessionSave(name)
+    fun! rc#SessionSave(name) "{{{ 
         exe "mks! " g:SESSION_DIR.'/'.a:name.'.session'
         echo "Session" a:name "saved"
-    endfun
+    endfun "}}} 
 
     " Omni and dict completition
-    fun! rc#AddWrapper()
+    fun! rc#AddWrapper() "{{{ 
         if exists('&omnifunc') && &omnifunc != ''
             return "\<C-X>\<C-o>\<C-p>"
         else
             return "\<C-N>"
         endif
-    endfun
+    endfun "}}} 
 
     " Recursive vimgrep
-    fun! rc#RGrep()
+    fun! rc#RGrep() "{{{ 
         let pattern = input("Search for pattern: ", expand("<cword>"))
         if pattern == ""
             return
@@ -252,11 +287,11 @@
         endif
 
         execute 'noautocmd vimgrep /'.pattern.'/gj '.startdir.'/**/'.filepattern | copen
-    endfun
+    endfun "}}} 
 
     " Shell command with buffer output
     command! -complete=shellcmd -nargs=+ Shell call rc#RunShellCommand(<q-args>)
-    function! rc#RunShellCommand(cmdline)
+    fun! rc#RunShellCommand(cmdline) "{{{ 
         let isfirst = 1
         let words = []
         for word in split(a:cmdline)
@@ -278,16 +313,52 @@
         call append(line('$'), substitute(getline(2), '.', '=', 'g'))
         silent execute '$read !'. expanded_cmdline
         1
-    endfunction
+    endfun "}}} 
+
+    " Restore cursor position
+    fun! rc#RestoreCursorPos() "{{{ 
+        if expand("<afile>:p:h") !=? $TEMP
+            if line("'\"") > 1 && line("'\"") <= line("$")
+                let line_num = line("'\"")
+                let b:doopenfold = 1
+                if (foldlevel(line_num) > foldlevel(line_num - 1))
+                    let line_num = line_num - 1
+                    let b:doopenfold = 2
+                endif
+                execute line_num
+            endif
+        endif
+    endfun "}}} 
+
+    " Open the fold if restoring cursor position
+    fun! rc#OpenFoldOnRestore() "{{{
+        if exists("b:doopenfold")
+            execute "normal zv"
+            if(b:doopenfold > 1)
+                execute "+".1
+            endif
+            unlet b:doopenfold
+        endif
+    endfun "}}}
+    
+    " Save buffer
+    fun! rc#SaveBuffer() "{{{
+        if filewritable(expand( '%' ))
+            exe "w"
+        endif
+    endfunction "}}}
+
+" }}}
 
 
-" Autocommands
+" Autocommands {{{
 " =============
 
     if has("autocmd")
 
         filetype plugin indent on
-  
+        call rc#KeyMapHighlight()
+
         augroup vimrcEx
         au!
 
@@ -306,22 +377,12 @@
                 au VimLeavePre * :call rc#SessionSave('last')
             endif
 
-            " When editing a file, always jump to the last known cursor position.
-            " Don't do it when the position is invalid or when inside an event handler
-            " (happens when dropping a file on gvim).
-            " Also don't do it when the mark is in the first line, that is the default
-            " position when opening a file.
-            autocmd BufReadPost *
-                \ if line("'\"") > 1 && line("'\"") <= line("$") |
-                \   exe "normal! g`\"" |
-                \ endif
+            " Restore cursor position
+            au BufReadPost * call rc#RestoreCursorPos()
+            au BufWinEnter * call rc#OpenFoldOnRestore()
 
-            au FocusLost * call rc#SaveBuffer()   " save current open file when wimdow focus is lost
-            fun! rc#SaveBuffer() "{{{
-                if filewritable(expand( '%' ))
-                    exe "w"
-                endif
-            endfunction "}}}
+            " Save current open file when wimdow focus is lost
+            au FocusLost * call rc#SaveBuffer()   
 
             " Filetypes
             au BufRead,BufNewFile /etc/nginx/* set ft=nginx
@@ -330,11 +391,13 @@
 
     endif
 
+" }}}
 
-" Hot keys 
+
+" Hot keys {{{
 " ==========
 
-    " Insert mode
+    " Insert mode {{{
     " ------------
 
         " Omni and dict completition on space
@@ -344,8 +407,9 @@
         " emacs style jump to end of line
         inoremap <C-E> <C-o>A
         inoremap <C-A> <C-o>I
+    " }}}
     
-    " Normal mode
+    " Normal mode {{{
     " ------------
 
         " Nice scrolling if line wrap
@@ -469,8 +533,9 @@
         nmap <Leader>ss :call rc#SessionInput('Save')<CR>
         nmap <Leader>sr :call rc#SessionInput('Read')<CR>
         nmap <Leader>sl :call rc#SessionRead('last')<CR>
+    " }}}
 
-    " Command mode
+    " Command mode {{{
     " ------------
 
         " Allow command line editing like emacs
@@ -480,9 +545,11 @@
         cnoremap <C-F>      <Right>
         cnoremap <C-N>      <Down>
         cnoremap <C-P>      <Up>
+    " }}}
 
+" }}}
 
-" GUI settings
+" GUI settings {{{
 " ============
 
     " Some gui settings
@@ -507,6 +574,8 @@
             let g:vimrcloaded = 1
         endif
     endif
+
+" }}}
 
 
 " Project settings
