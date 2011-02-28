@@ -22,3 +22,6 @@
 [submodule "bundle/chapa.vim.git"]
 	path = bundle/chapa.vim.git
 	url = https://github.com/alfredodeza/chapa.vim.git
+[submodule "bundle/javascript"]
+	path = bundle/javascript
+	url = git://github.com/pangloss/vim-javascript.git
