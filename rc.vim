@@ -13,16 +13,12 @@
         set backup                                 " make backup file and leave it around 
         set backupskip+=svn-commit.tmp,svn-commit.[0-9]*.tmp
 
-        set directory=$HOME/.cache/vim/swap        " where to put swap file
+        set directory=/tmp                         " where to put swap file
         let g:SESSION_DIR   = $HOME.'/.cache/vim/sessions'
 
         " Create system vim dirs
         if finddir(&backupdir) == ''
             silent call mkdir(&backupdir, "p")
-        endif
-
-        if finddir(&directory) == ''
-            silent call mkdir(&directory, "p")
         endif
 
         if finddir(g:SESSION_DIR) == ''
