@@ -170,44 +170,6 @@
 " }}}
 
 
-" Plugins setup {{{
-" ==============
-
-    " Taglist
-    let Tlist_Compact_Format          = 1   " Do not show help
-    let Tlist_Enable_Fold_Column      = 0   " Don't Show the fold indicator column
-    let Tlist_Exit_OnlyWindow         = 1   " If you are last kill your self
-    let Tlist_GainFocus_On_ToggleOpen = 1   " Jump to taglist window to open
-    let Tlist_Show_One_File           = 1   " Displaying tags for only one file
-    let Tlist_Use_Right_Window        = 1   " Split to rigt side of the screen
-    let Tlist_Use_SingleClick         = 1   " Single mouse click open tag
-    let Tlist_WinWidth                = 30  " Taglist win width
-    let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name
-    let tlist_xslt_settings           = 'xslt;m:match;n:name;a:apply;c:call'
-    let tlist_javascript_settings     = 'javascript;s:string;a:array;o:object;f:function'
-
-    " XPTemplates
-    let g:xptemplate_key = '<Tab>'
-    let g:xptemplate_highlight = 'following'
-
-    " NERDCommenter
-    let NERDSpaceDelims = 1
-
-    " NERDTree
-    let NERDTreeWinSize = 30
-
-    " Pylint compiler
-    let g:pylint_show_rate = 0
-
-    " Enable extended matchit
-    runtime macros/matchit.vim
-
-    " Chapa
-    let g:chapa_default_mappings = 1
-
-" }}}
-
-
 " Functions {{{
 " ==========
 
@@ -390,6 +352,44 @@
         augroup END
 
     endif
+
+" }}}
+
+
+" Plugins setup {{{
+" ==============
+
+    " Taglist
+    let Tlist_Compact_Format          = 1   " Do not show help
+    let Tlist_Enable_Fold_Column      = 0   " Don't Show the fold indicator column
+    let Tlist_Exit_OnlyWindow         = 1   " If you are last kill your self
+    let Tlist_GainFocus_On_ToggleOpen = 1   " Jump to taglist window to open
+    let Tlist_Show_One_File           = 1   " Displaying tags for only one file
+    let Tlist_Use_Right_Window        = 1   " Split to rigt side of the screen
+    let Tlist_Use_SingleClick         = 1   " Single mouse click open tag
+    let Tlist_WinWidth                = 30  " Taglist win width
+    let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name
+    let tlist_xslt_settings           = 'xslt;m:match;n:name;a:apply;c:call'
+    let tlist_javascript_settings     = 'javascript;s:string;a:array;o:object;f:function'
+
+    " XPTemplates
+    let g:xptemplate_key = '<Tab>'
+    let g:xptemplate_highlight = 'following'
+
+    " NERDCommenter
+    let NERDSpaceDelims = 1
+
+    " NERDTree
+    let NERDTreeWinSize = 30
+
+    " Pylint compiler
+    let g:pylint_show_rate = 0
+
+    " Enable extended matchit
+    runtime macros/matchit.vim
+
+    " Chapa
+    let g:chapa_default_mappings = 1
 
 " }}}
 
