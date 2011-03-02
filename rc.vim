@@ -430,24 +430,23 @@
         map vA ggVG
 
         " Close cwindow
-        noremap <silent> ,ll :ccl<CR>
+        nnoremap <silent> ,ll :ccl<CR>
 
         " Display next error"
-        noremap <silent> ,nn :cn<CR>
+        nnoremap <silent> ,nn :cn<CR>
 
         " Window commands
-        noremap <silent> ,h :wincmd h<CR>
-        noremap <silent> ,j :wincmd j<CR>
-        noremap <silent> ,k :wincmd k<CR>
-        noremap <silent> ,l :wincmd l<CR>
-        noremap <silent> ,+ :wincmd +<CR>
-        noremap <silent> ,- :wincmd -<CR>
-        noremap <silent> ,sb :wincmd p<CR>
-        noremap <silent> ,cj :wincmd j<CR>:close<CR>
-        noremap <silent> ,ck :wincmd k<CR>:close<CR>
-        noremap <silent> ,ch :wincmd h<CR>:close<CR>
-        noremap <silent> ,cl :wincmd l<CR>:close<CR>
-        noremap <silent> ,cw :close<CR>
+        nnoremap <silent> ,h :wincmd h<CR>
+        nnoremap <silent> ,j :wincmd j<CR>
+        nnoremap <silent> ,k :wincmd k<CR>
+        nnoremap <silent> ,l :wincmd l<CR>
+        nnoremap <silent> ,+ :wincmd +<CR>
+        nnoremap <silent> ,- :wincmd -<CR>
+        nnoremap <silent> ,cj :wincmd j<CR>:close<CR>
+        nnoremap <silent> ,ck :wincmd k<CR>:close<CR>
+        nnoremap <silent> ,ch :wincmd h<CR>:close<CR>
+        nnoremap <silent> ,cl :wincmd l<CR>:close<CR>
+        nnoremap <silent> ,cw :close<CR>
 
         " Buffer commands
         noremap <silent> ,bp :bp<CR>
