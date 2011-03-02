@@ -366,7 +366,7 @@
     let Tlist_WinWidth                = 30  " Taglist win width
     let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name
     let tlist_xslt_settings           = 'xslt;m:match;n:name;a:apply;c:call'
-    let tlist_javascript_settings     = 'javascript;s:string;a:array;o:object;f:function'
+    let tlist_javascript_settings     = 'javascript;s:string;f:function;a:array;o:object'
 
     " XPTemplates
     let g:xptemplate_key = '<Tab>'
