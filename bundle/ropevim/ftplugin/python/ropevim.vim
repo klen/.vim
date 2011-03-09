@@ -17,3 +17,4 @@ let g:ropevim_autoimport_modules = ["os", "shutil"]
 
 imap <buffer><Nul> <M-/>
 imap <buffer><C-Space> <M-/>
+map <C-c>rd :RopeShowDoc<CR>
