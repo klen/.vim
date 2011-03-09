@@ -47,12 +47,9 @@
     set winminheight=0          " minimal window height
     set winminwidth=0           " minimal window width
     set lazyredraw              " lazy buffer redrawing
-    set scrolloff=4             " 4 символа минимум под курсором
+    set scrolloff=4             " min 4 symbols bellow cursor
     set sidescroll=4
-    set sidescrolloff=10        " 10 символов минимум под курсором при скролле
-
-    " Split options
-    set splitright              " open new window right side
+    set sidescrolloff=10
     set nosplitbelow            " open new window bellow
 
     " Tab options
@@ -377,6 +374,28 @@
 
     " NERDTree
     let NERDTreeWinSize = 30
+    " files/dirs to ignore in NERDTree (mostly the same as my svn ignores)
+    let NERDTreeIgnore=[
+        \'\~$',
+        \'\.pt.cache$',
+        \'\.Python$',
+        \'\.svn$',
+        \'\.git*$',
+        \'\.pyc$',
+        \'\.pyo$',
+        \'\.mo$',
+        \'\.o$',
+        \'\.lo$',
+        \'\.la$',
+        \'\..*.rej$',
+        \'\.rej$',
+        \'\.\~lock.*#$',
+        \'\.AppleDouble$',
+        \'\.DS_Store$']
+    " set the sort order to alphabetical
+    let NERDTreeSortOrder=[]
+    " when the root is changed, change Vim's working dir
+    let NERDTreeChDirMode=2
 
     " Pylint compiler
     let g:pylint_show_rate = 0
@@ -411,6 +430,9 @@
         " Nice scrolling if line wrap
         noremap j gj
         noremap k gk
+
+        " More convinient to go to command mode
+        nnoremap ; :
 
         " Set paste mode for paste from terminal
         nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
@@ -490,8 +512,9 @@
         nmap <silent> <C-F> a<C-^><Esc>:call rc#KeyMapHighlight()<CR>
         vmap <silent> <C-F> <Esc>a<C-^><Esc>:call rc#KeyMapHighlight()<CR>gv
     
-        " Запуск/сокрытие плагина NERDTree
+        " NERDTree keys
         call rc#Map_ex_cmd("<F1>", "NERDTree")
+        nnoremap <silent> <leader>f :NERDTreeFind<CR>
 
         " Toggle cwindow
         call rc#Map_ex_cmd("<F2>", "cw")
