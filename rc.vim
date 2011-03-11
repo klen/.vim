@@ -392,10 +392,6 @@
         \'\.\~lock.*#$',
         \'\.AppleDouble$',
         \'\.DS_Store$']
-    " set the sort order to alphabetical
-    let NERDTreeSortOrder=[]
-    " when the root is changed, change Vim's working dir
-    let NERDTreeChDirMode=2
 
     " Pylint compiler
     let g:pylint_show_rate = 0
@@ -422,6 +418,10 @@
         " emacs style jump to end of line
         inoremap <C-E> <C-o>A
         inoremap <C-A> <C-o>I
+
+        " Toggle paste on insert
+        inoremap <S-Insert> <ESC>"p`]a
+
     " }}}
     
     " Normal mode {{{
@@ -566,6 +566,7 @@
     " }}}
 
 " }}}
+
 
 " GUI settings {{{
 " ============
