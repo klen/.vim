@@ -301,7 +301,12 @@
         if filewritable(expand( '%' ))
             exe "w"
         endif
-    endfunction "}}}
+    endfun "}}}
+
+    " Auto cwindow height
+    fun! AdjustWindowHeight(minheight, maxheight) " {{{
+        exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
+    endfun "}}}
 
 " }}}
 
@@ -341,6 +346,9 @@
 
             " Filetypes
             au BufRead,BufNewFile /etc/nginx/* set ft=nginx
+
+            " cwindow height
+            au FileType qf call AdjustWindowHeight(3, 6)
 
         augroup END
 
@@ -527,6 +535,7 @@
         " Git fugitive menu
         map <F9> :emenu G.<TAB>
         menu G.Diff :Gdiff<CR>
+        menu G.Commit :Gcommit<CR>
         menu G.Status :Gstatus<CR>
         menu G.Log :Glog<CR>
         menu G.Write :Gwrite<CR>
