@@ -28,3 +28,6 @@
 [submodule "bundle/jslint.git"]
 	path = bundle/jslint.git
 	url = git://github.com/klen/jslint.vim.git
+[submodule "bundle/ropevim"]
+	path = bundle/ropevim
+	url = git://github.com/klen/rope-vim.git
