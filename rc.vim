@@ -464,6 +464,11 @@
         " Display next error"
         nnoremap <silent> ,nn :cn<CR>
 
+        " Make test
+        nnoremap <silent> ,mt :!make test<CR>
+        nnoremap <silent> ,mu :!make update<CR>
+        nnoremap <silent> ,ms :!make static<CR>
+
         " Window commands
         nnoremap <silent> ,h :wincmd h<CR>
         nnoremap <silent> ,j :wincmd j<CR>
