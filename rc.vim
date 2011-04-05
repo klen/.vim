@@ -438,9 +438,6 @@
         noremap j gj
         noremap k gk
 
-        " More convinient to go to command mode
-        nnoremap ; :
-
         " Set paste mode for paste from terminal
         nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
 
@@ -539,13 +536,13 @@
 
         " Git fugitive menu
         map <F9> :emenu G.<TAB>
-        menu G.Diff :Gdiff<CR>
-        menu G.Commit :Gcommit<CR>
         menu G.Status :Gstatus<CR>
+        menu G.Commit :Gcommit<CR>
         menu G.Log :Glog<CR>
-        menu G.Write :Gwrite<CR>
+        menu G.Diff :Gdiff<CR>
         menu G.Blame :Gblame<CR>
         menu G.Move :Gmove<CR>
+        menu G.Write :Gwrite<CR>
         menu G.Remove :Gremove<CR>
         menu G.Grep :Ggrep<CR>
         menu G.Split :Gsplit<CR>
