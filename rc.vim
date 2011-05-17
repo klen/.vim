@@ -537,9 +537,8 @@
         " Git fugitive menu
         map <F9> :emenu G.<TAB>
         menu G.Status :Gstatus<CR>
-        menu G.Commit :Gcommit<CR>
-        menu G.Log :Glog<CR>
         menu G.Diff :Gdiff<CR>
+        menu G.Log :Glog<CR>
         menu G.Blame :Gblame<CR>
         menu G.Move :Gmove<CR>
         menu G.Write :Gwrite<CR>
