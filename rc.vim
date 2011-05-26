@@ -352,6 +352,13 @@
 
         augroup END
 
+        " Filetypes {{{
+        " ---------
+        
+            au BufNewFile,BufRead *.json setf javascript
+
+        " }}}
+
     endif
 
 " }}}
