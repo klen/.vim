@@ -538,13 +538,12 @@
         map <F9> :emenu G.<TAB>
         menu G.Status :Gstatus<CR>
         menu G.Diff :Gdiff<CR>
+        menu G.Commit :Gcommit %<CR>
+        menu G.Checkout :Gread<CR>
+        menu G.Remove :Gremove<CR>
+        menu G.Move :Gmove<CR>
         menu G.Log :Glog<CR>
         menu G.Blame :Gblame<CR>
-        menu G.Move :Gmove<CR>
-        menu G.Write :Gwrite<CR>
-        menu G.Remove :Gremove<CR>
-        menu G.Grep :Ggrep<CR>
-        menu G.Split :Gsplit<CR>
 
         " Закрытие файла
         call rc#Map_ex_cmd("<F10>", "qall")
