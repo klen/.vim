@@ -465,8 +465,9 @@
         " Close cwindow
         nnoremap <silent> ,ll :ccl<CR>
 
-        " Display next error"
-        nnoremap <silent> ,nn :cn<CR>
+        " Quickfix fast navigation
+        nnoremap <silent> ,nn :cwindow<CR>:cn<CR>
+        nnoremap <silent> ,pp :cwindow<CR>:cp<CR>
 
         " Make test
         nnoremap <silent> ,mt :!make test<CR>
