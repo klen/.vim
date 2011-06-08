@@ -34,3 +34,6 @@
 [submodule "bundle/gist-vim.git"]
 	path = bundle/gist-vim.git
 	url = https://github.com/mattn/gist-vim.git
+[submodule "bundle/vimerl.git"]
+	path = bundle/vimerl.git
+	url = https://github.com/jimenezrick/vimerl.git
