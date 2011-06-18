@@ -330,7 +330,7 @@
             au InsertLeave * set nocursorline
             
             " New file templates
-            au BufNewFile * silent! 0r $HOME/.vim/templates/%:e.tpl
+            au BufNewFile * 0r $HOME/.vim/templates/%:e.tpl
 
             " Autosave last session
             if has('mksession') 
@@ -384,6 +384,8 @@
     let g:xptemplate_key = '<Tab>'
     let g:xptemplate_key_pum_only = '<S-Tab>'
     let g:xptemplate_strict = 1
+    let g:xptemplate_highlight = 'following'
+    let g:xptemplate_vars = 'author=Kirill Klenov&email=horneds@gmail.com&SPfun=&SParg='
 
     " NERDCommenter
     let NERDSpaceDelims = 1

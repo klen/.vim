@@ -2,79 +2,82 @@ XPTemplate priority=lang
 
 let s:f = g:XPTfuncs()
 
-XPTvar $TRUE          1
-XPTvar $FALSE         0
-XPTvar $NULL          NULL
-XPTvar $UNDEFINED     NULL
-
-XPTvar $VOID_LINE  /* void */;
-XPTvar $CURSOR_PH      cursor
-
-XPTvar $BRif          ' '
-XPTvar $BRel          \n
-XPTvar $BRloop        ' '
-XPTvar $BRstc         ' '
-XPTvar $BRfun         ' '
-
 XPTinclude
     \ _common/common
 
 
 " ========================= Function and Variables =============================
 
+XPTvar $SParg         ' '
+XPTvar $SPfun         ' '
+
+fun! s:f.year(...)
+  return strftime( '%Y' )
+endfun
+
 " ================================= Snippets ===================================
 
+XPT module " -module ..
+-module`$SPfun^(`$SParg^`expand('%:t:r')^`$SParg^).
 
-XPT inc " -include ..
--include( "`cursor^.hrl").
+XPT author " -author ..
+-author`$SPfun^(`$SParg^'`$author^ <`$email^>'`$SParg^).
 
+XPT include " -include ..
+-include`$SPfun^(`$SParg^"`cursor^.hrl"`$SParg^).
 
-XPT def " -define ..
--define( `what^, `def^ ).
+XPT include_lib " -include_lib ..
+-include_lib`$SPfun^(`$SParg^"`cursor^.hrl"`$SParg^).
 
+XPT export " -export ...
+-export`$SPfun^([
+    `name0^/`0^` `...^,
+    `namen^/`0^` `...^
+    ]).
+
+XPT behavior " -behavior ..
+-behavior`$SPfun^(`$SParg^`gen_server^`$SParg^).
+
+XPT define " -define ..
+-define`$SPfun^(`$SParg^`what^, `?MODULE^`$SParg^).
 
 XPT ifdef " -ifdef ..\-endif..
--ifdef( `what^ ).
+-ifdef`$SPfun^("`$SParg^`what^"`$SParg^).
     `thenmacro^
 ``else...`
 {{^-else.
     `cursor^
 `}}^-endif().
-
 
 XPT ifndef " -ifndef ..\-endif
--ifndef( `what^ ).
+-ifndef`$SPfun^("`$SParg^`what^"`$SParg^).
     `thenmacro^
 ``else...`
 {{^-else.
     `cursor^
 `}}^-endif().
 
-
 XPT record " -record ..,{..}
--record( `recordName^
-        ,{ `field1^`...^
-        ,  `fieldn^`...^
-        }).
-
+-record`$SPfun^(`$SParg^`recordName^, {
+    `key0^`=value0^` `...^,
+    `keyn^`=valuen^` `...^
+    }`$SParg^).
 
 XPT if " if .. -> .. end
 if
     `cond^ ->
-        `body^` `...^;
+        `body^ `...^;
     `cond2^ ->
-        `bodyn^` `...^
-end `cursor^
-
+        `bodyn^ `...^
+end
 
 XPT case " case .. of .. -> .. end
 case `matched^ of
     `pattern^ ->
-        `body^`...^;
+        `body^` `...^;
     `patternn^ ->
-        `bodyn^`...^
-end `cursor^
-
+        `bodyn^` `...^
+end
 
 XPT receive " receive .. -> .. end
 receive
@@ -87,8 +90,6 @@ receive
     `afterBody^`}}^
 end
 
-
-
 XPT fun " fun .. -> .. end
 fun (`params^) `_^ -> `body^`
     `more...{{^;
@@ -96,8 +97,7 @@ fun (`params^) `_^ -> `body^`
     `...{{^;
     (`params^) `_^ -> `body^`
     `...^`}}^`}}^
-end `cursor^
-
+end
 
 XPT try wrap=what " try .. catch .. end
 try `what^
@@ -109,8 +109,7 @@ catch
 `after...{{^
 after
     `afterBody^`}}^
-end `cursor^
-
+end
 
 XPT tryof " try .. of ..
 try `what^ of
@@ -124,12 +123,60 @@ catch
 `after...{{^
 after
     `afterBody^`}}^
-end `cursor^
-
+end
 
 XPT function " f \( .. \) -> ..
-`funName^ ( `args0^ ) `_^ ->
+`funName^`$SPfun^(`$SParg^`args0^`$SParg^) `when^->
     `body0^ `...^;
-`name^R('funName')^ ( `argsn^ ) `_^ ->
-    `bodyn^`...^
+`name^R('funName')^`$SPfun^(`$SParg^`argsn^`$SParg^) `when^->
+    `bodyn^ `...^
 .
+
+XPT head " head of file
+%% -------------------------------------------------------------------
+%%  @author `$author^ <`$email^>
+%%          `[`url^]^
+%% 
+%%  @copyright `year()^ `$email^   
+%% 
+%%  @doc `description^
+%%  @end                      
+%% -------------------------------------------------------------------
+
+..XPT
+
+XPT doc synonym=spec " documentation
+%% @spec `name^(`args^) -> `{ ok, Term }^ `...^| `{ Other }^ `...^
+%% @doc  `description^
+
+" ================================= Lib Snippets ===================================
+
+XPT logger_info synonym=info " error_logger info
+error_logger:info_msg("`message^"`, Params...{{^, [`params^]`}}^)
+
+XPT logger_error synonym=error " error_logger info
+error_logger:error_msg("`message^"`, Params...{{^, [`params^]`}}^)
+
+XPT application_start " application:start
+application:start(`name^)
+
+XPT application_stop " application:stop
+application:stop(`name^)
+
+XPT gen_server_cast " gen_server cast
+gen_server:cast`$SPfun^(`$SParg^`?SERVER^, `Request^`$SParg^)
+
+XPT gen_server_call " gen_server call
+gen_server:call`$SPfun^(`$SParg^`?SERVER^, `Request^`, Timeout...{{^, `5000^`}}^`$SParg^)
+
+XPT gen_server_start " gen_server start_link
+gen_server:start_link`$SPfun^(`$SParg^{ `local^, `?SERVER^ }, `?MODULE^, `[]^, `[]^`$SParg^)
+
+" ================================= OTP Snippets ===================================
+
+XPT stop " stop -> ok
+stop`$SPfun^(`$SParg^_State`$SParg^) ->
+    ok
+.
+
+..XPT
