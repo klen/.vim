@@ -268,7 +268,7 @@ XPT fulltable hidden " create a full table
 `createTable()^
 
 
-XPT a wrap=cursor " <a href...
+XPT a wrap " <a href...
 <a href="`href^">`cursor^</a>
 ..XPT
 
@@ -300,7 +300,7 @@ XSET att?=Embed( 'name="`name^"' )
 
 
 " TODO enctype list : application/x-www-form-urlencoded
-XPT form wrap=cursor " <form ..>..</form>
+XPT form wrap " <form ..>..</form>
 XSET method=ChooseStr( 'GET', 'POST' )
 <form action="`action^" method="`method^" accept-charset="`html_enc()^" enctype="multipart/form-data">
     `cursor^
@@ -313,6 +313,22 @@ XSET att?=Embed( 'name="`name^"' )
 XPT input alias=_shorttagAttr
 XSET att?=Embed( 'type="`type^" name="`name^" value="`value^"' )
 XSET type=ChooseStr( 'text', 'password', 'checkbox', 'radio', 'submit', 'reset', 'file', 'hidden', 'image', 'button' )
+
+
+" TODO other optional attribute like "checked", "readonly"
+XPT _input_tmpl hidden " <input type=Echo($_xSnipName[1:]) ... />
+<input type="`Echo($_xSnipName[1:])^" name="`name^" value="`value^" />
+
+XPT itext     alias=_input_tmpl
+XPT ipassword alias=_input_tmpl
+XPT icheckbox alias=_input_tmpl
+XPT iradio    alias=_input_tmpl
+XPT isubmit   alias=_input_tmpl
+XPT ireset    alias=_input_tmpl
+XPT ifile     alias=_input_tmpl
+XPT ihidden   alias=_input_tmpl
+XPT iimage    alias=_input_tmpl
+XPT ibutton   alias=_input_tmpl
 
 
 XPT label alias=_tagAttr

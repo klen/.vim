@@ -3,15 +3,27 @@ if exists( "g:__HTMLDJANGO_FTDETECT_VIM__" )
 endif
 let g:__HTMLDJANGO_FTDETECT_VIM__ = 1
 
+
 if &filetype !~ 'htmldjango'
     finish
 endif
 
 
-" TODO !!!!!!!!!!!
-
+" TODO use array instead of dict because of duplicated key could be possible
 let s:skipPattern = 'synIDattr(synID(line("."), col("."), 0), "name") =~? "\\vstring|comment"'
 let s:pattern = {
+            \   'django'    : {
+            \       'start' : '\V\c{%',
+            \       'mid'   : '',
+            \       'end'   : '\V\c%}',
+            \       'skip'  : s:skipPattern,
+            \   },
+            \   'django_expr'    : {
+            \       'start' : '\V\c{{',
+            \       'mid'   : '',
+            \       'end'   : '\V\c}}',
+            \       'skip'  : s:skipPattern,
+            \   },
             \   'javascript'    : {
             \       'start' : '\V\c<script\_[^>]\*>',
             \       'mid'   : '',
@@ -34,9 +46,11 @@ fun! XPT_htmldjangoFiletypeDetect() "{{{
     let synName = g:xptutil.XPTgetCurrentOrPreviousSynName()
 
     if synName == ''
+
         return s:topFT
 
     else
+
         for [ name, ftPattern ] in items( s:pattern )
             let pos = searchpairpos( ftPattern.start, ftPattern.mid, ftPattern.end, 'nbW', ftPattern.skip )
             if pos != [0, 0]
@@ -44,13 +58,14 @@ fun! XPT_htmldjangoFiletypeDetect() "{{{
             endif
         endfor
 
-        if synName =~ '^\cjavascript'
+        if synName =~ '\v^\cjavascript'
             return 'javascript'
-        elseif synName =~ '^\ccss'
+        elseif synName =~ '\v^\ccss'
             return 'css'
         endif
 
         return s:topFT
+
     endif
 
 endfunction "}}}
