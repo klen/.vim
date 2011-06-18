@@ -1,9 +1,6 @@
 XPTemplate priority=lang-
 
 
-let s:f = g:XPTfuncs()
-
-
 XPTinclude
       \ _common/common
       \ html/html

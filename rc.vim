@@ -382,7 +382,8 @@
 
     " XPTemplates
     let g:xptemplate_key = '<Tab>'
-    let g:xptemplate_highlight = 'following'
+    let g:xptemplate_key_pum_only = '<S-Tab>'
+    let g:xptemplate_strict = 1
 
     " NERDCommenter
     let NERDSpaceDelims = 1
