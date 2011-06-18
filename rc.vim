@@ -395,6 +395,7 @@
         \'\.pt.cache$',
         \'\.Python$',
         \'\.svn$',
+        \'\.beam$',
         \'\.pyc$',
         \'\.pyo$',
         \'\.mo$',
@@ -415,6 +416,13 @@
 
     " Chapa
     let g:chapa_default_mappings = 1
+
+    " Vimerl
+    let g:erlangCompleteFile  = $HOME."/.vim/bundle/vimerl.git/autoload/erlang_complete.erl"
+    let g:erlangCheckFile     = $HOME."/.vim/bundle/vimerl.git/compiler/erlang_check.erl"
+    let g:erlangHighlightBIFs = 1
+    let g:erlangCompletionGrep="zgrep"
+    let g:erlangManSuffix="erl\.gz"
 
 " }}}
 
