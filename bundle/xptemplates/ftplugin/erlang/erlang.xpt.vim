@@ -35,6 +35,9 @@ XPT export " -export ...
     `namen^/`0^` `...^
     ]).
 
+XPT comp " -compile ...
+-compile(`export_all^).
+
 XPT behavior " -behavior ..
 -behavior`$SPfun^(`$SParg^`gen_server^`$SParg^).
 
@@ -151,17 +154,23 @@ XPT doc synonym=spec " documentation
 
 " ================================= Lib Snippets ===================================
 
+XPT format " io:format ...
+io:format`$SPfun^(`$SParg^"`message^"`, Params...{{^, [`params^]`}}^`$SParg^)
+
 XPT logger_info synonym=info " error_logger info
-error_logger:info_msg("`message^"`, Params...{{^, [`params^]`}}^)
+error_logger:info_msg`$SPfun^(`$SParg^"`message^"`, Params...{{^, [`params^]`}}^`$SParg^)
 
 XPT logger_error synonym=error " error_logger info
-error_logger:error_msg("`message^"`, Params...{{^, [`params^]`}}^)
+error_logger:error_msg`$SPfun^(`$SParg^"`message^"`, Params...{{^, [`params^]`}}^`$SParg^)
 
 XPT application_start " application:start
-application:start(`name^)
+application:start`$SPfun^(`$SParg^`expand('%:t:r')^`$SParg^)
 
 XPT application_stop " application:stop
-application:stop(`name^)
+application:stop`$SPfun^(`$SParg^`expand('%:t:r')^`$SParg^)
+
+XPT application_unload " application:unload
+application:unload`$SPfun^(`$SParg^`expand('%:t:r')^`$SParg^)
 
 XPT gen_server_cast " gen_server cast
 gen_server:cast`$SPfun^(`$SParg^`?SERVER^, `Request^`$SParg^)

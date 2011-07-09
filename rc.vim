@@ -116,7 +116,7 @@
     cabbrev h h<C-\>esubstitute(getcmdline(), '^h\>', 'Help', '')<CR>
 
     " Color options
-    set background=dark     " set background color to dark
+    set background=dark         " set background color to dark
     colorscheme wombat256
 
     " Edit
@@ -150,15 +150,12 @@
 
     " Autocomplete
     set completeopt=menu
-    set infercase               " предлагать авто-дополнение на основе уже введённого регистра
+    set infercase               " autocomplete match case
 
     " Перемещать курсор на следующую строку при нажатии на клавиши вправо-влево и пр.
     set whichwrap=b,s,<,>,[,],l,h
 
-    set modelines=0
-
-    " set custom map leader to ','
-    let mapleader = ","
+    set modelines=0             " no lines are checked
 
 " }}}
 
@@ -308,6 +305,16 @@
         exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
     endfun "}}}
 
+    fun! rc#LoadTemplate(type) "{{{
+        let l:template_dir = $HOME . '/.vim/templates/'
+        let l:fname = l:template_dir . a:type . '.tpl'
+        if getfsize(l:fname) >= 0
+            exe '0r ' . l:fname
+        else
+            echo 'Not find template: '.l:fname
+        endif
+    endfunction "}}}
+
 " }}}
 
 
@@ -330,7 +337,7 @@
             au InsertLeave * set nocursorline
             
             " New file templates
-            au BufNewFile * 0r $HOME/.vim/templates/%:e.tpl
+            au BufNewFile * silent! 0r $HOME/.vim/templates/%:e.tpl
 
             " Autosave last session
             if has('mksession') 
@@ -367,6 +374,9 @@
 " Plugins setup {{{
 " ==============
 
+
+    let mapleader = ","         " set custom map leader to ','
+
     " Taglist
     let Tlist_Compact_Format          = 1   " Do not show help
     let Tlist_Enable_Fold_Column      = 0   " Don't Show the fold indicator column
@@ -383,9 +393,9 @@
     " XPTemplates
     let g:xptemplate_key = '<Tab>'
     let g:xptemplate_key_pum_only = '<S-Tab>'
-    let g:xptemplate_strict = 1
     let g:xptemplate_highlight = 'following'
     let g:xptemplate_vars = 'author=Kirill Klenov&email=horneds@gmail.com&SPfun=&SParg='
+    let g:xptemplate_brace_complete = 1
 
     " NERDCommenter
     let NERDSpaceDelims = 1
@@ -583,6 +593,8 @@
     " Command mode {{{
     " ------------
 
+        command! -nargs=1 LoadTemplate call rc#LoadTemplate(<q-args>)
+
         " Allow command line editing like emacs
         cnoremap <C-A>      <Home>
         cnoremap <C-B>      <Left>
@@ -632,6 +644,5 @@
         exe 'silent! source '.getcwd().'/.vim/.vimrc'
         let s:loaded_my_vimrc = 1
     endif
-
 
 set secure  " must be written at the last.  see :help 'secure'.
