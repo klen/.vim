@@ -511,7 +511,7 @@
         " Buffer commands
         noremap <silent> ,bp :bp<CR>
         noremap <silent> ,bn :bn<CR>
-        noremap <silent> ,bw :w<CR>
+        noremap <silent> ,ww :w<CR>
         noremap <silent> ,bd :bd<CR>
         noremap <silent> ,ls :ls<CR>
 
