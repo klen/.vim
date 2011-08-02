@@ -27,10 +27,6 @@
 "
 "       let g:pylint_onwrite = 0
 "
-"   Displaying code rate calculated by Pylint can be avoided by setting
-"
-"       let g:pylint_show_rate = 0
-"
 "   Openning of QuickFix window can be disabled with
 "
 "       let g:pylint_cwindow = 0
@@ -53,10 +49,6 @@ if !exists('g:pylint_onwrite')
     let g:pylint_onwrite = 1
 endif
  
-if !exists('g:pylint_show_rate')
-    let g:pylint_show_rate = 1
-endif
- 
 if !exists('g:pylint_cwindow')
     let g:pylint_cwindow = 1
 endif
@@ -69,28 +61,8 @@ if exists(':Pylint') != 2
     command Pylint :call Pylint(0)
 endif
  
-if exists(":CompilerSet") != 2          " older Vim always used :setlocal
-  command -nargs=* CompilerSet setlocal <args>
-endif
- 
-" We should echo filename because pylint truncates .py
-" If someone know better way - let me know :) 
-" CompilerSet makeprg=(echo\ '[%]';\ pylint\ -r\ y\ %)
-" modified by Jose Blanca
-" it does not list the info messages and it lists errors first
-" pylint -i y hola.py|grep -e '^[WECY]'|sed -e 's/^W/2 W /' -e 's/^E/1 E /' -e
-" 's/^C/3 C /' |sort -k1,3
-CompilerSet makeprg=(echo\ '[%]';python\ /usr/bin/pylint\ -i\ y\ %\\\|grep\ -e\ \'^[WECY]\'\\\|sed\ -e\ \'s/^E/1\ E\ /\'\ -e\ \'s/^W/2\ W\ /\'\ -e\ \'s/^C/3\ C\ /\'\ \\\|sort\ -k1,3)
- 
-" We could omit end of file-entry, there is only one file
-" %+I... - include code rating information
-" %-G... - remove all remaining report lines from quickfix buffer
-" the original efm
-"CompilerSet efm=%+P[%f],%t:\ %#%l:%m,%Z,%+IYour\ code%m,%Z,%-G%.%#
-"modified by Jose Blanca
-"version for the sorted and filtered pylint
-" CompilerSet efm=%-GI%n:\ %#%l:%m,%*\\d\ %t\ %n:\ %#%l:%m,%Z,%+IYour\ code%m,%Z,%-G%.%#
-CompilerSet efm=%-GI%n:\ %#%l:%m,%*\\d\ %t\ %n:\ %#%l:%m,%Z,%Z,%-G%.%#
+set makeprg=python\ /usr/bin/pylint\ --reports=n\ --output-format=parseable\ %:p
+set errorformat=%f:%l:\ [%t]\ %m
  
 ""sings
 "signs definition
@@ -128,31 +100,9 @@ function! Pylint(writing)
         cwindow
     endif
  
-    " call PylintEvaluation()
- 
-    if g:pylint_show_rate
-        echon 'code rate: ' b:pylint_rate ', prev: ' b:pylint_prev_rate
-    endif
- 
     if g:pylint_signs
         call PlacePylintSigns()
     endif
-endfunction
- 
-function! PylintEvaluation()
-    let l:list = getqflist()
-    let b:pylint_rate = '0.00'
-    let b:pylint_prev_rate = '0.00'
-    for l:item in l:list
-        if l:item.type == 'I' && l:item.text =~ 'Your code has been rated'
-            let l:re_rate = '\(-\?[0-9]\{1,2\}\.[0-9]\{2\}\)/'
-            let b:pylint_rate = substitute(l:item.text, '.*rated at '.l:re_rate.'.*', '\1', 'g')
-            " Only if there is information about previous run
-            if l:item.text =~ 'previous run: '
-                let b:pylint_prev_rate = substitute(l:item.text, '.*previous run: '.l:re_rate.'.*', '\1', 'g')
-            endif    
-        endif
-    endfor
 endfunction
  
 function! PlacePylintSigns()
@@ -176,8 +126,8 @@ function! PlacePylintSigns()
 	let l:type=item.type
 	"sign place 1 line=l:lnum name=pylint file=l:buffr
 	if l:type != 'I'
-	    let l:exec = printf('sign place %d name=%s line=%d file=%s',
-	                        \ l:id, l:type, l:lnum, l:buffr)
+	    let l:exec = printf('sign place %d name=%s line=%d file=%s', l:id,
+                        \ l:type, l:lnum, l:buffr)
 	    let l:id = l:id + 1
 	    execute l:exec
 	endif
