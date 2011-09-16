@@ -20,10 +20,6 @@
     " Run python script
     map <buffer> <leader>r :!python %<cr>
 
-    " PyLint
-    compiler pylint
-
-    " Debug shortcut
 python << EOF
 import vim
 
@@ -44,5 +40,5 @@ def breakpoint():
         vim.current.buffer.append(
             "%simport ipdb; ipdb.set_trace() ### XXX Breakpoint ###" % indent, n_line - 1)
 
-vim.command( 'map <f8> :py breakpoint()<cr>')
+vim.command('map <f8> :py breakpoint()<cr>')
 EOF
