@@ -27,8 +27,7 @@
 
         " Pathogen load
         filetype off
-        call pathogen#helptags()
-        call pathogen#runtime_append_all_bundles()
+        call pathogen#infect()
 
         syntax on
 
@@ -351,9 +350,6 @@
             " Save current open file when wimdow focus is lost
             au FocusLost * call rc#SaveBuffer()   
 
-            " Filetypes
-            au BufRead,BufNewFile /etc/nginx/* set ft=nginx
-
             " cwindow height
             au FileType qf call AdjustWindowHeight(3, 6)
 
@@ -436,6 +432,10 @@
     let g:erlangHighlightBIFs = 1
     let g:erlangCompletionGrep="zgrep"
     let g:erlangManSuffix="erl\.gz"
+
+    " Haskell Mode
+    au BufEnter *.hs compiler ghc
+    let g:haddock_browser="google-chrome"
 
 " }}}
 
