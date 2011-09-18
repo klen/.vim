@@ -37,3 +37,6 @@
 [submodule "bundle/haskellmode.git"]
 	path = bundle/haskellmode.git
 	url = https://github.com/lukerandall/haskellmode-vim.git
+[submodule "bundle/plugin-helpers.git"]
+	path = bundle/plugin-helpers.git
+	url = git://github.com/klen/plugin-helpers.git
