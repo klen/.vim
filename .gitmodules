@@ -43,6 +43,3 @@
 [submodule "bundle/haskellmode.git"]
 	path = bundle/haskellmode.git
 	url = https://github.com/lukerandall/haskellmode-vim.git
-[submodule "bundle/pylint-mode.git"]
-	path = bundle/pylint-mode.git
-	url = https://github.com/klen/pylint-mode
