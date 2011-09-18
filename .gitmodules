@@ -16,18 +16,12 @@
 [submodule "bundle/vim-fugitive.git"]
 	path = bundle/vim-fugitive.git
 	url = https://github.com/tpope/vim-fugitive.git
-[submodule "bundle/chapa.vim.git"]
-	path = bundle/chapa.vim.git
-	url = https://github.com/alfredodeza/chapa.vim.git
 [submodule "bundle/javascript"]
 	path = bundle/javascript
 	url = git://github.com/pangloss/vim-javascript.git
 [submodule "bundle/jslint.git"]
 	path = bundle/jslint.git
 	url = git://github.com/klen/jslint.vim.git
-[submodule "bundle/ropevim"]
-	path = bundle/ropevim
-	url = git://github.com/klen/rope-vim.git
 [submodule "bundle/vim-haml.git"]
 	path = bundle/vim-haml.git
 	url = https://github.com/tpope/vim-haml.git
