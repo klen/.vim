@@ -381,7 +381,6 @@
     let Tlist_Show_One_File           = 1   " Displaying tags for only one file
     let Tlist_Use_Right_Window        = 1   " Split to rigt side of the screen
     let Tlist_Use_SingleClick         = 1   " Single mouse click open tag
-    let Tlist_WinWidth                = 30  " Taglist win width
     let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name
     let tlist_xslt_settings           = 'xslt;m:match;n:name;a:apply;c:call'
     let tlist_javascript_settings     = 'javascript;s:string;f:function;a:array;o:object'
@@ -551,7 +550,7 @@
         vmap <silent> <C-F> <Esc>a<C-^><Esc>:call rc#KeyMapHighlight()<CR>gv
     
         " NERDTree keys
-        call rc#Map_ex_cmd("<F1>", "NERDTree")
+        call rc#Map_ex_cmd("<F1>", "NERDTreeToggle")
         nnoremap <silent> <leader>f :NERDTreeFind<CR>
 
         " Toggle cwindow
