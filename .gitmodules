@@ -43,3 +43,6 @@
 [submodule "bundle/python-mode.git"]
 	path = bundle/python-mode.git
 	url = git://github.com/klen/python-mode.git
+[submodule "bundle/hvim.git"]
+	path = bundle/hvim.git
+	url = git://github.com/klen/hvim.git
