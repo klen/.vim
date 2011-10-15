@@ -46,3 +46,6 @@
 [submodule "bundle/hvim.git"]
 	path = bundle/hvim.git
 	url = git://github.com/klen/hvim.git
+[submodule "xptemplate.git"]
+	path = bundle/xptemplate.git
+	url = https://github.com/drmingdrmer/xptemplate.git
