@@ -1,2 +1,0 @@
-Migrate to snipmate
-Add syntax chekers ( pylint, jslint ) with check only on save
