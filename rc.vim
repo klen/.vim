@@ -373,17 +373,9 @@
 
     let mapleader = ","         " set custom map leader to ','
 
-    " Taglist
-    let Tlist_Compact_Format          = 1   " Do not show help
-    let Tlist_Enable_Fold_Column      = 0   " Don't Show the fold indicator column
-    let Tlist_Exit_OnlyWindow         = 1   " If you are last kill your self
-    let Tlist_GainFocus_On_ToggleOpen = 1   " Jump to taglist window to open
-    let Tlist_Show_One_File           = 1   " Displaying tags for only one file
-    let Tlist_Use_Right_Window        = 1   " Split to rigt side of the screen
-    let Tlist_Use_SingleClick         = 1   " Single mouse click open tag
-    let Tlist_Display_Tag_Scope       = 1   " Show tag scope next to the tag name
-    let tlist_xslt_settings           = 'xslt;m:match;n:name;a:apply;c:call'
-    let tlist_javascript_settings     = 'javascript;s:string;f:function;a:array;o:object'
+    " Tagbar
+    let g:tagbar_width = 30
+    let g:tagbar_foldlevel = 1
 
     " XPTemplates
     let g:xptemplate_key = '<Tab>'
@@ -556,8 +548,8 @@
         " Toggle cwindow
         call rc#Map_ex_cmd("<F2>", "cw")
         
-        " Запуск/сокрытие плагина Tlist
-        call rc#Map_ex_cmd("<F3>", "TlistToggle")
+        " Запуск/сокрытие плагина Tagbar
+        call rc#Map_ex_cmd("<F3>", "TagbarToggle")
 
         call rc#Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
         call rc#Toggle_option("<F7>", "wrap")      " Переключение переноса слов
