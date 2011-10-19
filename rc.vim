@@ -408,9 +408,6 @@
         \'\.AppleDouble$',
         \'\.DS_Store$']
 
-    " Pylint compiler
-    let g:pylint_show_rate = 0
-
     " Enable extended matchit
     runtime macros/matchit.vim
 
