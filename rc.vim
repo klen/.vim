@@ -425,6 +425,9 @@
     au BufEnter *.hs compiler ghc
     let g:haddock_browser="google-chrome"
 
+    " Pymode
+    let g:pymode_lint_jump = 1
+
 " }}}
 
 
