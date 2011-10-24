@@ -5,7 +5,7 @@
 " Setup {{{
 " ======
 
-    if !exists('s:loaded_my_vimrc') " Don't reset twice on reloading
+    if !exists('s:loaded_my_vimrc')                " don't reset twice on reloading
 
         set nocompatible                           " enable vim features
 
@@ -27,12 +27,20 @@
 
         " Pathogen load
         filetype off
-        call pathogen#infect()
 
+        call pathogen#infect()
+        call pathogen#helptags()
+
+        filetype plugin indent on
         syntax on
 
     endif
+
+" }}}
     
+" Options {{{
+" =======
+
     " Buffer options
     set hidden                  " hide buffers when they are abandoned
     set autoread                " auto reload changed files
@@ -45,17 +53,20 @@
     set linebreak               " break lines by words
     set winminheight=0          " minimal window height
     set winminwidth=0           " minimal window width
-    set lazyredraw              " lazy buffer redrawing
     set scrolloff=4             " min 4 symbols bellow cursor
     set sidescroll=4
     set sidescrolloff=10
-    set nosplitbelow            " open new window bellow
+    set showcmd
+    set whichwrap=b,s,<,>,[,],l,h
+    set completeopt=menu,preview
+    set infercase
+    set cmdheight=2
 
     " Tab options
     set autoindent              " copy indent from previous line
     set smartindent             " enable nice indent
     set expandtab               " tab with spaces
-    set smarttab                " isdent using shiftwidth"
+    set smarttab                " indent using shiftwidth"
     set shiftwidth=4            " number of spaces to use for each step of indent
     set softtabstop=4           " tab like 4 spaces
     set shiftround              " drop unused spaces
@@ -75,17 +86,20 @@
     " Matching characters
     set showmatch               " Show matching brackets
     set matchpairs+=<:>         " Make < and > match as well
-    set matchtime=3             " Show matching brackets for only 0.3 seconds
 
     " Localization
     set langmenu=none            " Always use english menu
-    set keymap=russian-jcukenwin " Переключение раскладок клавиатуры по <C-^>
-    set iminsert=0               " Раскладка по умолчанию - английская
-    set imsearch=0               " Раскладка по умолчанию при поиске - английская
-    set spelllang=en,ru          " Языки для проверки правописания
-    set encoding=utf-8
+    set keymap=russian-jcukenwin " Alternative keymap
+    set iminsert=0               " English by default
+    set imsearch=-1              " Search keymap from insert mode
+    set spelllang=en,ru          " Languages
+    set encoding=utf-8           " Default encoding
     set fileencodings=utf-8,cp1251,koi8-r,cp866
     set termencoding=utf-8
+
+    " Wildmenu
+    set wildmenu                " use wildmenu ...
+    set wildignore=*.pyc        " ignore file pattern
 
     " Undo
     if has('persistent_undo')
@@ -93,83 +107,41 @@
         set undodir=/tmp/       " store undofiles in a tmp dir
     endif
 
-    " Wildmenu
-    set wildmenu                " use wildmenu ...
-    set wildcharm=<TAB>         " autocomplete
-    set wildignore=*.pyc        " ignore file pattern
-    set cmdheight=2             " command line height 2
-
     " Folding
     if has('folding')
-        set foldenable          " Enable code folding
         set foldmethod=marker   " Fold on marker
-        set foldmarker={{{,}}}  " Keep foldmarkers default
-        set foldopen-=search    " Do not open folds when searching
-        set foldopen-=undo      " Do not open folds when undoing changes
         set foldlevel=999       " High default so folds are shown to start
-        set foldcolumn=0        " Don't show a fold column
     endif
+
+    " X-clipboard support
+    if has('unnamedplus')
+        set clipboard+=unnamed     " enable x-clipboard
+    endif
+
+    " Term
+    if &term =~ "xterm"
+        set t_Co=256            " set 256 colors
+    endif
+
+    " Color theme
+    colo wombat256
+
+    " Edit
+    set backspace=indent,eol,start " Allow backspace to remove indents, newlines and old tex"
+    set virtualedit=all         " on virtualedit for all mode
+
+    set confirm
+    set numberwidth=1              " Keep line numbers small if it's shown
 
     " Open help in a vsplit rather than a split
     command! -nargs=? -complete=help Help :vertical help <args>
     cabbrev h h<C-\>esubstitute(getcmdline(), '^h\>', 'Help', '')<CR>
-
-    " Color options
-    set background=dark         " set background color to dark
-    colorscheme wombat256
-
-    " Edit
-    set backspace=indent,eol,start " Allow backspace to remove indents, newlines and old tex"
-    set clipboard+=unnamed      " enable x-clipboard
-    set virtualedit=all         " on virtualedit for all mode
-
-    set shortmess=atToOI
-    set confirm
-
-    if v:version >= 700
-        set numberwidth=1       " Keep line numbers small if it's shown
-    endif
-
-    " if exists('+colorcolumn')
-        " hi ColorColumn ctermbg=8 guibg=gray
-        " set colorcolumn=+1
-    " else
-        " au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>100v.\+', -1)
-    " endif
-
-    " Enable mouse
-    if &term =~ "xterm"
-        set t_Co=256            " set 256 colors
-        set ttyfast
-
-        set mouse=a
-        set mousemodel=popup
-    endif
-    set mousehide		" Hide the mouse when typing text
-
-    " Autocomplete
-    set completeopt=menu
-    set infercase               " autocomplete match case
-
-    " Перемещать курсор на следующую строку при нажатии на клавиши вправо-влево и пр.
-    set whichwrap=b,s,<,>,[,],l,h
-
-    set modelines=0             " no lines are checked
 
 " }}}
 
 
 " Functions {{{
 " ==========
-
-    " Keymap highlighter
-    fun! rc#KeyMapHighlight() "{{{ 
-        if &iminsert == 0
-            hi StatusLine ctermbg=DarkBlue guibg=DarkBlue
-        else
-            hi StatusLine ctermbg=DarkRed guibg=DarkRed
-        endif
-    endfun "}}} 
 
     " Key bind helper
     fun! rc#Map_ex_cmd(key, cmd) "{{{ 
@@ -240,78 +212,17 @@
         execute 'noautocmd vimgrep /'.pattern.'/gj '.startdir.'/**/'.filepattern | copen
     endfun "}}} 
 
-    " Shell command with buffer output
-    command! -complete=shellcmd -nargs=+ Shell call rc#RunShellCommand(<q-args>)
-    fun! rc#RunShellCommand(cmdline) "{{{ 
-        let isfirst = 1
-        let words = []
-        for word in split(a:cmdline)
-            if isfirst
-            let isfirst = 0  " don't change first word (shell command)
-            else
-            if word[0] =~ '\v[%#<]'
-                let word = expand(word)
-            endif
-            let word = shellescape(word, 1)
-            endif
-            call add(words, word)
-        endfor
-        let expanded_cmdline = join(words)
-        botright new
-        setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-        call setline(1, 'You entered:  ' . a:cmdline)
-        call setline(2, 'Expanded to:  ' . expanded_cmdline)
-        call append(line('$'), substitute(getline(2), '.', '=', 'g'))
-        silent execute '$read !'. expanded_cmdline
-        1
-    endfun "}}} 
-
     " Restore cursor position
-    fun! rc#RestoreCursorPos() "{{{ 
-        if expand("<afile>:p:h") !=? $TEMP
-            if line("'\"") > 1 && line("'\"") <= line("$")
-                let line_num = line("'\"")
-                let b:doopenfold = 1
-                if (foldlevel(line_num) > foldlevel(line_num - 1))
-                    let line_num = line_num - 1
-                    let b:doopenfold = 2
-                endif
-                execute line_num
-            endif
+    fun! rc#restore_cursor() "{{{
+        if line("'\"") <= line("$")
+            normal! g`"
+            return 1
         endif
-    endfun "}}} 
+    endfunction "}}}
 
-    " Open the fold if restoring cursor position
-    fun! rc#OpenFoldOnRestore() "{{{
-        if exists("b:doopenfold")
-            execute "normal zv"
-            if(b:doopenfold > 1)
-                execute "+".1
-            endif
-            unlet b:doopenfold
-        endif
-    endfun "}}}
-    
-    " Save buffer
-    fun! rc#SaveBuffer() "{{{
-        if filewritable(expand( '%' ))
-            exe "w"
-        endif
-    endfun "}}}
-
-    " Auto cwindow height
-    fun! AdjustWindowHeight(minheight, maxheight) " {{{
-        exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
-    endfun "}}}
-
-    fun! rc#LoadTemplate(type) "{{{
-        let l:template_dir = $HOME . '/.vim/templates/'
-        let l:fname = l:template_dir . a:type . '.tpl'
-        if getfsize(l:fname) >= 0
-            exe '0r ' . l:fname
-        else
-            echo 'Not find template: '.l:fname
-        endif
+    fun! rc#load_template() "{{{
+        let dir = "$HOME/.vim/templates/" . &ft . ".tpl"
+        exe "0r " . l:dir
     endfunction "}}}
 
 " }}}
@@ -322,45 +233,39 @@
 
     if has("autocmd")
 
-        filetype plugin indent on
-        call rc#KeyMapHighlight()
-
-        augroup vimrcEx
+        augroup vimrc
         au!
 
             " Auto reload vim settins
-            au! bufwritepost rc.vim source ~/.vimrc
+            au! BufWritePost *.vim source ~/.vimrc
 
             " Highlight insert mode
             au InsertEnter * set cursorline
             au InsertLeave * set nocursorline
             
             " New file templates
-            au BufNewFile * silent! 0r $HOME/.vim/templates/%:e.tpl
+            au BufNewFile * silent! call rc#load_template()
+
+            " Restore cursor position
+            au BufWinEnter * call rc#restore_cursor()
 
             " Autosave last session
             if has('mksession') 
                 au VimLeavePre * :call rc#SessionSave('last')
             endif
 
-            " Restore cursor position
-            au BufReadPost * call rc#RestoreCursorPos()
-            au BufWinEnter * call rc#OpenFoldOnRestore()
+            " Save current open file when window focus is lost
+            au FocusLost * if &modifiable && &modified | write | endif
 
-            " Save current open file when wimdow focus is lost
-            au FocusLost * call rc#SaveBuffer()   
+            " Filetypes {{{
+            " ---------
+            
+                au BufNewFile,BufRead *.json setf javascript
 
-            " cwindow height
-            au FileType qf call AdjustWindowHeight(3, 6)
+            " }}}
+
 
         augroup END
-
-        " Filetypes {{{
-        " ---------
-        
-            au BufNewFile,BufRead *.json setf javascript
-
-        " }}}
 
     endif
 
@@ -411,19 +316,12 @@
     " Enable extended matchit
     runtime macros/matchit.vim
 
-    " Chapa
-    let g:chapa_default_mappings = 1
-
     " Vimerl
     let g:erlangCompleteFile  = $HOME."/.vim/bundle/vimerl.git/autoload/erlang_complete.erl"
     let g:erlangCheckFile     = $HOME."/.vim/bundle/vimerl.git/compiler/erlang_check.erl"
     let g:erlangHighlightBIFs = 1
     let g:erlangCompletionGrep="zgrep"
     let g:erlangManSuffix="erl\.gz"
-
-    " Haskell Mode
-    au BufEnter *.hs compiler ghc
-    let g:haddock_browser="google-chrome"
 
     " Pymode
     let g:pymode_lint_jump = 1
@@ -445,8 +343,6 @@
         inoremap <C-E> <C-o>A
         inoremap <C-A> <C-o>I
 
-        " Toggle paste on insert
-        inoremap <S-Insert> <ESC>"p`]a
 
     " }}}
     
@@ -457,14 +353,16 @@
         noremap j gj
         noremap k gk
 
-        " Set paste mode for paste from terminal
-        nmap <silent> ,p :set invpaste<CR>:set paste?<CR>
+        " Toggle paste mode
+        noremap <silent> ,p :set invpaste<CR>:set paste?<CR>
 
         " Split line in current cursor position
-        map     <S-O>       i<CR><ESC>
+        noremap <S-O>       i<CR><ESC>
 
         " Drop hightlight search result
         noremap <leader><space> :nohls<CR>
+
+        " Unfold
         noremap <space> za
 
         " Fast scrool
@@ -480,11 +378,6 @@
         " Quickfix fast navigation
         nnoremap <silent> ,nn :cwindow<CR>:cn<CR>
         nnoremap <silent> ,pp :cwindow<CR>:cp<CR>
-
-        " Make test
-        nnoremap <silent> ,mt :!make test<CR>
-        nnoremap <silent> ,mu :!make update<CR>
-        nnoremap <silent> ,ms :!make static<CR>
 
         " Window commands
         nnoremap <silent> ,h :wincmd h<CR>
@@ -507,10 +400,10 @@
         noremap <silent> ,ls :ls<CR>
 
         " Delete all buffers
-        nmap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
+        nnoremap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
 
         " Search the current file for the word under the cursor and display matches
-        nmap <silent> ,gw :call rc#RGrep()<CR>
+        nnoremap <silent> ,gw :call rc#RGrep()<CR>
 
         " Open new tab
         call rc#Map_ex_cmd("<C-W>t", ":tabnew")
@@ -535,11 +428,11 @@
         " переместить вкладку в конец
         call rc#Map_ex_cmd("<C-DOWN>", ":tabmove")
 
-        " Переключение раскладок будет производиться по <C-F>
-        cmap <silent> <C-F> <C-^>
-        imap <silent> <C-F> <C-^>X<Esc>:call rc#KeyMapHighlight()<CR>a<C-H>
-        nmap <silent> <C-F> a<C-^><Esc>:call rc#KeyMapHighlight()<CR>
-        vmap <silent> <C-F> <Esc>a<C-^><Esc>:call rc#KeyMapHighlight()<CR>gv
+        " Keymap switch <C-F>
+        cnoremap <silent> <C-F> <C-^>
+        inoremap <silent> <C-F> <C-^>
+        nnoremap <silent> <C-F> a<C-^><Esc>
+        vnoremap <silent> <C-F> <Esc>a<C-^><Esc>gv
     
         " NERDTree keys
         call rc#Map_ex_cmd("<F1>", "NERDTreeToggle")
@@ -548,14 +441,14 @@
         " Toggle cwindow
         call rc#Map_ex_cmd("<F2>", "cw")
         
-        " Запуск/сокрытие плагина Tagbar
+        " Toggle tagbar
         call rc#Map_ex_cmd("<F3>", "TagbarToggle")
 
         call rc#Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
         call rc#Toggle_option("<F7>", "wrap")      " Переключение переноса слов
 
         " Git fugitive menu
-        map <F9> :emenu G.<TAB>
+        noremap <F9> :emenu G.<TAB>
         menu G.Status :Gstatus<CR>
         menu G.Diff :Gdiff<CR>
         menu G.Commit :Gcommit %<CR>
@@ -565,26 +458,19 @@
         menu G.Log :Glog<CR>
         menu G.Blame :Gblame<CR>
 
-        " Закрытие файла
-        call rc#Map_ex_cmd("<F10>", "qall")
-        call rc#Map_ex_cmd("<S-F10>", "qall!")
-
-        " Список регистров 
-        call rc#Map_ex_cmd("<F11>", "reg")
-
-        " Список меток
-        call rc#Map_ex_cmd("<F12>", "marks")
+        " Close files
+        call rc#Map_ex_cmd("<F10>", "qa")
+        call rc#Map_ex_cmd("<S-F10>", "qa!")
 
         " Session UI
-        nmap <Leader>ss :call rc#SessionInput('Save')<CR>
-        nmap <Leader>sr :call rc#SessionInput('Read')<CR>
-        nmap <Leader>sl :call rc#SessionRead('last')<CR>
+        nnoremap <Leader>ss :call rc#SessionInput('Save')<CR>
+        nnoremap <Leader>sr :call rc#SessionInput('Read')<CR>
+        nnoremap <Leader>sl :call rc#SessionRead('last')<CR>
+
     " }}}
 
     " Command mode {{{
     " ------------
-
-        command! -nargs=1 LoadTemplate call rc#LoadTemplate(<q-args>)
 
         " Allow command line editing like emacs
         cnoremap <C-A>      <Home>
@@ -593,6 +479,7 @@
         cnoremap <C-F>      <Right>
         cnoremap <C-N>      <Down>
         cnoremap <C-P>      <Up>
+
     " }}}
 
 " }}}
@@ -603,25 +490,8 @@
 
     " Some gui settings
     if has("gui_running")
-        " Set up the gui cursor to look nice
-        set guicursor=n-v-c:block-Cursor-blinkon0
-        set guicursor+=ve:ver35-Cursor
-        set guicursor+=o:hor50-Cursor
-        set guicursor+=i-ci:ver25-Cursor
-        set guicursor+=r-cr:hor20-Cursor
-        set guicursor+=sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
-        set guioptions=ac
+        set guioptions=agimP
         set guifont=Monaco\ 11
-        colorscheme wombat256
-        if !exists("g:vimrcloaded")
-            winpos 0 0
-            if ! &diff
-                winsize 130 90
-            else
-                winsize 227 90
-            endif
-            let g:vimrcloaded = 1
-        endif
     endif
 
 " }}}
