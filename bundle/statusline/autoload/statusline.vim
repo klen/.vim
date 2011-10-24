@@ -43,6 +43,17 @@ fun! statusline#synId() "{{{
 endfunction "}}}
 
 
+fun! statusline#imiinsert() "{{{
+    if &iminsert
+        if !exists('b:keymap_name')
+            return '[map]'
+        endif
+        return '['. b:keymap_name . ']'
+    endif
+    return ''
+endfunction "}}}
+
+
 fun! statusline#setFull() "{{{
     setlocal statusline =%#StatuslineBufNr#
     setlocal statusline +=%n:                                              " buffer number
@@ -53,11 +64,12 @@ fun! statusline#setFull() "{{{
     setlocal statusline +=%#StatuslineFileEnc#\ %{&fenc}                   " file encoding
     setlocal statusline +=%#StatuslineTermEnc#%{b:SLTerm}                  " encoding
 
-    setlocal statusline +=%#StatuslineSyn#\ %{statusline#synId()}             " syn item
+    setlocal statusline +=%#StatuslineSyn#\ %{statusline#synId()}          " syn item
     setlocal statusline +=%#StatuslineChar#\ [%2B]                         " current char
     setlocal statusline +=%#StatuslineAppend#\ %{b:SLAppend}               " current char
 
     setlocal statusline +=%=
+    setlocal statusline +=%#Error#%{statusline#imiinsert()}%#Statusline#   " keymap
     setlocal statusline +=\ \%-10.(%lx%c%V%)                               " position
     setlocal statusline +=\ %P                                             " position percentage
 endfunction "}}}
