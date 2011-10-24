@@ -2,6 +2,7 @@ if !exists('g:statusline_max_path')
     let g:statusline_max_path = 20
 endif
 
+
 fun! statusline#path() "{{{
     if &buftype == ''
         let p = simplify(substitute(expand('%:p'), '^\V' . $HOME, '~', ''))
@@ -14,7 +15,7 @@ fun! statusline#path() "{{{
 endfunction "}}}
 
 
-fun! statusline#set() "{{{
+fun! statusline#set(full) "{{{
     let b:SLPath = statusline#path()
     let b:SLTerm = ':'.&tenc
     let b:SLAppend = ''
@@ -28,11 +29,11 @@ fun! statusline#set() "{{{
         let b:SLAppend = b:SLAppend . fugitive#statusline()
     endif
 
-    if &buftype == ''
-        return statusline#setFull()
+    if !a:full || &buftype != ''
+        return statusline#setSimple()
     endif
 
-    return statusline#setSimple()
+    return statusline#setFull()
 
 endfunction "}}}
 

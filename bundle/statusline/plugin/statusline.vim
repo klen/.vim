@@ -7,7 +7,7 @@ endif
 if g:statusline
     augroup Statusline
         au! Statusline
-        au BufEnter * call statusline#set()
-        au BufLeave,BufNew,BufRead,BufNewFile * call statusline#setSimple()
+        au BufEnter * call statusline#set(1)
+        au BufLeave,BufNew,BufRead,BufNewFile * call statusline#set(0)
     augroup END
 endif
