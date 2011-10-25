@@ -1,3 +1,3 @@
 clean:
-	find . -name "*.pyc" -delete
-	find . -name "tags" -delete
+	find . -name "*.pyc" -type f -delete
+	find . -name "tags" -type f -delete
