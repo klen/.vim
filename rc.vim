@@ -100,6 +100,7 @@
 
     " Wildmenu
     set wildmenu                " use wildmenu ...
+    set wildcharm=<TAB>
     set wildignore=*.pyc        " ignore file pattern
 
     " Undo
@@ -222,27 +223,23 @@
     endfunction "}}}
 
     fun! rc#load_template() "{{{
+        let dir_tpl = $HOME . "/.vim/templates/"
         let template = ''
-        let tpl_dir = $HOME . "/.vim/templates/"
-        let default = l:tpl_dir . &ft . ".tpl"
-        let path = expand('%:p')
-        let path = substitute(l:path, '\\' , '/', 'g')
-        let path = substitute(l:path, '^\V' . $HOME . '/', '', '')
-        let parts = reverse(reverse(split(l:path, '/'))[:2])
 
-        while len(l:parts) && !len(l:template)
-            let path = l:tpl_dir . join(l:parts, '/')
+        let path = expand('%:p:~:gs?\\?/?')
+        let path = strpart(l:path, len(fnamemodify(l:path, ':h:h:h')), len(l:path))
+        let parts = split(l:path, '/')
+
+        while len(l:parts) && !filereadable(l:template)
+            let template = l:dir_tpl . join(l:parts, '/')
             let l:parts = l:parts[1:]
-            if filereadable(l:path)
-                let template = l:path
-            endif
         endwhile
 
-        if !len(l:template) && filereadable(l:default)
-            let l:template = l:default
+        if !filereadable(l:template)
+            let l:template = l:dir_tpl . &ft
         endif
 
-        if len(l:template)
+        if filereadable(l:template)
             exe "0r " . l:template
         endif
     endfunction "}}}
