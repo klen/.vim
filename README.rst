@@ -19,7 +19,7 @@ Instalation
 
 #. Clone this repository in your home dir: ::
 
-    git clone git@github.com:klen/my.vim.git ~/.vim
+    git clone git@github.com:klen/.vim.git ~/.vim
 
 #. Goto cloned directory and init submodules: ::
 
