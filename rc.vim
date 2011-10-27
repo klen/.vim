@@ -299,7 +299,7 @@
 
     " Tagbar
     let g:tagbar_width = 30
-    let g:tagbar_foldlevel = 1
+    let g:tagbar_foldlevel = 2
 
     " XPTemplates
     let g:xptemplate_key = '<Tab>'
@@ -344,6 +344,7 @@
 
     " Pymode
     let g:pymode_lint_jump = 1
+    let g:pymode_rope_goto_def_newwin = 1
 
 " }}}
 
