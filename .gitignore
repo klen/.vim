@@ -2,3 +2,4 @@
 *.session
 tags
 .netrwhist
+_*
