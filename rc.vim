@@ -299,7 +299,7 @@
 
     " Tagbar
     let g:tagbar_width = 30
-    let g:tagbar_foldlevel = 2
+    let g:tagbar_foldlevel = 0
 
     " XPTemplates
     let g:xptemplate_key = '<Tab>'
