@@ -520,10 +520,8 @@
 " Project settings
 " ================
 
-    if !exists('s:loaded_my_vimrc')
-        " auto load .vim/.vimrc from current directory
-        exe 'silent! source '.getcwd().'/.vim/.vimrc'
-        let s:loaded_my_vimrc = 1
-    endif
+    " enables the reading of .vimrc, .exrc and .gvimrc in the current directory.
+    set exrc
 
-set secure  " must be written at the last.  see :help 'secure'.
+    " must be written at the last.  see :help 'secure'.
+    set secure  
