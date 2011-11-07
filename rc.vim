@@ -376,6 +376,9 @@
         " Toggle paste mode
         noremap <silent> ,p :set invpaste<CR>:set paste?<CR>
 
+        " Not jump on star, only highlight
+        nnoremap * *N
+
         " Split line in current cursor position
         noremap <S-O>       i<CR><ESC>
 
@@ -499,6 +502,13 @@
         cnoremap <C-F>      <Right>
         cnoremap <C-N>      <Down>
         cnoremap <C-P>      <Up>
+
+    " }}}
+
+    " Visual mode {{{
+    " ------------
+
+        vnoremap * y :execute ":let @/=@\""<CR> :execute "set hlsearch"<CR>
 
     " }}}
 
