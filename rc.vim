@@ -244,6 +244,17 @@
         endif
     endfunction "}}}
 
+    fun! rc#NTToggle() "{{{
+        if !exists('g:NTToggle') || !g:NTToggle
+            let g:NTToggle = 1 | NERDTree | TagbarOpen
+            cwindow
+            wincmd l
+        else
+            let g:NTToggle = 0 | NERDTreeClose | TagbarClose
+            cclose
+        endif
+    endfunction "}}}
+
 " }}}
 
 
@@ -461,8 +472,8 @@
         call rc#Map_ex_cmd("<F1>", "NERDTreeToggle")
         nnoremap <silent> <leader>f :NERDTreeFind<CR>
 
-        " Toggle cwindow
-        call rc#Map_ex_cmd("<F2>", "cw")
+        " Toggle NERDTRee and Tagbar
+        nnoremap <F2> :call rc#NTToggle()<CR>
         
         " Toggle tagbar
         call rc#Map_ex_cmd("<F3>", "TagbarToggle")
