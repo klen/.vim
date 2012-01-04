@@ -126,7 +126,13 @@
     endif
 
     " Color theme
+    set background=dark
+    let g:solarized_termcolors=256
+    let g:solarized_contrast = "high"
+    let g:solarized_termtrans = 1
+
     colo wombat256
+    " colo solarized
 
     " Edit
     set backspace=indent,eol,start " Allow backspace to remove indents, newlines and old tex"
@@ -311,6 +317,7 @@
     " Tagbar
     let g:tagbar_width = 30
     let g:tagbar_foldlevel = 0
+    autocmd VimEnter * nested TagbarOpen
 
     " XPTemplates
     let g:xptemplate_key = '<Tab>'
@@ -356,6 +363,8 @@
     " Pymode
     let g:pymode_lint_jump = 1
     let g:pymode_rope_goto_def_newwin = 1
+    let g:pymode_syntax_builtin_objs = 0
+    let g:pymode_syntax_builtin_funcs = 0
 
 " }}}
 
@@ -519,8 +528,6 @@
     " Visual mode {{{
     " ------------
 
-        vnoremap * y :execute ":let @/=@\""<CR> :execute "set hlsearch"<CR>
-
     " }}}
 
 " }}}
@@ -536,6 +543,13 @@
     endif
 
 " }}}
+
+
+" Local settings
+" ================
+if filereadable($HOME . "/.vim_local")
+    source $HOME/.vim_local
+endif
 
 
 " Project settings
