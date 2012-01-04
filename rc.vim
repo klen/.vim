@@ -126,7 +126,6 @@
     endif
 
     " Color theme
-    set background=dark
     let g:solarized_termcolors=256
     let g:solarized_contrast = "high"
     let g:solarized_termtrans = 1
@@ -228,8 +227,14 @@
         endif
     endfunction "}}}
 
+    " Templates
     fun! rc#load_template() "{{{
         let dir_tpl = $HOME . "/.vim/templates/"
+
+        if exists("g:tpl_prefix")
+            let dir_tpl = l:dir_tpl . g:tpl_prefix . "/"
+        endif
+
         let template = ''
 
         let path = expand('%:p:~:gs?\\?/?')
