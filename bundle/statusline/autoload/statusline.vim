@@ -82,4 +82,6 @@ fun! statusline#setSimple() "{{{
     setlocal statusline +=%#StatuslineFlag#%m                              " modify flag
     setlocal statusline +=\ %<%#StatuslineFlag#%y%w%#Error#%r              " other flags
     setlocal statusline +=%#StatuslineNC#                                  " color
+    setlocal statusline +=%=
+    setlocal statusline +=\ %P                                             " position percentage
 endfunction "}}}
