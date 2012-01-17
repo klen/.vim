@@ -216,7 +216,7 @@
             return
         endif
 
-        execute 'noautocmd vimgrep /'.pattern.'/gj '.startdir.'/**/'.filepattern | copen
+        execute 'noautocmd vimgrep /'.pattern.'/gj '.startdir.'/**/'.filepattern | botright copen
     endfun "}}} 
 
     " Restore cursor position
