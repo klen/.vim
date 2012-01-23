@@ -371,6 +371,26 @@
     let g:pymode_syntax_builtin_objs = 0
     let g:pymode_syntax_builtin_funcs = 0
 
+    " Fugitive
+    nnoremap <leader>gs :Gstatus<CR>
+    nnoremap <leader>ga :Gwrite<CR>
+    nnoremap <leader>gc :Gcommit %<CR>
+    nnoremap <leader>gd :Gdiff<CR>
+    nnoremap <leader>gl :Glog<CR>
+    nnoremap <leader>gb :Gblame<CR>
+    nnoremap <leader>gr :Gremove<CR>
+
+    noremap <F9> :emenu G.<TAB>
+    menu G.Status :Gstatus<CR>
+    menu G.Diff :Gdiff<CR>
+    menu G.Commit :Gcommit %<CR>
+    menu G.Checkout :Gread<CR>
+    menu G.Remove :Gremove<CR>
+    menu G.Move :Gmove<CR>
+    menu G.Log :Glog<CR>
+    menu G.Blame :Gblame<CR>
+
+
 " }}}
 
 
@@ -494,17 +514,6 @@
 
         call rc#Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
         call rc#Toggle_option("<F7>", "wrap")      " Переключение переноса слов
-
-        " Git fugitive menu
-        noremap <F9> :emenu G.<TAB>
-        menu G.Status :Gstatus<CR>
-        menu G.Diff :Gdiff<CR>
-        menu G.Commit :Gcommit %<CR>
-        menu G.Checkout :Gread<CR>
-        menu G.Remove :Gremove<CR>
-        menu G.Move :Gmove<CR>
-        menu G.Log :Glog<CR>
-        menu G.Blame :Gblame<CR>
 
         " Close files
         call rc#Map_ex_cmd("<F10>", "qa")
