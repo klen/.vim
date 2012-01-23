@@ -379,6 +379,7 @@
     nnoremap <leader>gl :Glog<CR>
     nnoremap <leader>gb :Gblame<CR>
     nnoremap <leader>gr :Gremove<CR>
+    nnoremap <leader>gpl :Git pull origin master<CR>
 
     noremap <F9> :emenu G.<TAB>
     menu G.Status :Gstatus<CR>
