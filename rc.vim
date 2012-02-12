@@ -380,6 +380,7 @@
     nnoremap <leader>gb :Gblame<CR>
     nnoremap <leader>gr :Gremove<CR>
     nnoremap <leader>gpl :Git pull origin master<CR>
+    nnoremap <leader>gps :Git push origin master<CR>
 
     noremap <F9> :emenu G.<TAB>
     menu G.Status :Gstatus<CR>
@@ -391,6 +392,9 @@
     menu G.Log :Glog<CR>
     menu G.Blame :Gblame<CR>
 
+    " VimWiki
+    let g:vimwiki_folding = 1
+    let g:vimwiki_fold_lists = 1
 
 " }}}
 
