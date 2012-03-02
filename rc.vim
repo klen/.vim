@@ -143,6 +143,8 @@
     " Open help in a vsplit rather than a split
     command! -nargs=? -complete=help Help :vertical help <args>
     cabbrev h h<C-\>esubstitute(getcmdline(), '^h\>', 'Help', '')<CR>
+                                            
+    set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
 " }}}
 
@@ -304,6 +306,10 @@
                 au BufNewFile,BufRead *.json setf javascript
 
             " }}}
+            
+            " Auto close preview window
+            autocmd CursorMovedI * if pumvisible() == 0|pclose|endif 
+            autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 
         augroup END
@@ -321,8 +327,18 @@
 
     " Tagbar
     let g:tagbar_width = 30
-    let g:tagbar_foldlevel = 0
-    autocmd VimEnter * nested TagbarOpen
+    let g:tagbar_foldlevel = 1
+    let g:tagbar_type_rst = {
+        \ 'ctagstype': 'rst',
+        \ 'kinds': [
+            \ 'r:references',
+            \ 'h:headers'
+        \ ],
+        \ 'sort': 0,
+        \ 'sro': '..',
+        \ 'kind2scope': { 'h': 'header' },
+        \ 'scope2kind': { 'header': 'h' }
+    \ }
 
     " XPTemplates
     let g:xptemplate_key = '<Tab>'
@@ -366,10 +382,12 @@
     let g:erlangManSuffix="erl\.gz"
 
     " Pymode
-    let g:pymode_lint_jump = 1
-    let g:pymode_rope_goto_def_newwin = 1
+    let g:pymode_lint_hold = 0
     let g:pymode_syntax_builtin_objs = 0
     let g:pymode_syntax_builtin_funcs = 0
+    let g:pymode_rope_goto_def_newwin = 1
+    let g:pymode_syntax_builtin_funcs = 1
+    let g:pymode_syntax_print_as_function = 1
 
     " Fugitive
     nnoremap <leader>gs :Gstatus<CR>
@@ -395,6 +413,7 @@
     " VimWiki
     let g:vimwiki_folding = 1
     let g:vimwiki_fold_lists = 1
+    let g:vimwiki_list = [{"path" : "~/Documents/Dropbox/wiki"}]
 
 " }}}
 
