@@ -385,7 +385,7 @@
     let g:pymode_lint_hold = 0
     let g:pymode_syntax_builtin_objs = 0
     let g:pymode_syntax_builtin_funcs = 0
-    let g:pymode_rope_goto_def_newwin = 1
+    let g:pymode_rope_goto_def_newwin = "new"
     let g:pymode_syntax_builtin_funcs = 1
     let g:pymode_syntax_print_as_function = 1
 
@@ -397,6 +397,7 @@
     nnoremap <leader>gl :Glog<CR>
     nnoremap <leader>gb :Gblame<CR>
     nnoremap <leader>gr :Gremove<CR>
+    nnoremap <leader>go :Gread<CR>
     nnoremap <leader>gpl :Git pull origin master<CR>
     nnoremap <leader>gps :Git push origin master<CR>
 
@@ -548,6 +549,15 @@
         nnoremap <Leader>sr :call rc#SessionInput('Read')<CR>
         nnoremap <Leader>sl :call rc#SessionRead('last')<CR>
 
+        " Show syntax highlighting groups for word under cursor
+        nmap <C-S-P> :call <SID>SynStack()<CR>
+        function! <SID>SynStack()
+            if !exists("*synstack")
+                return
+            endif
+            echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+        endfunc
+  
     " }}}
 
     " Command mode {{{

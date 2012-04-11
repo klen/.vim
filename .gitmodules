@@ -40,3 +40,6 @@
 [submodule "bundle/solarized"]
 	path = bundle/solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule "bundle/jsmode.git"]
+	path = bundle/jsmode.git
+	url = git://github.com/klen/vim-jsmode.git
