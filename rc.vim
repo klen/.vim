@@ -322,6 +322,7 @@
 " Plugins setup {{{
 " ==============
 
+    let g:changelog_username = $USER
 
     let mapleader = ","         " set custom map leader to ','
 
