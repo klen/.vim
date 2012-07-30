@@ -434,7 +434,6 @@
         inoremap <C-E> <C-o>A
         inoremap <C-A> <C-o>I
 
-
     " }}}
     
     " Normal mode {{{
