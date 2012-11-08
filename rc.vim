@@ -417,8 +417,8 @@
     let g:vimwiki_folding = 1
     let g:vimwiki_fold_lists = 1
     let g:vimwiki_list = [
-        \ {"path" : "~/Documents/Dropbox/wiki"},
-        \ {"path" : "~/Documents/Dropbox/wiki/english"}
+        \ {"path" : "~/Dropbox/wiki"},
+        \ {"path" : "~/Dropbox/wiki/english"}
     \ ]
     nmap <Leader>wv <Plug>VimwikiIndex
 
