@@ -40,4 +40,3 @@ set `name^(value) { throw "Not allowed"; }
 
 XPT method " Method
 `name^: `:function:^
-
