@@ -400,7 +400,8 @@
     nnoremap <leader>gr :Gremove<CR>
     nnoremap <leader>go :Gread<CR>
     nnoremap <leader>gpl :Git pull origin master<CR>
-    nnoremap <leader>gps :Git push origin master<CR>
+    nnoremap <leader>gpp :Git push<CR>
+    nnoremap <leader>gpm :Git push origin master<CR>
 
     noremap <F9> :emenu G.<TAB>
     menu G.Status :Gstatus<CR>
@@ -415,7 +416,11 @@
     " VimWiki
     let g:vimwiki_folding = 1
     let g:vimwiki_fold_lists = 1
-    let g:vimwiki_list = [{"path" : "~/Documents/Dropbox/wiki"}]
+    let g:vimwiki_list = [
+        \ {"path" : "~/Documents/Dropbox/wiki"},
+        \ {"path" : "~/Documents/Dropbox/wiki/english"}
+    \ ]
+    nmap <Leader>wv <Plug>VimwikiIndex
 
 " }}}
 
@@ -490,7 +495,7 @@
         noremap <silent> ,bn :bn<CR>
         noremap <silent> ,ww :w<CR>
         noremap <silent> ,bd :bd<CR>
-        noremap <silent> ,ls :ls<CR>
+        noremap <silent> ,ls :Bufferlist<CR>
 
         " Delete all buffers
         nnoremap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>

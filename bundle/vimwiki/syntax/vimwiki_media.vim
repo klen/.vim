@@ -45,15 +45,17 @@ let g:vimwiki_char_subscript = ',,'
 let g:vimwiki_rxH = '='
 let g:vimwiki_symH = 1
 
+
+
 " <hr>, horizontal rule
-let g:vimwiki_rxHR = '^----.*$'
+let g:vimwiki_rxHR = '^-----*$'
 
 " Tables. Each line starts and ends with '|'; each cell is separated by '|'
 let g:vimwiki_rxTableSep = '|'
 
 " Bulleted list items start with whitespace(s), then '*'
 " highlight only bullets and digits.
-let g:vimwiki_rxListBullet = '^\s*\*\+\s\([^*]*$\)\@='
+let g:vimwiki_rxListBullet = '^\s*\*\+\s\%([^*]*$\)\@='
 let g:vimwiki_rxListNumber = '^\s*#\+\s'
 
 let g:vimwiki_rxListDefine = '^\%(;\|:\)\s'

@@ -35,15 +35,17 @@ setlocal isfname-=[,]
 
 " Autocreate list items {{{
 " for list items, and list items with checkboxes
+setlocal formatoptions+=tnro
+setlocal formatoptions-=cq
 if VimwikiGet('syntax') == 'default'
   setl comments=b:*,b:#,b:-
   setl formatlistpat=^\\s*[*#-]\\s*
+elseif VimwikiGet('syntax') == 'markdown'
+  setlocal comments=fb:*,fb:-,fb:+,nb:> commentstring=\ >\ %s
+  setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\\|^[-*+]\\s\\+j
 else
   setl comments=n:*,n:#
 endif
-setlocal formatoptions=tnro
-" setlocal formatoptions+=tnro
-" setlocal formatoptions-=c
 
 if !empty(&langmap)
   " Valid only if langmap is a comma separated pairs of chars
@@ -66,20 +68,15 @@ function! VimwikiFoldLevel(lnum) "{{{
 
   " Header folding...
   if line =~ g:vimwiki_rxHeader
-    let n = vimwiki#base#count_first_sym(line)
+    let n = vimwiki#u#count_first_sym(line)
     return '>'.n
   endif
 
-  let nnline = getline(a:lnum + 1)
-
-  if nnline =~ g:vimwiki_rxHeader
-    let n = vimwiki#base#count_first_sym(nnline)
-    return '<'.n
-  endif
+  let base_level = s:get_base_level(a:lnum)
 
   " List item folding...
   if g:vimwiki_fold_lists
-    let base_level = s:get_base_level(a:lnum)
+    let nnline = getline(a:lnum + 1)
     
     let rx_list_item = '\('.
           \ g:vimwiki_rxListBullet.'\|'.g:vimwiki_rxListNumber.
@@ -94,8 +91,9 @@ function! VimwikiFoldLevel(lnum) "{{{
 
       if leveln > level
         return ">".(base_level+leveln-adj)
-      elseif (nnum-a:lnum) > 1 " check if multilined list item
-            \ (nline =~ rx_list_item || nnline !~ '^\s*$')
+      " check if multilined list item
+      elseif (nnum-a:lnum) > 1 
+            \ && nline =~ rx_list_item && nnline !~ '^\s*$'
         return ">".(base_level+level+1-adj)
       else
         return (base_level+level-adj)
@@ -111,18 +109,16 @@ function! VimwikiFoldLevel(lnum) "{{{
         endif
       endif
     endif
-
-    return base_level
   endif
 
-  return -1
+  return base_level
 endfunction "}}}
 
 function! s:get_base_level(lnum) "{{{
   let lnum = a:lnum - 1
   while lnum > 0
     if getline(lnum) =~ g:vimwiki_rxHeader
-      return vimwiki#base#count_first_sym(getline(lnum))
+      return vimwiki#u#count_first_sym(getline(lnum))
     endif
     let lnum -= 1
   endwhile
@@ -162,7 +158,7 @@ endfunction "}}}
 
 function! s:get_li_level(lnum) "{{{
   if VimwikiGet('syntax') == 'media'
-    let level = vimwiki#base#count_first_sym(getline(a:lnum))
+    let level = vimwiki#u#count_first_sym(getline(a:lnum))
   else
     let level = (indent(a:lnum) / &sw)
   endif
@@ -192,12 +188,13 @@ endfunction "}}}
 " COMMANDS {{{
 command! -buffer Vimwiki2HTML
       \ silent w <bar> 
-      \ call vimwiki#html#Wiki2HTML(expand(VimwikiGet('path_html')),
-      \                             expand('%')) <bar>
-      \ echo 'HTML conversion is done.'
+      \ let res = vimwiki#html#Wiki2HTML(expand(VimwikiGet('path_html')),
+      \                             expand('%'))
+      \<bar>
+      \ if res != '' | echo 'Vimwiki: HTML conversion is done.' | endif
 command! -buffer Vimwiki2HTMLBrowse
       \ silent w <bar> 
-      \ call VimwikiWeblinkHandler(vimwiki#html#Wiki2HTML(
+      \ call vimwiki#base#system_open_link(vimwiki#html#Wiki2HTML(
       \         expand(VimwikiGet('path_html')),
       \         expand('%')))
 command! -buffer VimwikiAll2HTML
@@ -211,6 +208,8 @@ command! -buffer VimwikiFollowLink call vimwiki#base#follow_link('nosplit')
 command! -buffer VimwikiGoBackLink call vimwiki#base#go_back_link()
 command! -buffer VimwikiSplitLink call vimwiki#base#follow_link('split')
 command! -buffer VimwikiVSplitLink call vimwiki#base#follow_link('vsplit')
+
+command! -buffer -nargs=? VimwikiNormalizeLink call vimwiki#base#normalize_link(<f-args>)
 
 command! -buffer VimwikiTabnewLink call vimwiki#base#follow_link('tabnew')
 
@@ -228,6 +227,10 @@ exe 'command! -buffer -nargs=* VWS lvimgrep <args> '.
       \ escape(VimwikiGet('path').'**/*'.VimwikiGet('ext'), ' ')
 
 command! -buffer -nargs=1 VimwikiGoto call vimwiki#base#goto("<args>")
+
+
+" list commands
+command! -buffer -nargs=* VimwikiListChangeLevel call vimwiki#lst#change_level(<f-args>)
 
 " table commands
 command! -buffer -nargs=* VimwikiTable call vimwiki#tbl#create(<f-args>)
@@ -282,6 +285,24 @@ if !hasmapto('<Plug>VimwikiVSplitLink')
 endif
 nnoremap <silent><script><buffer>
       \ <Plug>VimwikiVSplitLink :VimwikiVSplitLink<CR>
+
+if !hasmapto('<Plug>VimwikiNormalizeLink')
+  nmap <silent><buffer> + <Plug>VimwikiNormalizeLink
+endif
+nnoremap <silent><script><buffer>
+      \ <Plug>VimwikiNormalizeLink :VimwikiNormalizeLink 0<CR>
+
+if !hasmapto('<Plug>VimwikiNormalizeLinkVisual')
+  vmap <silent><buffer> + <Plug>VimwikiNormalizeLinkVisual
+endif
+vnoremap <silent><script><buffer>
+      \ <Plug>VimwikiNormalizeLinkVisual :<C-U>VimwikiNormalizeLink 1<CR>
+
+if !hasmapto('<Plug>VimwikiNormalizeLinkVisualCR')
+  vmap <silent><buffer> <CR> <Plug>VimwikiNormalizeLinkVisualCR
+endif
+vnoremap <silent><script><buffer>
+      \ <Plug>VimwikiNormalizeLinkVisualCR :<C-U>VimwikiNormalizeLink 1<CR>
 
 if !hasmapto('<Plug>VimwikiTabnewLink')
   nmap <silent><buffer> <D-CR> <Plug>VimwikiTabnewLink
@@ -344,7 +365,7 @@ nnoremap <silent><script><buffer>
 
 function! s:CR() "{{{
   let res = vimwiki#lst#kbd_cr()
-  if res == "\<CR>" && g:vimwiki_table_auto_fmt
+  if res == "\<CR>" && g:vimwiki_table_mappings
     let res = vimwiki#tbl#kbd_cr()
   endif
   return res
@@ -356,9 +377,25 @@ inoremap <buffer> <expr> <CR> <SID>CR()
 " List mappings
 nnoremap <buffer> o :<C-U>call vimwiki#lst#kbd_oO('o')<CR>
 nnoremap <buffer> O :<C-U>call vimwiki#lst#kbd_oO('O')<CR>
+nnoremap <buffer> gll :VimwikiListChangeLevel <<<CR>
+nnoremap <buffer> glm :VimwikiListChangeLevel >><CR>
+nnoremap <buffer> gl* :VimwikiListChangeLevel *<CR>
+nnoremap <buffer> gl8 :VimwikiListChangeLevel *<CR>
+if VimwikiGet('syntax') == 'default'
+  nnoremap <buffer> gl- :VimwikiListChangeLevel -<CR>
+  nnoremap <buffer> gl# :VimwikiListChangeLevel #<CR>
+  nnoremap <buffer> gl3 :VimwikiListChangeLevel #<CR>
+elseif VimwikiGet('syntax') == 'markdown'
+  nnoremap <buffer> gl- :VimwikiListChangeLevel -<CR>
+  nnoremap <buffer> gl1 :VimwikiListChangeLevel 1.<CR>
+elseif VimwikiGet('syntax') == 'media'
+  nnoremap <buffer> gl# :VimwikiListChangeLevel #<CR>
+  nnoremap <buffer> gl3 :VimwikiListChangeLevel #<CR>
+endif
+
 
 " Table mappings
-if g:vimwiki_table_auto_fmt
+if g:vimwiki_table_mappings
   inoremap <expr> <buffer> <Tab> vimwiki#tbl#kbd_tab()
   inoremap <expr> <buffer> <S-Tab> vimwiki#tbl#kbd_shift_tab()
 endif
@@ -397,8 +434,18 @@ vnoremap <silent><buffer> ac :<C-U>call vimwiki#base#TO_table_col(0, 1)<CR>
 onoremap <silent><buffer> ic :<C-U>call vimwiki#base#TO_table_col(1, 0)<CR>
 vnoremap <silent><buffer> ic :<C-U>call vimwiki#base#TO_table_col(1, 1)<CR>
 
-nnoremap <silent><buffer> = :call vimwiki#base#AddHeaderLevel()<CR>
-nnoremap <silent><buffer> - :call vimwiki#base#RemoveHeaderLevel()<CR>
+if !hasmapto('<Plug>VimwikiAddHeaderLevel')
+  nmap <silent><buffer> = <Plug>VimwikiAddHeaderLevel
+endif
+nnoremap <silent><buffer> <Plug>VimwikiAddHeaderLevel :
+      \<C-U>call vimwiki#base#AddHeaderLevel()<CR>
+
+if !hasmapto('<Plug>VimwikiRemoveHeaderLevel')
+  nmap <silent><buffer> - <Plug>VimwikiRemoveHeaderLevel
+endif
+nnoremap <silent><buffer> <Plug>VimwikiRemoveHeaderLevel :
+      \<C-U>call vimwiki#base#RemoveHeaderLevel()<CR>
+
 
 " }}}
 
@@ -408,8 +455,21 @@ nnoremap <silent><buffer> - :call vimwiki#base#RemoveHeaderLevel()<CR>
 if VimwikiGet('auto_export')
   " Automatically generate HTML on page write.
   augroup vimwiki
-    au BufWritePost <buffer> Vimwiki2HTML
+    au BufWritePost <buffer> 
+      \ call vimwiki#html#Wiki2HTML(expand(VimwikiGet('path_html')),
+      \                             expand('%'))
   augroup END
 endif
 
 " AUTOCOMMANDS }}}
+
+" PASTE, CAT URL {{{
+" html commands
+command! -buffer VimwikiPasteUrl call vimwiki#html#PasteUrl(expand('%:p'))
+command! -buffer VimwikiCatUrl call vimwiki#html#CatUrl(expand('%:p'))
+" }}}
+
+" DEBUGGING {{{
+command! VimwikiPrintWikiState call vimwiki#base#print_wiki_state()
+command! VimwikiReadLocalOptions call vimwiki#base#read_wiki_options(1)
+" }}}
