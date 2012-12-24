@@ -356,21 +356,28 @@
     " files/dirs to ignore in NERDTree (mostly the same as my svn ignores)
     let NERDTreeIgnore=[
         \'\~$',
-        \'\.pt.cache$',
-        \'\.Python$',
-        \'\.svn$',
+        \'\.AppleDouble$',
         \'\.beam$',
-        \'\.pyc$',
-        \'\.pyo$',
+        \'build',
+        \'dist',
+        \'\.DS_Store$',
+        \'\.egg$',
+        \'\.egg-info$',
+        \'\.la$',
+        \'\.lo$',
+        \'\.\~lock.*#$',
         \'\.mo$',
         \'\.o$',
-        \'\.lo$',
-        \'\.la$',
+        \'\.pt.cache$',
+        \'\.pyc$',
+        \'\.pyo$',
+        \'\.Python$',
         \'\..*.rej$',
         \'\.rej$',
-        \'\.\~lock.*#$',
-        \'\.AppleDouble$',
-        \'\.DS_Store$']
+        \'\.ropeproject$',
+        \'\.svn$',
+        \'\.tags$'
+    \]
 
     " Enable extended matchit
     runtime macros/matchit.vim
