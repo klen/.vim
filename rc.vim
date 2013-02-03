@@ -257,17 +257,6 @@
         endif
     endfunction "}}}
 
-    fun! rc#NTToggle() "{{{
-        if !exists('g:NTToggle') || !g:NTToggle
-            let g:NTToggle = 1 | NERDTree | TagbarOpen
-            cwindow
-            wincmd l
-        else
-            let g:NTToggle = 0 | NERDTreeClose | TagbarClose
-            cclose
-        endif
-    endfunction "}}}
-
 " }}}
 
 
@@ -411,16 +400,6 @@
     nnoremap <leader>gpp :Git push<CR>
     nnoremap <leader>gpm :Git push origin master<CR>
 
-    noremap <F9> :emenu G.<TAB>
-    menu G.Status :Gstatus<CR>
-    menu G.Diff :Gdiff<CR>
-    menu G.Commit :Gcommit %<CR>
-    menu G.Checkout :Gread<CR>
-    menu G.Remove :Gremove<CR>
-    menu G.Move :Gmove<CR>
-    menu G.Log :Glog<CR>
-    menu G.Blame :Gblame<CR>
-
     " VimWiki
     let g:vimwiki_folding = 1
     let g:vimwiki_fold_lists = 1
@@ -474,6 +453,8 @@
         " Fast scrool
         nnoremap <C-e> 3<C-e>
         nnoremap <C-y> 3<C-y>
+        nnoremap U <C-u>
+        nnoremap D <C-d>
 
         " Select all
         map vA ggVG
@@ -541,21 +522,17 @@
         vnoremap <silent> <C-F> <Esc>a<C-^><Esc>gv
     
         " NERDTree keys
-        call rc#Map_ex_cmd("<F1>", "NERDTreeToggle")
+        call rc#Map_ex_cmd("<leader>t", "NERDTreeToggle")
         nnoremap <silent> <leader>f :NERDTreeFind<CR>
-
-        " Toggle NERDTRee and Tagbar
-        nnoremap <F2> :call rc#NTToggle()<CR>
         
         " Toggle tagbar
         call rc#Map_ex_cmd("<F3>", "TagbarToggle")
 
-        call rc#Toggle_option("<F6>", "list")      " Переключение подсветки невидимых символов
-        call rc#Toggle_option("<F7>", "wrap")      " Переключение переноса слов
+        call rc#Toggle_option("<leader>ol", "list")      " Переключение подсветки невидимых символов
+        call rc#Toggle_option("<leader>or", "wrap")      " Переключение переноса слов
 
         " Close files
-        call rc#Map_ex_cmd("<F10>", "qa")
-        call rc#Map_ex_cmd("<S-F10>", "qa!")
+        call rc#Map_ex_cmd("<leader>qq", "qa")
 
         " Session UI
         nnoremap <Leader>ss :call rc#SessionInput('Save')<CR>
