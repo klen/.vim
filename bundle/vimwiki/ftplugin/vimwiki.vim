@@ -23,7 +23,7 @@ setlocal autowriteall
 setlocal commentstring=%%%s
 
 if g:vimwiki_conceallevel && exists("+conceallevel")
-  let &conceallevel = g:vimwiki_conceallevel
+  let &l:conceallevel = g:vimwiki_conceallevel
 endif
 
 " MISC }}}
@@ -63,6 +63,7 @@ endif
 " COMMENTS }}}
 
 " FOLDING for headers and list items using expr fold method. {{{
+
 function! VimwikiFoldLevel(lnum) "{{{
   let line = getline(a:lnum)
 
@@ -72,46 +73,48 @@ function! VimwikiFoldLevel(lnum) "{{{
     return '>'.n
   endif
 
-  let base_level = s:get_base_level(a:lnum)
+  let nnline = getline(a:lnum + 1)
 
-  " List item folding...
-  if g:vimwiki_fold_lists
-    let nnline = getline(a:lnum + 1)
-    
-    let rx_list_item = '\('.
-          \ g:vimwiki_rxListBullet.'\|'.g:vimwiki_rxListNumber.
-          \ '\)'
+  if nnline =~ g:vimwiki_rxHeader
+    let n = vimwiki#u#count_first_sym(nnline)
+    return '<'.n
+  endif
 
+  if !g:vimwiki_fold_lists
+    return -1
+  " List item folding... very slow
+  else
+    let base_level = s:get_base_level(a:lnum)
 
-    if line =~ rx_list_item
-      let [nnum, nline] = s:find_forward(rx_list_item, a:lnum)
+    if line =~ g:vimwiki_rxListItem
+      let [nnum, nline] = s:find_forward(g:vimwiki_rxListItem, a:lnum)
       let level = s:get_li_level(a:lnum)
       let leveln = s:get_li_level(nnum)
-      let adj = s:get_li_level(s:get_start_list(rx_list_item, a:lnum))
+      let adj = s:get_li_level(s:get_start_list(g:vimwiki_rxListItem, a:lnum))
 
       if leveln > level
         return ">".(base_level+leveln-adj)
       " check if multilined list item
       elseif (nnum-a:lnum) > 1 
-            \ && nline =~ rx_list_item && nnline !~ '^\s*$'
+            \ && nline =~ g:vimwiki_rxListItem && nnline !~ '^\s*$'
         return ">".(base_level+level+1-adj)
       else
         return (base_level+level-adj)
       endif
     else
       " process multilined list items
-      let [pnum, pline] = s:find_backward(rx_list_item, a:lnum)
-      if pline =~ rx_list_item
+      let [pnum, pline] = s:find_backward(g:vimwiki_rxListItem, a:lnum)
+      if pline =~ g:vimwiki_rxListItem
         if indent(a:lnum) >= indent(pnum) && line !~ '^\s*$'
           let level = s:get_li_level(pnum)
-          let adj = s:get_li_level(s:get_start_list(rx_list_item, pnum))
+          let adj = s:get_li_level(s:get_start_list(g:vimwiki_rxListItem, pnum))
           return (base_level+level+1-adj)
         endif
       endif
     endif
-  endif
 
-  return base_level
+    return base_level
+  endif
 endfunction "}}}
 
 function! s:get_base_level(lnum) "{{{

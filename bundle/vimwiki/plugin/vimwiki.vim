@@ -195,13 +195,12 @@ function! s:setup_buffer_enter() "{{{
   " Settings foldmethod, foldexpr and foldtext are local to window. Thus in a
   " new tab with the same buffer folding is reset to vim defaults. So we
   " insist vimwiki folding here.
-  if g:vimwiki_folding == 2 && &fdm != 'expr'
-    " User-defined fold-expression, and fold-text
-  endif
-  if g:vimwiki_folding == 1
+  if g:vimwiki_folding == 'expr'
     setlocal fdm=expr
     setlocal foldexpr=VimwikiFoldLevel(v:lnum)
     setlocal foldtext=VimwikiFoldText()
+  elseif g:vimwiki_folding == 'syntax'
+    setlocal fdm=syntax
   endif
 
   " And conceal level too.
@@ -372,12 +371,12 @@ let s:vimwiki_defaults.list_margin = -1
 call s:default('list', [s:vimwiki_defaults])
 call s:default('auto_checkbox', 1)
 call s:default('use_mouse', 0)
-call s:default('folding', 0)
+call s:default('folding', '')
 call s:default('fold_trailing_empty_lines', 0)
 call s:default('fold_lists', 0)
 call s:default('menu', 'Vimwiki')
 call s:default('global_ext', 1)
-call s:default('ext2syntax', {'.md': 'markdown'}) " syntax map keyed on extension
+call s:default('ext2syntax', {}) " syntax map keyed on extension
 call s:default('hl_headers', 0)
 call s:default('hl_cb_checked', 0)
 call s:default('list_ignore_newline', 1)

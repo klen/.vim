@@ -5,6 +5,10 @@
 # "customwiki2html" option.  Experiment with the two proposed methods by 
 # commenting / uncommenting the relevant lines below.
 #
+#   NEW!  An alternative converter was developed by Jason6Anderson, and can
+#   be located at http://code.google.com/p/vimwiki/issues/detail?id=384
+#
+#
 # To use this script, you must have the Discount converter installed.
 #
 #   http://www.pell.portland.or.us/~orc/Code/discount/
@@ -38,7 +42,7 @@ FORCEFLAG=
 [ $FORCE -eq 0 ] || { FORCEFLAG="-f"; };
 [ $SYNTAX = "markdown" ] || { echo "Error: Unsupported syntax"; exit -2; };
 
-OUTPUT=$OUTPUTDIR/$(basename "$INPUT" .$EXTENSION).html
+OUTPUT="$OUTPUTDIR"/$(basename "$INPUT" .$EXTENSION).html
 
 # # Method 1:
 # # markdown [-d] [-T] [-V] [-b url-base] [-C prefix] [-F bitmap] [-f flags] [-o file] [-s text] [-t text] [textfile]
@@ -50,9 +54,9 @@ OUTPUT=$OUTPUTDIR/$(basename "$INPUT" .$EXTENSION).html
 # Method 2:
 # mkd2html [-css file] [-header string] [-footer string] [file]
 
-$MKD2HTML -css $CSSFILE $INPUT
+$MKD2HTML -css "$CSSFILE" "$INPUT"
 OUTPUTTMP=$(dirname "$INPUT")/$(basename "$INPUT" ."$EXTENSION").html
-mv -f $OUTPUTTMP $OUTPUT
+mv -f "$OUTPUTTMP" "$OUTPUT"
 
 
 

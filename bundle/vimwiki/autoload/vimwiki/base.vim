@@ -441,7 +441,7 @@ function! vimwiki#base#system_open_link(url) "{{{
     execute '!open ' . shellescape(a:url, 1)
   endfunction
   function! s:linux_handler(url)
-    execute 'silent !xdg-open ' . shellescape(a:url, 1)
+    call system('xdg-open ' . shellescape(a:url, 1).' &')
   endfunction
   let success = 0
   try 

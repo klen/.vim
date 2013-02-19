@@ -1641,13 +1641,24 @@ The following arguments, in this order, are passed to the
 4. output_dir : the full path of the output directory, i.e. 'path_html'
 5. input_file : the full path of the wiki page
 6. css_file : the full path of the css file for this wiki
+7. template_path : the full path to the wiki's templates
+8. template_default : the default template name
+9. template_ext : the extension of template files
+10. root_path : a count of ../ for pages buried in subdirs
+    if you have wikilink [[dir1/dir2/dir3/my page in a subdir]] then
+    %root_path% is replaced by '../../../'.
+
+Options 7-10 are experimental and may change in the future.  If any of these
+parameters is empty, then a hyphen "-" is passed to the script in its place.
 
 For an example and further instructions, refer to the following script:
 
   $VIMHOME/autoload/vimwiki/customwiki2html.sh
 
-To use the internal wiki2html converter, use an empty string (the default).
+An alternative converter was developed by Jason6Anderson, and can
+be located at http://code.google.com/p/vimwiki/issues/detail?id=384
 
+To use the internal wiki2html converter, use an empty string (the default).
 
 *vimwiki-option-list_margin*
 ------------------------------------------------------------------------------
@@ -1736,7 +1747,7 @@ An extension that is registered with vimwiki can trigger creation of a
 |g:vimwiki_list| are automatically registered with vimwiki using the default
 syntax.
 
-Default: {'.md': 'markdown'}
+Default: {}
 
 ------------------------------------------------------------------------------
 *g:vimwiki_auto_checkbox*
@@ -1797,25 +1808,34 @@ Default: 0
 *g:vimwiki_folding*
 
 Enable/disable vimwiki's folding/outline functionality. Folding in vimwiki 
-uses the 'expr' foldmethod which is very flexible but really slow.
+can uses either the 'expr' or the 'syntax' foldmethod of Vim.
 
 Value           Description~
-0               Disable folding.
-1               Enable folding.
+''              Disable folding.
+'expr'          Enable folding based on expression function (more flexible).
+'syntax'        Enable folding based on syntax (might be faster).
 
-Default: 0
+Default: ''
+
+
+'syntax' limitations:
+  - folding for list items is not possible,
+  - only available for default syntax so far.
 
 
 ------------------------------------------------------------------------------
 *g:vimwiki_fold_lists*
 
-Enable/disable folding of list subitems.
+Enable/disable folding of list subitems. Enabling this option can make
+work with larger files very slow.
 
 Value           Description~
 0               Disable list subitem's folding.
 1               Enable list subitem's folding.
 
 Default: 0
+
+List folding works only with the 'expr' method of |g:vimwiki_folding|.
 
 
 ------------------------------------------------------------------------------
@@ -2068,7 +2088,7 @@ Default: '' (empty)
 ------------------------------------------------------------------------------
 *g:vimwiki_valid_html_tags*
 
-Comma-separated list of HTML tags that can be used in vimwiki.
+Case-insensitive comma separated list of HTML tags that can be used in vimwiki.
 
 Default: 'b,i,s,u,sub,sup,kbd,br,hr'
 
@@ -2185,6 +2205,16 @@ Vim plugins: http://www.vim.org/scripts/script.php?script_id=2226
 
 ==============================================================================
 14. Changelog                                              *vimwiki-changelog*
+
+'DEV'~
+
+    * Issue 261: Syntax folding is back. |g:vimwiki_folding| values are
+      changed to '', 'expr', 'syntax'.
+    * Issue 372: Ignore case in g:vimwiki_valid_html_tags
+    * Issue 380: Fixed
+    * Issue 384: Custom_wiki2html script now receives templating arguments
+    * Issue 393: Custom_wiki2html script path can contain tilde character
+    * Issue 392: Custom_wiki2html arguments are quoted, e.g names with spaces
 
 2.0.1 'stu'~
 
