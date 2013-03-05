@@ -453,8 +453,6 @@
         " Fast scrool
         nnoremap <C-e> 3<C-e>
         nnoremap <C-y> 3<C-y>
-        nnoremap U <C-u>
-        nnoremap D <C-d>
 
         " Select all
         map vA ggVG
