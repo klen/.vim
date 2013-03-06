@@ -218,7 +218,12 @@
             return
         endif
 
-        execute 'noautocmd vimgrep /'.pattern.'/gj '.startdir.'/**/'.filepattern | botright copen
+        try
+            execute 'noautocmd vimgrep /'.pattern.'/gj '.startdir.'/**/'.filepattern
+            botright copen
+        catch /.*/
+            echohl WarningMsg | echo "Not found: ".pattern | echohl None
+        endtry
     endfun "}}} 
 
     " Restore cursor position
