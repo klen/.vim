@@ -391,7 +391,7 @@
     let g:pymode_rope_goto_def_newwin = "new"
     let g:pymode_syntax_builtin_funcs = 1
     let g:pymode_syntax_print_as_function = 1
-    let g:pymode_lint_mccabecomplexity = 8
+    let g:pymode_lint_mccabe_complexity = 8
     let g:pymode_lint_checker = "pylint,pep8,pyflakes,mccabe"
 
     " Fugitive
