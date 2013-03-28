@@ -136,6 +136,7 @@
     " Edit
     set backspace=indent,eol,start " Allow backspace to remove indents, newlines and old tex"
     set virtualedit=all         " on virtualedit for all mode
+    set nrformats=              " dont use octal and hex in number operations
 
     set confirm
     set numberwidth=1              " Keep line numbers small if it's shown
@@ -143,7 +144,7 @@
     " Open help in a vsplit rather than a split
     command! -nargs=? -complete=help Help :vertical help <args>
     cabbrev h h<C-\>esubstitute(getcmdline(), '^h\>', 'Help', '')<CR>
-                                            
+
     set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
 " }}}
@@ -448,14 +449,8 @@
         " Not jump on star, only highlight
         nnoremap * *N
 
-        " Split line in current cursor position
-        noremap <S-O>       i<CR><ESC>
-
         " Drop hightlight search result
         noremap <leader><space> :nohls<CR>
-
-        " Unfold
-        noremap <space> za
 
         " Fast scrool
         nnoremap <C-e> 3<C-e>
@@ -465,60 +460,40 @@
         map vA ggVG
 
         " Close cwindow
-        nnoremap <silent> ,ll :ccl<CR>
+        nnoremap <silent> <leader>ll :ccl<CR>
 
         " Quickfix fast navigation
-        nnoremap <silent> ,nn :cwindow<CR>:cn<CR>
-        nnoremap <silent> ,pp :cwindow<CR>:cp<CR>
+        nnoremap <silent> <leader>nn :cwindow<CR>:cn<CR>
+        nnoremap <silent> <leader>pp :cwindow<CR>:cp<CR>
 
         " Window commands
-        nnoremap <silent> ,h :wincmd h<CR>
-        nnoremap <silent> ,j :wincmd j<CR>
-        nnoremap <silent> ,k :wincmd k<CR>
-        nnoremap <silent> ,l :wincmd l<CR>
-        nnoremap <silent> ,+ :wincmd +<CR>
-        nnoremap <silent> ,- :wincmd -<CR>
-        nnoremap <silent> ,cj :wincmd j<CR>:close<CR>
-        nnoremap <silent> ,ck :wincmd k<CR>:close<CR>
-        nnoremap <silent> ,ch :wincmd h<CR>:close<CR>
-        nnoremap <silent> ,cl :wincmd l<CR>:close<CR>
-        nnoremap <silent> ,cw :close<CR>
+        nnoremap <silent> <leader>h :wincmd h<CR>
+        nnoremap <silent> <leader>j :wincmd j<CR>
+        nnoremap <silent> <leader>k :wincmd k<CR>
+        nnoremap <silent> <leader>l :wincmd l<CR>
+        nnoremap <silent> <leader>+ :wincmd +<CR>
+        nnoremap <silent> <leader>- :wincmd -<CR>
+        nnoremap <silent> <leader>cj :wincmd j<CR>:close<CR>
+        nnoremap <silent> <leader>ck :wincmd k<CR>:close<CR>
+        nnoremap <silent> <leader>ch :wincmd h<CR>:close<CR>
+        nnoremap <silent> <leader>cl :wincmd l<CR>:close<CR>
+        nnoremap <silent> <leader>cw :close<CR>
 
         " Buffer commands
-        noremap <silent> ,bp :bp<CR>
-        noremap <silent> ,bn :bn<CR>
-        noremap <silent> ,ww :w<CR>
-        noremap <silent> ,bd :bd<CR>
-        noremap <silent> ,ls :Bufferlist<CR>
+        noremap <silent> <leader>bp :bp<CR>
+        noremap <silent> <leader>bn :bn<CR>
+        noremap <silent> <leader>ww :w<CR>
+        noremap <silent> <leader>bd :bd<CR>
+        noremap <silent> <leader>ls :Bufferlist<CR>
 
         " Delete all buffers
-        nnoremap <silent> ,da :exec "1," . bufnr('$') . "bd"<cr>
+        nnoremap <silent> <leader>da :exec "1," . bufnr('$') . "bd"<cr>
 
         " Search the current file for the word under the cursor and display matches
-        nnoremap <silent> ,gw :call rc#RGrep()<CR>
+        nnoremap <silent> <leader>gw :call rc#RGrep()<CR>
 
         " Open new tab
         call rc#Map_ex_cmd("<C-W>t", ":tabnew")
-
-        " Tab navigation
-        map <A-1> 1gt
-        map <A-2> 2gt
-        map <A-3> 3gt
-        map <A-4> 4gt
-        map <A-5> 5gt
-        map <A-6> 6gt
-        map <A-7> 7gt
-        map <A-8> 8gt
-        map <A-9> 9gt
-
-        " первая вкладка
-        call rc#Map_ex_cmd("<A-UP>", ":tabfirst")
-        " последняя вкладка
-        call rc#Map_ex_cmd("<A-DOWN>", ":tablast")
-        " переместить вкладку в начало
-        nmap Q :tabmove 0<cr>
-        " переместить вкладку в конец
-        call rc#Map_ex_cmd("<C-DOWN>", ":tabmove")
 
         " Keymap switch <C-F>
         cnoremap <silent> <C-F> <C-^>
@@ -571,6 +546,10 @@
     " Visual mode {{{
     " ------------
 
+        " Save selection after indentation
+        vnoremap > >gv
+        vnoremap < <gv
+
     " }}}
 
 " }}}
@@ -598,8 +577,8 @@ endif
 " Project settings
 " ================
 
-    " enables the reading of .vimrc, .exrc and .gvimrc in the current directory.
-    set exrc
+" enables the reading of .vimrc, .exrc and .gvimrc in the current directory.
+set exrc
 
-    " must be written at the last.  see :help 'secure'.
-    set secure  
+" must be written at the last.  see :help 'secure'.
+set secure

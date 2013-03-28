@@ -70,7 +70,7 @@ fun! statusline#setFull() "{{{
 
     setlocal statusline +=%=
     setlocal statusline +=%#Error#%{statusline#imiinsert()}%#Statusline#   " keymap
-    setlocal statusline +=\ \%-10.(%lx%c%V%)                               " position
+    setlocal statusline +=\ \%-10.(%c%Vx%l%)                               " position
     setlocal statusline +=\ %P                                             " position percentage
 endfunction "}}}
 
