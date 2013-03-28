@@ -546,10 +546,6 @@
     " Visual mode {{{
     " ------------
 
-        " Save selection after indentation
-        vnoremap > >gv
-        vnoremap < <gv
-
     " }}}
 
 " }}}
