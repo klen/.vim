@@ -443,6 +443,9 @@
         noremap j gj
         noremap k gk
 
+        " Switch folding in current line
+        noremap <space> za
+
         " Toggle paste mode
         noremap <silent> ,p :set invpaste<CR>:set paste?<CR>
 
