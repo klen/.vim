@@ -340,7 +340,7 @@
     let g:xptemplate_key = '<Tab>'
     let g:xptemplate_key_pum_only = '<S-Tab>'
     let g:xptemplate_highlight = 'following'
-    let g:xptemplate_vars = 'author=Kirill Klenov&email=horneds@gmail.com&SPfun=&SParg='
+    let g:xptemplate_vars = 'author=Kirill Klenov&email=horneds@gmail.com&SPfun=&SParg=&PYTHON_EXP_SYM= as '
     let g:xptemplate_brace_complete = 1
 
     " NERDCommenter
@@ -499,7 +499,7 @@
         call rc#Map_ex_cmd("<C-W>t", ":tabnew")
 
         " Keymap switch <C-F>
-        cnoremap <silent> <C-F> <C-^>
+        " cnoremap <silent> <C-F> <C-^>
         inoremap <silent> <C-F> <C-^>
         nnoremap <silent> <C-F> a<C-^><Esc>
         vnoremap <silent> <C-F> <Esc>a<C-^><Esc>gv
@@ -538,11 +538,12 @@
 
         " Allow command line editing like emacs
         cnoremap <C-A>      <Home>
-        cnoremap <C-B>      <Left>
         cnoremap <C-E>      <End>
-        cnoremap <C-F>      <Right>
         cnoremap <C-N>      <Down>
         cnoremap <C-P>      <Up>
+
+        " Write as sudo
+        command! W %!sudo tee > /dev/null %
 
     " }}}
 
