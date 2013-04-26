@@ -130,7 +130,8 @@
     let g:solarized_contrast = "high"
     let g:solarized_termtrans = 1
 
-    colo wombat256
+    " colo wombat256
+    colo jellybeans
     " colo solarized
 
     " Edit
