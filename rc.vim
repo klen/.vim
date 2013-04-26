@@ -57,11 +57,11 @@
     set scrolloff=4             " min 4 symbols bellow cursor
     set sidescroll=4
     set sidescrolloff=10
-    set showcmd
+    set showcmd                 " Show commands
     set whichwrap=b,s,<,>,[,],l,h
     set completeopt=menu,preview
     set infercase
-    set cmdheight=2
+    " set cmdheight=2
 
     " Tab options
     set autoindent              " copy indent from previous line
@@ -125,10 +125,11 @@
         set t_Co=256            " set 256 colors
     endif
 
-    " Color theme
-    let g:solarized_termcolors=256
+    " Color themes
+    let g:solarized_termcolors = 256
     let g:solarized_contrast = "high"
     let g:solarized_termtrans = 1
+    let g:jellybeans_background_color_256 = 234
 
     " colo wombat256
     colo jellybeans
