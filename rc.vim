@@ -61,7 +61,7 @@
     set whichwrap=b,s,<,>,[,],l,h
     set completeopt=menu,preview
     set infercase
-    " set cmdheight=2
+    set nojoinspaces
 
     " Tab options
     set autoindent              " copy indent from previous line
@@ -98,10 +98,11 @@
     set fileencodings=utf-8,cp1251,koi8-r,cp866
     set termencoding=utf-8
 
-    " Wildmenu
+    " Tab completion in command line mode
     set wildmenu                " use wildmenu ...
+    set wildmode=full
     set wildcharm=<TAB>
-    set wildignore=*.pyc        " ignore file pattern
+    set wildignore=*.pyc,*.pdf  " ignore file pattern
 
     " Undo
     if has('persistent_undo')
@@ -166,32 +167,6 @@
     " Option switcher helper
     fun! rc#Toggle_option(key, opt) "{{{ 
       call rc#Map_ex_cmd(a:key, "set ".a:opt."! ".a:opt."?")
-    endfun "}}} 
-
-    " Sessions
-    fun! rc#SessionRead(name) "{{{ 
-        let s:name = g:SESSION_DIR.'/'.a:name.'.session'
-        if getfsize(s:name) >= 0
-            echo "Reading " s:name
-            exe 'source '.s:name
-            exe 'silent! source '.getcwd().'/.vim/.vimrc'
-        else
-            echo 'Not find session: '.a:name
-        endif
-    endfun "}}} 
-
-    fun! rc#SessionInput(type) "{{{ 
-        let s:name = input(a:type.' session name? ')
-        if a:type == 'Save'
-            call rc#SessionSave(s:name)
-        else
-            call rc#SessionRead(s:name)
-        endif
-    endfun "}}} 
-
-    fun! rc#SessionSave(name) "{{{ 
-        exe "mks! " g:SESSION_DIR.'/'.a:name.'.session'
-        echo "Session" a:name "saved"
     endfun "}}} 
 
     " Omni and dict completition
@@ -291,7 +266,7 @@
 
             " Autosave last session
             if has('mksession') 
-                au VimLeavePre * :call rc#SessionSave('last')
+                au VimLeavePre * exe "mks! " g:SESSION_DIR.'/last.session'
             endif
 
             " Save current open file when window focus is lost
@@ -420,6 +395,9 @@
     \ ]
     nmap <Leader>wv <Plug>VimwikiIndex
 
+    " Startify
+    let g:startify_session_dir = g:SESSION_DIR
+
 " }}}
 
 
@@ -521,9 +499,9 @@
         call rc#Map_ex_cmd("<leader>qq", "qa")
 
         " Session UI
-        nnoremap <Leader>ss :call rc#SessionInput('Save')<CR>
-        nnoremap <Leader>sr :call rc#SessionInput('Read')<CR>
-        nnoremap <Leader>sl :call rc#SessionRead('last')<CR>
+        nnoremap <Leader>ss :SSave<CR>
+        nnoremap <Leader>sr :SLoad<CR>
+        nnoremap <Leader>sl :SLoad last.session<CR>
 
         " Show syntax highlighting groups for word under cursor
         nmap <C-S-P> :call <SID>SynStack()<CR>
