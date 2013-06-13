@@ -371,7 +371,7 @@
     let g:pymode_syntax_builtin_funcs = 1
     let g:pymode_syntax_print_as_function = 1
     let g:pymode_lint_mccabe_complexity = 10
-    let g:pymode_lint_checker = "pylint,pep8,pyflakes,mccabe"
+    let g:pymode_lint_checker = "pylint,pep8,pyflakes,mccabe,pep257"
 
     " Fugitive
     nnoremap <leader>gs :Gstatus<CR>

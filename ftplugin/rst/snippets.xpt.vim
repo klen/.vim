@@ -13,5 +13,20 @@ XSETm END
 XPT ref " :ref:`...`
 :ref:`~ref^`
 
+XPT class " :class:`...`
+:class:`~class^`
+
 XPT image " :image:...
 .. image:: ~source^
+
+XPT param " :param:...
+:param ~param^:
+
+XPT type " :type:...
+:type ~type^:
+
+XPT rtype " :rtype:...
+:rtype: ~return^
+
+XPT include " .. include
+.. include:: ~include^

@@ -1,5 +1,3 @@
-
-
 " Vim color file
 " Maintainer:   
 " Last Change:  
