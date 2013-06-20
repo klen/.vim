@@ -1,8 +1,15 @@
 XPTemplate priority=personal mark=~^
 
-XPTinclude _common/common
+XPTinclude
+        \ rst/rst
 
 XPTvar $DATE_FMT     '%Y-%m-%d'
+
+XPT bold wrap=text " **..**
+**~text^**
+
+XPT quote wrap=text " ``..``
+``~text^``
 
 XPT term wrap=TERM " :term:`...`
 :term:`~term^~<...^`~cursor^
@@ -13,14 +20,14 @@ XSETm END
 XPT ref " :ref:`...`
 :ref:`~ref^`
 
-XPT class " :class:`...`
-:class:`~class^`
-
 XPT image " :image:...
 .. image:: ~source^
 
 XPT param " :param:...
 :param ~param^:
+
+XPT return " :return...
+:return ~return^:
 
 XPT type " :type:...
 :type ~type^:
