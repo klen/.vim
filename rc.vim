@@ -398,6 +398,13 @@
     " Startify
     let g:startify_session_dir = g:SESSION_DIR
 
+    " Airline
+    let g:airline_detect_iminsert = 1
+    let g:airline_exclude_preview = 1
+    let g:airline_left_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_theme = 'badwolf'
+
 " }}}
 
 
