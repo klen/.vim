@@ -62,6 +62,7 @@
     set completeopt=menu,preview
     set infercase
     set nojoinspaces
+    set laststatus=2            " Always show a statusline
 
     " Tab options
     set autoindent              " copy indent from previous line
