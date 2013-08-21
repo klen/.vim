@@ -40,9 +40,6 @@
 [submodule "bundle/vim-startify"]
 	path = bundle/vim-startify
 	url = git://github.com/mhinz/vim-startify.git
-[submodule "bundle/airline"]
-	path = bundle/airline
-	url = https://github.com/bling/vim-airline
 [submodule "bundle/salt-vim"]
 	path = bundle/salt-vim
 	url = https://github.com/saltstack/salt-vim
