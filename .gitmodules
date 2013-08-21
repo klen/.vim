@@ -16,9 +16,6 @@
 [submodule "bundle/hsmode.git"]
 	path = bundle/hsmode.git
 	url = git://github.com/klen/hsmode.git
-[submodule "xptemplate.git"]
-	path = bundle/xptemplate.git
-	url = https://github.com/drmingdrmer/xptemplate.git
 [submodule "bundle/vim-orgmode.git"]
 	path = bundle/vim-orgmode.git
 	url = https://github.com/jceb/vim-orgmode.git
