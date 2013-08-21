@@ -398,6 +398,16 @@
 
     " Startify
     let g:startify_session_dir = g:SESSION_DIR
+    let g:startify_custom_header = [
+                \ '   __      ___            ______ ____   ',
+                \ '   \ \    / (_)           |____  |___ \ ',
+                \ '    \ \  / / _ _ __ ___       / /  __) |',
+                \ '     \ \/ / | | ''_ ` _ \     / /  |__ <',
+                \ '      \  /  | | | | | | |   / /   ___) |',
+                \ '       \/   |_|_| |_| |_|  /_(_) |____/ ',
+                \ '',
+                \ '',
+                \ ]
 
     " Airline
     let g:airline_detect_iminsert = 1
