@@ -31,9 +31,6 @@
 [submodule "bundle/ctrip"]
 	path = bundle/ctrip
 	url = git://github.com/kien/ctrlp.vim.git
-[submodule "bundle/vim-startify"]
-	path = bundle/vim-startify
-	url = git://github.com/mhinz/vim-startify.git
 [submodule "bundle/salt-vim"]
 	path = bundle/salt-vim
 	url = https://github.com/saltstack/salt-vim
