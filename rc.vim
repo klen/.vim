@@ -272,7 +272,7 @@
 
             " Autosave last session
             if has('mksession') 
-                au VimLeavePre * exe "mks! " g:SESSION_DIR.'/last.session'
+                au VimLeavePre * exe "mks! " g:SESSION_DIR.'/last.vim'
             endif
 
             " Save current open file when window focus is lost
