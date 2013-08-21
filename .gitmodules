@@ -1,12 +1,6 @@
 [submodule "bundle/python-mode.git"]
 	path = bundle/python-mode.git
 	url = git://github.com/klen/python-mode.git
-[submodule "bundle/hsmode.git"]
-	path = bundle/hsmode.git
-	url = git://github.com/klen/hsmode.git
-[submodule "bundle/jsmode.git"]
-	path = bundle/jsmode.git
-	url = git://github.com/klen/vim-jsmode.git
 [submodule "bundle/salt-vim"]
 	path = bundle/salt-vim
 	url = https://github.com/saltstack/salt-vim
