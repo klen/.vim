@@ -6,5 +6,4 @@ tags
 _*
 spell/*.utf-8.add
 spell/*.utf-8.add.spl
-bundle/vim-voice
-bundle/.neobundle
+bundle/*
