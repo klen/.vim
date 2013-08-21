@@ -19,9 +19,6 @@
 [submodule "bundle/vim-orgmode.git"]
 	path = bundle/vim-orgmode.git
 	url = https://github.com/jceb/vim-orgmode.git
-[submodule "bundle/tagbar.git"]
-	path = bundle/tagbar.git
-	url = https://github.com/majutsushi/tagbar.git
 [submodule "bundle/solarized"]
 	path = bundle/solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
