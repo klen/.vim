@@ -55,3 +55,6 @@
 [submodule "bundle/airline"]
 	path = bundle/airline
 	url = https://github.com/bling/vim-airline
+[submodule "bundle/salt-vim"]
+	path = bundle/salt-vim
+	url = https://github.com/saltstack/salt-vim
