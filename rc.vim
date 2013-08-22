@@ -658,6 +658,8 @@
 
         NeoBundleLazy 'tsukkee/unite-help', {'autoload':{'unite_sources':'help'}}
 
+        NeoBundleLazy 'unite-radio.vim', {'autoload':{'unite_sources':'radio'}}
+
         source $HOME/.vim/unite.vim
 
   

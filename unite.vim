@@ -29,7 +29,7 @@ call unite#filters#sorter_default#use(['sorter_rank'])
 
 nnoremap [menu] <Nop>
 nmap <LocalLeader> [menu]
-nnoremap <silent>[menu]u :Unite -silent -winheight=11 menu<CR>
+nnoremap <silent>[menu]u :Unite -silent -winheight=12 menu<CR>
 
 " Buffers, tabs and windows operations {{{
 
@@ -74,8 +74,7 @@ nnoremap <silent>[menu]u :Unite -silent -winheight=11 menu<CR>
         \['search directory with recursive search', 'Unite directory_rec/async'],
         \['make new directory', 'Unite directory/new'],
         \['change working directory', 'Unite -default-action=lcd directory'],
-        \['know current working directory', 'Unite output:pwd'],
-        \['junk files                                                 ⌘ ,d', 'Unite junkfile/new junkfile'],
+        \['know current working directory', 'Unite -winheight=3 output:pwd'],
         \['save as root                                               ⌘ :w!!', 'exe "write !sudo tee % >/dev/null"'],
         \['quick save                                                 ⌘ ,w', 'normal ,w'],
     \]
@@ -155,6 +154,7 @@ nnoremap <silent>[menu]u :Unite -silent -winheight=11 menu<CR>
         \['vim command output', 'Unite output'],
         \['unite sources', 'Unite source'],
         \['kill process', 'Unite -default-action=sigkill process'],
+        \['play radio', 'Unite radio'],
         \['launch executable (dmenu like)', 'Unite -start-insert launcher'],
     \]
 
