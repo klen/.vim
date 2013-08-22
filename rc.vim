@@ -403,11 +403,12 @@
         function! ToggleRelativeAbsoluteNumber()
             if !&number && !&relativenumber
                 set number
-            elseif &number && !&relativenumber
-                set nonumber
                 set relativenumber
-            elseif !&number && &relativenumber
+            elseif &relativenumber
                 set norelativenumber
+                set number
+            elseif &number
+                set nonumber
             endif
         endfunction
 
