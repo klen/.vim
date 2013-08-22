@@ -1,5 +1,5 @@
-[submodule "bundle/python-mode.git"]
-	path = bundle/python-mode.git
+[submodule "bundle/python-mode"]
+	path = bundle/python-mode
 	url = git://github.com/klen/python-mode.git
 [submodule "bundle/neobundle.vim"]
 	path = bundle/neobundle.vim

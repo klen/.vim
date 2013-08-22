@@ -601,7 +601,7 @@
     " Python-mode {{{
     " ===========
 
-        " NeoBundle "klen/python-mode"
+        " NeoBundle "python-mode.git"
 
         let g:pymode_lint_hold = 0
         let g:pymode_syntax_builtin_objs = 0
