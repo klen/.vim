@@ -618,7 +618,7 @@
     " WIKI {{{
     " ====
 
-        NeoBundle "vimwiki/vimwiki"
+        NeoBundle "vimwiki/vimwiki", "dev"
         
         let g:vimwiki_folding = 1
         let g:vimwiki_fold_lists = 1
@@ -649,7 +649,7 @@
 
         NeoBundleLazy 'Shougo/unite-outline', {'autoload':{'unite_sources':'outline'}}
 
-        NeoBundleLazy 'Shougo/unite-session', {'autoload':{'unite_sources':'session'}}
+        NeoBundleLazy 'Shougo/unite-session', {'autoload':{'unite_sources':'session', 'commands': ['UniteSessionSave', 'UniteSessionLoad']}}
 
         NeoBundleLazy 'osyo-manga/unite-quickfix', {'autoload':{'unite_sources': ['quickfix', 'location_list']}}
 
@@ -675,6 +675,15 @@
         nnoremap <leader>uu :GundoToggle<CR>
     
     " }}}
+
+    " VimSpec {{{
+    " =======
+
+        " Testing framework for Vim script
+        NeoBundle 'kana/vim-vspec'
+    
+    " }}}
+
 
 " }}}
 

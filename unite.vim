@@ -125,11 +125,11 @@ nnoremap <silent>[menu]u :Unite -silent -winheight=12 menu<CR>
 " Sessions {{{
 
     let g:unite_source_menu_menus.sessions = {
-        \ 'description' : '       sessions                                              ⌘ [space]h'}
+        \ 'description' : '       sessions                                              ⌘ [space]s'}
 
     let g:unite_source_menu_menus.sessions.command_candidates = [
-        \['load session', 'Unite session'],
-        \['load last auto-session', 'SLoad last.vim'],
+        \['session list', 'Unite session'],
+        \['load last auto-session', 'UniteSessionLoad last.vim'],
         \['save session (default)', 'UniteSessionSave'],
         \['save session (custom)', 'exe "UniteSessionSave " input("name: ")'],
     \]
