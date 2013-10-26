@@ -460,6 +460,8 @@
     " Support for SALT
     NeoBundle 'saltstack/salt-vim'
 
+    NeoBundle 'NsLib/vim-DoxygenToolkit-mod'
+
     " Disable plugins for LargeFile
     NeoBundle 'LargeFile'
 
@@ -681,6 +683,14 @@
 
         " Testing framework for Vim script
         NeoBundle 'kana/vim-vspec'
+    
+    " }}}
+
+    " git-slides {{{
+    " ==========
+
+        " Testing framework for Vim script
+        " NeoBundle 'gelisam/git-slides'
     
     " }}}
 
