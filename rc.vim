@@ -56,8 +56,12 @@
 " Options {{{
 " =======
 
-    " Buffer options
-    set hidden                  " hide buffers when they are abandoned
+    " Buffer (File) options
+    set hidden                  " Edit multiple unsaved files at the same time
+    set confirm                 " Prompt to save unsaved changes when exiting
+                                " Keep various histories between edits
+    set viminfo='1000,f1,<500,:100,/100,h
+
     set autoread                " auto reload changed files
     set autowrite               " automatically save before commands like :next and :make
 
@@ -77,6 +81,8 @@
     set infercase
     set nojoinspaces
     set laststatus=2            " Always show a statusline
+    " Don't try to highlight lines longer than 800 characters.
+    set synmaxcol=800
 
     " Tab options
     set autoindent              " copy indent from previous line
@@ -87,21 +93,27 @@
     set softtabstop=4           " tab like 4 spaces
     set shiftround              " drop unused spaces
 
-    " Backup and swap files
-    set history=400             " history length
-    set viminfo+=h              " save history
-    set ssop-=blank             " dont save blank vindow
-    set ssop-=options           " dont save options
-
     " Search options
     set hlsearch                " Highlight search results
     set ignorecase              " Ignore case in search patterns
     set smartcase               " Override the 'ignorecase' option if the search pattern contains upper case characters
     set incsearch               " While typing a search command, show where the pattern
 
+    " Insert (Edit)
+    set backspace=indent,eol,start " Allow backspace to remove indents, newlines and old tex"
+    set nostartofline           " Emulate typical editor navigation behaviour
+    set nopaste                 " Start in normal (non-paste) mode
+    set virtualedit=all         " on virtualedit for all mode
+    set nrformats=              " dont use octal and hex in number operations
+
     " Matching characters
     set showmatch               " Show matching brackets
     set matchpairs+=<:>         " Make < and > match as well
+
+    " Backup and swap files
+    set history=400             " history length
+    set ssop-=blank             " dont save blank vindow
+    set ssop-=options           " dont save options
 
     " Localization
     set langmenu=none            " Always use english menu
@@ -114,17 +126,24 @@
     set termencoding=utf-8
 
     " Tab completion in command line mode
-    set wildmenu                " use wildmenu ...
-    set wildmode=full
+    set wildmenu                   " Better commandline completion
+    set wildmode=longest:full,full " Expand match on first Tab complete
     set wildcharm=<TAB>
-    set wildignore=*.pyc,*.pdf  " ignore file pattern
+    set wildignore+=.hg,.git,.svn                    " Version control
+    set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+    set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+    set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+    set wildignore+=*.spl                            " compiled spelling word lists
+    set wildignore+=*.sw?                            " Vim swap files
+    set wildignore+=*.DS_Store                       " OSX bullshit
 
-    " Edit
-    set backspace=indent,eol,start " Allow backspace to remove indents, newlines and old tex"
-    set virtualedit=all         " on virtualedit for all mode
-    set nrformats=              " dont use octal and hex in number operations
+    set wildignore+=*.luac                           " Lua byte code
 
-    set confirm
+    set wildignore+=migrations                       " Django migrations
+    set wildignore+=*.pyc                            " Python byte code
+
+    set wildignore+=*.orig                           " Merge resolution files
+
     set numberwidth=1              " Keep line numbers small if it's shown
 
     set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
@@ -147,6 +166,9 @@
     endif
 
     " Term
+    set mouse=a                    " Enable mouse usage (all modes) in terminals
+    " Quickly time out on keycodes, but never time out on mappings
+    set notimeout ttimeout ttimeoutlen=200
     if &term =~ "xterm"
         set t_Co=256            " set 256 colors
     endif
@@ -158,6 +180,9 @@
     " Color themes
     colo jellybeans
     let g:jellybeans_background_color_256 = 234
+
+    " Highlight VCS conflict markers
+    match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
     " Open help in a vsplit rather than a split
     command! -nargs=? -complete=help Help :vertical help <args>
@@ -174,15 +199,6 @@
 
 " Functions {{{
 " ==========
-
-    " Omni and dict completition
-    fun! rc#AddWrapper() "{{{ 
-        if exists('&omnifunc') && &omnifunc != ''
-            return "\<C-X>\<C-o>\<C-p>"
-        else
-            return "\<C-N>"
-        endif
-    endfun "}}} 
 
     " Recursive vimgrep
     fun! rc#RGrep() "{{{ 
@@ -260,10 +276,15 @@
             " Auto reload vim settins
             au! BufWritePost *.vim source ~/.vimrc
 
-            " Highlight insert mode
-            au InsertEnter * set cursorline
-            au InsertLeave * set nocursorline
-            
+            " Only show cursorline in the current window and in normal mode.
+            au WinLeave,InsertEnter * set nocursorline
+            au WinEnter,InsertLeave * set cursorline
+
+            au BufRead * :set cpoptions+=J
+
+            au InsertEnter * :set listchars-=trail:⌴
+            au InsertLeave * :set listchars+=trail:⌴
+
             " New file templates
             au BufNewFile * silent! call rc#load_template()
 
@@ -304,30 +325,43 @@
     " Insert mode {{{
     " ------------
 
-        " Omni and dict completition on space
-        inoremap <Nul> <C-R>=rc#AddWrapper()<CR>
-        inoremap <C-Space> <C-R>=rc#AddWrapper()<CR>
-
         " emacs style jump to end of line
-        inoremap <C-E> <C-o>A
-        inoremap <C-A> <C-o>I
+        inoremap <C-e> <C-o>A
+        inoremap <C-a> <C-o>I
+
+        inoremap <c-f> <c-x><c-f>
+        inoremap <c-]> <c-x><c-]>
 
     " }}}
     
     " Normal mode {{{
     " ------------
 
-        " Nice scrolling if line wrap
-        noremap j gj
-        noremap k gk
+	" F1 to be a context sensitive keyword-under-cursor lookup
+	nnoremap <F1> :help <C-R><C-W><CR>
 
-        nnoremap Y y$
+	" Reformat current paragraph
+	nnoremap Q gqap
 
-        " Switch folding in current line
-        noremap \ za
+	" Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
+	" which is the default
+	nnoremap Y y$
+
+        " Navigation
+        nnoremap j gj
+        nnoremap k gk
+        nnoremap gj j
+        nnoremap gk k
+        nnoremap H ^
+        nnoremap gI `.
+        nnoremap <left>  :cprev<cr>zvzz
+        nnoremap <right> :cnext<cr>zvzz
+        nnoremap <up>    :lprev<cr>zvzz
+        nnoremap <down>  :lnext<cr>zvzz
 
         " Toggle paste mode
-        noremap <silent> ,p :set invpaste<CR>:set paste?<CR>
+        noremap <leader>p :set paste!<CR>
+        noremap <localleader>p :silent! set paste<CR>"*p:set nopaste<CR>
 
         " Not jump on star, only highlight
         nnoremap * *N
@@ -335,12 +369,9 @@
         " Drop hightlight search result
         noremap <leader><space> :set invhlsearch<CR>
 
-        " Fast scrool
-        nnoremap <C-e> 3<C-e>
-        nnoremap <C-y> 3<C-y>
-
-        " Select all
-        map vA ggVG
+        " Select entire buffer
+        nnoremap Vaa ggVG
+        nnoremap vaa ggvGg_
 
         " QuickFix {{{
         "
@@ -431,15 +462,31 @@
     " ------------
 
         " Allow command line editing like emacs
-        cnoremap <C-A>      <Home>
-        cnoremap <C-E>      <End>
-        cnoremap <C-N>      <Down>
-        cnoremap <C-P>      <Up>
+        cnoremap <C-a>      <Home>
+        cnoremap <C-e>      <End>
+        cnoremap <C-n>      <Down>
+        cnoremap <C-p>      <Up>
 
         " Write as sudo
         command! W %!sudo tee > /dev/null %
 
     " }}}
+
+" }}}
+
+
+" Commands {{{
+
+" Typos
+command! -bang E e<bang>
+command! -bang Q q<bang>
+command! -bang W w<bang>
+command! -bang QA qa<bang>
+command! -bang Qa qa<bang>
+command! -bang Wa wa<bang>
+command! -bang WA wa<bang>
+command! -bang Wq wq<bang>
+command! -bang WQ wq<bang>
 
 " }}}
 
@@ -460,8 +507,6 @@
     " Support for SALT
     NeoBundle 'saltstack/salt-vim'
 
-    NeoBundle 'NsLib/vim-DoxygenToolkit-mod'
-
     " Disable plugins for LargeFile
     NeoBundle 'LargeFile'
 
@@ -470,28 +515,28 @@
 
     " HTML/CSS
     NeoBundleLazy 'othree/html5.vim', {'autoload':
-        \ {'filetypes': ['html', 'xhttml', 'css']}}
+      \ {'filetypes': ['html', 'xhttml', 'css']}}
 
     NeoBundleLazy 'mattn/emmet-vim', {'autoload':
-        \ {'filetypes': ['html', 'xhttml', 'css', 'xml', 'xls', 'markdown']}}
+      \ {'filetypes': ['html', 'xhttml', 'css', 'xml', 'xls', 'markdown']}}
 
     " NERDTree {{{
     " ========
 
-        " A tree explorer plugin for vim.
-        NeoBundle 'scrooloose/nerdtree'
+      " A tree explorer plugin for vim.
+      NeoBundle 'scrooloose/nerdtree'
 
-        let NERDTreeWinSize = 30
+      let NERDTreeWinSize = 30
 
-        " files/dirs to ignore in NERDTree (mostly the same as my svn ignores)
-        let NERDTreeIgnore=['\~$', '\.AppleDouble$', '\.beam$', 'build$',
-            \'dist$', '\.DS_Store$', '\.egg$', '\.egg-info$', '\.la$',
-            \'\.lo$', '\.\~lock.*#$', '\.mo$', '\.o$', '\.pt.cache$',
-            \'\.pyc$', '\.pyo$', '__pycache__$', '\.Python$', '\..*.rej$',
-            \'\.rej$', '\.ropeproject$', '\.svn$', '\.tags$' ]
+      " files/dirs to ignore in NERDTree (mostly the same as my svn ignores)
+      let NERDTreeIgnore=['\~$', '\.AppleDouble$', '\.beam$', 'build$',
+        \'dist$', '\.DS_Store$', '\.egg$', '\.egg-info$', '\.la$',
+        \'\.lo$', '\.\~lock.*#$', '\.mo$', '\.o$', '\.pt.cache$',
+        \'\.pyc$', '\.pyo$', '__pycache__$', '\.Python$', '\..*.rej$',
+        \'\.rej$', '\.ropeproject$', '\.svn$', '\.tags$' ]
 
-        nnoremap <silent> <leader>t :NERDTreeToggle<CR>
-        nnoremap <silent> <leader>f :NERDTreeFind<CR>
+      nnoremap <silent> <leader>t :NERDTreeToggle<CR>
+      nnoremap <silent> <leader>f :NERDTreeFind<CR>
 
     " }}}
 
@@ -508,28 +553,29 @@
     " Fugitive {{{
     " ========
 
-        " a Git wrapper so awesome, it should be illegal
-        NeoBundle 'tpope/vim-fugitive'
+      " a Git wrapper so awesome, it should be illegal
+      NeoBundle 'tpope/vim-fugitive'
 
-        " Browse Git history
-        NeoBundleLazy 'gregsexton/gitv', {'depends':['tpope/vim-fugitive'],
-            \ 'autoload':{'commands':'Gitv'}}
+      " Browse Git history
+      NeoBundleLazy 'gregsexton/gitv', {'depends':['tpope/vim-fugitive'],
+          \ 'autoload':{'commands':'Gitv'}}
 
-        nnoremap <leader>gs :Gstatus<CR>
-        nnoremap <leader>ga :Gwrite<CR>
-        nnoremap <leader>gc :Gcommit %<CR>
-        nnoremap <leader>gd :Gdiff<CR>
-        nnoremap <leader>gb :Gblame<CR>
-        nnoremap <leader>gr :Gremove<CR>
-        nnoremap <leader>go :Gread<CR>
-        nnoremap <leader>gpl :Git pull origin master<CR>
-        nnoremap <leader>gpp :Git push<CR>
-        nnoremap <leader>gpm :Git push origin master<CR>
-        nnoremap <leader>gl :Gitv! --all<CR>
-        nnoremap <leader>gL :Gitv --all<CR>
+      nnoremap <leader>gL :Gitv --all<CR>
+      nnoremap <leader>ga :Gadd<CR>
+      nnoremap <leader>gb :Gblame<CR>
+      nnoremap <leader>gc :Gcommit %<CR>
+      nnoremap <leader>gd :Gdiff<CR>
+      nnoremap <leader>gl :Gitv! --all<CR>
+      nnoremap <leader>go :Gread<CR>
+      nnoremap <leader>gpl :Git pull origin master<CR>
+      nnoremap <leader>gpm :Git push origin master<CR>
+      nnoremap <leader>gpp :Git push<CR>
+      nnoremap <leader>gr :Gremove<CR>
+      nnoremap <leader>gs :Gstatus<CR>
+      nnoremap <leader>gw :Gwrite<CR>
 
-        let g:Gitv_WipeAllOnClose = 1
-        let g:Gitv_DoNotMapCtrlKey = 1
+      let g:Gitv_WipeAllOnClose = 1
+      let g:Gitv_DoNotMapCtrlKey = 1
     
     " }}}
 
@@ -588,9 +634,11 @@
     " ========
 
         " A fancy start screen for Vim.
-	NeoBundle 'mhinz/vim-startify'
+        NeoBundle 'mhinz/vim-startify'
 
         let g:startify_session_dir = g:SESSION_DIR
+        let g:startify_change_to_vcs_root = 1
+        " let g:startify_change_to_dir = 0
         let g:startify_custom_header = [
             \ '           ______________________________________           ',
             \ '  ________|                                      |_______   ',
@@ -604,16 +652,17 @@
     " Python-mode {{{
     " ===========
 
-        NeoBundle "python-mode"
+        NeoBundle "pymode"
+        " NeoBundle "python-mode"
 
-        let g:pymode_lint_hold = 0
-        let g:pymode_syntax_builtin_objs = 0
-        let g:pymode_syntax_builtin_funcs = 0
-        let g:pymode_rope_goto_def_newwin = "new"
-        let g:pymode_syntax_builtin_funcs = 1
-        let g:pymode_syntax_print_as_function = 1
-        let g:pymode_lint_mccabe_complexity = 10
-        let g:pymode_lint_checker = "pylint,pep8,pyflakes,mccabe,pep257"
+        " let g:pymode_lint_hold = 0
+        " let g:pymode_syntax_builtin_objs = 0
+        " let g:pymode_syntax_builtin_funcs = 0
+        " let g:pymode_rope_goto_def_newwin = "new"
+        " let g:pymode_syntax_builtin_funcs = 1
+        " let g:pymode_syntax_print_as_function = 1
+        " let g:pymode_lint_mccabe_complexity = 10
+        " let g:pymode_lint_checker = "pylint,pep8,pyflakes,mccabe,pep257"
     
     " }}}
 
@@ -664,7 +713,6 @@
         NeoBundleLazy 'klen/unite-radio.vim', {'autoload':{'unite_sources':'radio'}}
 
         source $HOME/.vim/unite.vim
-
   
     " }}}
 
@@ -678,13 +726,43 @@
     
     " }}}
 
-    " VimSpec {{{
-    " =======
+    NeoBundle 'dahu/LearnVim'
+    NeoBundle 'kien/ctrlp.vim'
 
-        " Testing framework for Vim script
-        NeoBundle 'kana/vim-vspec'
-    
-    " }}}
+    let g:ctrlp_dont_split = 'NERD_tree_2'
+    let g:ctrlp_jump_to_buffer = 0
+    let g:ctrlp_working_path_mode = 0
+    let g:ctrlp_match_window_reversed = 1
+    let g:ctrlp_split_window = 0
+    let g:ctrlp_max_height = 20
+    let g:ctrlp_extensions = ['tag']
+
+    let g:ctrlp_map = '<leader>,'
+    nnoremap <leader>. :CtrlPTag<cr>
+
+    let g:ctrlp_prompt_mappings = {
+    \ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
+    \ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
+    \ 'PrtHistory(-1)':       ['<c-n>'],
+    \ 'PrtHistory(1)':        ['<c-p>'],
+    \ 'ToggleFocus()':        ['<c-tab>'],
+    \ }
+
+    let ctrlp_filter_greps = "".
+        \ "egrep -iv '\\.(" .
+        \ "jar|class|swp|swo|log|so|o|pyc|jpe?g|png|gif|mo|po" .
+        \ ")$' | " .
+        \ "egrep -v '^(\\./)?(" .
+        \ "deploy/|lib/|classes/|libs/|deploy/vendor/|.git/|.hg/|.svn/|.*migrations/|docs/build/" .
+        \ ")'"
+
+    let my_ctrlp_user_command = "" .
+        \ "find %s '(' -type f -or -type l ')' -maxdepth 15 -not -path '*/\\.*/*' | " .
+        \ ctrlp_filter_greps
+
+    let my_ctrlp_git_command = "" .
+        \ "cd %s && git ls-files --exclude-standard -co | " .
+        \ ctrlp_filter_greps
 
     " git-slides {{{
     " ==========
