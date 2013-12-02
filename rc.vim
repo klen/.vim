@@ -178,8 +178,9 @@
     let maplocalleader = " "
 
     " Color themes
-    colo jellybeans
-    let g:jellybeans_background_color_256 = 234
+    if !exists('g:colors_name')
+        colorscheme jellybeans
+    endif
 
     " Highlight VCS conflict markers
     match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -191,7 +192,7 @@
     " Some gui settings
     if has("gui_running")
         set guioptions=agimP
-        set guifont=Monaco\ 11
+        set guifont=Monaco\ 12
     endif
 
 " }}}
@@ -274,7 +275,7 @@
         au!
 
             " Auto reload vim settins
-            au! BufWritePost *.vim source ~/.vimrc
+            au! BufWritePost rc.vim source ~/.vimrc
 
             " Only show cursorline in the current window and in normal mode.
             au WinLeave,InsertEnter * set nocursorline
@@ -370,7 +371,6 @@
         noremap <leader><space> :set invhlsearch<CR>
 
         " Select entire buffer
-        nnoremap Vaa ggVG
         nnoremap vaa ggvGg_
 
         " QuickFix {{{
@@ -408,10 +408,10 @@
         nnoremap <silent> <leader>cw :close<CR>
 
         " Buffer commands
-        noremap <silent> <leader>bp :bp<CR>
-        noremap <silent> <leader>bn :bn<CR>
         noremap <silent> <leader>ww :w<CR>
         noremap <silent> <leader>bd :bd<CR>
+        noremap <silent> <leader>bn :bn<CR>
+        noremap <silent> <leader>bp :bp<CR>
 
         " Delete all buffers
         nnoremap <silent> <leader>da :exec "1," . bufnr('$') . "bd"<cr>
@@ -572,7 +572,6 @@ command! -bang WQ wq<bang>
       nnoremap <leader>gpp :Git push<CR>
       nnoremap <leader>gr :Gremove<CR>
       nnoremap <leader>gs :Gstatus<CR>
-      nnoremap <leader>gw :Gwrite<CR>
 
       let g:Gitv_WipeAllOnClose = 1
       let g:Gitv_DoNotMapCtrlKey = 1
@@ -586,7 +585,6 @@ command! -bang WQ wq<bang>
         NeoBundle 'bling/vim-airline'
 
         let g:airline_detect_iminsert = 1
-        let g:airline_exclude_preview = 1
         let g:airline_left_sep = ''
         let g:airline_right_sep = ''
         let g:airline_theme = 'wombat'
@@ -638,6 +636,12 @@ command! -bang WQ wq<bang>
 
         let g:startify_session_dir = g:SESSION_DIR
         let g:startify_change_to_vcs_root = 1
+        let g:startify_list_order = [
+            \ ['   Last recently opened files:'],
+            \ 'files',
+            \ ['   My sessions:'],
+            \ 'sessions',
+        \ ]
         " let g:startify_change_to_dir = 0
         let g:startify_custom_header = [
             \ '           ______________________________________           ',
@@ -652,17 +656,13 @@ command! -bang WQ wq<bang>
     " Python-mode {{{
     " ===========
 
-        NeoBundle "pymode"
-        " NeoBundle "python-mode"
+        NeoBundle "python-mode"
 
-        " let g:pymode_lint_hold = 0
-        " let g:pymode_syntax_builtin_objs = 0
-        " let g:pymode_syntax_builtin_funcs = 0
-        " let g:pymode_rope_goto_def_newwin = "new"
-        " let g:pymode_syntax_builtin_funcs = 1
-        " let g:pymode_syntax_print_as_function = 1
-        " let g:pymode_lint_mccabe_complexity = 10
-        " let g:pymode_lint_checker = "pylint,pep8,pyflakes,mccabe,pep257"
+        let g:pymode_breakpoint_bind = '<leader>bb'
+        let g:pymode_syntax_highlight_equal_operator = 0
+        let g:pymode_lint_checkers = ['pylint', 'pep8', 'pep257', 'pyflakes', 'mccabe']
+        let g:pymode_lint_ignore = 'C0111'
+        let g:pymode_lint_unmodified = 1
     
     " }}}
 
