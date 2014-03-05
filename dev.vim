@@ -2,8 +2,6 @@
 
 	setlocal nowrap
 	setlocal number
-	setlocal foldlevelstart=99
-	setlocal foldlevel=99
 	setlocal foldmethod=indent
 
 	" Complete option
