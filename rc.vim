@@ -261,11 +261,17 @@
 
     if has("autocmd")
 
+        autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+        autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+        autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+        autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
         augroup vimrc
         au!
 
             " Auto reload vim settins
-            au! BufWritePost rc.vim source ~/.vimrc
+            " au! BufWritePost rc.vim source ~/.vimrc
+            au! BufWritePost ~/.vim/*.vim source ~/.vimrc
 
             " Only show cursorline in the current window and in normal mode.
             au WinLeave,InsertEnter * set nocursorline
