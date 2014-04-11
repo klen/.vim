@@ -162,6 +162,18 @@
     let g:pymode_syntax_highlight_equal_operator = 0
     " let g:pymode_debug = 1
 
+    NeoBundle "fatih/vim-go"
+    au BufNewFile,BufRead *.go set ft=go nu
+    au FileType go nnoremap <buffer><leader>r :GoRun<CR>
+    au FileType go nnoremap <buffer><C-c>d :GoDef<CR>
+    au FileType go setlocal tabstop=4
+    au FileType go setlocal softtabstop=4
+
+    NeoBundle "chase/vim-ansible-yaml"
+
+    NeoBundle "mitsuhiko/vim-jinja"
+    au BufNewFile,BufRead *.j2 set ft=jinja
+
 " }}}
 
 
@@ -229,6 +241,8 @@ NeoBundleLazy 'alfredodeza/coveragepy.vim', {'autoload': {'filetypes': ['python'
     NeoBundle 'scrooloose/nerdcommenter'
 
     let NERDSpaceDelims = 1
+
+    let g:NERDCustomDelimiters = { 'ansible': { 'left': '#'} }
 
 " }}}
 

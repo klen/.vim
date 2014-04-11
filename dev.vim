@@ -1,15 +1,15 @@
-""" Общий конфигурационный файл для всех файлов, которые имеют какое-либо отношение к программированию.
+""" Common configuration file
 
-	setlocal nowrap
-	setlocal number
-	setlocal foldmethod=indent
+setl nowrap
+setl number
+setl foldmethod=indent
 
-	" Complete option
-	setlocal complete=""
-	setlocal complete+=.
-	setlocal complete+=k
-	setlocal complete+=b
-	setlocal completeopt-=preview
-	setlocal completeopt+=longest
-        setlocal tabstop=4
-        setlocal softtabstop=4
+" Complete option
+setl complete=""
+setl complete+=.
+setl complete+=k
+setl complete+=b
+setl completeopt-=preview
+setl completeopt+=longest
+setl tabstop=4
+setl softtabstop=4
