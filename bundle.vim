@@ -168,6 +168,7 @@
     au FileType go nnoremap <buffer><C-c>d :GoDef<CR>
     au FileType go setlocal tabstop=4
     au FileType go setlocal softtabstop=4
+    let g:go_disable_autoinstall = 1
 
     NeoBundle "chase/vim-ansible-yaml"
 
