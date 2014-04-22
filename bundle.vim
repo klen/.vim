@@ -140,10 +140,10 @@
 " =============
 
     NeoBundleLazy 'othree/html5.vim', {'autoload':
-        \ {'filetypes': ['html', 'xhttml', 'css']}}
+        \ {'filetypes': ['html', 'xhtml', 'css']}}
 
     NeoBundleLazy 'mattn/emmet-vim', {'autoload':
-        \ {'filetypes': ['html', 'xhttml', 'css', 'xml', 'xls', 'markdown']}}
+        \ {'filetypes': ['html', 'xhtml', 'css', 'xml', 'xls', 'markdown']}}
 
     " NeoBundle "klen/vim-jsmode"
 
