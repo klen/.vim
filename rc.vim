@@ -2,6 +2,8 @@
 " .vimrc klen <horneds@gmail.com>
 " ================================
 
+scriptencoding utf-8
+
 " Setup {{{
 " ======
 
