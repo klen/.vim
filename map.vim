@@ -150,5 +150,12 @@
 
     " }}}
 
+    " Visual mode {{{
+    " ---------------
+
+        " Copy selected to command line
+        vnoremap ! y:<C-r>"<C-b>
+
+    " }}}
 " }}}
 

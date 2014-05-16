@@ -287,6 +287,9 @@ NeoBundleLazy 'alfredodeza/coveragepy.vim', {'autoload': {'filetypes': ['python'
 
 NeoBundle 'dahu/LearnVim'
 
+NeoBundle 'tpope/vim-characterize'
+
+
 " git-slides {{{
 " ==========
 
