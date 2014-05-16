@@ -155,7 +155,7 @@ scriptencoding utf-8
     endif
 
     " Term
-    set mouse=a                    " Enable mouse usage (all modes) in terminals
+    set mouse=                     " Disable mouse usage (all modes) in terminals
     " Quickly time out on keycodes, but never time out on mappings
     set notimeout ttimeout ttimeoutlen=200
     if &term =~ "xterm"
@@ -182,6 +182,7 @@ scriptencoding utf-8
     if has("gui_running")
         set guioptions=agimP
         set guifont=Monaco\ 12
+        set mouse=a
     endif
 
     " Enable extended matchit
