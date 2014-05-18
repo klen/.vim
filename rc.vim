@@ -178,6 +178,9 @@ scriptencoding utf-8
     command! -nargs=? -complete=help Help :vertical help <args>
     cabbrev h h<C-\>esubstitute(getcmdline(), '^h\>', 'Help', '')<CR>
 
+    " quick shortcut to outer make
+    cabbrev m m<C-\>esubstitute(getcmdline(), '^m\>', '!make', '')<CR>
+
     " Some gui settings
     if has("gui_running")
         set guioptions=agimP
