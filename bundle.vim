@@ -174,6 +174,7 @@
 
     NeoBundle "mitsuhiko/vim-jinja"
     au BufNewFile,BufRead *.j2 set ft=jinja
+    let g:htmljinja_disable_html_upgrade = 1
 
 " }}}
 
