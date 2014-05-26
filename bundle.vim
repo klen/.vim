@@ -17,6 +17,7 @@
 
     " a Git wrapper so awesome, it should be illegal
     NeoBundle 'tpope/vim-fugitive'
+    cabbrev git Git
 
     " Browse Git history
     NeoBundleLazy 'gregsexton/gitv', {'depends':['tpope/vim-fugitive'],
