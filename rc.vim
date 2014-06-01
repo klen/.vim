@@ -31,6 +31,7 @@ scriptencoding utf-8
         " =================
 
         set rtp+=$HOME/.vim/bundle/neobundle.vim/
+        let g:neobundle#types#git#clone_depth = 2
         call neobundle#rc($HOME . '/.vim/bundle')
         filetype plugin indent on
 
