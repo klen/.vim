@@ -307,7 +307,6 @@ scriptencoding utf-8
             " ---------
             
                 au BufNewFile,BufRead *.json setf javascript
-                au BufNewFile,BufRead *.py setl colorcolumn=80
 
             " }}}
             

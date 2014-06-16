@@ -160,6 +160,7 @@
     let g:pymode_lint_ignore = 'C0111'
     let g:pymode_lint_sort = ['E', 'C', 'W', 'R', 'I', 'F', 'D']
     let g:pymode_lint_unmodified = 1
+    let g:pymode_options_max_line_length = 99
     let g:pymode_rope_lookup_project = 0
     let g:pymode_syntax_highlight_equal_operator = 0
     " let g:pymode_debug = 1
