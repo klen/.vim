@@ -148,6 +148,7 @@ scriptencoding utf-8
     if has('folding')
         set foldmethod=marker   " Fold on marker
         set foldlevel=999       " High default so folds are shown to start
+        set foldlevelstart=999  " High default so folds are shown to start
     endif
 
     " X-clipboard support
