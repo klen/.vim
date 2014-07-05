@@ -146,12 +146,7 @@
     NeoBundleLazy 'mattn/emmet-vim', {'autoload':
         \ {'filetypes': ['html', 'xhtml', 'css', 'xml', 'xls', 'markdown']}}
 
-    " NeoBundle "klen/vim-jsmode"
-
-    NeoBundle "t9md/vim-chef"
-    nnoremap <C-a> :ChefFindAny<CR>
-
-    NeoBundle 'saltstack/salt-vim'
+    NeoBundle "kchmck/vim-coffee-script"
 
     NeoBundle "python-mode"
     let g:pymode_breakpoint_bind = '<leader>bb'
@@ -179,6 +174,14 @@
     NeoBundle "mitsuhiko/vim-jinja"
     au BufNewFile,BufRead *.j2 set ft=jinja
     let g:htmljinja_disable_html_upgrade = 1
+
+
+    " NeoBundle "klen/vim-jsmode"
+
+    " NeoBundle "t9md/vim-chef"
+    " nnoremap <C-a> :ChefFindAny<CR>
+
+    " NeoBundle 'saltstack/salt-vim'
 
 " }}}
 
@@ -237,7 +240,7 @@
 
 
 " Show reports from coverage.py
-NeoBundleLazy 'alfredodeza/coveragepy.vim', {'autoload': {'filetypes': ['python']}}
+" NeoBundleLazy 'alfredodeza/coveragepy.vim', {'autoload': {'filetypes': ['python']}}
 
 
 " NERDCommenter {{{
@@ -290,7 +293,7 @@ NeoBundleLazy 'alfredodeza/coveragepy.vim', {'autoload': {'filetypes': ['python'
 
 " }}}
 
-NeoBundle 'dahu/LearnVim'
+" NeoBundle 'dahu/LearnVim'
 
 NeoBundle 'tpope/vim-characterize'
 
