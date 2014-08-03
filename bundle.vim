@@ -176,6 +176,9 @@
     let g:htmljinja_disable_html_upgrade = 1
 
 
+    NeoBundle "wavded/vim-stylus"
+    au BufNewFile,BufRead *.styl set ft=stylus nu
+
     " NeoBundle "klen/vim-jsmode"
 
     " NeoBundle "t9md/vim-chef"
