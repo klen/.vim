@@ -301,9 +301,6 @@ scriptencoding utf-8
                 au VimLeavePre * exe "mks! " g:SESSION_DIR.'/last.vim'
             endif
 
-            " Save current open file when window focus is lost
-            au FocusLost * if &modifiable && &modified | write | endif
-
             " Filetypes {{{
             " ---------
             
