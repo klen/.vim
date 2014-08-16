@@ -130,6 +130,7 @@
 
     " Quoting/parenthesizing made simple
     NeoBundle 'tpope/vim-surround'
+    NeoBundle 'tpope/vim-repeat'
 
     " Exchange objects
     NeoBundle "tommcdo/vim-exchange"
@@ -178,6 +179,8 @@
 
     NeoBundle "wavded/vim-stylus"
     au BufNewFile,BufRead *.styl set ft=stylus nu
+
+    NeoBundle "tpope/vim-rsi"
 
     " NeoBundle "klen/vim-jsmode"
 

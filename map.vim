@@ -4,10 +4,6 @@
     " Insert mode {{{
     " ------------
 
-        " emacs style jump to end of line
-        inoremap <C-e> <C-o>A
-        inoremap <C-a> <C-o>I
-
         inoremap <c-f> <c-x><c-f>
         inoremap <c-]> <c-x><c-]>
 
@@ -40,6 +36,9 @@
 
         " Toggle paste mode
         noremap <leader>p :set paste!<CR>
+
+        " Automatically jump to end of text you pasted
+        nnoremap <silent> p p`]
 
         " Not jump on star, only highlight
         nnoremap * *N
@@ -139,12 +138,6 @@
     " Command mode {{{
     " ------------
 
-        " Allow command line editing like emacs
-        cnoremap <C-a>      <Home>
-        cnoremap <C-e>      <End>
-        cnoremap <C-n>      <Down>
-        cnoremap <C-p>      <Up>
-
         " Write as sudo
         command! W %!sudo tee > /dev/null %
 
@@ -155,6 +148,10 @@
 
         " Copy selected to command line
         vnoremap ! y:<C-r>"<C-b>
+
+        " Automatically jump to end of text you pasted
+        vnoremap <silent> y y`]
+        vnoremap <silent> p p`]
 
     " }}}
 " }}}
