@@ -11,14 +11,14 @@ scriptencoding utf-8
 
         set nocompatible                           " enable vim features
 
-        set backupdir=$HOME/.cache/vim/backup      " where to put backup file 
+        set backupdir=$HOME/.cache/vim/backup      " where to put backup files
         set backup                                 " make backup file and leave it around 
         set backupskip+=svn-commit.tmp,svn-commit.[0-9]*.tmp
 
-        set directory=/tmp                         " where to put swap file
+        set directory=/tmp                         " where to put swap files
         let g:SESSION_DIR   = $HOME.'/.cache/vim/sessions'
 
-        " Create system vim dirs
+        " Create directories
         if finddir(&backupdir) == ''
             silent call mkdir(&backupdir, "p")
         endif
@@ -33,8 +33,8 @@ scriptencoding utf-8
         set rtp+=$HOME/.vim/bundle/neobundle.vim/
         let g:neobundle#types#git#clone_depth = 2
         call neobundle#rc($HOME . '/.vim/bundle')
-        filetype plugin indent on
 
+        filetype plugin indent on
         syntax on
 
     endif
@@ -71,8 +71,8 @@ scriptencoding utf-8
     set infercase
     set nojoinspaces
     set laststatus=2            " Always show a statusline
-    " Don't try to highlight lines longer than 800 characters.
-    set synmaxcol=800
+    " Don't try to highlight lines longer than 1000 characters.
+    set synmaxcol=1000
 
     " Tab options
     set autoindent              " copy indent from previous line
@@ -312,6 +312,8 @@ scriptencoding utf-8
             autocmd CursorMovedI * if pumvisible() == 0|pclose|endif 
             autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
+            " Unset paste on InsertLeave
+            au InsertLeave * silent! set nopaste
 
         augroup END
 

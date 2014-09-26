@@ -1,3 +1,13 @@
+ NeoBundle "Shougo/unite.vim"
+
+ NeoBundleLazy 'Shougo/unite-outline', {'autoload':{'unite_sources':'outline'}}
+ NeoBundleLazy 'Shougo/unite-session', {'autoload':{'unite_sources':'session', 'commands': ['UniteSessionSave', 'UniteSessionLoad']}}
+ NeoBundleLazy 'osyo-manga/unite-quickfix', {'autoload':{'unite_sources': ['quickfix', 'location_list']}}
+ NeoBundleLazy 'thinca/vim-unite-history', { 'autoload' : { 'unite_sources' : ['history/command', 'history/search']}}
+ NeoBundleLazy 'ujihisa/unite-colorscheme', {'autoload':{'unite_sources': 'colorscheme'}}
+ NeoBundleLazy 'tsukkee/unite-help', {'autoload':{'unite_sources':'help'}}
+ NeoBundleLazy 'klen/unite-radio.vim', {'autoload':{'unite_sources':'radio'}}
+
 let g:unite_source_session_path = g:SESSION_DIR
 let g:unite_source_history_yank_enable = 1
 let g:unite_source_menu_menus = {}

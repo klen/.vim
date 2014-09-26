@@ -20,8 +20,10 @@
     cabbrev git Git
 
     " Browse Git history
-    NeoBundleLazy 'gregsexton/gitv', {'depends':['tpope/vim-fugitive'],
-        \ 'autoload':{'commands':'Gitv'}}
+    NeoBundle 'gregsexton/gitv', {
+        \ 'lazy': 1,
+        \ 'depends': ['tpope/vim-fugitive'],
+        \ 'autoload': {'commands': 'Gitv'}}
 
     nnoremap <leader>gL :Gitv --all<CR>
     nnoremap <leader>ga :Gadd<CR>
@@ -40,7 +42,13 @@
     let g:Gitv_DoNotMapCtrlKey = 1
 
     " vimscript for gist
-    NeoBundle 'mattn/gist-vim'
+    NeoBundle 'mattn/gist-vim', {
+        \ 'lazy': 1,
+        \ 'autoload': {'commands': 'Gist'}}
+
+    NeoBundle 'junegunn/vim-github-dashboard', {
+        \ 'lazy': 1,
+        \ 'autoload': {'commands': ['GHDashboard', 'GHActivity']}}
 
 " }}}
 
@@ -55,9 +63,11 @@
     NeoBundle "unphased/vim-fakeclip"
 
     " browse the vim undo tree
-    NeoBundleLazy 'sjl/gundo.vim', { 'autoload' : {'commands': 'GundoToggle'}}
-
-    nnoremap <leader>uu :GundoToggle<CR>
+    NeoBundle 'mbbill/undotree', { 
+        \ 'lazy': 1,
+        \ 'autoload' : {'commands': 'UndotreeToggle'}}
+    let g:undotree_WindowLayout = 3
+    nnoremap <leader>uu :UndotreeToggle<CR>
 
 " }}}
 
@@ -66,7 +76,9 @@
 " ==========
 
     " A tree explorer plugin for vim.
-    NeoBundle 'scrooloose/nerdtree'
+    NeoBundle 'scrooloose/nerdtree', { 
+        \ 'lazy': 1,
+        \ 'autoload' : {'commands': 'NERDTreeToggle'}} 
 
     let NERDTreeWinSize = 30
 
@@ -87,7 +99,9 @@
     let g:ctrlp_map = '<leader>,'
 
     " Vim plugin that displays tags in a window, ordered by class etc.
-    NeoBundle "majutsushi/tagbar"
+    NeoBundle "majutsushi/tagbar", {
+        \ 'lazy': 1,
+        \ 'autoload' : {'commands': 'TagbarToggle'}} 
 
     let g:tagbar_width = 30
     let g:tagbar_foldlevel = 1
@@ -129,11 +143,14 @@
     let g:wildfire_water_map = "-"
 
     " Quoting/parenthesizing made simple
-    NeoBundle 'tpope/vim-surround'
     NeoBundle 'tpope/vim-repeat'
+    NeoBundle 'tpope/vim-surround', {
+        \ 'depends': ['tpope/vim-repeat']}
 
     " Exchange objects
     NeoBundle "tommcdo/vim-exchange"
+
+    " NeoBundle "tpope/vim-rsi"
 
 " }}}   
 
@@ -141,15 +158,21 @@
 " Languages {{{
 " =============
 
-    NeoBundleLazy 'othree/html5.vim', {'autoload':
-        \ {'filetypes': ['html', 'xhtml', 'css']}}
+    NeoBundle 'othree/html5.vim', {
+        \ 'lazy': 1,
+        \ 'autoload': {'filetypes': ['html', 'xhtml', 'css']}}
 
-    NeoBundleLazy 'mattn/emmet-vim', {'autoload':
-        \ {'filetypes': ['html', 'xhtml', 'css', 'xml', 'xls', 'markdown']}}
+    NeoBundle 'mattn/emmet-vim', {
+        \ 'lazy': 1,
+        \ 'autoload': {'filetypes': ['html', 'xhtml', 'css', 'xml', 'xls', 'markdown']}}
 
-    NeoBundle "kchmck/vim-coffee-script"
+    NeoBundle "kchmck/vim-coffee-script", {
+        \ 'lazy': 1,
+        \ 'autoload': {'filetypes': ['coffee']}}
 
-    NeoBundle "python-mode"
+    NeoBundle "python-mode", {
+        \ 'lazy': 1,
+        \ 'autoload': {'filetypes': ['python']}}
     let g:pymode_breakpoint_bind = '<leader>bb'
     let g:pymode_completion_provider = 'jedi'
     let g:pymode_lint_checkers = ['pylint', 'pep8', 'pep257', 'pyflakes', 'mccabe']
@@ -162,7 +185,9 @@
     " let g:pymode_debug = 1
     " let g:pymode_python = 'python3'
 
-    NeoBundle "fatih/vim-go"
+    NeoBundle "fatih/vim-go", {
+        \ 'lazy': 1,
+        \ 'autoload': {'filetypes': ['go']}}
     au BufNewFile,BufRead *.go set ft=go nu
     au FileType go nnoremap <buffer><leader>r :GoRun<CR>
     au FileType go nnoremap <buffer><C-c>d :GoDef<CR>
@@ -170,48 +195,24 @@
     au FileType go setlocal softtabstop=4
     let g:go_disable_autoinstall = 1
 
-    NeoBundle "chase/vim-ansible-yaml"
+    NeoBundle "chase/vim-ansible-yaml", {
+        \ 'lazy': 1,
+        \ 'autoload': {'filetypes': ['yaml', 'ansible']}}
 
-    NeoBundle "mitsuhiko/vim-jinja"
+    NeoBundle "mitsuhiko/vim-jinja", {
+        \ 'lazy': 1,
+        \ 'autoload': {'filetypes': ['jinja']}}
     au BufNewFile,BufRead *.j2 set ft=jinja
     let g:htmljinja_disable_html_upgrade = 1
 
 
-    NeoBundle "wavded/vim-stylus"
+    NeoBundle "wavded/vim-stylus", {
+        \ 'lazy': 1,
+        \ 'autoload': {'filetypes': ['styl']}}
     au BufNewFile,BufRead *.styl set ft=stylus nu
 
-    NeoBundle "tpope/vim-rsi"
-
     " NeoBundle "klen/vim-jsmode"
-
-    " NeoBundle "t9md/vim-chef"
-    " nnoremap <C-a> :ChefFindAny<CR>
-
     " NeoBundle 'saltstack/salt-vim'
-
-" }}}
-
-
-" Unite {{{
-" =====
-
-    NeoBundle "Shougo/unite.vim"
-
-    NeoBundleLazy 'Shougo/unite-outline', {'autoload':{'unite_sources':'outline'}}
-
-    NeoBundleLazy 'Shougo/unite-session', {'autoload':{'unite_sources':'session', 'commands': ['UniteSessionSave', 'UniteSessionLoad']}}
-
-    NeoBundleLazy 'osyo-manga/unite-quickfix', {'autoload':{'unite_sources': ['quickfix', 'location_list']}}
-
-    NeoBundleLazy 'thinca/vim-unite-history', { 'autoload' : { 'unite_sources' : ['history/command', 'history/search']}}
-
-    NeoBundleLazy 'ujihisa/unite-colorscheme', {'autoload':{'unite_sources': 'colorscheme'}}
-
-    NeoBundleLazy 'tsukkee/unite-help', {'autoload':{'unite_sources':'help'}}
-
-    NeoBundleLazy 'klen/unite-radio.vim', {'autoload':{'unite_sources':'radio'}}
-
-    source $HOME/.vim/unite.vim
 
 " }}}
 
@@ -254,9 +255,7 @@
 
     " Vim plugin for intensely orgasmic commenting
     NeoBundle 'scrooloose/nerdcommenter'
-
-    let NERDSpaceDelims = 1
-
+    let NERDSpaceDelim = 1
     let g:NERDCustomDelimiters = { 'ansible': { 'left': '#'} }
 
 " }}}
@@ -289,12 +288,12 @@
 " WIKI {{{
 " ====
 
-    NeoBundle "vimwiki/vimwiki", "dev"
-    
+    NeoBundle "vimwiki/vimwiki", 'dev', {
+        \ 'lazy': 1,
+        \ 'autoload' : {'commands': 'VimwikiIndex'}} 
     let g:vimwiki_folding = 1
     let g:vimwiki_fold_lists = 1
     let g:vimwiki_list = [{"path" : "~/Dropbox/wiki"}, {"path" : "~/Dropbox/wiki/english"}]
-
     nmap <Leader>wv <Plug>VimwikiIndex
 
 " }}}
@@ -308,6 +307,14 @@ NeoBundle 'tpope/vim-characterize'
 " ==========
 
     " NeoBundle 'gelisam/git-slides'
+
+" }}}
+
+
+" Unite {{{
+" =====
+
+    " source $HOME/.vim/unite.vim
 
 " }}}
 

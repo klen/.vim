@@ -34,9 +34,6 @@
         nnoremap <up>    :lprev<cr>zvzz
         nnoremap <down>  :lnext<cr>zvzz
 
-        " Toggle paste mode
-        noremap <leader>p :set paste!<CR>
-
         " Automatically jump to end of text you pasted
         nnoremap <silent> p p`]
 
@@ -105,6 +102,7 @@
         vnoremap <silent> <C-F> <Esc>a<C-^><Esc>gv
     
         " Switch options
+        nnoremap <silent> <leader>op :set paste! paste?<CR>
         nnoremap <silent> <leader>ol :set list! list?<CR>
         nnoremap <silent> <leader>ow :set wrap! wrap?<CR>
         nnoremap <silent> <leader>on :call ToggleRelativeAbsoluteNumber()<CR>
@@ -137,6 +135,13 @@
 
     " Command mode {{{
     " ------------
+
+        cnoremap        <C-A> <Home>
+        cnoremap        <C-B> <Left>
+        cnoremap        <M-b> <S-Left>
+        cnoremap        <M-f> <S-Right>
+        silent! exe "set <S-Left>=\<Esc>b"
+        silent! exe "set <S-Right>=\<Esc>f"
 
         " Write as sudo
         command! W %!sudo tee > /dev/null %
