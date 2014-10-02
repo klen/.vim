@@ -78,7 +78,7 @@
     " A tree explorer plugin for vim.
     NeoBundle 'scrooloose/nerdtree', { 
         \ 'lazy': 1,
-        \ 'autoload' : {'commands': 'NERDTreeToggle'}} 
+        \ 'autoload' : {'commands': ['NERDTreeToggle', 'NERDTreeFind']}} 
 
     let NERDTreeWinSize = 30
 
@@ -255,7 +255,7 @@
 
     " Vim plugin for intensely orgasmic commenting
     NeoBundle 'scrooloose/nerdcommenter'
-    let NERDSpaceDelim = 1
+    let NERDSpaceDelims = 1
     let g:NERDCustomDelimiters = { 'ansible': { 'left': '#'} }
 
 " }}}
@@ -288,9 +288,7 @@
 " WIKI {{{
 " ====
 
-    NeoBundle "vimwiki/vimwiki", 'dev', {
-        \ 'lazy': 1,
-        \ 'autoload' : {'commands': 'VimwikiIndex'}} 
+    NeoBundle "vimwiki/vimwiki", 'dev'
     let g:vimwiki_folding = 1
     let g:vimwiki_fold_lists = 1
     let g:vimwiki_list = [{"path" : "~/Dropbox/wiki"}, {"path" : "~/Dropbox/wiki/english"}]
