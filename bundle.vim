@@ -165,6 +165,12 @@
     NeoBundle 'mattn/emmet-vim', {
         \ 'lazy': 1,
         \ 'autoload': {'filetypes': ['html', 'xhtml', 'css', 'xml', 'xls', 'markdown']}}
+    autocmd BufNewFile,BufRead *.md setf markdown
+
+    NeoBundle 'groenewege/vim-less', {
+        \ 'lazy': 1,
+        \ 'autoload': {'filetypes': ['less']}}
+    autocmd BufNewFile,BufRead *.less setf less
 
     NeoBundle "kchmck/vim-coffee-script", {
         \ 'lazy': 1,
