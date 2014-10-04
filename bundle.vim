@@ -1,3 +1,5 @@
+let s:darwin = has('mac')
+
 " Utils {{{
 " =========
 
@@ -116,6 +118,13 @@
 
     " Toggle tagbar
     nnoremap <silent> <F3> :TagbarToggle<CR>
+
+    if s:darwin
+        NeoBundle "rizzatti/dash.vim", {
+            \ 'lazy': 1,
+            \ 'autoload' : {'commands': ['Dash', 'DashKeywords']}} 
+        nnoremap <silent> <leader>dd :Dash<CR>
+    endif
 
 " }}}
 
