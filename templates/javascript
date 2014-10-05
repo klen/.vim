@@ -1,6 +1,7 @@
 /*global console */
 
 (function () {
-    "use strict";
+  "use strict";
+
 
 }());

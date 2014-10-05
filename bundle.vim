@@ -226,6 +226,13 @@ let s:darwin = has('mac')
         \ 'autoload': {'filetypes': ['styl']}}
     au BufNewFile,BufRead *.styl set ft=stylus nu
 
+    NeoBundle "pangloss/vim-javascript", {
+        \ 'lazy': 1,
+        \ 'autoload': {'filetypes': ['javascript']}}
+    au BufNewFile,BufRead *.js setf javascript
+    au BufNewFile,BufRead *.jsm setf javascript
+    au BufNewFile,BufRead Jakefile setf javascript
+
     " NeoBundle "klen/vim-jsmode"
     " NeoBundle 'saltstack/salt-vim'
 
