@@ -233,6 +233,12 @@ let s:darwin = has('mac')
     au BufNewFile,BufRead *.jsm setf javascript
     au BufNewFile,BufRead Jakefile setf javascript
 
+    NeoBundle "digitaltoad/vim-jade", {
+        \ 'lazy': 1,
+        \ 'autoload': {'filetypes': ['jade']}}
+    au BufNewFile,BufRead *.jade setf jade
+    au BufNewFile,BufRead *.jade set sw=2 ts=2 sts=2
+
     " NeoBundle "klen/vim-jsmode"
     " NeoBundle 'saltstack/salt-vim'
 
