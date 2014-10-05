@@ -1,4 +1,3 @@
-setl foldmethod=indent
 setl nowrap
 setl number
 setl shiftwidth=2
