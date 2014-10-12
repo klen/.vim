@@ -32,7 +32,7 @@ scriptencoding utf-8
 
         set rtp+=$HOME/.vim/bundle/neobundle.vim/
         let g:neobundle#types#git#clone_depth = 2
-        call neobundle#rc($HOME . '/.vim/bundle')
+        call neobundle#begin($HOME . '/.vim/bundle')
 
         filetype plugin indent on
         syntax on
@@ -361,3 +361,5 @@ set exrc
 
 " must be written at the last.  see :help 'secure'.
 set secure
+
+call neobundle#end()
