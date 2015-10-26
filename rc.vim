@@ -305,6 +305,7 @@ scriptencoding utf-8
             " ---------
             
                 au BufNewFile,BufRead *.json setf javascript
+                au BufNewFile,BufRead *.tag  setf coffee
 
             " }}}
             

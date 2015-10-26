@@ -1,9 +1,10 @@
 *.pyc
-.DS_Store
 *.session
-tags
+.DS_Store
 .netrwhist
+.ropeproject
 _*
+bundle/*
 spell/*.utf-8.add
 spell/*.utf-8.add.spl
-bundle/*
+tags

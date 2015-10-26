@@ -31,7 +31,7 @@ let s:darwin = has('mac')
     nnoremap <leader>ga :Gadd<CR>
     nnoremap <leader>gb :Gblame<CR>
     nnoremap <leader>gc :Gcommit %<CR>
-    nnoremap <leader>gd :Gdiff<CR>
+    nnoremap <leader>gd :Gvdiff<CR>
     nnoremap <leader>gl :Gitv! --all<CR>
     nnoremap <leader>go :Gread<CR>
     nnoremap <leader>gpl :Git pull origin master<CR>
@@ -91,7 +91,7 @@ let s:darwin = has('mac')
     \'\.pyc$', '\.pyo$', '__pycache__$', '\.Python$', '\..*.rej$',
     \'\.rej$', '\.ropeproject$', '\.svn$', '\.tags$' ]
 
-    nnoremap <silent> <leader>t :NERDTreeToggle<CR>
+    nnoremap <silent> <leader>dd :NERDTreeToggle<CR>
     nnoremap <silent> <leader>f :NERDTreeFind<CR>
 
     " Find files
@@ -119,12 +119,12 @@ let s:darwin = has('mac')
     " Toggle tagbar
     nnoremap <silent> <F3> :TagbarToggle<CR>
 
-    if s:darwin
-        NeoBundle "rizzatti/dash.vim", {
-            \ 'lazy': 1,
-            \ 'autoload' : {'commands': ['Dash', 'DashKeywords']}} 
-        nnoremap <silent> <leader>dd :Dash<CR>
-    endif
+    " if s:darwin
+        " NeoBundle "rizzatti/dash.vim", {
+            " \ 'lazy': 1,
+            " \ 'autoload' : {'commands': ['Dash', 'DashKeywords']}} 
+        " nnoremap <silent> <leader>dd :Dash<CR>
+    " endif
 
 " }}}
 
@@ -239,6 +239,7 @@ let s:darwin = has('mac')
     au BufNewFile,BufRead *.jade setf jade
     au BufNewFile,BufRead *.jade set sw=2 ts=2 sts=2
 
+    NeoBundle "sudar/vim-arduino-syntax"
     " NeoBundle "klen/vim-jsmode"
     " NeoBundle 'saltstack/salt-vim'
 
@@ -326,7 +327,13 @@ let s:darwin = has('mac')
 
 " NeoBundle 'dahu/LearnVim'
 
-NeoBundle 'tpope/vim-characterize'
+" NeoBundle 'tpope/vim-characterize'
+NeoBundle 'janko-m/vim-test'
+nmap <silent> <leader>tn :TestNearest<CR>
+nmap <silent> <leader>tf :TestFile<CR>
+nmap <silent> <leader>tt :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tv :TestVisit<CR>
 
 
 " git-slides {{{
