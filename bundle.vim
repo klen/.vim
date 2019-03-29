@@ -48,10 +48,6 @@ let s:darwin = has('mac')
         \ 'lazy': 1,
         \ 'autoload': {'commands': 'Gist'}}
 
-    NeoBundle 'junegunn/vim-github-dashboard', {
-        \ 'lazy': 1,
-        \ 'autoload': {'commands': ['GHDashboard', 'GHActivity']}}
-
 " }}}
 
 
@@ -138,7 +134,7 @@ let s:darwin = has('mac')
     let g:airline_detect_iminsert = 1
     let g:airline_left_sep = ''
     let g:airline_right_sep = ''
-    let g:airline_theme = 'wombat'
+    " let g:airline_theme = 'wombat'
 
 " }}}
 
@@ -158,8 +154,6 @@ let s:darwin = has('mac')
 
     " Exchange objects
     NeoBundle "tommcdo/vim-exchange"
-
-    " NeoBundle "tpope/vim-rsi"
 
 " }}}   
 
@@ -312,17 +306,6 @@ let s:darwin = has('mac')
         \ '   /      |______________________________________|     \    ',
         \ '  /__________)                                (_________\   ',
         \ '']
-" }}}
-
-" WIKI {{{
-" ====
-
-    NeoBundle "vimwiki/vimwiki", 'dev'
-    let g:vimwiki_folding = 1
-    let g:vimwiki_fold_lists = 1
-    let g:vimwiki_list = [{"path" : "~/Dropbox/wiki"}, {"path" : "~/Dropbox/wiki/english"}]
-    nmap <Leader>wv <Plug>VimwikiIndex
-
 " }}}
 
 " NeoBundle 'dahu/LearnVim'
