@@ -11,16 +11,19 @@ scriptencoding utf-8
 
         set nocompatible                           " enable vim features
 
-        set backupdir=$HOME/.cache/vim/backup      " where to put backup files
         set backup                                 " make backup file and leave it around 
-        set backupskip+=svn-commit.tmp,svn-commit.[0-9]*.tmp
 
-        set directory=/tmp                         " where to put swap files
-        let g:SESSION_DIR   = $HOME.'/.cache/vim/sessions'
+        set backupdir=/tmp/vim/backup              " where to put backup files
+        set directory=/tmp/vim/swap                " where to put swap files
+        let g:SESSION_DIR='/tmp/vim/sessions'      " where to keep sessions
 
         " Create directories
         if finddir(&backupdir) == ''
             silent call mkdir(&backupdir, "p")
+        endif
+
+        if finddir(&directory) == ''
+            silent call mkdir(&directory, "p")
         endif
 
         if finddir(g:SESSION_DIR) == ''
@@ -48,11 +51,11 @@ scriptencoding utf-8
     " Buffer (File) options
     set hidden                  " Edit multiple unsaved files at the same time
     set confirm                 " Prompt to save unsaved changes when exiting
-                                " Keep various histories between edits
+
+    " Keep various histories between edits
     set viminfo='1000,f1,<500,:100,/100,h
 
     set autoread                " auto reload changed files
-    set autowrite               " automatically save before commands like :next and :make
 
     " Display options
     set title                   " show file name in window title
@@ -67,9 +70,7 @@ scriptencoding utf-8
     set sidescrolloff=10
     set showcmd                 " Show commands
     set whichwrap=b,s,<,>,[,],l,h
-    set completeopt=menu,preview,longest
-    set infercase
-    set nojoinspaces
+    set completeopt=menu,longest
     set laststatus=2            " Always show a statusline
     " Don't try to highlight lines longer than 1000 characters.
     set synmaxcol=1000
@@ -86,6 +87,7 @@ scriptencoding utf-8
     " Search options
     set hlsearch                " Highlight search results
     set ignorecase              " Ignore case in search patterns
+    set infercase               " Enable case-sensetive search for non lower-case string
     set smartcase               " Override the 'ignorecase' option if the search pattern contains upper case characters
     set incsearch               " While typing a search command, show where the pattern
 
@@ -273,6 +275,8 @@ scriptencoding utf-8
         autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
         autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
         autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+        
+        autocmd FileType crontab setlocal nobackup nowritebackup
 
         augroup vimrc
         au!
